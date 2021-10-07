@@ -1,0 +1,143 @@
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.filter_sort, .filter_sort_mobile{
+    border-bottom: 1px solid #ebebeb;
+    border-top: 1px solid #ebebeb;
+    display: block;
+    padding: 5px 0;
+}
+
+
+
+.form-check{
+    display: inline;
+    font-size: 14px;
+    padding-left: 2.25rem;
+}
+
+.form-check-label {
+    padding-left: 0px;
+    margin-bottom: 0;
+}
+
+
+
+
+.overflow-auto  {
+    max-height: 140px;
+    max-width: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.selected-option-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.filter_mobile {
+    padding-left: 1rem;
+}
+.categories_name{
+   font-weight: 700;
+   color: #ffffff;
+   font-size: 18px;
+}
+
+.filter_desktop{
+    background: #395781;
+    position: relative;
+    padding: 10px 25px 10px 40px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+.filter__menu__overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    content: "";
+    z-index: 98;
+    visibility: hidden;
+    -webkit-transition: all, 0.6s;
+    -moz-transition: all, 0.6s;
+    -ms-transition: all, 0.6s;
+    -o-transition: all, 0.6s;
+    transition: all, 0.6s;
+}
+
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+
+
+    .scroll_check_category { 
+        
+        max-width:260px; 
+        height: 140px; 
+        overflow-y: scroll;
+        padding: 10px;
+    }
+
+    .search_categories{
+        margin-top: 30px;
+        margin: 0 auto;
+        max-width: 240px;
+        margin-bottom: 5px;
+
+
+    }
+
+    .filter_categories_mobile{
+        border: 1px solid #ebebeb;
+        margin-top: 30px;
+    }
+
+    .search_categories_mobile{
+        margin-bottom: 5px;
+    }
+
+
+@media only screen and (min-width: 992px) {
+	.container {
+		max-width: 1170px;
+	}
+
+    .filter_categories{
+        margin-top: 30px;
+        border: 1px solid #ebebeb;
+    }
+
+}
+
+
+@media only screen and (max-width: 992px) {
+	
+    .filter_categories{
+        display: none;
+    }
+
+}
+
+
