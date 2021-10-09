@@ -31,7 +31,6 @@ import com.example.datn.security.services.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,8 +41,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.authentication.BadCredentialsException;
-import java.io.IOException;
+
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -70,8 +69,7 @@ public class AuthController {
 
   
   @PostMapping("/signin")
-  
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws AuthenticationException, IOException {
+  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
    
         Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -161,5 +159,8 @@ public class AuthController {
     refreshTokenService.deleteByUserId(logOutRequest.getUserId());
     return ResponseEntity.ok(new MessageResponse("Log out successful!"));
   }
+
+
+  
 
 }

@@ -98,16 +98,9 @@
  });
 
 
- //check confim password
- function checkPasswordMatch() {
-   var password = $("#txtNewPassword").val();
-   var confirmPassword = $("#txtConfirmPassword").val();
-   if (password != confirmPassword)
-       $("#CheckPasswordMatch").html("Passwords does not match!");
-   else
-       $("#CheckPasswordMatch").html("Passwords match.");
-}
 
+
+//register
 
  $(function (){
    $.validator.addMethod("checkEmail", function(value, element) {
@@ -180,12 +173,65 @@
             });
          }
 
-         $("#txtConfirmPassword").keyup(checkPasswordMatch);
-   
-   
         
 
-  
+      }
+  })
+
+ });
+
+ //forgot-password
+
+ $(function (){
+   $.validator.addMethod("checkEmail", function(value, element) {
+      return this.optional(element) || /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i.test(value);
+  }, "Sai định dạng email, vui lòng nhập lại!");
+   $("#forgotpasswordForm").validate({
+      rules: {
+         email: "required checkEmail"
+      },
+      messages: {
+         email: {
+            required: "Email không được để trống"
+        }
+      },
+      submitHandler: function() {
+
+   var $form = $("#forgotpasswordForm");
+   var loginData = {
+      email: $form.find('input[name="email"]').val()
+     
+   };
+
+
+   document.getElementById("forgotpasswordbtn").disabled = true;
+
+   
+
+   $.ajax({
+      url: "/account/forgot-password",
+      type: "POST",
+      data: JSON.stringify(loginData),
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success: function (data, textStatus, jqXHR) {
+
+         
+         alert(jqXHR.responseJSON.message);
+        
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+         if (jqXHR.status === 401) {
+            $('#loginErrorModal')
+            .modal("show")
+            .find(".modal-body")
+            .empty()
+            .html("<p>" + jqXHR.responseJSON.message + "</p>");
+           location.replace("/login")
+            
+         }
+      }
+   });
 
       }
   })
