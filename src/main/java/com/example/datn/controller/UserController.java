@@ -57,7 +57,7 @@ public class UserController {
 
 			return "resetpassword";
 
-		}
+		} 
 
 		return "404page";
 

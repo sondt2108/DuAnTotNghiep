@@ -49,6 +49,13 @@ public class UserService {
 				return "Invalid token.";
 			}
 
+			LocalDateTime tokenCreationDate = userOptional.get().getTokenCreationDate();
+
+			if (isTokenExpired(tokenCreationDate)) {
+				return "Invalid Token expired.";
+
+			}
+
 			
 			
 			return "ok";

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.example.datn.payload.request.ForgotPasswordRequest;
+import com.example.datn.payload.request.ResetPassword;
 import com.example.datn.service.MailService;
 import com.example.datn.service.UserService;
 
@@ -52,10 +53,16 @@ public class UserRescontroller {
       
   
       @PutMapping("/account/reset-password")
-      public String resetPassword(@RequestParam String token,
-              @RequestParam String password) {
+      public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPassword resetPassword
+      ) {
+
+                String password = resetPassword.getPassword();
+
+                String token = resetPassword.getToken();
+
+                userService.resetPassword(token, password);
   
-          return userService.resetPassword(token, password);
+                return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
       }
 
     
