@@ -146,12 +146,18 @@ $(function () {
           data: JSON.stringify(loginData),
           contentType: "application/json; charset=utf-8",
           dataType: "json",
-          success: function (data, textStatus, jqXHR) {},
+          success: function (data, textStatus, jqXHR) {
+            alert("đăng ký thành công");
+            location.assign("/login");
+          },
           error: function (jqXHR, textStatus, errorThrown) {
-            if (jqXHR.status === 401) {
-            } else {
-              throw new Error("an unexpected error occured: " + errorThrown);
-            }
+            if (jqXHR.status === 400) {
+              $('#loginErrorModal')
+              .modal("show")
+              .find(".modal-body")
+              .empty()
+              .html("<p>" + jqXHR.responseJSON.message + "</p>");
+            } 
           },
         });
       }
