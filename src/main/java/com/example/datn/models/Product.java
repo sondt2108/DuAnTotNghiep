@@ -1,10 +1,14 @@
 package com.example.datn.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -68,15 +72,26 @@ public class Product {
 			foreignKey = @ForeignKey(name = "category_products"))
 	private Category category;
 	
+	
 	private String hinhanh;
+
+
+	private String seourl;
+
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY
+			, mappedBy = "product")
+	private List<ImgProduct> imgProducts;
 
 	public Product() {
 		super();
 	}
 
-	public Product(int productId, @NotBlank @Size(min = 3, max = 30) String tensanpham, NhaCungCap nhacungcap,
+	public Product(int productId, @NotBlank @Size(min = 3, max = 255) String tensanpham, NhaCungCap nhacungcap,
 			ThuongHieu thuonghieu, Loaisp loaisanpham, double soluong, double khuyenmai, String tinhtranghang,
-			@NotNull @Min(1000) @Max(1000000) Long gia, @NotNull Date createdDate, Category category, String hinhanh) {
+			@NotNull @Min(1000) @Max(1000000) Long gia, @NotNull Date createdDate, Category category, String hinhanh,
+			String seourl, List<ImgProduct> imgProducts) {
 		this.productId = productId;
 		this.tensanpham = tensanpham;
 		this.nhacungcap = nhacungcap;
@@ -89,6 +104,8 @@ public class Product {
 		this.createdDate = createdDate;
 		this.category = category;
 		this.hinhanh = hinhanh;
+		this.seourl = seourl;
+		this.imgProducts = imgProducts;
 	}
 
 	public int getProductId() {
@@ -187,7 +204,38 @@ public class Product {
 		this.hinhanh = hinhanh;
 	}
 
+	public String getSeourl() {
+		return seourl;
+	}
 
+	public void setSeourl(String seourl) {
+		this.seourl = seourl;
+	}
+
+	public List<ImgProduct> getImgProducts() {
+		return imgProducts;
+	}
+
+	public void setImgProducts(List<ImgProduct> imgProducts) {
+		this.imgProducts = imgProducts;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Product) {
+			Product cProduct = (Product)obj;
+			return this.productId == cProduct.getProductId();
+		}
+		return false;
+	}
+	 
+	@Override
+	public int hashCode() {
+		return productId;
+	}
+
+	
 	
 
 	

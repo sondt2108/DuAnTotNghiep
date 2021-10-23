@@ -1,25 +1,22 @@
-$(document).ready(function() {
-    // MDB Lightbox Init
+
+
+	
+
     $(function() {
-        $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
+        $.getScript("/asset/js/api/product.js",function(){
+            var prid = localStorage.getItem("prid");
+            loaddetail(prid);
+            
+            });
     });
-});
-// tăng giảm số lượng
-$('input.input-qty').each(function() {
-    var $this = $(this),
-        qty = $this.parent().find('.is-form'),
-        min = Number($this.attr('min')),
-        max = Number($this.attr('max'))
-    if (min == 0) {
-        var d = 0
-    } else d = min
-    $(qty).on('click', function() {
-        if ($(this).hasClass('minus')) {
-            if (d > min) d += -1
-        } else if ($(this).hasClass('plus')) {
-            var x = Number($this.val()) + 1
-            if (x <= max) d += 1
-        }
-        $this.attr('value', d).val(d)
-    })
-})
+
+
+   function addSP() {
+    var prid = localStorage.getItem("prid");
+    fetch('/cart/them-vao-gio/' + prid)
+    .then(response => response.text())
+    .then(data => {
+        $('#table-content').html(data);
+    });
+   }
+

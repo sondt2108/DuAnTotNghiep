@@ -35,7 +35,7 @@ body {
 	height: 100%;
 	font-family: "Cairo", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
+	
 }
 
 h1,
@@ -3762,4 +3762,24 @@ ol {
 .error {
 	color: red;
 	padding-top: 10px;;
+}
+
+.details-product .service-block {
+    border: 1px solid #ebebeb;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+.details-product .service-block .sidebar-content {
+    margin-bottom: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.details-product .service-block .sidebar-content .service-item {
+    text-align: center;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ebebeb;
 }

@@ -1,0 +1,114 @@
+
+    <div class="container">
+        <div class="row">
+          <div class="card border-white">
+          <div class="table-responsive">
+            <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+              <tr class="small text-uppercase">
+              <th scope="col" width="350">Sản Phẩm</th>
+              <th
+                scope="col"
+                width="200"
+                style="text-align: center"
+              >
+                Số Lượng
+              </th>
+              <th
+                scope="col"
+                class="text-center"
+                width="150"
+                style="text-align: center"
+              >
+                Đơn Giá
+              </th>
+              <th
+                scope="col"
+                class="text-center"
+                width="150"
+                style="text-align: center"
+              >
+                Thành Tiền
+              </th>
+              <th
+                scope="col"
+                class="text-center d-none d-md-block"
+                width="50"
+              ></th>
+              </tr>
+            </thead>
+            <tbody id="cart-data" th:with="totalPrice=0">
+              <th:block th:each="cart : ${cart.chiTietGioHang}">
+              <tr>
+              <td>
+                <figure class="itemside align-items-center">
+                <div class="aside">
+                  <img
+                  th:src="${cart.key.hinhanh}"
+                  class="img-sm"
+                  />
+                </div>
+                <figcaption class="info">
+                  <p href="#" class="title-ten" data-abc="true">
+                    [[${cart.key.tensanpham}]]
+                  </p>
+                  <button th:onclick="'xoaSP('+ *{cart.key.productId} +')'"
+                  class="btn quantity-left-minus1" >
+                  Xoá
+                  </button>
+                </figcaption>
+                </figure>
+              </td>
+              <td class="quantity-sl input-group">
+                <button
+                type="button"
+                class="quantity-left-minus btn"
+                data-type="minus"
+                data-field=""
+                th:onclick="'truSP('+ *{cart.key.productId} +')'"
+                >
+                <i class="fa-gh fa fa-minus"></i>
+                </button>
+                <input
+                type="text"
+                name="quant[1]"
+                class="form-control"
+                th:value="${cart.value}"
+                min="1"
+                max="10"
+                style="text-align: center"
+                />
+                <button
+                type="button"
+                class="quantity-right-plus btn"
+                data-type="plus"
+                data-field=""
+                th:onclick="'congSP('+ *{cart.key.productId} +')'"
+                >
+                <i class="fa-gh fa fa-plus"></i>
+                </button>
+              </td>
+              <td>
+                <div class="price-wrap">
+                <var class="price">[[${cart.key.gia}]]</var>
+                </div>
+              </td>
+              <td>
+                <div class="price-wrap">
+                <var class="price">[[${cart.key.gia} * ${cart.value}]]</var>
+                </div>
+              </td>
+              <td><p th:with="totalPrice =${(cart.key.gia * cart.value)}"> </p></td>
+              </tr>
+              </th:block>
+              <p>[[${totalPrice}]]</p>
+            </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+        </div>
+
+
+
+        

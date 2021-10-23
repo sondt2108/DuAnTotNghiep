@@ -3,7 +3,6 @@ package com.example.datn.payload.request;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
  
 public class SignupRequest {
