@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.example.datn.models.User;
 import com.example.datn.repository.UserRepository;
+import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +24,24 @@ public class UserController {
 		return "Public Content.";
 	}
 
+	@Autowired
+    CustomerService customerService;
+
 
 
 	@GetMapping("/login")
-	public String Login() {
+	public String Login(Model model) {
 
-		return "dangnhap";
+		if (customerService.isCustomerLogin()) {
+			
+			return "redirect:/";
+		} else {
+			
+			
+			return "dangnhap";
+		}
+
+		
 	}
 
 

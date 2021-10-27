@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Đức Phát | Thiết bị điện</title>
+    <style>
+     
+    </style>
 
     <!-- Google Font -->
    
@@ -22,8 +25,8 @@
     <link rel="stylesheet" href="/asset/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/style.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/slideshow.css">
+    <link rel="stylesheet" href="/asset/css/index.css">
     <link rel="stylesheet" href="/asset/css/chitietsp.css">
-    <link rel="stylesheet" href="/asset/css/modalhide.css">
     <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
 
     
@@ -331,24 +334,40 @@
               </a>
             </div>
             <div class="categories__slider owl-carousel owl-theme" id="product">
-              
-                <div class="col-lg-3" th:each="products : ${products}">
+              <div class="col-lg-3" th:each="products : ${products}">
+                <div class="thumb-wrapper">
                   <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
-                  <div class="card" id="testvalue" th:attr="at=${products.productId}">
-                    <div
-                  class="categories__item set-bg"
-                  
-                >
-                <img th:src="${products.hinhanh}" alt="" />
-                  <p>[[${products.tensanpham}]]
-
-                  </p>
+                      
+                        <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                          
+                          </span>
+                        <img th:src="${products.hinhanh}" alt="" />
+                          <p class="product-item-name">[[${products.tensanpham}]]</p>
+                      
+                      <div class="item-price">
+                        <div class="price-box price-final_price">                                             
+                          <span class="special-price">
+                            <span class="price-container">
+                              <span class="price-wrapper">
+                                <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>
+                          
+                          <span class="old-price">
+                            <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                              <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                                <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>                                          
+                        </div>								
+                      </div>
+                    
+                  </a>
                 </div>
-                <p>[[${products.gia}]]</p>
                 
-              </div>
-            </a>
-                  </div>
+              </div> 
             </div>
           </div>
         </div>

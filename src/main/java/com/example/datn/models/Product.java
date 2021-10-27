@@ -1,5 +1,6 @@
 package com.example.datn.models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -57,10 +59,9 @@ public class Product {
 	
 	private String tinhtranghang;
 
-	@NotNull
-	@Min(1000)
-	@Max(1000000)
-	private Long gia;
+	@Column(name = "gia", nullable = false)
+    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
+    private BigDecimal gia;
 	
 	@NotNull
 	private Date createdDate = new Date((new java.util.Date()).getTime());
@@ -84,13 +85,18 @@ public class Product {
 			, mappedBy = "product")
 	private List<ImgProduct> imgProducts;
 
+
+	@OneToMany(fetch = FetchType.LAZY
+			, mappedBy = "product")
+	private List<OrderDetail> orderDetail;
+
 	public Product() {
 		super();
 	}
 
 	public Product(int productId, @NotBlank @Size(min = 3, max = 255) String tensanpham, NhaCungCap nhacungcap,
 			ThuongHieu thuonghieu, Loaisp loaisanpham, double soluong, double khuyenmai, String tinhtranghang,
-			@NotNull @Min(1000) @Max(1000000) Long gia, @NotNull Date createdDate, Category category, String hinhanh,
+			BigDecimal gia, @NotNull Date createdDate, Category category, String hinhanh,
 			String seourl, List<ImgProduct> imgProducts) {
 		this.productId = productId;
 		this.tensanpham = tensanpham;
@@ -172,12 +178,13 @@ public class Product {
 		this.tinhtranghang = tinhtranghang;
 	}
 
-	public Long getGia() {
+	public BigDecimal getGia() {
 		return gia;
 	}
 
-	public void setGia(Long gia) {
-		this.gia = gia;
+
+	public void setGia(BigDecimal unitPrice) {
+        this.gia = unitPrice;
 	}
 
 	public Date getCreatedDate() {

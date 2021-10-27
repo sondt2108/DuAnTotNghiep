@@ -31,6 +31,11 @@ function errorLogin() {
   $("#showerror").append("sai kiaf cmm ");
 }
 
+const urlParams = new URLSearchParams(window.location.search);
+const cartStatus = urlParams.get('cartStatus');
+console.log(cartStatus);
+        
+
 //validate form login
 
 $(function () {
@@ -64,7 +69,12 @@ $(function () {
           setJwtToken(data.accessToken);
           setRefreshToken(data.refreshToken);
           console.log(data);
-          window.location.assign("/home");
+          if (cartStatus == 0) {
+            location.assign("/checkout")
+          }else{
+            location.assign("/")
+          }
+          
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (jqXHR.status === 401) {
@@ -72,8 +82,8 @@ $(function () {
               .modal("show")
               .find(".modal-body")
               .empty()
-              .html("<p>" + jqXHR.responseJSON.message + "</p>");
-            location.replace("/login");
+              .html("<p class='error'>" + 'Thông tin tài khoản hoặc mật khẩu không chính xác!' + "</p>");
+            
           } else {
             throw new Error("an unexpected error occured: " + errorThrown);
           }

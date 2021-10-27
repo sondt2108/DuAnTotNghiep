@@ -22,6 +22,7 @@ public class CartController {
 	@GetMapping("cart/gio-hang")
 	public String gioHang(Model model) {
 		model.addAttribute("cart", cartService.getGioHang());
+		model.addAttribute("total", cartService.getTotal().toString());
 
 		return "cart";
 		
@@ -44,5 +45,36 @@ public class CartController {
 	public String xoaSanPham(@PathVariable("idSanPham") int idSanPham) {
         cartService.xoaSanPham(idSanPham);
 		return "redirect:/cart/gio-hang";
+	}
+
+
+
+	@GetMapping("cart")
+	public String  cart(Model model) {
+		model.addAttribute("cart", cartService.getGioHang());
+		model.addAttribute("total", cartService.getTotal().toString());
+
+		return "giohang";
+		
+	}
+
+
+	@GetMapping("cart/add/{idSanPham}")
+	public String addCart(@PathVariable("idSanPham") int idSanPham) {
+        cartService.themSanPham(idSanPham);
+		return "redirect:/cart";
+	}
+	
+	
+	@GetMapping("cart/minus/{idSanPham}")
+	public String minusCart(@PathVariable("idSanPham") int idSanPham) {
+        cartService.truSanPham(idSanPham);
+		return "redirect:/cart";
+	}
+	
+	@GetMapping("cart/remove/{idSanPham}")
+	public String removeCart(@PathVariable("idSanPham") int idSanPham) {
+        cartService.xoaSanPham(idSanPham);
+		return "redirect:/cart";
 	}
 }

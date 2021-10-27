@@ -2,6 +2,19 @@
     margin-top: 10px;
 }
 
+.product-item-name {
+    width: 200px;
+    margin: 0 0 7px;
+    font-weight: 500;
+    font-size: 14px;
+    height: 50px;
+    overflow: hidden;
+    
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .ducphat {
     color: #2a9dcc;
     font-family: "Helvetica Neue", sans-serif;

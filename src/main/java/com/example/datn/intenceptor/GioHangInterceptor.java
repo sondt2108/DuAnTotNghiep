@@ -25,7 +25,7 @@ public class GioHangInterceptor implements HandlerInterceptor {
 		// nếu giỏ hàng trống thì chuyển về trang chủ
 		if (gioHang.getChiTietGioHang().size() == 0) {
 			
-			response.sendRedirect("/product");
+			response.sendRedirect("/");
 			return false;
 		}
 		return true;

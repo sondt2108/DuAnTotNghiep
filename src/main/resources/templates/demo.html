@@ -43,7 +43,7 @@
 	div.gio-hang {
   display: none; /* Ẩn Mặc Định */
    position: fixed;
-   z-index: 1;
+   z-index: 1021;
    padding-top: 100px; /* Vị trí của modal */
    left: 0;
    top: 0;
@@ -82,6 +82,12 @@
    text-decoration: none;
    cursor: pointer;
  }
+
+ .btn-continue{
+   border: none;
+ }
+
+
 </style>
 
 
@@ -402,9 +408,8 @@
   <!-- Nội Dung Modal -->
    <div class="modal-content">
      <span class="close">×</span>
-     <div id="table-content">
-      			
-    </div>
+      <div id="table-content">		
+      </div>
    </div>
 </div>
 	
@@ -480,9 +485,7 @@
               <p>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 Copyright &copy;
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
+                
                 All rights reserved | This template design by
                 <i class="fa fa-heart" aria-hidden="true"></i> by
                 <a href="#" target="_blank">Team No Crack</a>
@@ -500,80 +503,23 @@
   
 </body>
 </html>
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script src="/asset/js/jquery-3.3.1.min.js"></script>
+<script src="/asset/js/bootstrap.min.js"></script>
+<script src="/asset/js/jquery.nice-select.min.js"></script>
+<script src="/asset/js/jquery-ui.min.js"></script>
+<script src="/asset/js/jquery.slicknav.js"></script>
+<script src="/asset/js/mixitup.min.js"></script>
+<script src="/asset/js/owl.carousel.min.js"></script>
+<script src="/asset/js/main.js"></script>
 <script src="/asset/js/api/product.js"></script>
+<script src="/asset/js/api/cart.js"></script>
 <script src="/asset/js/chitietsp.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-      	<script>
-      		$('button.close').click(function () {
-      			$(this).parent().css("display", "none");
-      		});
-      		$('button.mo-gio-hang').click(function() {
-      			$('div.gio-hang').css("display", "block");
-      			fetch('/cart/gio-hang')
-      			.then(response => response.text())
-      			.then(data => {
-      				$('#table-content').html(data);
-      			});
-      		});
-
-
-          function truSP(ev) {
-    let id = $(ev.target).attr('id');
-    fetch('/cart/tru-san-pham/' + ev)
-    .then(response => response.text())
-    .then(data => {
-        $('#table-content').html(data);
-    });
-}
-function congSP(ev) {
-    let id = $(ev.target).attr('id');
-    console.log(ev);
-    fetch('/cart/them-vao-gio/' + ev)
-    .then(response => response.text())
-    .then(data => {
-        $('#table-content').html(data);
-    });
-    
-    
-}
-
- function xoaSP(ev) {
-    console.log(ev);
-    var r = confirm("Do you really want to delete this row?");
-    if (r == true) {
-    let id = $(ev.target).attr('id');
-    fetch('/cart/xoa-san-pham/' + ev)
-    .then(response => response.text())
-    .then(data => {
-        $('#table-content').html(data);
-    });
-    }
-  }
-
-
- /* lấy phần tử modal */
- var modal = document.getElementById("myModal");
-/* thiết lập nút mở modal */
- 
-/* thiết lập nút đóng modal */
- var span = document.getElementsByClassName("close")[0];
+  <script>
+    var span = document.getElementsByClassName("close")[0];
 
 /* Sẽ đóng modal khi nhấn dấu x */
- span.onclick = function() {
-   modal.style.display = "none";
- }
-/*Sẽ đóng modal khi nhấp ra ngoài màn hình*/
- window.onclick = function(event) {
-   if (event.target == modal) {
-     modal.style.display = "none";
-   }
- }
-</script>
+span.onclick = function() {
+modal.style.display = "none";
+}
+  </script>

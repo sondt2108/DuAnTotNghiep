@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 import javax.security.auth.message.AuthException;
 import javax.security.sasl.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.datn.exception.TokenRefreshException;
@@ -27,7 +30,7 @@ import com.example.datn.repository.UserRepository;
 import com.example.datn.security.jwt.JwtUtils;
 import com.example.datn.security.services.RefreshTokenService;
 import com.example.datn.security.services.UserDetailsImpl;
-
+import com.example.datn.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +44,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -66,10 +70,13 @@ public class AuthController {
   @Autowired
   RefreshTokenService refreshTokenService;
 
-
+  @Autowired
+  CustomerService customerService;
   
   @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
+  @RequestParam(value = "cartStatus", defaultValue = "0") int cartStatus, HttpServletResponse response) {
+    HttpSession session = request.getSession();
    
         Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -85,12 +92,19 @@ public class AuthController {
         .collect(Collectors.toList());
 
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
-
-    
-    return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-        userDetails.getUsername(), userDetails.getEmail(), roles));
-
+    if (customerService.getUser(userDetails.getId())) {
         
+        session.setAttribute("username", customerService.getCustomer().getHoten());
+        session.setAttribute("currentUser", customerService.getCustomer());
+        //session.setAttribute("cartStatus", 0);
+       
+    }else{
+        cartStatus = 1;
+        //session.setAttribute("cartStatus", 1);
+    }
+
+    return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
+        userDetails.getUsername(), userDetails.getEmail(), roles, cartStatus));
 
   }
   

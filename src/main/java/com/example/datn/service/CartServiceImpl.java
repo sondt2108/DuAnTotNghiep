@@ -1,10 +1,7 @@
 package com.example.datn.service;
 
 import java.math.BigDecimal;
-import java.security.KeyStore.Entry;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import com.example.datn.models.GioHang;
 import com.example.datn.models.Product;
@@ -55,6 +52,16 @@ public class CartServiceImpl implements CartService {
 			gioHang.getChiTietGioHang().remove(product);
 		}
 	}
+
+
+
+	@Override
+    public BigDecimal getTotal() {
+        return gioHang.getChiTietGioHang().entrySet().stream()
+                .map(entry -> entry.getKey().getGia().multiply(BigDecimal.valueOf(entry.getValue())))
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+    }
 
 	
 
