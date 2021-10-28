@@ -50,14 +50,16 @@ function renderProduct(prs) {
 
     var datapr = document.querySelector('#data-detail');
     var data_detail = [prs].map(function(prs){
+        var price = prs.gia;
+        var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
         return `
        
         <h3>${prs.tensanpham}</h3>
                         
-        <div class="product__details__price">${prs.gia}</div>
+        <div class="product__details__price" >${priceFormat}₫</div>
         <ul>
-            <li><b>Availability</b> <span>In Stock</span></li>
-            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+            <li><b>Thương hiệu</b> <span>${prs.thuonghieu.tenTH}</span></li>
+            <li><b>Tình trạng</b> <span>${prs.tinhtranghang}</span></li>
             <li><b>Weight</b> <span>0.5 kg</span></li>
         </ul>
         

@@ -1,8 +1,12 @@
 package com.example.datn.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.datn.models.OrderDetail;
+import com.example.datn.models.Product;
 import com.example.datn.payload.response.JwtResponse;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
@@ -29,6 +33,18 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		if (customerService.isCustomerLogin()) {
 			//model.addAttribute("cartStatus", 0);
+			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+		for (Product product : listItems.keySet()) {
+
+            
+
+			
+			int quantity = listItems.get(product);
+            
+			model.addAttribute("quantity", quantity);
+			
+		}
 			model.addAttribute("cart", cartService.getGioHang());
 			model.addAttribute("total", cartService.getTotal().toString());
 			model.addAttribute("name", customerService.getCustomer().getHoten());

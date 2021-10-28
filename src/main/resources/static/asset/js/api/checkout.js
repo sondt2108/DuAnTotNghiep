@@ -1,5 +1,7 @@
 
+const tk = localStorage.getItem("jwtToken");
 
+console.log(tk);
 
 $(function () {
 
@@ -31,6 +33,8 @@ $(function () {
       },
       submitHandler: function () {
 
+        document.getElementById("btncheckout").disabled = true;
+
         if($("select[name=ls_province]").val() == null && $("select[name=ls_ward]").val() == null ) {
           $("label.province_error").show(); // show Warning 
           $("select#province").focus();  // Focus the select box      
@@ -55,48 +59,34 @@ $(function () {
         var ward = $('#ward option:selected').text();
 
         var $form = $("#checkoutForm");
-        var loginData = {
+        var orderData = {
           name: $form.find('input[name="name"]').val(),
           email: $form.find('input[name="email"]').val(),
           address: $form.find('input[name="address"]').val(),
+          phoneNumber: $form.find('input[name="phoneNumber"]').val(),
           province,
           district,
           ward,
+          note : $('textarea#note').val(),
         };
-
-
-        console.log(loginData);
   
-        // $.ajax({
-        //   url: "/api/auth/signin",
-        //   type: "POST",
-        //   data: JSON.stringify(loginData),
-        //   contentType: "application/json; charset=utf-8",
-        //   dataType: "json",
-        //   success: function (data, textStatus, jqXHR) {
-        //     setJwtToken(data.accessToken);
-        //     setRefreshToken(data.refreshToken);
-        //     console.log(data);
-        //     if (cartStatus == 0) {
-        //       location.assign("/checkout")
-        //     }else{
-        //       location.assign("/")
-        //     }
+        $.ajax({
+          url: "/checkout",
+          type: "POST",
+          data: JSON.stringify(orderData),
+          contentType: "application/json; charset=utf-8",
+          beforeSend: function (xhr) {
+               xhr.setRequestHeader('Authorization', 'Bearer ' + tk);
+           },
+          dataType: "json",
+          success: function (data, textStatus, jqXHR) {
+            alert("thành công");
             
-        //   },
-        //   error: function (jqXHR, textStatus, errorThrown) {
-        //     if (jqXHR.status === 401) {
-        //       $("#loginErrorModal")
-        //         .modal("show")
-        //         .find(".modal-body")
-        //         .empty()
-        //         .html("<p class='error'>" + 'Thông tin tài khoản hoặc mật khẩu không chính xác!' + "</p>");
-              
-        //     } else {
-        //       throw new Error("an unexpected error occured: " + errorThrown);
-        //     }
-        //   },
-        // });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert("lỗi")
+          },
+        });
       }
       },
     });

@@ -40,17 +40,9 @@ public class HomeController {
     ProductRepository productRepository;
 
     @GetMapping("/")
-    public String po( @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "6") int size, Model model) {
+    public String po(Model model) {
 
-    List<Product> products = new ArrayList<Product>();
-      Pageable paging = PageRequest.of(page, size);
-      
-      Page<Product> pageTuts;
-     
-        pageTuts = productRepository.findByTitleContaining(paging);
-      
-        products = pageTuts.getContent();
+    List<Product> products = productRepository.findByTitleContaining();
 
         model.addAttribute("products", products);
 

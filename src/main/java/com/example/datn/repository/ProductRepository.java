@@ -15,8 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
    
 
 
-    @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1", nativeQuery = true)
-    Page<Product> findByTitleContaining(Pageable pageable);
+    @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)
+    List<Product> findByTitleContaining();
 
     //@Query(value = "select * from products where seourl like ?1 ", nativeQuery = true)
     Optional<Product> findBySeourlContaining(String name);

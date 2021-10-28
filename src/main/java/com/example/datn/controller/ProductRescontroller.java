@@ -33,33 +33,7 @@ public class ProductRescontroller {
     @Autowired
     ProductImgRepository productImgRepository;
 
-    @GetMapping("api/productbytrademark")
-    public ResponseEntity<Map<String, Object>> getAllTutorials(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "6") int size
-      ) {
-
-    try {
-      List<Product> products = new ArrayList<Product>();
-      Pageable paging = PageRequest.of(page, size);
-      
-      Page<Product> pageTuts;
-     
-        pageTuts = productRepository.findByTitleContaining(paging);
-      
-        products = pageTuts.getContent();
-
-      Map<String, Object> response = new HashMap<>();
-      response.put("pr", products);
-      response.put("currentPage", pageTuts.getNumber());
-      response.put("totalItems", pageTuts.getTotalElements());
-      response.put("totalPages", pageTuts.getTotalPages());
-
-      return new ResponseEntity<>(response, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
+   
 
   @GetMapping("api/productdetails/{id}")
   public ResponseEntity<Product> getTutorialById(@PathVariable("id") int id) {

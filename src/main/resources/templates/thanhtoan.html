@@ -192,7 +192,7 @@
                     <li><a href="./blog-details.html">Giới thiệu</a></li>
                     <li style="float: right;">
 
-                        <a href="./giohang.html" class="header__cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                        <a href="./giohang.html" class="header__cart"><i class="fa fa-shopping-bag"></i> <span>[[${quantity}]]</span></a>
                     </li>
 
                 </ul>
@@ -205,46 +205,7 @@
 <section>
     <div class="container-xl ">
         <form class="needs-validation" id="checkoutForm">
-            <div class="row">
-                <div class="col-md-5 order-md-2 mb-4">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="donhang">Đơn hàng của bạn</span>
-                    </h4>
-                    <ul class="list-group mb-3" th:each="cart : ${cart.chiTietGioHang}">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <img class="my-0 images" th:src="${cart.key.hinhanh}" alt="">
-                            </div>
-                            <div>
-                                <p class="product-item-name">[[${cart.key.tensanpham}]]</p>
-                            </div>
-                            <div>
-                                <h6 class="my-0">x[[${cart.value}]]</h6>
-                            </div>
-                            <span class="text-muted" th:with="sum=${cart.value * cart.key.gia}" th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 0, 'POINT')+'₫'}"></span>
-                        </li>
-                    </ul>
-                    <hr class="mb-4" />
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Mã giảm giá" />
-                        <div class="input-group-append">
-                            <button  class="apdung btn">Áp Dụng</button>
-                        </div>
-                    </div>
-                    <ul class="list-group mb-3 tongtien">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <span>Tổng cộng</span>
-                            <strong th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')+'₫'}"></strong>
-                        </li>
-                    </ul>
-                    <hr class="mb-4" />
-                    <div class="mb-3">
-                        <a href="/cart" class="quayve"><i class="fas fa-angle-left"></i>Quay về giỏ hàng</a>
-                        <button class="dathang btn" type="submit">
-                ĐẶT HÀNG
-            </button>
-                    </div>
-                </div>
+            <div class="row">           
                 <div class="col-md-7 order-md-1">
                     <a href="./index.html" class="ducphat">Đức Phát</a>
                     <div class="mb-3">
@@ -294,7 +255,7 @@
                         
                         <div class="mb-3">
                             <label for="address"><i class="fas fa-sticky-note"></i>Ghi chú </label>
-                            <textarea name="description" class="form-control" placeholder="ghi chú" id="pwd"></textarea>
+                            <textarea name="description" th:name="ghichu" class="form-control" placeholder="ghi chú" id="note"></textarea>
                    
                     <hr class="mb-12" />
                     <p class="baomat" data-toggle="modal" data-target=".bd-example-modal-lg">Chính sách bảo mật</p>
@@ -343,6 +304,45 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-5 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="donhang">Đơn hàng của bạn</span>
+                    </h4>
+                    <ul class="list-group mb-3" th:each="cart : ${cart.chiTietGioHang}">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <img class="my-0 images" th:src="${cart.key.hinhanh}" alt="">
+                            </div>
+                            <div>
+                                <p class="product-item-name">[[${cart.key.tensanpham}]]</p>
+                            </div>
+                            <div>
+                                <h6 class="my-0">x[[${cart.value}]]</h6>
+                            </div>
+                            <span class="text-muted" th:with="sum=${cart.value * cart.key.gia}" th:text="${#numbers.formatDecimal(sum, 0, 'COMMA', 0, 'POINT')+'₫'}"></span>
+                        </li>
+                    </ul>
+                    <hr class="mb-4" />
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Mã giảm giá" />
+                        <div class="input-group-append">
+                            <button  class="apdung btn">Áp Dụng</button>
+                        </div>
+                    </div>
+                    <ul class="list-group mb-3 tongtien">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <span>Tổng cộng</span>
+                            <strong th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')+'₫'}"></strong>
+                        </li>
+                    </ul>
+                    <hr class="mb-4" />
+                    <div class="mb-3">
+                        <a href="/cart" class="quayve"><i class="fas fa-angle-left"></i>Quay về giỏ hàng</a>
+                        <button class="dathang btn" id="btncheckout" type="submit">
+                ĐẶT HÀNG
+            </button>
                     </div>
                 </div>
             </form>
