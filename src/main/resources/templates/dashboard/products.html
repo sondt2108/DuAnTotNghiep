@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Title -->
+<title>Products | Graindashboard UI Kit</title>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+<link rel="shortcut icon" href="dashboard/img/favicon.ico">
+<link rel="stylesheet"
+	href="/asset/dashboard/css/graindashboard.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style type="text/css">
+#timkiem-item {
+	background-color: #F5F5F5;
+	border: none;
+}
+
+#sort-item {
+	border: none;
+}
+
+#searchBt {
+	margin-left: 10px;
+	border: 1px solid #F0F0F0;
+	border-radius: 2px;
+	background-color: white;
+	color: black;
+}
+
+#searchBt:hover {
+	background-color: #F5F5F5;
+	color: black;
+}
+
+#them {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 5px;
+	border-radius: 3px;
+	font-size: 18px;
+	background-color: white;
+	color: black;
+	border: 2px solid #265df1;
+	margin-left: 5px;
+}
+
+#them:hover {
+	background-color: #265df1;
+	color: white;
+}
+
+#myInput {
+	background-image: url('/css/searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	font-size: 16px;
+	padding: 12px 20px 12px 40px;
+	border: 1px solid #ddd;
+	margin-bottom: 12px;
+}
+
+</style>
+</head>
+
+<body class="has-sidebar has-fixed-sidebar-and-header">
+	<!-- Header -->
+	<header class="header bg-body">
+		<nav class="navbar flex-nowrap p-0">
+			<div class="navbar-brand-wrapper d-flex align-items-center col-auto">
+				<!-- Logo For Mobile View -->
+				<a class="navbar-brand navbar-brand-mobile" href="/"> <img
+					class="img-fluid w-100" src="dashboard/img/logo-mini.png"
+					alt="Graindashboard">
+				</a>
+				<!-- End Logo For Mobile View -->
+
+				<!-- Logo For Desktop View -->
+				<a class="navbar-brand navbar-brand-desktop" href="/"> <img
+					class="side-nav-show-on-closed" src="dashboard/img/logo-mini.png"
+					alt="Graindashboard" style="width: auto; height: 33px;"> <img
+					class="side-nav-hide-on-closed" src="dashboard/img/logo.png"
+					alt="Graindashboard" style="width: auto; height: 33px;">
+				</a>
+				<!-- End Logo For Desktop View -->
+			</div>
+
+			<div class="header-content col px-md-3">
+				<div class="d-flex align-items-center">
+					<!-- Side Nav Toggle -->
+					<a class="js-side-nav header-invoker d-flex mr-md-2" href="#"
+						data-close-invoker="#sidebarClose" data-target="#sidebar"
+						data-target-wrapper="body"> <i class="gd-align-left"></i>
+					</a>
+					<!-- End Side Nav Toggle -->
+
+					<!-- User Notifications -->
+					<div class="dropdown ml-auto">
+						<a id="notificationsInvoker" class="header-invoker" href="#"
+							aria-controls="notifications" aria-haspopup="true"
+							aria-expanded="false" data-unfold-event="click"
+							data-unfold-target="#notifications"
+							data-unfold-type="css-animation" data-unfold-duration="300"
+							data-unfold-animation-in="fadeIn"
+							data-unfold-animation-out="fadeOut"> <span
+							class="indicator indicator-bordered indicator-top-right indicator-primary rounded-circle"></span>
+							<i class="gd-bell"></i>
+						</a>
+
+						<div id="notifications"
+							class="dropdown-menu dropdown-menu-center py-0 mt-4 w-18_75rem w-md-22_5rem unfold-css-animation unfold-hidden"
+							aria-labelledby="notificationsInvoker"
+							style="animation-duration: 300ms;">
+							<div class="card">
+								<div
+									class="card-header d-flex align-items-center border-bottom py-3">
+									<h5 class="mb-0">Notifications</h5>
+									<a class="link small ml-auto" href="#">Clear All</a>
+								</div>
+
+								<div class="card-body p-0">
+									<div class="list-group list-group-flush">
+										<div class="list-group-item list-group-item-action">
+											<div class="d-flex align-items-center text-nowrap mb-2">
+												<i class="gd-info-alt icon-text text-primary mr-2"></i>
+												<h6 class="font-weight-semi-bold mb-0">New Update</h6>
+												<span class="list-group-item-date text-muted ml-auto">just
+													now</span>
+											</div>
+											<p class="mb-0">
+												Order <strong>#10000</strong> has been updated.
+											</p>
+											<a class="list-group-item-closer text-muted" href="#"><i
+												class="gd-close"></i></a>
+										</div>
+										<div class="list-group-item list-group-item-action">
+											<div class="d-flex align-items-center text-nowrap mb-2">
+												<i class="gd-info-alt icon-text text-primary mr-2"></i>
+												<h6 class="font-weight-semi-bold mb-0">New Update</h6>
+												<span class="list-group-item-date text-muted ml-auto">just
+													now</span>
+											</div>
+											<p class="mb-0">
+												Order <strong>#10001</strong> has been updated.
+											</p>
+											<a class="list-group-item-closer text-muted" href="#"><i
+												class="gd-close"></i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End User Notifications -->
+					<!-- User Avatar -->
+					<div class="dropdown mx-3 dropdown ml-2">
+						<a id="profileMenuInvoker" class="header-complex-invoker" href="#"
+							aria-controls="profileMenu" aria-haspopup="true"
+							aria-expanded="false" data-unfold-event="click"
+							data-unfold-target="#profileMenu"
+							data-unfold-type="css-animation" data-unfold-duration="300"
+							data-unfold-animation-in="fadeIn"
+							data-unfold-animation-out="fadeOut"> <!--img class="avatar rounded-circle mr-md-2" src="#" alt="John Doe"-->
+							<span class="mr-md-2 avatar-placeholder">J</span> <span
+							class="d-none d-md-block">John Doe</span> <i
+							class="gd-angle-down d-none d-md-block ml-2"></i>
+						</a>
+
+						<ul id="profileMenu"
+							class="unfold unfold-user unfold-light unfold-top unfold-centered position-absolute pt-2 pb-1 mt-4 unfold-css-animation unfold-hidden fadeOut"
+							aria-labelledby="profileMenuInvoker"
+							style="animation-duration: 300ms;">
+							<li class="unfold-item"><a
+								class="unfold-link d-flex align-items-center text-nowrap"
+								href="#"> <span class="unfold-item-icon mr-3"> <i
+										class="gd-user"></i>
+								</span> My Profile
+							</a></li>
+							<li class="unfold-item unfold-item-has-divider"><a
+								class="unfold-link d-flex align-items-center text-nowrap"
+								href="#"> <span class="unfold-item-icon mr-3"> <i
+										class="gd-power-off"></i>
+								</span> Sign Out
+							</a></li>
+						</ul>
+					</div>
+					<!-- End User Avatar -->
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End Header -->
+
+	<main class="main">
+		<!-- Sidebar Nav -->
+		<aside id="sidebar" class="js-custom-scroll side-nav">
+			<ul id="sideNav" class="side-nav-menu side-nav-menu-top-level mb-0">
+				<!-- Title -->
+				<li class="sidebar-heading h6">Dashboard</li>
+				<!-- End Title -->
+
+				<!-- Dashboard -->
+				<li class="side-nav-menu-item"><a
+					class="side-nav-menu-link media align-items-center" href="/"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i
+							class="gd-dashboard"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Dashboard</span>
+				</a></li>
+				<!-- End Dashboard -->
+
+				<!-- Documentation -->
+				<li class="side-nav-menu-item"><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					target="_blank"> <span class="side-nav-menu-icon d-flex mr-3">
+							<i class="gd-file"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Documentation</span>
+				</a></li>
+				<!-- End Documentation -->
+
+				<!-- Title -->
+				<li class="sidebar-heading h6">Examples</li>
+				<!-- End Title -->
+
+				<!-- Users -->
+				<li class="side-nav-menu-item side-nav-has-menu"><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					data-target="#subUsers"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-user"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Users</span> <span
+						class="side-nav-control-icon d-flex"> <i
+							class="gd-angle-right side-nav-fadeout-on-closed"></i>
+					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+				</a> <!-- Users: subUsers -->
+					<ul id="subUsers"
+						class="side-nav-menu side-nav-menu-second-level mb-0">
+						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
+							href="khachhang.html">Khách hàng</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="nhanvien.html">Nhân Viên</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="chucvu.html">Chức vụ</a></li>
+						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
+							href="user.html">User</a></li>
+					</ul> <!-- End Users: subUsers --></li>
+				<!-- End Users -->
+
+				<!-- Products -->
+
+				<li class="side-nav-menu-item side-nav-has-menu active"><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					data-target="#subProducts"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i
+							class="gd-package"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Sản
+							phẩm</span> <span class="side-nav-control-icon d-flex"> <i
+							class="gd-angle-right side-nav-fadeout-on-closed"></i>
+					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+				</a> <!-- Products: subProducts -->
+					<ul id="subProducts"
+						class="side-nav-menu side-nav-menu-second-level mb-0">
+						<li class="side-nav-menu-item active"><a
+							class="side-nav-menu-link" href="products.html">Sản Phẩm</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="categories.html">Loại sản phẩm</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="mausac.html">Màu sắc</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="hoadon.html">Hóa đơn</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="cthoadon.html">Chi tiết hóa đơn</a></li>
+					</ul> <!-- End Products: subProducts --></li>
+
+				<!-- End Products -->
+				<!-- category -->
+				<li class="side-nav-menu-item side-nav-has-menu "><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					data-target="#subCategory"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-list"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Phân
+							phối</span> <span class="side-nav-control-icon d-flex"> <i
+							class="gd-angle-right side-nav-fadeout-on-closed"></i>
+					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+				</a> <!-- category: subcategory -->
+					<ul id="subCategory"
+						class="side-nav-menu side-nav-menu-second-level mb-0">
+
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="nhacungcap.html">Nhà cung cấp</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="nhasanxuat.html">Nhà sản xuất</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="thuonghieu.html">Thương hiệu</a></li>
+					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
+				</li>
+				<!-- End category -->
+
+				<!-- Authentication -->
+				<li class="side-nav-menu-item side-nav-has-menu"><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					data-target="#subPages"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-lock"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Authentication</span>
+						<span class="side-nav-control-icon d-flex"> <i
+							class="gd-angle-right side-nav-fadeout-on-closed"></i>
+					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+				</a> <!-- Pages: subPages -->
+					<ul id="subPages"
+						class="side-nav-menu side-nav-menu-second-level mb-0">
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="login.html">Login</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="register.html">Register</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="password-reset.html">Forgot Password</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="password-reset-2.html">Forgot Password 2</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="email-verification.html">Email Verification</a></li>
+					</ul> <!-- End Pages: subPages --></li>
+				<!-- End Authentication -->
+
+				<!-- Settings -->
+				<li class="side-nav-menu-item"><a
+					class="side-nav-menu-link media align-items-center"
+					href="settings.html"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i
+							class="gd-settings"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Settings</span>
+				</a></li>
+				<!-- End Settings -->
+
+			</ul>
+		</aside>
+		<!-- End Sidebar Nav -->
+
+		<div class="content">
+			<div class="py-4 px-3 px-md-4">
+				<div class="card mb-3 mb-md-4">
+
+					<div class="card-body">
+						<!-- Breadcrumb -->
+						<nav class="d-none d-md-block" aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Sản
+									phẩm</li>
+							</ol>
+						</nav>
+						<!-- End Breadcrumb -->
+
+						<div class="mb-3 mb-md-4 d-flex justify-content-between">
+							<div class="h3 mb-0">Users</div>
+						</div>
+						<!-- <input id="myInput" type="text" placeholder="Search.."> -->
+						<div>
+							<form id="searchForm">
+
+								
+
+								Tên : <input name="ten" type="text">  <input
+
+									type="hidden" name="trang" value="0"> <select
+									id="sort-item" name="xepTheo">
+									<option value="productId">Lọc ID</option>
+									<option value="tensanpham">Lọc Tên</option>
+									<option value="gia">Lọc Giá</option>
+								</select> <select id="sort-item" name="thuTu">
+									<option value="true">Tăng dần</option>
+									<option value="false">Giảm dần</option>
+								</select>
+
+								<button class="button" type="button" id="searchBt">Tìm
+									kiếm</button>
+							</form>
+						</div>
+
+						<button id="them">
+							<b>+ Thêm</b>
+						</button>
+
+						<div class="table-responsive-xl">
+							<table class="table table-striped  table-sm" id="table">
+								<thead>
+									<tr>
+										<th scope="col">Tên</th>
+										<th scope="col">Giá</th>
+										<th scope="col">Ngày tạo</th>
+										<th scope="col">Ảnh</th>
+										<th scope="col">Loại SP</th>
+										<th scope="col">Thương hiệu</th>
+										<th scope="col">Số lượng</th>
+										<th scope="col">Kuyến mãi</th>
+										<th scope="col">Tình trạng</th>
+										<th scope="col">Sửa Xóa</th>
+
+									</tr>
+								</thead>
+								<tbody id="myTable">
+
+								</tbody>
+							</table>
+							<div style="float: right;"
+								class="page-item card-footer d-block d-md-flex align-items-center d-print-none"
+								id="phanTrang"></div>
+						</div>
+						<!-- End Users -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="editModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<h5 class="modal-title" id="exampleModalLabel">
+								<b>Thêm sản phẩm</b>
+							</h5>
+
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="editForm"></form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" action="" id="save">Thêm</button>
+
+								<button type="button" class="btn btn-primary" action="" id="edit">Sửa</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer class="small p-3 px-md-4 mt-auto">
+				<div class="row justify-content-between">
+					<div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
+						<ul class="list-dot list-inline mb-0">
+							<li
+								class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a
+								class="link-dark" href="#">FAQ</a></li>
+							<li class="list-dot-item list-inline-item mr-lg-2"><a
+								class="link-dark" href="#">Support</a></li>
+							<li class="list-dot-item list-inline-item mr-lg-2"><a
+								class="link-dark" href="#">Contact us</a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg text-center mb-3 mb-lg-0">
+						<ul class="list-inline mb-0">
+							<li class="list-inline-item mx-2"><a class="link-muted"
+								href="#"><i class="gd-twitter-alt"></i></a></li>
+							<li class="list-inline-item mx-2"><a class="link-muted"
+								href="#"><i class="gd-facebook"></i></a></li>
+							<li class="list-inline-item mx-2"><a class="link-muted"
+								href="#"><i class="gd-github"></i></a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg text-center text-lg-right">&copy; 2019
+						Graindashboard. All Rights Reserved.</div>
+				</div>
+			</footer>
+			<!-- End Footer -->
+		</div>
+	</main>
+	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://brainfoolong.github.io/form-data-json/lib/form-data-json.min.js"></script>
+    <!-- Validation -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+		<script
+		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
+
+
+	<script type="text/javascript">
+	var url = "/api/products";
+		var rowTemplate = "{{#each products}}"
+			+"<tr>"
+			+       '<td class="py-3">{{tensanpham}}</td>'
+			+       '<td class="py-3">{{gia}}</td>'
+			+       '<td class="py-3">{{createdDate}}</td>'
+			+'<td class="py-3"><img src="{{hinhanh}}" style="width: 50px; height: 50px" /></td>' 
+			+       '<td class="py-3">{{category.name}}</td>'
+			+       '<td class="py-3">{{thuonghieu.tenTH}}</td>'
+			+       '<td class="py-3">{{soluong}}</td>'
+			+       '<td class="py-3">{{khuyenmai}}%</td>'
+			+       '<td class="py-3">{{tinhtranghang}}</td>'
+			+       '<td class="py-3"><button class="edit btn btn-outline" c-id="{{productId}}">Sửa</button>'
+			+ 		'<button class="delete btn btn-outline" c-id="{{productId}}">Xóa</button></td>'
+			
+			+"</tr>"
+		+"{{/each}}";
+		var rowHbs = Handlebars.compile(rowTemplate);
+//nhà cung cấp 
+		 var nhacungcapSelect =
+        '<select  id="nhacungcapSelect" class="form-control" name="idNCC">{{#each nhacungcaps}}' +
+        '<option value="{{idNCC}}">' +
+        "{{tenNCC}}" +
+        "</option>" +
+        "{{/each}}</select>";
+
+    	var nhacungcapSelectHbs = Handlebars.compile(nhacungcapSelect); 
+//category
+    	var categorySelect = '<select id="categorySelect" class="form-control" name="categoryId">{{#each categories}}'
+			+ '<option value="{{categoryId}}">'
+			+ "{{name}}"
+			+ "</option>"
+			+ "{{/each}}</select>";
+		var categorySelectHbs = Handlebars.compile(categorySelect);
+	
+//thương hiệu
+		 var thuonghieuSelect =
+		        '<select  id="thuonghieuSelect" class="form-control" name="idTH">{{#each thuonghieus}}' +
+		        '<option value="{{idTH}}">' +
+		        "{{tenTH}}" +
+		        "</option>" +
+		        "{{/each}}</select>";
+
+		var thuonghieuSelectHbs = Handlebars.compile(thuonghieuSelect);
+// load sản phẩm
+		function loadList() {
+			
+			var searchForm = FormDataJson.toJson(document.querySelector("form"));
+			console.log(searchForm);
+			var searchOption = {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+	          	},
+		        body: JSON.stringify(searchForm)
+			};
+			
+			
+			fetch("/api/product/search", searchOption).then(res => res.json())
+				.then(data => {
+					var rows = rowHbs({ products: data.content });
+					$("#myTable").html(rows);
+					bindEvent();
+					bindClick();
+					var pageHtml = "";
+					for (var i = 0; i < data.totalPages; i++) {
+						pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="datatablePagination0" class='${i == searchForm.trang ? "page-link active pageIndex" : "page-link pageIndex"}'>${i+1}</button>`;
+					}
+					$("#phanTrang").html(pageHtml);
+					
+					$(".pageIndex").click(function() {
+						$('#searchForm input[name="trang"]').val($(this).val());
+						loadList();
+					});
+				});
+		}
+		loadList();
+		
+		$("#searchBt").click(function() {
+			$('#searchForm input[name="trang"]').val(0);
+			loadList();
+		});
+
+
+		// Handle Validate
+		$(document).ready(function() {
+            
+
+            $("#editForm").validate({
+                rules: {
+                    tensanpham: "required",
+                    price: {
+                        required: true,
+                        number: true
+                    },
+                    images: "required IMAGES"
+                },
+                messages: {
+                	tensanpham: "Tên sản phẩm không được để trống",
+                    price: {
+                        required: "Giá bán không được để trống",
+                        number: "Sai kiểu định dạng giá bán"
+                    },
+                    images: {
+                        required: "Hình ảnh sản phẩm không được để trống"
+                    }
+                }
+            })
+        });
+		
+//thêm sản phẩm
+		var insertModal = new bootstrap.Modal(document.getElementById('editModal'), {
+			  keyboard: false
+			});
+		$("#them").click(function() {
+			document.getElementById("edit").style.visibility = 'hidden';
+			insertModal.show();
+			// nhà cung cấp
+			fetch("/api/nhacungcap")
+			  .then(response => response.json())
+			  .then(data => {
+				  var nhacungcapSelectHtml = nhacungcapSelectHbs({ nhacungcaps: data });
+				  
+				  //category
+			fetch("/api/categories")
+			  .then(response => response.json())
+			  .then(data => {
+				  var categorySelectHtml = categorySelectHbs({ categories: data });								  
+					  //thương hiệu
+					  fetch("/api/thuonghieu")
+					  .then(response => response.json())
+					  .then(data => {
+						  var thuonghieuSelectHtml = thuonghieuSelectHbs({ thuonghieus: data });
+						  
+				  var insertForm = '<div class="mb-3">'
+		               +	'<label for="name" class="form-label"><b>Tên sản phẩm:</b></label>'
+
+		  			   +	'<input name="tensanpham" class="form-control" id="tensanpham" oninput="myFunction()" placeholder="Tên sản phẩm">'
+					
+					   +   '</div>';
+						
+					insertForm += '<div class="mb-3">'
+			           +	'<label for="price" class="form-label"><b>Giá bán:</b></label>'
+			  		   +	'<input name="gia" value="" class="form-control" id="price" placeholder="Giá bán">'
+					   +   '</div>';
+					
+					insertForm += '<div class="mb-3">'
+			           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
+			  		   +	'<input name="hinhanh" value="" class="form-control" id="picture" placeholder="Hình ảnh">'
+					   +   '</div>';
+					insertForm += '<div class="mb-3">'
+
+				           		+	'<label for="category" class="form-label"><b>Loại sản phẩm:</b> </label>'
+				   				+ categorySelectHtml;
+
+					insertForm += '<div class="mb-3">'
+							   +	'<label for="thuonghieu" class="form-label"><b>Thương hiệu: </b></label>'
+							   + thuonghieuSelectHtml;
+					 
+					insertForm += '<div class="mb-3">'
+							   +	'<label for="thuonghieu" class="form-label"><b>Nhà cung cấp: </b></label>'
+							   + nhacungcapSelectHtml;
+					 
+					insertForm += '<div class="mb-3">'
+						   +	'<label for="soluong" class="form-label"><b>Số lượng</b></label>'
+						   +	'<input name="soluong" value="" class="form-control" id="sL" placeholder="Số lượng">'
+						   +   '</div>';
+					insertForm += '<div class="form-group">'
+						   +	'<label for="kM" class="form-label"><b>Khuyến mãi</b></label>'
+						   +	'<input name="khuyenmai" class="form-control" placeholder="Khuyến mãi" id="kM">'
+
+						   +   '</div>';
+						    insertForm += '<div class="mb-3">'
+					           +	'<label for="tT" class="form-label"><b>Tình trạng:</b></label>'
+					  		   +	'<input name="tinhtranghang" value="" class="form-control" id="tT" placeholder="Tình trạng">'
+								+	'<input  name="seourl" class="form-control" id="seourl" type="hidden">'
+							   +   '</div>';
+					$("#editForm").html(insertForm);	
+					  });
+				  });
+			  });
+		
+		});
+
+		function xoa_dau(str) {
+
+				str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+				str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+				str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+				str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+				str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+				str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+				str = str.replace(/đ/g, "d");
+				str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+				str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+				str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+				str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+				str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+				str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+				str = str.replace(/Đ/g, "D");
+
+				str = str.replace(/\s+/g, '-');
+				str = str.toLowerCase();
+				str.replace(/\s/g,'-');
+				console.log(str);
+
+			return str;
+}
+
+function myFunction() {
+  			var x = document.getElementById("tensanpham").value;
+			var seourl = xoa_dau(x);
+  			document.getElementById("seourl").value = seourl;
+}
+	
+		$("#save").click(function() {
+
+			const input = document.getElementById('tensanpham');
+			const log = document.getElementById('seourl');
+
+
+			
+			var products = FormDataJson.toJson(document.querySelector("#editModal"));
+			products.category = {
+					categoryId: products.categoryId
+                }
+			 products.nhacungcap = {
+					idNCC: products.idNCC
+                } 
+			products.nhasanxuat = {
+					idNSX: products.idNSX
+                }
+			products.thuonghieu = {
+					idTH: products.idTH
+                }
+
+
+				var nameurl = $("#tensanpham").val();
+				
+				var seourl = xoa_dau(nameurl);
+				
+				$("#seourl").val(seourl);							
+
+				console.log(products);
+
+			var editOption = {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+	          	},
+		        body: JSON.stringify(products, seourl)
+			};
+
+			if ($("#editForm").valid()) {
+			products = fetch(url, editOption)
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						loadList();
+					});
+				}
+			insertModal.hide();
+			
+		});
+// thực hiện delete
+		function bindEvent() {
+			$(".delete").click(function() {
+	            var result = confirm("Want to delete?");
+	            if (result == true) {
+	            	deleteProducts($(this));
+	            } else {
+	                return false;
+	            }
+	        });
+		}
+		function deleteProducts($button) {
+	    var id = $button.attr("c-id");
+	    alert("id saa pham la" + id)
+	    var deleteOption = {
+	        method: 'delete',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        }
+	    };
+	    products = fetch(url + "/" + id, deleteOption)
+	        .then(response => {
+	            loadList();
+	        });
+
+	}
+		
+// Sửa sản phẩm 
+var editTemplateStr = '<input type="hidden" name="productId" idProduct = "productId" value = "{{productId}}">' ;
+		 editTemplateStr = '<div class="mb-3">'
+             +	'<label for="name" class="form-label"><b>Tên sản phẩm:</b></label>'
+			   +	'<input name="name" value="{{tensanpham}}" class="form-control" id="name" placeholder="Tên sản phẩm	">'
+			   +   '</div>';
+				
+			   editTemplateStr += '<div class="mb-3">'
+	           +	'<label for="price" class="form-label"><b>Giá bán:</b></label>'
+	  		   +	'<input name="price" value="{{gia}}" class="form-control" id="price" placeholder="Giá bán">'
+			   +   '</div>';
+			
+			   editTemplateStr += '<div class="mb-3">'
+	           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
+	  		   +	'<input name="picture" value="{{hinhanh}}" class="form-control" id="picture" placeholder="Hình ảnh">'
+			   +   '</div>';
+					   editTemplateStr += '<div class="mb-3">'
+				   +	'<label for="sL" class="form-label"><b>Số lượng:</b></label>'
+				   +	'<input name="sL" value="{{soluong}}" class="form-control" id="sL" placeholder="Số lượng">'
+				   +   '</div>';
+				   editTemplateStr += '<div class="form-group">'
+				   +	'<label for="kM" class="form-label"><b>Khuyến mãi:</b></label>'
+				   +	'<input name="kM" value="{{khuyenmai}}" class="form-control" id="kM" placeholder="Khuyến mãi" >'
+				   +   '</div>';
+				   editTemplateStr += '<div class="mb-3">'
+			           +	'<label for="tT" class="form-label"><b>Tình trạng:</b></label>'
+			  		   +	'<input name="tT" value="{{tinhtranghang}}" class="form-control" id="tT" placeholder="Tình trạng">'
+					   +   '</div>';
+			 
+    	var editHbs = Handlebars.compile(editTemplateStr);
+    	function bindClick() {
+    	    $(".edit").click(function() {
+    	        insertModal.show();
+
+    	        var id = $(this).attr("c-id");
+    	        fetch(url + "/" + id)
+
+    	        .then((res) => res.json())
+    	            .then((products) => {
+    	                var editHTML = editHbs(products);
+    	                
+   //fetch nhà cùng cấp
+    	                         fetch("/api/nhacungcap")
+        	                    .then((res) => res.json())
+        	                    .then((nhacungcaps) => {
+        	                        var nhacungcapSelectHtml = nhacungcapSelectHbs({
+        	                        	nhacungcaps: nhacungcaps,
+        	                        });
+        	                        editHTML += '<div class="mb-3">'
+        						           +	'<label for="nhacungcap" class="form-label"><b>Nhà cung cấp:</b> </label>'
+        						   		   + nhacungcapSelectHtml;
+
+        	                        $("#editForm").html(editHTML);
+        	                        $("#nhacungcapSelect").val(products.nhacungcap.idNCC)
+        	                        
+   //fetch categories
+        	             fetch("/api/categories")
+    	                    .then((res) => res.json())
+    	                    .then((categories) => {
+    	                        var categorySelectHtml = categorySelectHbs({
+    	                            categories: categories,
+    	                        });
+    	                        editHTML +=  '<div class="mb-3">'
+    				           		+	'<label for="category" class="form-label"><b>Loại sản phẩm:</b> </label>'
+    				   				+  categorySelectHtml;
+
+    	                        $("#editForm").html(editHTML);
+    	                        $("#categorySelect").val(products.category.categoryId)
+    	                        
+   
+ //fetch thường hiệu                     
+        	               fetch("/api/thuonghieu")
+        	                    .then((res) => res.json())
+        	                    .then((thuonghieus) => {
+        	                        var thuonghieuSelectHtml = thuonghieuSelectHbs({
+        	                        	thuonghieus: thuonghieus,
+        	                        });
+        	                        editHTML +=  '<div class="mb-3">'
+        								   +	'<label for="thuonghieu" class="form-label"><b>Thương hiệu: </b></label>'
+        								   +  thuonghieuSelectHtml;
+
+        	                        $("#editForm").html(editHTML);
+        	                        $("#thuonghieuSelect").val(products.thuonghieu.idTH)
+									$("#nhacungcapSelect").val(products.nhacungcap.idNCC)
+        	                        $("#categorySelect").val(products.category.categoryId)
+        	                    });
+        	                    }); 
+        	                    }); 
+    	                    });
+    	                
+    	                	
+    	            });
+    	    
+    	
+        }
+        </script>
+	
+	<!-- <script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script>  -->
+	
+</body>
+</html>

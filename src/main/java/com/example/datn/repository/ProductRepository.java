@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     
-   
+    Page<Product> findByTensanphamContainingIgnoreCase(String name, Pageable pager);
 
 
     @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)

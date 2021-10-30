@@ -3,6 +3,7 @@ package com.example.datn.service;
 import com.example.datn.models.Customer;
 import com.example.datn.repository.CustomerRepository;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
 	CustomerSession customerSession;
+
+	
+
 
     @Autowired
 	CustomerRepository customerRepository;
@@ -25,6 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerSession.getCustomer() != null;
 	}
 
+
+	
+
     @Override
 	public boolean getUser(Long userId) {
 		Customer customer = customerRepository.findByUserId(userId);
@@ -34,4 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return false;
 	}
+
+
+	
 }

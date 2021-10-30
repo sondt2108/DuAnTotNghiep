@@ -50,6 +50,13 @@ public class HomeController {
     }
 
 
+    @GetMapping("/checkout/success")
+    public String oderSuccess(){
+
+        return "ordersuccess";
+    }
+
+
     
 	
     

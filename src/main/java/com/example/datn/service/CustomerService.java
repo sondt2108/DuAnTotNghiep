@@ -6,4 +6,6 @@ public interface CustomerService {
     Customer getCustomer();
     boolean isCustomerLogin();
     boolean getUser(Long uesrId);
+
+   
 }

@@ -98,10 +98,12 @@ public class AuthController {
         session.setAttribute("currentUser", customerService.getCustomer());
         //session.setAttribute("cartStatus", 0);
        
-    }else{
-        cartStatus = 1;
-        //session.setAttribute("cartStatus", 1);
     }
+
+    
+        //cartStatus = 1;
+        //session.setAttribute("cartStatus", 1);
+    
 
     return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
         userDetails.getUsername(), userDetails.getEmail(), roles, cartStatus));

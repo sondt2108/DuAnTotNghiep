@@ -17,4 +17,14 @@ public class CustomerSession {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+
+	
+	public Customer getRL() {
+		return customer;
+	}
+
+	public void setRL(Customer customer) {
+		this.customer = customer;
+	}
 }

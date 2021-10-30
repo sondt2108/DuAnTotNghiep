@@ -59,7 +59,7 @@ private List<MimeMessage> mailList = new ArrayList<>();
             + "or you have not made the request.</p>";
 		try {
 			
-			helper.setFrom("Thanh Son <sonthanh111@outlook.com>");
+			helper.setFrom("Thanh Son <sondtpk01429@fpt.edu.vn>");
 			helper.setTo(email);
 			helper.setSubject("Thank you");
 			helper.setText(content, true);
@@ -92,9 +92,7 @@ private List<MimeMessage> mailList = new ArrayList<>();
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
 				+ "    <title>Document</title>\n" + "</head>\n" + "<body>\n"
 				+ "    <div style= \"background: #FFDDC4;padding : 20px; margin : 20px;\">\n"
-				+ "    <img src=\"https://technext.github.io/timezone/assets/img/logo/logo.png\" style= \"\">\n"
 				+ "	   <p style= \"font-size:26px;\" >\"Begin your own tradition\" : Hãy tạo nên truyền thống của riêng bạn.</p>\n	"
-				+ "    <img src=\"https://cdn.tgdd.vn/2021/05/banner/hotsale-sm-830-300-830x300.png\" style= \"\">\n"
 				+ "        <h1 style= \"color: red;\">Thông tin đơn hàng</h1>\n" + "<p style= \"color: red;\">\n" + "Tên Người Nhận : <b>"
 				+ order.getCustomer().getHoten() + "</b>\n" + "  </p>\n" + "<p style= \"color: red;\">\n" + " Số điện thoại: <b>"
 				+ order.getCustomer().getSdt() + "</b>\n" + "</p>\n" + "<p style= \"color: red; \">\n" + "Địa chỉ nhận hàng : <b>"
@@ -113,7 +111,7 @@ private List<MimeMessage> mailList = new ArrayList<>();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		try {
 			
-			helper.setFrom("Thanh Son <sonthanh111@outlook.com>");
+			helper.setFrom("Thanh Son <sondtpk01429@fpt.edu.vn>");
 			helper.setTo(order.getCustomer().getUser().getEmail());
 			helper.setSubject("Thank you");
 			helper.setText(content, true);

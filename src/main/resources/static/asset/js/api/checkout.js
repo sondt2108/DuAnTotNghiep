@@ -3,6 +3,16 @@ const tk = localStorage.getItem("jwtToken");
 
 console.log(tk);
 
+/* lấy phần tử modal */
+var modal = document.getElementById("myModal");
+/* thiết lập nút mở modal */
+ var btn = document.getElementById("btncheckout");
+
+/* Sẽ hiển thị modal khi người dùng click vào */
+ btn.onclick = function() {
+   modal.style.display = "block";
+ }
+
 $(function () {
 
   $.validator.addMethod(
@@ -33,7 +43,14 @@ $(function () {
       },
       submitHandler: function () {
 
-        document.getElementById("btncheckout").disabled = true;
+
+        $('#loginErrorModal')
+              .modal("show")
+              .find(".modal-body")
+              .empty()
+              .html("<p>Chúng tôi đang xử lý đơn hàng của bạn</p>");
+
+       
 
         if($("select[name=ls_province]").val() == null && $("select[name=ls_ward]").val() == null ) {
           $("label.province_error").show(); // show Warning 
@@ -54,6 +71,10 @@ $(function () {
         $('.province_error').hide(); 
         $('.district_error').hide();
         $('.ward_error').hide();
+
+        
+        document.getElementById("btncheckout").disabled = true;
+
         var province = $('#province option:selected').text();
         var district = $('#district option:selected').text();
         var ward = $('#ward option:selected').text();
@@ -80,11 +101,16 @@ $(function () {
            },
           dataType: "json",
           success: function (data, textStatus, jqXHR) {
-            alert("thành công");
+            modal.style.display = "none"
+            location.assign("/checkout/success")
             
           },
           error: function (jqXHR, textStatus, errorThrown) {
-            alert("lỗi")
+            $('#loginErrorModal')
+              .modal("show")
+              .find(".modal-body")
+              .empty()
+              .html("<p>Có lỗi xảy ra vui lòng thử lại sau</p>");
           },
         });
       }
