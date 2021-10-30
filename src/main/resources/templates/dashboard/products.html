@@ -613,7 +613,8 @@
 			  keyboard: false
 			});
 		$("#them").click(function() {
-			document.getElementById("edit").style.visibility = 'hidden';
+			document.getElementById("edit").style.display = "none";
+			document.getElementById("save").style.display = "block";
 			insertModal.show();
 			// nhà cung cấp
 			fetch("/api/nhacungcap")
@@ -714,11 +715,7 @@ function myFunction() {
 }
 	
 		$("#save").click(function() {
-
-			const input = document.getElementById('tensanpham');
-			const log = document.getElementById('seourl');
-
-
+		
 			
 			var products = FormDataJson.toJson(document.querySelector("#editModal"));
 			products.category = {
@@ -793,34 +790,37 @@ function myFunction() {
 var editTemplateStr = '<input type="hidden" name="productId" idProduct = "productId" value = "{{productId}}">' ;
 		 editTemplateStr = '<div class="mb-3">'
              +	'<label for="name" class="form-label"><b>Tên sản phẩm:</b></label>'
-			   +	'<input name="name" value="{{tensanpham}}" class="form-control" id="name" placeholder="Tên sản phẩm	">'
+			   +	'<input name="tensanpham" value="{{tensanpham}}" class="form-control" id="tensanpham" oninput="myFunction()" placeholder="Tên sản phẩm	">'
 			   +   '</div>';
 				
 			   editTemplateStr += '<div class="mb-3">'
 	           +	'<label for="price" class="form-label"><b>Giá bán:</b></label>'
-	  		   +	'<input name="price" value="{{gia}}" class="form-control" id="price" placeholder="Giá bán">'
+	  		   +	'<input name="gia" value="{{gia}}" class="form-control" id="price" placeholder="Giá bán">'
 			   +   '</div>';
 			
 			   editTemplateStr += '<div class="mb-3">'
 	           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
-	  		   +	'<input name="picture" value="{{hinhanh}}" class="form-control" id="picture" placeholder="Hình ảnh">'
+	  		   +	'<input name="hinhanh" value="{{hinhanh}}" class="form-control" id="picture" placeholder="Hình ảnh">'
 			   +   '</div>';
 					   editTemplateStr += '<div class="mb-3">'
 				   +	'<label for="sL" class="form-label"><b>Số lượng:</b></label>'
-				   +	'<input name="sL" value="{{soluong}}" class="form-control" id="sL" placeholder="Số lượng">'
+				   +	'<input name="soluong" value="{{soluong}}" class="form-control" id="sL" placeholder="Số lượng">'
 				   +   '</div>';
 				   editTemplateStr += '<div class="form-group">'
 				   +	'<label for="kM" class="form-label"><b>Khuyến mãi:</b></label>'
-				   +	'<input name="kM" value="{{khuyenmai}}" class="form-control" id="kM" placeholder="Khuyến mãi" >'
+				   +	'<input name="khuyenmai" value="{{khuyenmai}}" class="form-control" id="kM" placeholder="Khuyến mãi" >'
 				   +   '</div>';
 				   editTemplateStr += '<div class="mb-3">'
 			           +	'<label for="tT" class="form-label"><b>Tình trạng:</b></label>'
-			  		   +	'<input name="tT" value="{{tinhtranghang}}" class="form-control" id="tT" placeholder="Tình trạng">'
+			  		   +	'<input name="tinhtranghang" value="{{tinhtranghang}}" class="form-control" id="tT" placeholder="Tình trạng">'
+						 +	'<input  name="seourl" class="form-control" id="seourl" type="hidden">'
 					   +   '</div>';
 			 
     	var editHbs = Handlebars.compile(editTemplateStr);
     	function bindClick() {
     	    $(".edit").click(function() {
+				document.getElementById("save").style.display = "none";
+				document.getElementById("edit").style.display = "block";
     	        insertModal.show();
 
     	        var id = $(this).attr("c-id");
