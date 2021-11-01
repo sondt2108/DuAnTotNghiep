@@ -15,9 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,6 +59,20 @@ public class AdminRescontroller {
     @GetMapping("/api/products/{id}")
 	public Product getById(@PathVariable("id") int id) {
 		return productRepository.findById(id).orElse(null);
+	}
+
+
+    //edit product
+    @PutMapping("/api/products/{id}")
+    public Product update(@PathVariable("id") int id, @RequestBody Product product) {
+        return productRepository.save(product);
+    }
+
+
+    //delete product
+    @DeleteMapping("/api/products/{id}")
+	public void delete(@PathVariable("id") int id) {
+		productRepository.deleteById(id);
 	}
 
 

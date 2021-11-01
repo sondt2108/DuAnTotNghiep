@@ -608,6 +608,7 @@
             })
         });
 		
+		
 //thêm sản phẩm
 		var insertModal = new bootstrap.Modal(document.getElementById('editModal'), {
 			  keyboard: false
@@ -634,6 +635,7 @@
 						  var thuonghieuSelectHtml = thuonghieuSelectHbs({ thuonghieus: data });
 						  
 				  var insertForm = '<div class="mb-3">'
+					   
 		               +	'<label for="name" class="form-label"><b>Tên sản phẩm:</b></label>'
 
 		  			   +	'<input name="tensanpham" class="form-control" id="tensanpham" oninput="myFunction()" placeholder="Tên sản phẩm">'
@@ -647,7 +649,8 @@
 					
 					insertForm += '<div class="mb-3">'
 			           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
-			  		   +	'<input name="hinhanh" value="" class="form-control" id="picture" placeholder="Hình ảnh">'
+			  		   +	'<input type="file" class="upload" id="${editProp.prop}_file" accept="image/*">'
+						+ 	'<img src="${product.images}"/>'
 					   +   '</div>';
 					insertForm += '<div class="mb-3">'
 
@@ -759,6 +762,53 @@ function myFunction() {
 			insertModal.hide();
 			
 		});
+
+
+		$("#edit").click(function() {
+			var id = document.getElementById("productId").value;
+			
+		var products = FormDataJson.toJson(document.querySelector("#editModal"));
+		products.category = {
+				categoryId: products.categoryId
+			}
+		 products.nhacungcap = {
+				idNCC: products.idNCC
+			} 
+		products.nhasanxuat = {
+				idNSX: products.idNSX
+			}
+		products.thuonghieu = {
+				idTH: products.idTH
+			}
+
+
+			var nameurl = $("#tensanpham").val();
+			
+			var seourl = xoa_dau(nameurl);
+			
+			$("#seourl").val(seourl);							
+
+			console.log(products);
+
+		var editOption = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			  },
+			body: JSON.stringify(products, seourl)
+		};
+
+		if ($("#editForm").valid()) {
+		products = fetch(url + '/' +id, editOption)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+					loadList();
+				});
+			}
+		insertModal.hide();
+		
+	});
 // thực hiện delete
 		function bindEvent() {
 			$(".delete").click(function() {
@@ -787,8 +837,8 @@ function myFunction() {
 	}
 		
 // Sửa sản phẩm 
-var editTemplateStr = '<input type="hidden" name="productId" idProduct = "productId" value = "{{productId}}">' ;
-		 editTemplateStr = '<div class="mb-3">'
+var editTemplateStr = '<div class="mb-3">'
+	+'<input class="form-control" id="productId"  name="productId" idProduct="{{productId}}"  value ="{{productId}}" type="hidden">'
              +	'<label for="name" class="form-label"><b>Tên sản phẩm:</b></label>'
 			   +	'<input name="tensanpham" value="{{tensanpham}}" class="form-control" id="tensanpham" oninput="myFunction()" placeholder="Tên sản phẩm	">'
 			   +   '</div>';
@@ -813,7 +863,7 @@ var editTemplateStr = '<input type="hidden" name="productId" idProduct = "produc
 				   editTemplateStr += '<div class="mb-3">'
 			           +	'<label for="tT" class="form-label"><b>Tình trạng:</b></label>'
 			  		   +	'<input name="tinhtranghang" value="{{tinhtranghang}}" class="form-control" id="tT" placeholder="Tình trạng">'
-						 +	'<input  name="seourl" class="form-control" id="seourl" type="hidden">'
+						 +	'<input  name="seourl" class="form-control" id="seourl">'
 					   +   '</div>';
 			 
     	var editHbs = Handlebars.compile(editTemplateStr);
