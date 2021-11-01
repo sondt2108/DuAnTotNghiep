@@ -154,10 +154,10 @@
                 <div class="col-lg-9">
                     <div class="hero__search" style="padding-top: 20px">
                         <div class="hero__search__form">
-                            <form th:action="@{/search}" th:object="${employee}" method="post">
+                            <form th:action="@{/search}" method="GET">
 
 
-                                <input type="text" placeholder="What do yo u need?">
+                                <input type="text" name="query" th:value="${searchName}" placeholder="Tìm kiếm sản phẩm...">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -546,197 +546,20 @@
                         </ul>
                     </div>
 
-                    <aside class="aside-item filter-vendor">
-                      <div class="aside-title">
-                        <h2 class="title-head margin-top-0"><span>Thương hiệu</span></h2>
-                      </div>
-                      <div class="aside-content filter-group">
-                        <div class="field-search input-group">
-                          <input type="text" placeholder="Tìm Thương hiệu" class="form-control filter-vendor-list" onkeyup="filterItemInList(jQuery('.filter-vendor-list'))">
-                          <span class="input-group-btn">
-                            <button class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
-                          </span>
-                        </div>
-                        <ul class="filter-vendor">
-                          
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="bình minh" for="filter-binh-minh" class="binh-minh">
-                              <input type="checkbox" id="filter-binh-minh" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Bình Minh" value="(&quot;Bình Minh&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Bình Minh
-                              
-                            </label>
-                          </li>                         
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="daphaco" for="filter-daphaco" class="daphaco">
-                              <input type="checkbox" id="filter-daphaco" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Daphaco" value="(&quot;Daphaco&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Daphaco
-                              
-                            </label>
-                          </li>                                                                  
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="đệ nhất" for="filter-de-nhat" class="de-nhat">
-                              <input type="checkbox" id="filter-de-nhat" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Đệ Nhất" value="(&quot;Đệ Nhất&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Đệ Nhất
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="duhal" for="filter-duhal" class="duhal">
-                              <input type="checkbox" id="filter-duhal" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Duhal" value="(&quot;Duhal&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Duhal
-                              
-                            </label>
-                          </li>
-
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="golden link" for="filter-golden-link" class="golden-link">
-                              <input type="checkbox" id="filter-golden-link" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Golden Link" value="(&quot;Golden Link&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Golden Link
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="mitsubishi" for="filter-mitsubishi" class="mitsubishi">
-                              <input type="checkbox" id="filter-mitsubishi" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Mitsubishi" value="(&quot;Mitsubishi&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Mitsubishi
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="mpe" for="filter-mpe" class="mpe">
-                              <input type="checkbox" id="filter-mpe" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="MPE" value="(&quot;MPE&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              MPE
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="nanoco" for="filter-nanoco" class="nanoco">
-                              <input type="checkbox" id="filter-nanoco" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Nanoco" value="(&quot;Nanoco&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Nanoco
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="panasonic" for="filter-panasonic" class="panasonic">
-                              <input type="checkbox" id="filter-panasonic" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Panasonic" value="(&quot;Panasonic&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Panasonic
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="paragon" for="filter-paragon" class="paragon">
-                              <input type="checkbox" id="filter-paragon" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Paragon" value="(&quot;Paragon&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Paragon
-                              
-                            </label>
-                          </li>
-                          <li class="filter-item filter-item--check-box filter-item--green ">
-                            <label data-filter="philips" for="filter-philips" class="philips">
-                              <input type="checkbox" id="filter-philips" onchange="toggleFilter(this)" data-group="Hãng" data-field="vendor.filter_key" data-text="Philips" value="(&quot;Philips&quot;)" data-operator="OR">
-                              <i class="fa"></i>
-                              
-                              Philips
-                              
-                            </label>
-                          </li>                                                
-                        </ul>
-                      </div>
-                    </aside>
+                    
 
                 
 
-                <div class="hero__categories filter_categories">
-                    <div class="filter_desktop">
-                        <div class="categories_name">Giá sản phẩm</div>
-                    </div>
-                    <div class="search_categories">
-                    <div class="input-group">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                          aria-describedby="search-addon" />
-                        <button type="button" class="btn btn-outline-primary">search</button>
-                    </div>
-                    </div>
-                      <div class="scroll_check_category">
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                        <input type="checkbox" /> This is checkbox <br />
-                    </div>
+               
                 </div>
-                </div>
+
+                <th:block th:if=>
+
+                </th:block>
                 
                 <div class="col-lg-9">
                    
-                        <h2>Tất cả sản phẩm</h2>
-                      
-                   <div class="filter_sort">
-                       <span>Ưu tiên theo:</span>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio"  value="1" name="flexRadioDefault" id="nameASC">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                          Tên A-Z
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="nameDESC" >
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Tên Z-A
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="priceASC" >
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Giá thấp đến cao
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="priceDESC">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          Giá cao đến thấp
-                        </label>
-                      </div>
-                      
-
-                   </div>
-
-                   <div class="filter_sort_mobile">
-                    <div class="box">
-                        <label>Ưu tiên theo:</label>
-                        <select class="wide">
-                          <option data-display="Select">Mặc định</option>
-                          <option value="1">Tên A-Z</option>
-                          <option value="2">Tên Z-A</option>
-                          <option value="3">Giá thấp đến cao</option>
-                          <option value="4">Giá cao đến thấp</option>
-                        </select>
-                      </div>
-                   </div>
+                    
 
                    <div class="row">
                     <!-- card -->
@@ -792,7 +615,6 @@
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                       <li class="page-item">
-                        
                         <a class="page-link" href="#" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                           <span class="sr-only">Previous</span>
@@ -800,8 +622,8 @@
                       </li>
                       <li th:each="i : ${#numbers.sequence(1, maxPage)}"
 						th:class="${i == currentPage +1 ? 'page-item active' :'page-item' }">
-						<a class="page-link" th:if="${currentPage != i}" th:href="@{'/product?pageIndex=' + ${i -1} +'&sort=' + ${sortName}+'&sortBy='+${sortDesc}}">[[${i}]]</a>
-						<a class="page-link" th:unless="${currentPage != i}" th:href="@{'/product?pageIndex=' + ${i -1} +'&sort=' + ${sortName}+'&sortBy='+${sortDesc}}">[[${i}]]
+						<a class="page-link" th:if="${currentPage != i}" th:href="@{'/search?query=' + ${searchName} +'&pageIndex=' + ${i-1}}">[[${i}]]</a>
+						<a class="page-link" th:unless="${currentPage != i}" th:href="@{'/search?query=' + ${searchName} +'&pageIndex=' + ${i-1}}">[[${i}]]
             </a> 
 					
 					</li>
@@ -816,7 +638,6 @@
             </div>
         </div>
     </section>
-    
 
     <div id="back-top">
         <a title="Go to Top" href="#"> <i class="fa fa-angle-double-up"></i></a>
@@ -824,7 +645,7 @@
 
 
     
-    
+    <li>[[${demo}]]</li>
 
 
     <!-- Footer Section Begin -->

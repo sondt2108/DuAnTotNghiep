@@ -9,11 +9,17 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 import com.example.datn.models.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.service.CartService;
@@ -22,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
 
 @Controller
 public class HomeController {
@@ -55,6 +62,88 @@ public class HomeController {
 
         return "ordersuccess";
     }
+
+    private static final int TOI_DA_SAN_PHAM = 3;
+
+    @GetMapping("/product")
+    public String listproduct(@RequestParam(name = "sort", defaultValue = "productId") String sortFeild,
+			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+
+		Sort sortable = null;
+
+		if (sortBy.equals("DESC")) {
+			sortable = Sort.by(Sort.Direction.DESC, sortFeild);
+		}
+
+		if (sortBy.equals("ASC")) {
+			sortable = Sort.by(Sort.Direction.ASC, sortFeild);
+		}
+
+		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
+
+		// lấy sản phẩm
+		Page<Product> productPage = productRepository.findAll(pager);
+
+		model.addAttribute("countProduct", productPage.getTotalElements());
+
+		model.addAttribute("products", productPage.getContent());
+		// truyền vào số lượng page tối đa
+		model.addAttribute("maxPage", productPage.getTotalPages());
+
+		// truyền vào page hiện tại
+		model.addAttribute("currentPage", productPage.getNumber());
+
+		// truyền vào sắp xếp theo id, name, price
+		model.addAttribute("sortName", sortFeild);
+
+		// truyền vào kiểu sắp xếp 
+		model.addAttribute("sortDesc", sortBy);
+
+        return "product";
+    }
+
+
+    // Search product
+	@GetMapping("search")
+	public String search(@RequestParam(name = "sort", defaultValue = "productId") String sortFeild,
+			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
+			// thêm từ khóa tìm kiếm
+			@RequestParam(name = "query", defaultValue = "") String productname, 
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model
+			) {
+
+		Sort sortable = null;
+
+		if (sortBy.equals("DESC")) {
+			sortable = Sort.by(Sort.Direction.DESC, sortFeild);
+		}
+
+		if (sortBy.equals("ASC")) {
+			sortable = Sort.by(Sort.Direction.ASC, sortFeild);
+		}
+
+		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
+		// lấy sản phẩm
+		Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(productname, pager);
+
+
+        model.addAttribute("demo", productPage.getTotalElements());
+
+		model.addAttribute("searchName", productname);
+		model.addAttribute("products", productPage.getContent());
+		model.addAttribute("maxPage", productPage.getTotalPages());
+		// truyền vào page hiện tại
+		model.addAttribute("currentPage", productPage.getNumber());
+		
+		// truyền vào sắp xếp theo id, name, price
+		model.addAttribute("sortName", sortFeild);
+
+		// truyền vào kiểu sắp xếp desc
+		model.addAttribute("sortDesc", sortBy);
+
+		return "search";
+	}
 
 
     

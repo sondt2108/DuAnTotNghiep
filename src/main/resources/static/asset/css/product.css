@@ -132,6 +132,60 @@
 }
 
 
+.aside-item {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+
+    border: 1px solid #ebebeb;
+    padding: 10px;
+
+}
+
+.aside-item .aside-title .title-head {
+    text-transform: uppercase;
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: SFUFuturaBold;
+}
+
+.filter-group {
+    margin-bottom: 0px;
+}
+
+.filter-group ul {
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.filter-item {
+    margin: 0;
+    cursor: pointer;
+    line-height: 2.5em;
+}
+
+.aside-item .field-search {
+    margin-bottom: 10px;
+}
+
+.aside-item .field-search input {
+    min-height: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    padding: 0 7px;
+}
+.input-group .form-control, .input-group-addon, .input-group-btn {
+    display: table-cell;
+}
+
+.input-group-btn {
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+    padding: 0;
+}
+
 @media only screen and (max-width: 992px) {
 	
     .filter_categories{
