@@ -21,22 +21,11 @@
 	border: none;
 }
 
-#sort-item {
-	border: none;
-}
-
-#searchBt {
-	margin-left: 10px;
-	border: 1px solid #F0F0F0;
-	border-radius: 2px;
-	background-color: white;
-	color: black;
-}
-
-#searchBt:hover {
-	background-color: #F5F5F5;
-	color: black;
-}
+.error{
+    	color: red;
+    	font-size: 16px;
+    	
+    }
 
 #them {
 	margin-top: 20px;
@@ -360,23 +349,36 @@
 						<!-- <input id="myInput" type="text" placeholder="Search.."> -->
 						<div>
 							<form id="searchForm">
-
+								<div class="row">
+									<div class="col-lg-3">
+									 <input name="ten" class="form-control" type="text" placeholder="Nhập tên sản phẩm cần tìm..."> 
+									 <input type="hidden" name="trang" value="0"> 
+								</div>
 								
-
-								Tên : <input name="ten" type="text">  <input
-
-									type="hidden" name="trang" value="0"> <select
-									id="sort-item" name="xepTheo">
+								<div class="col-lg-3">
+									<select class="form-control" id="sort-item" name="xepTheo">
 									<option value="productId">Lọc ID</option>
 									<option value="tensanpham">Lọc Tên</option>
 									<option value="gia">Lọc Giá</option>
-								</select> <select id="sort-item" name="thuTu">
+								</select>
+								</div>
+								<div class="col-lg-3">
+									<select class="form-control" id="sort-item" name="thuTu">
 									<option value="true">Tăng dần</option>
 									<option value="false">Giảm dần</option>
 								</select>
-
-								<button class="button" type="button" id="searchBt">Tìm
+								</div>
+								<div class="col-lg-3">
+									<button class="btn btn-primary" type="button" id="searchBt">Tìm
 									kiếm</button>
+								</div>
+								</div>
+								
+
+								 
+								  
+
+								
 							</form>
 						</div>
 
@@ -477,21 +479,23 @@
 			<!-- End Footer -->
 		</div>
 	</main>
+
+	<script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
       integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
       crossorigin="anonymous"
     ></script>
-    <script src="https://brainfoolong.github.io/form-data-json/lib/form-data-json.min.js"></script>
+    
     <!-- Validation -->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js" integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
 
 		<script
 		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
@@ -501,9 +505,9 @@
 	var url = "/api/products";
 		var rowTemplate = "{{#each products}}"
 			+"<tr>"
-			+       '<td class="py-3">{{tensanpham}}</td>'
+			+       '<td class="py-3 text_over">{{tensanpham}}</td>'
 			+       '<td class="py-3">{{gia}}</td>'
-			+       '<td class="py-3">{{createdDate}}</td>'
+			+       '<td class="py-3 text_over">{{createdDate}}</td>'
 			+'<td class="py-3"><img src="{{hinhanh}}" style="width: 50px; height: 50px" /></td>' 
 			+       '<td class="py-3">{{category.name}}</td>'
 			+       '<td class="py-3">{{thuonghieu.tenTH}}</td>'
@@ -582,31 +586,7 @@
 		});
 
 
-		// Handle Validate
-		$(document).ready(function() {
-            
-
-            $("#editForm").validate({
-                rules: {
-                    tensanpham: "required",
-                    price: {
-                        required: true,
-                        number: true
-                    },
-                    images: "required IMAGES"
-                },
-                messages: {
-                	tensanpham: "Tên sản phẩm không được để trống",
-                    price: {
-                        required: "Giá bán không được để trống",
-                        number: "Sai kiểu định dạng giá bán"
-                    },
-                    images: {
-                        required: "Hình ảnh sản phẩm không được để trống"
-                    }
-                }
-            })
-        });
+     
 		
 		
 //thêm sản phẩm
@@ -649,8 +629,8 @@
 					
 					insertForm += '<div class="mb-3">'
 			           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
-			  		   +	'<input type="file" class="upload" id="${editProp.prop}_file" accept="image/*">'
-						+ 	'<img src="${product.images}"/>'
+			  		 +	'<input name="hinhanh"  type="file" class="form-control" id="picture" placeholder="Hình ảnh">'
+					
 					   +   '</div>';
 					insertForm += '<div class="mb-3">'
 
@@ -716,6 +696,52 @@ function myFunction() {
 			var seourl = xoa_dau(x);
   			document.getElementById("seourl").value = seourl;
 }
+
+
+
+ // Handle Validate
+ $(document).ready(function() {
+            
+
+            $("#editForm").validate({
+                rules: {
+                    tensanpham: "required",
+                    gia: {
+                        required: true,
+                        number: true
+                    },
+                    hinhanh: "required",
+					soluong:{
+						required: true,
+                        number: true
+					},
+					khuyenmai:{
+						required: true,
+                        number: true
+					},
+					tinhtranghang : "required"
+                },
+                messages: {
+                	tensanpham: "Tên sản phẩm không được để trống",
+                    gia: {
+                        required: "Giá bán không được để trống",
+                        number: "Sai kiểu định dạng giá bán"
+                    },
+                    hinhanh: {
+                        required: "Hình ảnh sản phẩm không được để trống"
+                    },
+					soluong :{
+						required: "Số lượng không được để trống",
+                        number: "Sai kiểu định dạng số lượng"
+					},
+					khuyenmai :{
+						required: "Số lượng không được để trống",
+                        number: "Sai kiểu định dạng số lượng"
+					},
+					tinhtranghang : "Tình trạng hàng không được để trống"
+                }
+            })
+        });
 	
 		$("#save").click(function() {
 		
@@ -758,14 +784,25 @@ function myFunction() {
 						console.log(data);
 						loadList();
 					});
+
+					insertModal.hide();
 				}
-			insertModal.hide();
+			
 			
 		});
 
 
 		$("#edit").click(function() {
 			var id = document.getElementById("productId").value;
+
+			var nameurl = $("#tensanpham").val();
+			console.log(nameurl);
+			
+			var seourl = xoa_dau(nameurl);
+			
+			$("#seourl").val(seourl);							
+
+			console.log(products);
 			
 		var products = FormDataJson.toJson(document.querySelector("#editModal"));
 		products.category = {
@@ -780,16 +817,6 @@ function myFunction() {
 		products.thuonghieu = {
 				idTH: products.idTH
 			}
-
-
-			var nameurl = $("#tensanpham").val();
-			
-			var seourl = xoa_dau(nameurl);
-			
-			$("#seourl").val(seourl);							
-
-			console.log(products);
-
 		var editOption = {
 			method: 'PUT',
 			headers: {
@@ -805,8 +832,9 @@ function myFunction() {
 					console.log(data);
 					loadList();
 				});
-			}
+			
 		insertModal.hide();
+			}
 		
 	});
 // thực hiện delete
@@ -863,7 +891,7 @@ var editTemplateStr = '<div class="mb-3">'
 				   editTemplateStr += '<div class="mb-3">'
 			           +	'<label for="tT" class="form-label"><b>Tình trạng:</b></label>'
 			  		   +	'<input name="tinhtranghang" value="{{tinhtranghang}}" class="form-control" id="tT" placeholder="Tình trạng">'
-						 +	'<input  name="seourl" class="form-control" id="seourl">'
+						 +	'<input  name="seourl" class="form-control" id="seourl" type="hidden">'
 					   +   '</div>';
 			 
     	var editHbs = Handlebars.compile(editTemplateStr);
@@ -936,8 +964,7 @@ var editTemplateStr = '<div class="mb-3">'
         }
         </script>
 	
-	<!-- <script src="/asset/dashboard/js/graindashboard.js"></script>
-	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script>  -->
+	
 	
 </body>
 </html>

@@ -24,6 +24,11 @@ public class JwtResponse {
 
 	
 
+	public JwtResponse() {
+	}
+
+
+
 	public int getCartStatus() {
 		return cartStatus;
 	}

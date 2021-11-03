@@ -31,6 +31,7 @@ import com.example.datn.security.jwt.JwtUtils;
 import com.example.datn.security.services.RefreshTokenService;
 import com.example.datn.security.services.UserDetailsImpl;
 import com.example.datn.service.CustomerService;
+import com.example.datn.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,10 @@ public class AuthController {
 
   @Autowired
   CustomerService customerService;
+
+
+  @Autowired
+  UserService userService;
   
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
@@ -99,6 +104,8 @@ public class AuthController {
         //session.setAttribute("cartStatus", 0);
        
     }
+
+    userService.getUser(userDetails.getId());
 
     
         //cartStatus = 1;

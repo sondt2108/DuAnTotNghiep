@@ -546,6 +546,25 @@
                         </ul>
                     </div>
 
+                    <aside class="aside-item filter-vendor" style="margin-top: 30px;">
+                        <div class="aside-title">
+                          <h2 class="title-head margin-top-0"><span>Thương hiệu</span></h2>
+                        </div>
+                        <div class="aside-content filter-group">
+                          
+                          <ul class="filter-vendor">
+                            <th:block th:each="th : ${thuonghieu}">
+  
+                            <li class="filter-item filter-item--check-box filter-item--green ">
+                              <a th:href="@{'/trademake/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
+                            </li> 
+                            </th:block>
+                                                    
+                                                                            
+                          </ul>
+                        </div>
+                      </aside>
+
                     
 
                 
@@ -553,63 +572,74 @@
                
                 </div>
 
-                <th:block th:if=>
+                <th:block th:if="${demo == 0}">
+                    <div class="col-lg-9">
+                        <h3 class="title-head text-center margin-bottom-10 margin-top-0">Không tìm thấy bất kỳ kết quả nào với từ khóa trên.</h3>
+                        <h5 class="title-head text-center margin-bottom-10 margin-top-0">Vui lòng nhập từ khóa tìm kiếm khác</h5>
+                    </div>
+                    
+                </th:block>
 
+                <th:block th:if="${demo != 0}">
+                    <div class="col-lg-9">
+                   
+                        <h3 class="title-head text-center margin-bottom-10 margin-top-0">Có [[${demo}]] kết quả tìm kiếm phù hợp</h3>
+
+                        <div class="row">
+                         <!-- card -->
+                         
+                         <div class="col-lg-4 mobile" th:each="products : ${products}">
+                           <div class="thumb-wrapper">
+                             <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
+                                 
+                                   <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                                     
+                                     </span>
+                                   <img th:src="${products.hinhanh}" alt="" />
+                                     <p class="product-item-name">[[${products.tensanpham}]]</p>
+                                 
+                                 <div class="item-price">
+                                   <div class="price-box price-final_price">                                             
+                                     <span class="special-price">
+                                       <span class="price-container">
+                                         <span class="price-wrapper">
+                                           <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                                         </span>
+                                       </span>
+                                     </span>
+                                     
+                                     <span class="old-price">
+                                       <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                                         <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                                           <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                                         </span>
+                                       </span>
+                                     </span>                                          
+                                   </div>								
+                                 </div>
+                               
+                             </a>
+                           </div>
+                           
+                         </div> 
+                         
+                         
+                         <!-- end card -->
+                     </div>
+                        
+     
+                     </div>
                 </th:block>
                 
-                <div class="col-lg-9">
-                   
-                    
-
-                   <div class="row">
-                    <!-- card -->
-                    <div class="col-lg-4 mobile" th:each="products : ${products}">
-                      <div class="thumb-wrapper">
-                        <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
-                            
-                              <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
-                                
-                                </span>
-                              <img th:src="${products.hinhanh}" alt="" />
-                                <p class="product-item-name">[[${products.tensanpham}]]</p>
-                            
-                            <div class="item-price">
-                              <div class="price-box price-final_price">                                             
-                                <span class="special-price">
-                                  <span class="price-container">
-                                    <span class="price-wrapper">
-                                      <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
-                                    </span>
-                                  </span>
-                                </span>
-                                
-                                <span class="old-price">
-                                  <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
-                                    <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
-                                      <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
-                                    </span>
-                                  </span>
-                                </span>                                          
-                              </div>								
-                            </div>
-                          
-                        </a>
-                      </div>
-                      
-                    </div> 
-                    
-                    
-                    <!-- end card -->
-                </div>
-                   
-
-                </div>
+                
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
-    <section>
+
+    <th:block th:if="${demo != 0}">
+       <section>
         <div class="container">
             <div class="row justify-content-center">
                 <nav aria-label="Page navigation example">
@@ -637,7 +667,11 @@
                   </nav>
             </div>
         </div>
-    </section>
+    </section> 
+        
+    </th:block>
+    
+    
 
     <div id="back-top">
         <a title="Go to Top" href="#"> <i class="fa fa-angle-double-up"></i></a>
@@ -645,7 +679,7 @@
 
 
     
-    <li>[[${demo}]]</li>
+    
 
 
     <!-- Footer Section Begin -->

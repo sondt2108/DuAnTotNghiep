@@ -17,6 +17,9 @@ public class UserService {
 
     private static final long EXPIRE_TOKEN_AFTER_MINUTES = 30;
 
+	@Autowired
+	UserSession userSession;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
      }
@@ -39,6 +42,19 @@ public class UserService {
 			return user.getToken();
 		}
 
+
+		public boolean getUser(Long userId) {
+			User user = userRepository.findByRole(userId);
+			if(user != null) {
+				userSession.setUser(user);
+				return true;
+			}
+			return false;
+		}
+
+		public boolean isRole() {
+			return userSession.getUser() != null;
+		}
 
 		public String checkToken(String token) {
 

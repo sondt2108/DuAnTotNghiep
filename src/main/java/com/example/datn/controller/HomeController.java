@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 import com.example.datn.models.Product;
+import com.example.datn.models.ThuongHieu;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.example.datn.repository.ProductRepository;
+import com.example.datn.repository.TrademakeRepository;
 import com.example.datn.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,9 @@ public class HomeController {
     @GetMapping("/detail/{productname}")
     public String demo(@PathVariable String productname, Model model){
         model.addAttribute("cart", cartService.getGioHang());
+
+
+
         return "demo";
     }
 
@@ -51,7 +57,17 @@ public class HomeController {
 
     List<Product> products = productRepository.findByTitleContaining();
 
+	
+
         model.addAttribute("products", products);
+
+
+		
+		long leftLimit = 1L;
+    long rightLimit = 100000L;
+    long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+
+	System.out.println("testRandom: " +generatedLong );
 
         return "index";
     }
@@ -63,7 +79,7 @@ public class HomeController {
         return "ordersuccess";
     }
 
-    private static final int TOI_DA_SAN_PHAM = 3;
+    private static final int TOI_DA_SAN_PHAM = 6;
 
     @GetMapping("/product")
     public String listproduct(@RequestParam(name = "sort", defaultValue = "productId") String sortFeild,
@@ -84,12 +100,16 @@ public class HomeController {
 
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findAll(pager);
+		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+
+		model.addAttribute("thuonghieu", thuonghieu);
 
 		model.addAttribute("countProduct", productPage.getTotalElements());
 
 		model.addAttribute("products", productPage.getContent());
 		// truyền vào số lượng page tối đa
 		model.addAttribute("maxPage", productPage.getTotalPages());
+		model.addAttribute("demo", productPage.getTotalElements());
 
 		// truyền vào page hiện tại
 		model.addAttribute("currentPage", productPage.getNumber());
@@ -101,6 +121,49 @@ public class HomeController {
 		model.addAttribute("sortDesc", sortBy);
 
         return "product";
+    }
+
+
+	@Autowired
+	TrademakeRepository trademakeRepository;
+
+	@GetMapping("/trademake/{name}")
+    public String filterByTremak(@PathVariable String name, @RequestParam(name = "price_min", defaultValue = "0") Long giamin,
+			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
+			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+
+		
+		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM);
+
+		// lấy sản phẩm
+		Page<Product> productPage = productRepository.findByTradeMake(name, giamin, giamax, pager);
+
+		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+
+		model.addAttribute("thuonghieu", thuonghieu);
+
+		model.addAttribute("countProduct", productPage.getTotalElements());
+		model.addAttribute("demo", productPage.getTotalElements());
+
+		model.addAttribute("products", productPage.getContent());
+		// truyền vào số lượng page tối đa
+		model.addAttribute("maxPage", productPage.getTotalPages());
+
+		// truyền vào page hiện tại
+		model.addAttribute("currentPage", productPage.getNumber());
+
+		model.addAttribute("trademaxName", name);
+		model.addAttribute("price_min", giamin);
+		model.addAttribute("price_max", giamax);
+
+		// truyền vào sắp xếp theo id, name, price
+		//model.addAttribute("sortName", sortFeild);
+
+		// truyền vào kiểu sắp xếp 
+		model.addAttribute("sortDesc", sortBy);
+
+        return "filter_product";
     }
 
 
@@ -126,6 +189,10 @@ public class HomeController {
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(productname, pager);
+
+		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+
+		model.addAttribute("thuonghieu", thuonghieu);
 
 
         model.addAttribute("demo", productPage.getTotalElements());

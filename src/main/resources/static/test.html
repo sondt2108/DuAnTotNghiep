@@ -218,34 +218,34 @@
       }
    }
 
-//    function showUserInformation() {
-//       $.ajax({
-//          url: "/api/test/admin",
-//          type: "GET",
-//          contentType: "application/json; charset=utf-8",
-//          dataType: "json",
-//          headers: {
-//      	    "Authorization": "Bearer " + getJwtToken()
-//      	  },
-//          success: function (data, textStatus, jqXHR) {
-//             var $userInfoBody = $userInfo.find("#userInfoBody");
+   function showUserInformation() {
+      $.ajax({
+         url: "/api/test/admin",
+         type: "GET",
+         contentType: "application/json; charset=utf-8",
+         dataType: "json",
+         headers: {
+     	    "Authorization": "Bearer " + getJwtToken()
+     	  },
+         success: function (data, textStatus, jqXHR) {
+            var $userInfoBody = $userInfo.find("#userInfoBody");
 
-//             $userInfoBody.append($("<div>").text("Username: " + data.username));
+            $userInfoBody.append($("<div>").text("Username: " + data.username));
             
-//             $userInfoBody.append($("<div>").text("Email: " + data.email));
+            $userInfoBody.append($("<div>").text("Email: " + data.email));
 
-//             var $authorityList = $("<ul>");
-//             data.authorities.forEach(function (authorityItem) {
-//                $authorityList.append($("<li>").text(authorityItem.name));
-//             });
-//             var $authorities = $("<div>").text("Authorities:");
-//             $authorities.append($authorityList);
+            var $authorityList = $("<ul>");
+            data.authorities.forEach(function (authorityItem) {
+               $authorityList.append($("<li>").text(authorityItem.name));
+            });
+            var $authorities = $("<div>").text("Authorities:");
+            $authorities.append($authorityList);
 
-//             $userInfoBody.append($authorities);
-//             $userInfo.show();
-//          }
-//       });
-//    }
+            $userInfoBody.append($authorities);
+            $userInfo.show();
+         }
+      });
+   }
 
    function showTokenInformation() {
       $loggedIn

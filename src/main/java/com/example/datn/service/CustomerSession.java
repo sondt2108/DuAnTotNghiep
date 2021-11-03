@@ -20,11 +20,5 @@ public class CustomerSession {
 
 
 	
-	public Customer getRL() {
-		return customer;
-	}
-
-	public void setRL(Customer customer) {
-		this.customer = customer;
-	}
+	
 }

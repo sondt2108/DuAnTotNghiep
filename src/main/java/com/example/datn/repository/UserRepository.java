@@ -23,6 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
 
-    @Query(value = "select user_id from user_roles where  role_id = 1 and user_id = ?1", nativeQuery = true)
-    Optional<User> findByRole(@Param(value = "user_id") Long userId);
+    @Query(value = "select * from users inner join user_roles on users.id = user_roles.user_id where user_id = :user_id and role_id = 3", nativeQuery = true)
+    User findByRole(@Param(value = "user_id") Long userId);
   }
