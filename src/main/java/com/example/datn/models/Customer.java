@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 @Entity(name = "khachhang")
@@ -25,8 +26,7 @@ public class Customer {
 	@Size(max = 150)
 	private String diachi;
 	
-	@NotBlank
-	@Size(max = 10)
+	
 	private String sdt;
 
 	// @OneToMany(fetch = FetchType.LAZY
@@ -37,7 +37,7 @@ public class Customer {
 	}
 
 	public Customer(int id, User user, @NotBlank @Size(max = 35) String hoten, @NotBlank @Size(max = 150) String diachi,
-			@NotBlank @Size(max = 10) String sdt) {
+			@Size(max = 10) @Null String sdt) {
 		this.id = id;
 		this.user = user;
 		this.hoten = hoten;
@@ -84,6 +84,8 @@ public class Customer {
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
+
+	
 
 
 	

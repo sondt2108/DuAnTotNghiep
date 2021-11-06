@@ -3,11 +3,13 @@ package com.example.datn.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 
+import com.example.datn.models.Category;
 import com.example.datn.models.Product;
 import com.example.datn.models.ThuongHieu;
 
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.datn.repository.CategoryRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.TrademakeRepository;
 import com.example.datn.service.CartService;
@@ -52,14 +56,26 @@ public class HomeController {
     @Autowired
     ProductRepository productRepository;
 
+
+	@Autowired
+	CategoryRepository categoryRepository;
+
     @GetMapping("/")
     public String po(Model model) {
 
-    List<Product> products = productRepository.findByTitleContaining();
+    List<Product> productByPanasonic = productRepository.findByTitleContaining();
+
+	List<Product> productByNanoco = productRepository.findByTrade();
+
+	List<Category> categories = categoryRepository.findAll();
+
+
 
 	
 
-        model.addAttribute("products", products);
+        model.addAttribute("productByPana", productByPanasonic);
+		model.addAttribute("productByNano", productByNanoco);
+		model.addAttribute("cate", categories);
 
 
 		
@@ -98,9 +114,64 @@ public class HomeController {
 
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
+		
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findAll(pager);
 		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		//category
+		List<Category> categories = categoryRepository.findAll();
+
+
+		model.addAttribute("cate", categories);
+
+		model.addAttribute("thuonghieu", thuonghieu);
+
+		model.addAttribute("countProduct", productPage.getTotalElements());
+
+		model.addAttribute("products", productPage.getContent());
+		// truyền vào số lượng page tối đa
+		model.addAttribute("maxPage", productPage.getTotalPages());
+		model.addAttribute("demo", productPage.getTotalElements());
+
+		// truyền vào page hiện tại
+		model.addAttribute("currentPage", productPage.getNumber());
+
+		// truyền vào sắp xếp theo id, name, price
+		model.addAttribute("sortName", sortFeild);
+
+		// truyền vào kiểu sắp xếp 
+		model.addAttribute("sortDesc", sortBy);
+
+        return "product";
+    }
+
+
+	@GetMapping("/category/{catename}")
+    public String listcate(@PathVariable String catename, @RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
+			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+
+		Sort sortable = null;
+
+		if (sortBy.equals("DESC")) {
+			sortable = Sort.by(Sort.Direction.DESC, sortFeild);
+		}
+
+		if (sortBy.equals("ASC")) {
+			sortable = Sort.by(Sort.Direction.ASC, sortFeild);
+		}
+
+		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
+
+		
+
+		Page<Product> productPage = productRepository.findCategory(catename, pager);
+		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		//category
+		List<Category> categories = categoryRepository.findAll();
+
+
+		model.addAttribute("cate", categories);
 
 		model.addAttribute("thuonghieu", thuonghieu);
 
@@ -140,6 +211,11 @@ public class HomeController {
 		Page<Product> productPage = productRepository.findByTradeMake(name, giamin, giamax, pager);
 
 		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+
+		List<Category> categories = categoryRepository.findAll();
+
+
+		model.addAttribute("cate", categories);
 
 		model.addAttribute("thuonghieu", thuonghieu);
 
@@ -194,9 +270,11 @@ public class HomeController {
 
 		model.addAttribute("thuonghieu", thuonghieu);
 
-
-        model.addAttribute("demo", productPage.getTotalElements());
-
+		if (productname.equals("") ) {
+			model.addAttribute("demo", 0);
+		}else {
+			model.addAttribute("demo", productPage.getTotalElements());
+		}
 		model.addAttribute("searchName", productname);
 		model.addAttribute("products", productPage.getContent());
 		model.addAttribute("maxPage", productPage.getTotalPages());
@@ -211,6 +289,9 @@ public class HomeController {
 
 		return "search";
 	}
+
+
+
 
 
     

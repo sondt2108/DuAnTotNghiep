@@ -38,7 +38,7 @@ public class AdminRescontroller {
     SupplierRepository supplierRepository;
     
 
-    private static final int TOI_DA_SAN_PHAM = 2;
+    private static final int TOI_DA_SAN_PHAM = 6;
 	@PostMapping("api/product/search")
     public Page<Product> search(
             // thông tin form tìm kiếm
@@ -46,7 +46,7 @@ public class AdminRescontroller {
 
         Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
                 // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                sf.getThuTu() ? Direction.ASC : Direction.DESC,
+                sf.getThuTu() ? Direction.DESC : Direction.ASC,
                 // xếp theo trường nào ví dụ id, name, price
                 sf.getXepTheo());
 
@@ -86,4 +86,11 @@ public class AdminRescontroller {
 	public List<NhaCungCap> list() {
 		return supplierRepository.findAll();
 	}
+
+
+
+    
 }
+
+
+

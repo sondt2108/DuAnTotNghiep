@@ -3019,7 +3019,7 @@ ol {
 	}
 
 	.filter__open {
-		display: block;
+		display: none;
 		font-size: 22px;
 		color: #ffffff;
 		height: 35px;

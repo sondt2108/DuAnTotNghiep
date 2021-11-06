@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.datn.exception.TokenRefreshException;
+import com.example.datn.models.Customer;
 import com.example.datn.models.ERole;
 import com.example.datn.models.RefreshToken;
 import com.example.datn.models.Role;
@@ -25,6 +26,7 @@ import com.example.datn.payload.request.TokenRefreshRequest;
 import com.example.datn.payload.response.JwtResponse;
 import com.example.datn.payload.response.MessageResponse;
 import com.example.datn.payload.response.TokenRefreshResponse;
+import com.example.datn.repository.CustomerRepository;
 import com.example.datn.repository.RoleRepository;
 import com.example.datn.repository.UserRepository;
 import com.example.datn.security.jwt.JwtUtils;
@@ -61,6 +63,9 @@ public class AuthController {
 
   @Autowired
   RoleRepository roleRepository; 
+
+  @Autowired
+  CustomerRepository customerRepository;
 
   @Autowired
   PasswordEncoder encoder;
@@ -129,8 +134,18 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        
+        User user = new User();
+
+        user.setUsername(signUpRequest.getUsername());
+        user.setEmail(signUpRequest.getEmail());
+        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+
+
+        Customer customer = new Customer();
+        customer.setUser(user);
+        customer.setHoten(signUpRequest.getName());
+        customer.setDiachi(signUpRequest.getAddress());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -158,6 +173,7 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
+        customerRepository.save(customer);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

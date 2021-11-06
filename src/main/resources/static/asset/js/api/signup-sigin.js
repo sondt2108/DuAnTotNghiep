@@ -115,6 +115,16 @@ $(function () {
         maxlength: 20,
       },
       email: "required checkEmail",
+      name :{
+        required: true,
+        minlength: 3,
+        maxlength: 40,
+      },
+      address : {
+        required: true,
+        minlength: 3,
+        maxlength: 100,
+      },
       password: {
         required: true,
         minlength: 6,
@@ -128,6 +138,8 @@ $(function () {
     },
     messages: {
       username: "Tên đăng nhập không được để trống",
+      name : "Họ và tên không được để trống",
+      address :"Địa chỉ không được để trống",
       email: {
         required: "Email không được để trống",
       },
@@ -145,6 +157,8 @@ $(function () {
         var loginData = {
           username: $form.find('input[name="username"]').val(),
           email: $form.find('input[name="email"]').val(),
+          name : $form.find('input[name="name"]').val(),
+          address : $form.find('input[name="address"]').val(),
           password: $form.find('input[name="password"]').val(),
         };
 

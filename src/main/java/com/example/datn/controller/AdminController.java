@@ -10,6 +10,7 @@ import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -21,12 +22,18 @@ public class AdminController {
     UserService userService;
 
 
+    @Autowired
+    CustomerService customerService;
+
+
     @GetMapping("admin/product")
-    public String listProduct(){
+    public String listProduct(Model model){
       
         //  if (userService.isRole()) {
         //     return "dashboard/products";
         //  }
+
+        // model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
          return "dashboard/products"; 
     }
     

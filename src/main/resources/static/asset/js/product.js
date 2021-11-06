@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 const url = window.location.pathname;
 console.log('name' + url);
 
@@ -17,13 +11,19 @@ const sortBy = urlParams.get('sortBy');
 console.log(sortBy);
 console.log(param);
 
+
+
 if (param == 'tensanpham') {
     document.getElementById('nameASC').checked = true;
     document.getElementById("filter_products").selectedIndex = "1";
+    document.getElementById('page_default').remove();
+    $("#page_sort").css("display", 'block');
 
 }else if(param == 'gia'){
     document.getElementById('priceASC').checked = true;
     document.getElementById("filter_products").selectedIndex = "3";
+    document.getElementById('page_default').remove();
+    $("#page_sort").css("display", 'block');
 } 
 
 
@@ -32,9 +32,12 @@ if(param == 'tensanpham' && sortBy == 'DESC'){
    
     document.getElementById('nameDESC').checked = true;
     document.getElementById("filter_products").selectedIndex = "2";
+    $("#page_sort").css("display", 'block');
 }else if(param == 'gia' && sortBy == 'DESC'){
     document.getElementById('priceDESC').checked = true;
     document.getElementById("filter_products").selectedIndex = "4";
+    
+    $("#page_sort").css("display", 'block');
 }
 
 

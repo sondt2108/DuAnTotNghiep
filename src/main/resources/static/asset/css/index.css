@@ -59,3 +59,79 @@
     top: 0;
     z-index: 9;
 }
+
+.mainmenu {
+    height: auto;
+    color: #323c3f;
+    cursor: pointer;
+}
+
+.mainmenu span {
+    display: block;
+    position: relative;
+    padding: 7px 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #fff;
+    border: 1px solid #5a7b68;
+    background-color: #057C40;
+}
+
+.mainmenu .nav-cate {
+    border: 1px solid #ebebeb;
+    border-top: none;
+}
+
+.mainmenu .nav-cate ul {
+    width: 100%;
+    overflow: visible;
+    border-top: none;
+}
+
+.mainmenu .nav-cate ul li.dropdown {
+    position: static;
+}
+
+.mainmenu .nav-cate ul li {
+    display: block;
+    overflow: visible;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.mainmenu .nav-cate ul li h3 {
+    position: relative;
+    display: block;
+    color: #000;
+    line-height: 20px;
+    padding: 5.7px 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.mainmenu .nav-cate ul li h3 img {
+    max-width: 22px;
+    float: left;
+    margin-right: 5px;
+}
+
+.mainmenu .nav-cate ul li h3 a {
+    display: block;
+    font-size: 14px;
+    color: #000;
+    padding-left: 27px;
+    padding-right: 15px;
+}
+
+.mainmenu .nav-cate ul li h3 a i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.mainmenu .nav-cate ul li+li {
+    border-top: 1px dashed #ebebeb;
+}

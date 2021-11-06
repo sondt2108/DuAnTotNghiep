@@ -700,6 +700,7 @@
         "<tr>" +
         "<td>{{categoryId}}</td>" +
         "<td>{{name}}</td>" +
+        "<td><img src='{{icon}}' style='width: 50px; height: 50px' /></td>" +
         '<td class="py-3"><button class="btn btn-outline-primary edit" c-id="{{categoryId}}">Sửa</button>' +
         '<button class="btn btn-outline-primary delete" c-id="{{categoryId}}">Xóa</button></td>' +
         "</tr>" +
@@ -739,43 +740,88 @@
         var insertForm =
           '<div class="mb-3">' +
           '<label for="c-Name" class="form-label"><b>Loại sản phẩm:</b></label>' +
-          '<input name="name" value="" class="form-control" id="c-Name" placeholder="Loại sản phẩm">' +
-		//   '<input  name="seourl" class="form-control" id="seourl" type="hidden">'+
+          '<input name="name" value="" class="form-control" id="c-Name" oninput="myFunction()" placeholder="Loại sản phẩm">' +
+		   '<input  name="seourl" class="form-control" id="seourl" >'+
           "</div>";
+
+          insertForm += '<div class="mb-3">'
+			           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
+					   +'<input type="file" name="imgupload" class="upload" id="${editProp.prop}_file" accept="image/*">'
+			+'<input name="icon" placeholder="Hình ảnh" type="hidden" cssClass="form-control" id="pictureInput"/>'
+	       +'<img id="imgpr" src="" style="width:25%" />'	
+					
+					   +   '</div>';
         $("#editForm").html(insertForm);
+
+        
+					$('.upload').change(function() {
+					  
+            uploadFile(this);
+        });
+      
       });
 
-    //   function xoa_dau(str) {
-    //     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-    //     str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-    //     str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-    //     str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-    //     str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-    //     str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-    //     str = str.replace(/đ/g, "d");
-    //     str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-    //     str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-    //     str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-    //     str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-    //     str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-    //     str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-    //     str = str.replace(/Đ/g, "D");
 
-    //     str = str.replace(/\s+/g, "-");
-    //     str = str.toLowerCase();
-    //     str.replace(/\s/g, "-");
-    //     console.log(str);
+      uploadFile = async (fileInput) => {
+	    let formData = new FormData()
+	    formData.append('file', fileInput.files[0]);
+	    let uploadOption = {
+	        method: 'POST',
+	        body: formData
+	    };
+	    try {
+	        let response = await fetch('/upload', uploadOption);
+	        if (response.ok) {
+	            let uploadResult = await response.json();
+	            if (uploadResult.uploaded) {
+					$('#pictureInput').val(uploadResult.url);
+		            let $img =  $(fileInput).next().next();
+		            if ($img.length > 0) {
+		                $('#imgpr').attr('src',uploadResult.url);
+		            }
+		        } else {
+		            alert(uploadResult.messsage);
+		        }
+	        } else {
+	            let error = await response.json();
+	            alert(error);
+	        }
+	    } catch(error) {
+	        alert(error);
+	    }
+	}
 
-    //     return str;
-    //   }
+      function xoa_dau(str) {
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        str = str.replace(/Đ/g, "D");
+
+        str = str.replace(/\s+/g, "-");
+        str = str.toLowerCase();
+        str.replace(/\s/g, "-");
+        
+
+        return str;
+      }
 
 
 
-// 	  function myFunction() {
-//   			var x = document.getElementById("tensanpham").value;
-// 			var seourl = xoa_dau(x);
-//   			document.getElementById("seourl").value = seourl;
-// }
+	  function myFunction() {
+  			var x = document.getElementById("c-Name").value;
+			var seourl = xoa_dau(x);
+  			document.getElementById("seourl").value = seourl;
+}
       // Handle Validate
       $(document).ready(function () {
         $("#editForm").validate({
@@ -796,11 +842,11 @@
         );
 
 
-		// var nameurl = $("#c-Name").val();
+		var nameurl = $("#c-Name").val();
 				
-		// 		var seourl = xoa_dau(nameurl);
+				var seourl = xoa_dau(nameurl);
 				
-		// 		$("#seourl").val(seourl);							
+				$("#seourl").val(seourl);							
 
 				
         var editOption = {
@@ -842,8 +888,14 @@
         '<div class="mb-3">' +
         '<label for="c-Name" class="form-label"><b>Loại sản phẩm:</b></label>' +
         '<input name="name" value="{{name}}" class="form-control" id="c-Name"  placeholder="Loại sản phẩm">' +
-		// '<input  name="seourl" class="form-control" id="seourl" type="hidden">'+
+		   '<input  name="seourl" class="form-control" id="seourl" type="hidden">'+
         "</div>";
+        editTemplateStr += '<div class="mb-3">'
+	           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
+			   +'<input type="file" class="upload" id="${editProp.prop}_file" accept="image/*">'
+			+'<input name="icon" value={{icon}} placeholder="Hình ảnh" type="hidden" cssClass="form-control" id="pictureInput"/>'
+	       +'<img id="imgpr" src="{{icon}}" style="width:25%" />'	
+			   +   '</div>';
       var editHbs = Handlebars.compile(editTemplateStr);
       function bindClick() {
         $(".edit").click(function () {
@@ -858,12 +910,22 @@
             .then((data) => {
               var editHtml = editHbs(data);
               $("#editForm").html(editHtml);
+              $('.upload').change(function() {
+					  
+            uploadFile(this);
+        });
             });
         });
       }
 
       $("#edit").click(function () {
         var id = document.getElementById("categoryId").value;
+        var nameurl = $("#c-Name").val();
+			console.log(nameurl);
+			
+			var seourl = xoa_dau(nameurl);
+			
+			$("#seourl").val(seourl);
         var category = FormDataJson.toJson(
           document.querySelector("#editModal")
         );

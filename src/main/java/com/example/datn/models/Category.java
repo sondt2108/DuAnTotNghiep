@@ -30,6 +30,10 @@ public class Category {
 			, mappedBy = "category")
 	private List<Product> products;
 
+	private String icon;
+
+	private String seourl;
+
 	public Category() {
 		super();
 	}
@@ -64,5 +68,25 @@ public class Category {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public String getSeourl() {
+		return seourl;
+	}
+
+	public void setSeourl(String seourl) {
+		this.seourl = seourl;
+	}
+
+	
+
+	
 
 }

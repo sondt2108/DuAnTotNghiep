@@ -8,7 +8,12 @@ $(function() {
         success: function(data) {
             console.log(data);
             data.forEach(function(cate) {
-                $("#categories").append("<li><a href='#'>" + cate.name + "</a><li>")
+                $("#categories").append("<li class='dropdown menu-item-count'>"
+                +"<h3>"
+                +"<img src='/asset/img/categories/"+cate.icon+"'>"
+                +"<a href='/category/"+cate.seourl+"'>"+cate.name+"<i class='fa fa-angle-right' aria-hidden='true'></i></a>"
+                +"</h3>"
+                +"</li>")
             })
         }
     });

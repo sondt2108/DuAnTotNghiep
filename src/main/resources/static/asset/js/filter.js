@@ -10,8 +10,6 @@ const price_min = urlPrice.get('price_min');
 const price_max = urlPrice.get('price_max');
 
 if (price_max == 100000) {
-
-    
     document.getElementById("filter_price_mobile").selectedIndex = "1";
     document.getElementById("filter_price_desktop").selectedIndex = "1";
 }else if (price_min == 100000 && price_max==300000) {

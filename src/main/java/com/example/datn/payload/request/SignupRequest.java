@@ -23,7 +23,14 @@ public class SignupRequest {
 
     private String token;
 	
-	
+	@NotBlank
+    private String name;
+
+    @NotBlank
+    private String address;
+
+
+   
 	
 	private LocalDateTime tokenCreationDate;
   
@@ -74,6 +81,27 @@ public class SignupRequest {
     public void setTokenCreationDate(LocalDateTime tokenCreationDate) {
         this.tokenCreationDate = tokenCreationDate;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+  
+
+
+    
 
     
 }

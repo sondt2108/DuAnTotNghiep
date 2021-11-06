@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <!-- Title -->
 <title>Products | Graindashboard UI Kit</title>
@@ -10,7 +10,8 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-<link rel="shortcut icon" href="dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
+
 <link rel="stylesheet"
 	href="/asset/dashboard/css/graindashboard.css">
 <script
@@ -157,7 +158,7 @@
 							data-unfold-animation-in="fadeIn"
 							data-unfold-animation-out="fadeOut"> <!--img class="avatar rounded-circle mr-md-2" src="#" alt="John Doe"-->
 							<span class="mr-md-2 avatar-placeholder">J</span> <span
-							class="d-none d-md-block">John Doe</span> <i
+							class="d-none d-md-block">[[${username}]]</span> <i
 							class="gd-angle-down d-none d-md-block ml-2"></i>
 						</a>
 
@@ -396,10 +397,9 @@
 										<th scope="col">Ảnh</th>
 										<th scope="col">Loại SP</th>
 										<th scope="col">Thương hiệu</th>
-										<th scope="col">Số lượng</th>
 										<th scope="col">Kuyến mãi</th>
 										<th scope="col">Tình trạng</th>
-										<th scope="col">Sửa Xóa</th>
+										<th scope="col">Action</th>
 
 									</tr>
 								</thead>
@@ -409,7 +409,10 @@
 							</table>
 							<div style="float: right;"
 								class="page-item card-footer d-block d-md-flex align-items-center d-print-none"
-								id="phanTrang"></div>
+								id="phanTrang">
+												
+								
+							</div>
 						</div>
 						<!-- End Users -->
 					</div>
@@ -511,11 +514,10 @@
 			+'<td class="py-3"><img src="{{hinhanh}}" style="width: 50px; height: 50px" /></td>' 
 			+       '<td class="py-3">{{category.name}}</td>'
 			+       '<td class="py-3">{{thuonghieu.tenTH}}</td>'
-			+       '<td class="py-3">{{soluong}}</td>'
 			+       '<td class="py-3">{{khuyenmai}}%</td>'
 			+       '<td class="py-3">{{tinhtranghang}}</td>'
-			+       '<td class="py-3"><button class="edit btn btn-outline" c-id="{{productId}}">Sửa</button>'
-			+ 		'<button class="delete btn btn-outline" c-id="{{productId}}">Xóa</button></td>'
+			+       '<td class="py-3"><button class="edit btn btn-outline" c-id="{{productId}}"><i class="gd-pencil-alt"></i></button>'
+			+ 		'<button class="delete btn btn-outline" c-id="{{productId}}"><i class="gd-trash"></i></button></td>'
 			
 			+"</tr>"
 		+"{{/each}}";
@@ -629,7 +631,9 @@
 					
 					insertForm += '<div class="mb-3">'
 			           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
-			  		 +	'<input name="hinhanh"  type="file" class="form-control" id="picture" placeholder="Hình ảnh">'
+					   +'<input type="file" name="imgupload" class="upload" id="${editProp.prop}_file" accept="image/*">'
+			+'<input name="hinhanh" placeholder="Hình ảnh" type="hidden" cssClass="form-control" id="pictureInput"/>'
+	       +'<img id="imgpr" src="" style="width:25%" />'	
 					
 					   +   '</div>';
 					insertForm += '<div class="mb-3">'
@@ -659,12 +663,53 @@
 					  		   +	'<input name="tinhtranghang" value="" class="form-control" id="tT" placeholder="Tình trạng">'
 								+	'<input  name="seourl" class="form-control" id="seourl" type="hidden">'
 							   +   '</div>';
-					$("#editForm").html(insertForm);	
+					$("#editForm").html(insertForm);
+					
+					
+					$('.upload').change(function() {
+					  
+	    uploadFile(this);
+	});
+
 					  });
+
 				  });
 			  });
 		
 		});
+
+
+
+	
+
+	uploadFile = async (fileInput) => {
+	    let formData = new FormData()
+	    formData.append('file', fileInput.files[0]);
+	    let uploadOption = {
+	        method: 'POST',
+	        body: formData
+	    };
+	    try {
+	        let response = await fetch('/upload', uploadOption);
+	        if (response.ok) {
+	            let uploadResult = await response.json();
+	            if (uploadResult.uploaded) {
+					$('#pictureInput').val(uploadResult.url);
+		            let $img =  $(fileInput).next().next();
+		            if ($img.length > 0) {
+		                $('#imgpr').attr('src',uploadResult.url);
+		            }
+		        } else {
+		            alert(uploadResult.messsage);
+		        }
+	        } else {
+	            let error = await response.json();
+	            alert(error);
+	        }
+	    } catch(error) {
+	        alert(error);
+	    }
+	}
 
 		function xoa_dau(str) {
 
@@ -710,7 +755,9 @@ function myFunction() {
                         required: true,
                         number: true
                     },
-                    hinhanh: "required",
+					imgupload : {
+						required :true
+					},
 					soluong:{
 						required: true,
                         number: true
@@ -727,9 +774,11 @@ function myFunction() {
                         required: "Giá bán không được để trống",
                         number: "Sai kiểu định dạng giá bán"
                     },
-                    hinhanh: {
-                        required: "Hình ảnh sản phẩm không được để trống"
-                    },
+
+					imgupload :{ required:"Vui lòng chọn hình ảnh"
+
+					},
+                    
 					soluong :{
 						required: "Số lượng không được để trống",
                         number: "Sai kiểu định dạng số lượng"
@@ -745,7 +794,6 @@ function myFunction() {
 	
 		$("#save").click(function() {
 		
-			
 			var products = FormDataJson.toJson(document.querySelector("#editModal"));
 			products.category = {
 					categoryId: products.categoryId
@@ -878,7 +926,9 @@ var editTemplateStr = '<div class="mb-3">'
 			
 			   editTemplateStr += '<div class="mb-3">'
 	           +	'<label for="picture" class="form-label"><b>Hình ảnh:</b></label>'
-	  		   +	'<input name="hinhanh" value="{{hinhanh}}" class="form-control" id="picture" placeholder="Hình ảnh">'
+			   +'<input type="file" placeholder="{{hinhanh}}" class="upload" id="${editProp.prop}_file" accept="image/*">'
+			+'<input name="hinhanh" value={{hinhanh}} placeholder="Hình ảnh" type="hidden" cssClass="form-control" id="pictureInput"/>'
+	       +'<img src="{{hinhanh}}" style="width:25%" />'	
 			   +   '</div>';
 					   editTemplateStr += '<div class="mb-3">'
 				   +	'<label for="sL" class="form-label"><b>Số lượng:</b></label>'
@@ -952,6 +1002,10 @@ var editTemplateStr = '<div class="mb-3">'
         	                        $("#thuonghieuSelect").val(products.thuonghieu.idTH)
 									$("#nhacungcapSelect").val(products.nhacungcap.idNCC)
         	                        $("#categorySelect").val(products.category.categoryId)
+									$('.upload').change(function() {
+					 
+	    uploadFile(this);
+	});
         	                    });
         	                    }); 
         	                    }); 

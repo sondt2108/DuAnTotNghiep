@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)
     List<Product> findByTitleContaining();
 
-    @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)
+    @Query(value = "select * from products pr where thuonghieu_id = 2 and category_id = 1 Limit 6", nativeQuery = true)
     List<Product> findByTrade();
 
     //@Query(value = "select * from products where seourl like ?1 ", nativeQuery = true)
@@ -27,4 +27,11 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "select *  from products inner join thuonghieu on products.thuonghieu_id = thuonghieu.idth where tenth iLIKE %:name% and products.gia between :giamin and :giamax", nativeQuery = true)
     Page<Product> findByTradeMake(@Param(value = "name") String name, @Param(value = "giamin") Long giamin, @Param(value = "giamax") Long giamax, Pageable pager );
+
+
+    @Query(value = "Select * from products where gia between :giamin and :giamax", nativeQuery = true)
+    Page<Product> findProductAll(@Param(value = "giamin") Long giamin, @Param(value = "giamax") Long giamax, Pageable pager );
+
+    @Query(value = "select *  from products p inner join categories c on p.category_id = c.category_id where c.seourl iLIKE %:seourl%", nativeQuery = true)
+    Page<Product> findCategory(@Param(value = "seourl") String seourl, Pageable pager );
 }

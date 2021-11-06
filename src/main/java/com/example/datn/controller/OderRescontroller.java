@@ -48,7 +48,9 @@ public class OderRescontroller {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> checkout(@Valid @RequestBody OrderRequest orderRequest){
 
-        long id = new Random().nextLong();
+        long leftLimit = 1L;
+        long rightLimit = 100000L;
+        long id = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
         //order
         Order order = new Order();
         order.setOrderId(id);
@@ -85,6 +87,8 @@ public class OderRescontroller {
 		}
 
         mailService.sendMailWithOrderId(order.getOrderId());
+
+        cartService.getGioHang().getChiTietGioHang().clear();
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
