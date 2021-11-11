@@ -1,4 +1,5 @@
 
+
 const url = window.location.pathname;
 console.log('name' + url);
 
@@ -10,7 +11,7 @@ const param = urlParams.get('sort');
 const sortBy = urlParams.get('sortBy');
 const trademake = urlParams.get('trademake');
 
-console.log(trademake);
+
 
 
 
@@ -46,17 +47,11 @@ if(param == 'tensanpham' && sortBy == 'DESC'){
 
 
 var x = location.search;
-console.log(x);
-
-var a = x.indexOf('&'); 
-
-let sub =x.substr(0, a).toString();
 
 
 
-var test = `${url}${sub}`;
 
-console.log(test);
+
 
 
 
@@ -65,7 +60,8 @@ console.log(test);
 document.body.addEventListener('change', function (e) {
     let target = e.target;
 
-    
+    if (x === '' || trademake === null ) {
+        
         switch (target.id) {
             case 'nameASC':
                 window.location.assign('?sort=tensanpham')
@@ -81,27 +77,71 @@ document.body.addEventListener('change', function (e) {
                 window.location.assign('?sort=gia&sortBy=DESC')
                 break;
         }
+    }else if(trademake != '') {
+        switch (target.id) {
+            case 'nameASC':
+                window.location.assign(`?trademake=${trademake}&sort=tensanpham`)
+                
+                break;
+            case 'nameDESC':
+                window.location.assign(`?trademake=${trademake}&sort=tensanpham&sortBy=DESC`)
+                break;
+            case 'priceASC':
+                window.location.assign(`?trademake=${trademake}&sort=gia`)
+                break;
+            case 'priceDESC':
+                window.location.assign(`?trademake=${trademake}&sort=gia&sortBy=DESC`)
+                break;
+        }
+    }
+        
+    
+        
+        
+    
+    
+    
 });
 
 function sortChanged(obj)
 {
-    
+
     var value = obj.value;
-    if (value === ''){
-        window.location.assign(url)
+    if (x === '' || trademake === null ) {
+        if (value === ''){
+            window.location.assign(url)
+        }
+        else if (value === '1'){
+        window.location.assign('?sort=tensanpham')  
+        }
+        else if (value === '2'){
+            window.location.assign('?sort=tensanpham&sortBy=DESC') 
+        }
+        else if (value === '3'){
+            window.location.assign('?sort=gia') 
+        }
+        else if (value === '4'){
+            window.location.assign('?sort=gia&sortBy=DESC') 
+        }
+    }else if (trademake != '') {
+        if (value === ''){
+            window.location.assign(url + `?trademake=${trademake}`)
+        }
+        else if (value === '1'){
+        window.location.assign(`?trademake=${trademake}&sort=tensanpham`)  
+        }
+        else if (value === '2'){
+            window.location.assign(`?trademake=${trademake}&sort=tensanpham&sortBy=DESC`) 
+        }
+        else if (value === '3'){
+            window.location.assign(`?trademake=${trademake}&sort=gia`) 
+        }
+        else if (value === '4'){
+            window.location.assign(`?trademake=${trademake}&sort=gia&sortBy=DESC`) 
+        }
     }
-    else if (value === '1'){
-      window.location.assign('?sort=tensanpham')  
-    }
-    else if (value === '2'){
-        window.location.assign('?sort=tensanpham&sortBy=DESC') 
-    }
-    else if (value === '3'){
-        window.location.assign('?sort=gia') 
-    }
-    else if (value === '4'){
-        window.location.assign('?sort=gia&sortBy=DESC') 
-    }
+    
+    
     
 }
 

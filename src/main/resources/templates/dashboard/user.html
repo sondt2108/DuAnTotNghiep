@@ -10,12 +10,33 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
 
 <!-- Template -->
-<link rel="stylesheet"
-	href="dashboard/graindashboard/css/graindashboard.css">
+<link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css">
 <style type="text/css">
+#timkiem-item {
+	background-color: #F5F5F5;
+	border: none;
+}
+
+#sort-item {
+	border: none;
+}
+
+#searchBt {
+	margin-left: 10px;
+	border: 1px solid #F0F0F0;
+	border-radius: 2px;
+	background-color: white;
+	color: black;
+}
+
+#searchBt:hover {
+	background-color: #F5F5F5;
+	color: black;
+}
+
 #them {
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -32,6 +53,25 @@
 	background-color: #265df1;
 	color: white;
 }
+
+#myInput {
+	background-image: url('/css/searchicon.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	font-size: 16px;
+	padding: 12px 20px 12px 40px;
+	border: 1px solid #ddd;
+	margin-bottom: 12px;
+}
+
+.error {
+	color: red;
+	font-size: 16px;
+	font-style: italic bold;
+}
+
+
 </style>
 </head>
 
@@ -42,16 +82,16 @@
 			<div class="navbar-brand-wrapper d-flex align-items-center col-auto">
 				<!-- Logo For Mobile View -->
 				<a class="navbar-brand navbar-brand-mobile" href="/"> <img
-					class="img-fluid w-100" src="dashboard/img/logo-mini.png"
+					class="img-fluid w-100" src="/asset/dashboard/img/logo-mini.png"
 					alt="Graindashboard">
 				</a>
 				<!-- End Logo For Mobile View -->
 
 				<!-- Logo For Desktop View -->
 				<a class="navbar-brand navbar-brand-desktop" href="/"> <img
-					class="side-nav-show-on-closed" src="dashboard/img/logo-mini.png"
+					class="side-nav-show-on-closed" src="/asset/dashboard/img/logo-mini.png"
 					alt="Graindashboard" style="width: auto; height: 33px;"> <img
-					class="side-nav-hide-on-closed" src="dashboard/img/logo.png"
+					class="side-nav-hide-on-closed" src="/asset/dashboard/img/logo.png"
 					alt="Graindashboard" style="width: auto; height: 33px;">
 				</a>
 				<!-- End Logo For Desktop View -->
@@ -194,8 +234,7 @@
 				<!-- End Title -->
 
 				<!-- Users -->
-				<li
-					class="side-nav-menu-item side-nav-has-menu active side-nav-opened"><a
+				<li class="side-nav-menu-item side-nav-has-menu active"><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subUsers"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-user"></i>
@@ -206,14 +245,14 @@
 				</a> <!-- Users: subUsers -->
 					<ul id="subUsers"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
-						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
-							href="khachhang.html">Khách hàng</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhanvien.html">Nhân Viên</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="chucvu.html">Chức vụ</a></li>
 						<li class="side-nav-menu-item active"><a
-							class="side-nav-menu-link" href="user.html">User</a></li>
+							class="side-nav-menu-link" href="khachhang">Khách hàng</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="nhanvien">Nhân Viên</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="chucvu">Chức vụ</a></li>
+						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
+							href="user">User</a></li>
 					</ul> <!-- End Users: subUsers --></li>
 				<!-- End Users -->
 
@@ -232,15 +271,15 @@
 					<ul id="subProducts"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="products.html">Sản Phẩm</a></li>
+							href="products">Sản Phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="categories.html">Loại sản phẩm</a></li>
+							href="categories">Loại sản phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="mausac.html">Màu sắc</a></li>
+							href="mausac">Màu sắc</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="hoadon.html">Hóa đơn</a></li>
+							href="hoadon">Hóa đơn</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="cthoadon.html">Chi tiết hóa đơn</a></li>
+							href="cthoadon">Chi tiết hóa đơn</a></li>
 					</ul> <!-- End Products: subProducts --></li>
 
 				<!-- End Products -->
@@ -258,11 +297,9 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhacungcap.html">Nhà cung cấp</a></li>
+							href="nhacungcap">Nhà cung cấp</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhasanxuat.html">Nhà sản xuất</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="thuonghieu.html">Thương hiệu</a></li>
+							href="thuonghieu">Thương hiệu</a></li>
 					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
 				</li>
 				<!-- End category -->
@@ -326,37 +363,55 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Users</a></li>
 								<li class="breadcrumb-item active" aria-current="page">
-									User</li>
+									Khách hàng</li>
 							</ol>
 						</nav>
 						<!-- End Breadcrumb -->
 
 						<div class="mb-3 mb-md-4 d-flex justify-content-between">
-							<div class="h3 mb-0">Users</div>
+							<div class="h3 mb-0">Khách hàng</div>
 						</div>
+						<div>
+							<form id="searchForm">
+								Từ Khóa: <input name="ten" type="text"> <input
+									type="hidden" name="trang" value="0"> <select
+									id="sort-item" name="xepTheo">
+									<option value="id">Lọc Địa chỉ</option>
+									<option value="username">Lọc Tên</option>
+								</select> <select id="sort-item" name="thuTu">
+									<option value="true">Tăng dần</option>
+									<option value="false">Giảm dần</option>
+								</select>
 
-						<button id="them">
-							<b>+ Thêm</b>
-						</button>
-						
+								<button class="button" type="button" id="searchBt">Tìm
+									kiếm</button>
+							</form>
+						</div>
+						<button id="them">+ Thêm</button>
 						<!-- Users -->
 						<div class="table-responsive-xl">
-							<table class="table table-striped  table-sm">
+							<table class="table table-striped  table-sm" id="table">
 								<thead>
 									<tr>
-										<th class="font-weight-semi-bold border-top-0 py-2">Tài
-											khoản</th>
-										<th class="font-weight-semi-bold border-top-0 py-2">Mật
-											khẩu</th>
-										<th class="font-weight-semi-bold border-top-0 py-2">Sửa Xóa</th>
-										
+
+										<th class="font-weight-semi-bold border-top-0 py-2">Tên
+											khách hàng</th>
+										<th class="font-weight-semi-bold border-top-0 py-2">Địa
+											chỉ</th>
+										<th class="font-weight-semi-bold border-top-0 py-2">Số
+											điện thoại</th>
+										<th class="font-weight-semi-bold border-top-0 py-2">Hành động</th>
 									</tr>
 								</thead>
-								<tbody id="tableBody">
+								<tbody id="myTable">
 
 								</tbody>
 							</table>
-							
+
+							<div style="float: right;"
+								class="page-item card-footer d-block d-md-flex align-items-center d-print-none"
+								id="phanTrang"></div>
+
 						</div>
 						<!-- End Users -->
 					</div>
@@ -371,7 +426,9 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel"><b>User</b></h5>
+							<h5 class="modal-title" id="exampleModalLabel">
+								<b>Khách hàng</b>
+							</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -382,9 +439,12 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal btn-secondary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" action="" id="save">Save
-								changes</button>
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" action="" id="save">
+								Thêm</button>
+
+							<button type="button" class="btn btn-primary" action="" id="edit">
+								Sửa</button>
 						</div>
 					</div>
 				</div>
@@ -423,126 +483,81 @@
 			<!-- End Footer -->
 		</div>
 	</main>
+	<script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
 		crossorigin="anonymous"></script>
+
+	<!-- Validation -->
+	<script
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+		integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+		integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
-
-
 	<script type="text/javascript">
-	var url = "/api/users";
-		var rowTemplate = "{{#each users}}"
-			+"<tr>"
-			+       '<td class="py-3">{{taiKhoan}}</td>'
-			+       '<td class="py-3">{{matKhau}}</td>'
-			+       '<td class="py-3"><button class="edit" c-id="{{idUser}}"> <img class="icon-item" src="dashboard/img/iconfix.png" alt=""></button>'
-			+ 		'<button class="delete" c-id="{{idUser}}"><img class="icon-item"  src="dashboard/img/iconremove.png" alt=""></button></td>'
+				var url = "/api/users";
+				var rowTemplate = "{{#each users}}"
+					+"<tr>"
+					+       '<td class="py-3">{{username}}</td>'
+					+       '<td class="py-3">{{email}}</td>'
+					+       '<td class="py-3">{{password}}</td>'
+					
+					+"</tr>"
+				+"{{/each}}";
+				var rowHbs = Handlebars.compile(rowTemplate);
 			
-			+"</tr>"
-		+"{{/each}}";
-		var rowHbs = Handlebars.compile(rowTemplate);
-	
-		function loadList() {
-			fetch(url).then(res => res.json())
-				.then(data => {
-					var rows = rowHbs({ users: data });
-					$("#tableBody").html(rows);
-					 bindEvent();
-					 bindClick();
+				function loadList() {
+					
+					var searchForm = FormDataJson.toJson(document.querySelector("form"));
+					console.log(searchForm);
+					var searchOption = {
+				        method: 'POST',
+				        headers: {
+				            'Content-Type': 'application/json'
+			          	},
+				        body: JSON.stringify(searchForm)
+					};
+					
+					
+					fetch("/api/users/search", searchOption).then(res => res.json())
+						.then(data => {
+							var rows = rowHbs({ users: data.content });
+							$("#myTable").html(rows);
+							bindEvent();
+							bindClick();
+							var pageHtml = "";
+							for (var i = 0; i < data.totalPages; i++) {
+								pageHtml += `<button value="${i}" class="page-link pageIndex">${i+1}</button>`;
+							}
+							$("#phanTrang").html(pageHtml);
+							
+							$(".pageIndex").click(function() {
+								$('#searchForm input[name="trang"]').val($(this).val());
+								loadList();
+							});
+						});
+				}
+				loadList();
+				
+				$("#searchBt").click(function() {
+					loadList();
 				});
-		}
-		loadList();
-		
-	 function bindEvent() {
-			$(".delete").click(function() {
-				deleteUser($(this));
-			});
-		} 
-		
-		var insertModal = new bootstrap.Modal(document.getElementById('editModal'), {
-			  keyboard: false
-			});
-		$("#them").click(function() {
-			insertModal.show();
-			var insertForm = '<div class="mb-3">'
-	               +	'<label for="taiKhoan" class="form-label"><b>Tài Khoản:</b></label>'
-	  			   +	'<input name="taiKhoan" value="" class="form-control" id="taiKhoan" placeholder="Tài Khoản">'
-	  			   
-	  			  +	'<label for="matKhau" class="form-label"><b>Mật khẩu:</b></label>'
-	  			   +	'<input name="matKhau" value="" class="form-control" id="matKhau" placeholder="Mật khẩu">'
-	  			   
-					+   '</div>';
-			$("#editForm").html(insertForm);
-		});
-		
-		$("#save").click(function() {
-			var user = FormDataJson.toJson(document.querySelector("#editModal"));
-			var editOption = {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json'
-	          	},
-		        body: JSON.stringify(user)
-			};
-			user = fetch(url, editOption)
-					.then(response => response.json())
-					.then(data => {
-						console.log(data);
-						loadList();
-					});
-			insertModal.hide();
-		});
-		
-		// thực hiện delete
-		function deleteUser($button) {
-	    var id = $button.attr("c-id");
-	    alert("id saa pham la" + id)
-	    var deleteOption = {
-	        method: 'delete',
-	        headers: {
-	            'Content-Type': 'application/json'
-	        }
-	    };
-	    users = fetch(url + "/" + id, deleteOption)
-	        .then(response => {
-	            loadList();
-	        });
+				
+				</script>
 
-	}
-		var editTemplateStr = '<input type="hidden" name="idUser" id-cate = "idUser" value = "{{idUser}}">' +
-        '<div class="mb-3">' +
-        
-        '<label for="taiKhoan" class="form-label"><b>Tài Khoản</></label>' +
-        '<input name="taiKhoan" value="{{taiKhoan}}" class="form-control" id="taiKhoan" placeholder="Tài Khoản">' +
-        
-        '<label for="matKhau" class="form-label"><b>Mật Khẩu</></label>' +
-        '<input name="matKhau" value="{{matKhau}}" class="form-control" id="matKhau" placeholder="Mật Khẩu">' +
-       
-        '</div>';
-    	var editHbs = Handlebars.compile(editTemplateStr);
-    	function bindClick() {
-            $(".edit").click(function() {
-                insertModal.show();
-                var id = $(this).attr("c-id");
-                fetch(url + "/" + id)
-                    .then(res => res.json())
-                    .then(data => {
-                        var editHtml = editHbs(data);
-                        $("#editForm").html(editHtml);
-                    })
-            })
-        }
-    	
-	</script>
-
-	<script src="dashboard/graindashboard/js/graindashboard.js"></script>
-	<script src="dashboard/graindashboard/js/graindashboard.vendor.js"></script>
-
-
+	
 </body>
 </html>

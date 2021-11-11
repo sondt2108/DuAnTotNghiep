@@ -10,11 +10,10 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
 
 <!-- Template -->
-<link rel="stylesheet"
-	href="dashboard/graindashboard/css/graindashboard.css">
+<link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css">
 <style type="text/css">
 #timkiem-item {
 	background-color: #F5F5F5;
@@ -65,6 +64,14 @@
 	border: 1px solid #ddd;
 	margin-bottom: 12px;
 }
+
+.error {
+	color: red;
+	font-size: 16px;
+	font-style: italic bold;
+}
+
+
 </style>
 </head>
 
@@ -75,16 +82,16 @@
 			<div class="navbar-brand-wrapper d-flex align-items-center col-auto">
 				<!-- Logo For Mobile View -->
 				<a class="navbar-brand navbar-brand-mobile" href="/"> <img
-					class="img-fluid w-100" src="dashboard/img/logo-mini.png"
+					class="img-fluid w-100" src="/asset/dashboard/img/logo-mini.png"
 					alt="Graindashboard">
 				</a>
 				<!-- End Logo For Mobile View -->
 
 				<!-- Logo For Desktop View -->
 				<a class="navbar-brand navbar-brand-desktop" href="/"> <img
-					class="side-nav-show-on-closed" src="dashboard/img/logo-mini.png"
+					class="side-nav-show-on-closed" src="/asset/dashboard/img/logo-mini.png"
 					alt="Graindashboard" style="width: auto; height: 33px;"> <img
-					class="side-nav-hide-on-closed" src="dashboard/img/logo.png"
+					class="side-nav-hide-on-closed" src="/asset/dashboard/img/logo.png"
 					alt="Graindashboard" style="width: auto; height: 33px;">
 				</a>
 				<!-- End Logo For Desktop View -->
@@ -239,13 +246,13 @@
 					<ul id="subUsers"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 						<li class="side-nav-menu-item active"><a
-							class="side-nav-menu-link" href="khachhang.html">Khách hàng</a></li>
+							class="side-nav-menu-link" href="khachhang">Khách hàng</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhanvien.html">Nhân Viên</a></li>
+							href="nhanvien">Nhân Viên</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="chucvu.html">Chức vụ</a></li>
+							href="chucvu">Chức vụ</a></li>
 						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
-							href="user.html">User</a></li>
+							href="user">User</a></li>
 					</ul> <!-- End Users: subUsers --></li>
 				<!-- End Users -->
 
@@ -264,15 +271,15 @@
 					<ul id="subProducts"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="products.html">Sản Phẩm</a></li>
+							href="products">Sản Phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="categories.html">Loại sản phẩm</a></li>
+							href="categories">Loại sản phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="mausac.html">Màu sắc</a></li>
+							href="mausac">Màu sắc</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="hoadon.html">Hóa đơn</a></li>
+							href="hoadon">Hóa đơn</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="cthoadon.html">Chi tiết hóa đơn</a></li>
+							href="cthoadon">Chi tiết hóa đơn</a></li>
 					</ul> <!-- End Products: subProducts --></li>
 
 				<!-- End Products -->
@@ -290,11 +297,9 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhacungcap.html">Nhà cung cấp</a></li>
+							href="nhacungcap">Nhà cung cấp</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhasanxuat.html">Nhà sản xuất</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="thuonghieu.html">Thương hiệu</a></li>
+							href="thuonghieu">Thương hiệu</a></li>
 					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
 				</li>
 				<!-- End category -->
@@ -358,22 +363,21 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#">Users</a></li>
 								<li class="breadcrumb-item active" aria-current="page">
-									Khách hàng</li>
+									Users </li>
 							</ol>
 						</nav>
 						<!-- End Breadcrumb -->
 
 						<div class="mb-3 mb-md-4 d-flex justify-content-between">
-							<div class="h3 mb-0">Khách hàng</div>
+							<div class="h3 mb-0">User</div>
 						</div>
 						<div>
 							<form id="searchForm">
-								Tên : <input name="ten" type="text"> <input
+								Từ Khóa: <input name="ten" type="text"> <input
 									type="hidden" name="trang" value="0"> <select
 									id="sort-item" name="xepTheo">
-									<option value="diaChi">Lọc Địa chỉ</option>
-									<option value="tenKH">Lọc Tên</option>
-									<option value="gmail">Lọc Gmail</option>
+									<option value="diachi">Lọc Địa chỉ</option>
+									<option value="hoten">Lọc Tên</option>
 								</select> <select id="sort-item" name="thuTu">
 									<option value="true">Tăng dần</option>
 									<option value="false">Giảm dần</option>
@@ -392,28 +396,22 @@
 
 										<th class="font-weight-semi-bold border-top-0 py-2">Tên
 											khách hàng</th>
-										<th class="font-weight-semi-bold border-top-0 py-2">Giới
-											tính</th>
 										<th class="font-weight-semi-bold border-top-0 py-2">Địa
 											chỉ</th>
 										<th class="font-weight-semi-bold border-top-0 py-2">Số
 											điện thoại</th>
-										<th class="font-weight-semi-bold border-top-0 py-2">Gmail</th>
-										<th class="font-weight-semi-bold border-top-0 py-2">Sửa,
-											Xóa</th>
+										<th class="font-weight-semi-bold border-top-0 py-2">Hành động</th>
 									</tr>
 								</thead>
 								<tbody id="myTable">
 
 								</tbody>
 							</table>
-<<<<<<< HEAD
+
 							<div style="float: right;"
 								class="page-item card-footer d-block d-md-flex align-items-center d-print-none"
 								id="phanTrang"></div>
-=======
-							
->>>>>>> c3589e0450f04fd804ad4b79949659e00e2117fe
+
 						</div>
 						<!-- End Users -->
 					</div>
@@ -442,8 +440,11 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary" action="" id="save">Save
-								changes</button>
+							<button type="button" class="btn btn-primary" action="" id="save">
+								Thêm</button>
+
+							<button type="button" class="btn btn-primary" action="" id="edit">
+								Sửa</button>
 						</div>
 					</div>
 				</div>
@@ -482,27 +483,40 @@
 			<!-- End Footer -->
 		</div>
 	</main>
+	<script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
 		crossorigin="anonymous"></script>
+
+	<!-- Validation -->
+	<script
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+		integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+		integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
 	<script type="text/javascript">
-				var url = "/api/khachhangs";
+				var url = "/api/khachhang";
 				var rowTemplate = "{{#each khachhangs}}"
 					+"<tr>"
-					+       '<td class="py-3">{{tenKH}}</td>'
-					+       '<td class="py-3">{{gioiTinh}}</td>'
-					+       '<td class="py-3">{{diaChi}}</td>'
+					+       '<td class="py-3">{{hoten}}</td>'
+					+       '<td class="py-3">{{diachi}}</td>'
 					+       '<td class="py-3">{{sdt}}</td>'
-					+       '<td class="py-3">{{gmail}}</td>'
-					+       '<td class="py-3"><button class="edit" c-id="{{idKH}}"> <img class="icon-item" src="dashboard/img/iconfix.png" alt=""></button>'
-					+ 		'<button class="delete" c-id="{{idKH}}"><img class="icon-item"  src="dashboard/img/iconremove.png" alt=""></button></td>'
-					
+					+       '<td class="py-3"><button class="edit" c-id="{{idCV}}"> <img class="icon-item" src="/asset/dashboard/img/iconfix.png" alt=""></button>'
+			+ 		'<button class="delete" c-id="{{idCV}}"><img class="icon-item"  src="/asset/dashboard/img/iconremove.png" alt=""></button></td>'
+			
 					+"</tr>"
 				+"{{/each}}";
 				var rowHbs = Handlebars.compile(rowTemplate);
@@ -519,7 +533,7 @@
 					};
 					
 					
-					fetch("/api/khachhangs/search", searchOption).then(res => res.json())
+					fetch("/api/khachhang/search", searchOption).then(res => res.json())
 						.then(data => {
 							var rows = rowHbs({ khachhangs: data.content });
 							$("#myTable").html(rows);
@@ -552,46 +566,105 @@
 					});
 				
 				$("#them").click(function() {
+					document.getElementById("edit").style.display = "none";
+			        //hiện btn thêm
+			        document.getElementById("save").style.display = "block";
 					insertModal.show();
 					var insertForm = '<div class="mb-3">'
-			               +	'<label for="tenKH" class="form-label"><b>Tên khách hàng:</b></label>'
-			  			   +	'<input name="tenKH" value="" class="form-control" id="tenKH" placeholder="Tên khách hàng">'
+			               +	'<label for="hoten" class="form-label"><b>Tên khách hàng:</b></label>'
+			  			   +	'<input name="hoten" value="" class="form-control" id="hoten" placeholder="Tên khách hàng"><br>'
 			  			   
-			  			 +	'<label for="gioiTinh" class="form-label"><b>Giới tính:</b></label>'
-			  			   +	'<input name="gioiTinh" value="" class="form-control" id="gioiTinh" placeholder="Giới tính">'
+			  			   +	'<label for="diachi" class="form-label"><b>Địa chỉ:</b></label>'
+			  			   +	'<input name="diachi" value="" class="form-control" id="diachi" placeholder="Địa chỉ"><br>'
 			  			   
-			  			  +	'<label for="diaChi" class="form-label"><b>Địa chỉ:</b></label>'
-			  			   +	'<input name="diaChi" value="" class="form-control" id="diaChi" placeholder="Địa chỉ">'
+			  			   +	'<label for="sdt" class="form-label"><b>Số điện thoại:</b></label>'
+			  			   +	'<input name="sdt" value="" class="form-control" id="sdt" placeholder="Số điện thoại"><br>'
 			  			   
-			  			  +	'<label for="sdt" class="form-label"><b>Số điện thoại:</b></label>'
-			  			   +	'<input name="sdt" value="" class="form-control" id="sdt" placeholder="Số điện thoại">'
-			  			   
-			  			  +	'<label for="gmail" class="form-label"><b>Gmail:</b></label>'
-			  			   +	'<input name="gmail" value="" class="form-control" id="gmail" placeholder="Gmail">'
+			  			  
 			  			   
 							+   '</div>';
 					$("#editForm").html(insertForm);
 				});
-				
-				$("#save").click(function() {
-					var khachhang = FormDataJson.toJson(document.querySelector("#editModal"));
-					var editOption = {
-				        method: 'POST',
-				        headers: {
-				            'Content-Type': 'application/json'
-			          	},
-				        body: JSON.stringify(khachhang)
-					};
-					khachhang = fetch(url, editOption)
-							.then(response => response.json())
-							.then(data => {
-								console.log(data);
-								loadList();
-							});
-					insertModal.hide();
-				});
-				
-				// thực hiện delete
+				$(document).ready(function () {
+					$.validator.addMethod(
+						    "checkPhoneNumber",
+						    function (value, element) {
+						      return (
+						        this.optional(element) ||
+						        /((09|03|07|08|05)+([0-9]{8})\b)/g.test(value)
+						      );
+						    },
+						    "Số điện thoại không hợp lệ, vui lòng nhập lại !"
+						  );
+					$.validator.addMethod(
+						    "checkChuSo",
+						    function (value, element) {
+						      return (
+						        this.optional(element) ||
+						        /^[^\d+]*[\d+]{0}[^\d+]*$/.test(value)
+						      );
+						    },
+						    "Tên khách hàng không hợp lệ, vui lòng nhập lại !"
+						  );
+			        $("#editForm").validate({
+			          rules: {
+			        	  hoten: {required: true,
+			        		  checkChuSo:true
+			        	  },
+			        	  
+			        	 
+			        	  diachi: "required",
+			        	  sdt: {required:true,
+			        		  checkPhoneNumber:true
+			        	  },
+			          },
+			          messages: {
+			        	  hoten: {required:"Tên khách hàng không được để trống",
+			        		  
+			        	  },
+			        	 
+			        	  diachi: "Địa chỉ không được để trống",
+			        	  sdt:{required: "Số điện thoại không được để trống",
+			        		  
+			        	  },
+			          },
+			        });
+			      });
+
+
+				  // nút thêm
+			      $("#save").click(function () {
+			        var khachhang = FormDataJson.toJson(
+			          document.querySelector("#editModal")
+			        );
+
+
+					// var nameurl = $("#c-Name").val();
+							
+					// 		var seourl = xoa_dau(nameurl);
+							
+					// 		$("#seourl").val(seourl);							
+
+							
+			        var editOption = {
+			          method: "POST",
+			          headers: {
+			            "Content-Type": "application/json",
+			          },
+			          body: JSON.stringify(khachhang),
+			        };
+
+					//check valid trước khi thêm
+			        if ($("#editForm").valid()) {
+			        	khachhang = fetch(url, editOption)
+			            .then((response) => response.json())
+			            .then((data) => {
+			              console.log(data);
+			              loadList();
+			            });
+			          insertModal.hide();
+			        }
+			      });
 			
 				function deleteKhachhang($button) {
 				    var id = $button.attr("c-id");
@@ -608,27 +681,26 @@
 				        });
 
 				}
-					var editTemplateStr = '<input type="hidden" name="idKH" id-cate = "idKH" value = "{{idKH}}">' +
+					var editTemplateStr = '<input type="hidden" name="idKH" id = "id" value = "{{id}}">' +
 			        '<div class="mb-3">' +
-			        '<label for="tenKH" class="form-label"><b>Tên khách hàng:</b></label>' +
-			        '<input name="tenKH" value="{{tenKH}}" class="form-control" id="tenKH" placeholder="Tên khách hàng">' +
+			        '<label for="hoten" class="form-label"><b>Tên khách hàng:</b></label>' +
+			        '<input name="hoten" value="{{hoten}}" class="form-control" id="hoten" placeholder="Tên khách hàng">' +
 			        
-			        '<label for="gioiTinh" class="form-label"><b>Giới tính:</b></label>' +
-			        '<input name="gioiTinh" value="{{gioiTinh}}" class="form-control" id="gioiTinh" placeholder="Giới tính">' +
-			        
-			        '<label for="diaChi" class="form-label"><b>Địa chỉ:</b></label>' +
-			        '<input name="diaChi" value="{{diaChi}}" class="form-control" id="diaChi" placeholder="diaChi">' +
+			        '<label for="diachi" class="form-label"><b>Địa chỉ:</b></label>' +
+			        '<input name="diachi" value="{{diachi}}" class="form-control" id="diachi" placeholder="Địa chỉ">' +
 			        
 			        '<label for="sdt" class="form-label"><b>Số điện thoại:</b></label>' +
-			        '<input name="sdt" value="{{sdt}}" class="form-control" id="sdt" placeholder="sdt">' +
+			        '<input name="sdt" value="{{sdt}}" class="form-control" id="sdt" placeholder="Số điện thoại">' +
 			        
-			        '<label for="gmail" class="form-label"><b>Gmail:</b></label>' +
-			        '<input name="gmail" value="{{gmail}}" class="form-control" id="gmail" placeholder="gmail">' +
+			       
 			        
 			        '</div>';
 			    	var editHbs = Handlebars.compile(editTemplateStr);
 			    	function bindClick() {
 			            $(".edit").click(function() {
+			            	document.getElementById("save").style.display = "none";
+			                //hiện btn sửa
+			                document.getElementById("edit").style.display = "block";
 			                insertModal.show();
 			                var id = $(this).attr("c-id");
 			                fetch(url + "/" + id)
@@ -639,20 +711,31 @@
 			                    });
 			            });
 			        }
+			    	 $("#edit").click(function () {
+			    	        var id = document.getElementById("idKH").value;
+			    	        var khachhang = FormDataJson.toJson(
+			    	          document.querySelector("#editModal")
+			    	        );
+			    	        var editOption = {
+			    	          method: "PUT",
+			    	          headers: {
+			    	            "Content-Type": "application/json",
+			    	          },
+			    	          body: JSON.stringify(khachhang),
+			    	        };
+
+			    	        if ($("#editForm").valid()) {
+			    	        	khachhang = fetch(url + "/" + id, editOption)
+			    	            .then((response) => response.json())
+			    	            .then((data) => {
+			    	              console.log(data);
+			    	              loadList();
+			    	            });
+			    	          insertModal.hide();
+			    	        }
+			    	      });
 				</script>
-	<!-- <script>
-		$(document).ready(function(){
-			  $("#myInput").on("keyup", function() {
-			    var value = $(this).val().toLowerCase();
-			    $("#tableBody tr").filter(function() {
-			      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			    });
-			  });
-			});
-	</script> -->
-	<script src="dashboard/graindashboard/js/graindashboard.js"></script>
-	<script src="dashboard/graindashboard/js/graindashboard.vendor.js"></script>
 
-
+	
 </body>
 </html>

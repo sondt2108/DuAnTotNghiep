@@ -69,7 +69,7 @@ function renderProduct(prs) {
     datapr.innerHTML = data_detail.join(' ');
 
 
-    var data_description = document.querySelector('#data_description');
+    var data_description = document.querySelector('#data_descriptions');
     var data_dct = [prs].map(function(prs){
         return `
        

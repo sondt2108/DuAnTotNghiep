@@ -3247,6 +3247,10 @@ ol {
 		display: none;
 		}
 
+		.filter_sort{
+			display: none;
+		}
+
 
 	.hero__categories {
 		margin-bottom: 30px;
@@ -3590,6 +3594,10 @@ ol {
 		-ms-transition: all, 0.6s;
 		-o-transition: all, 0.6s;
 		transition: all, 0.6s;
+	}
+
+	.filter_sort{
+		display: none;
 	}
 
 	.filter__menu__wrapper {

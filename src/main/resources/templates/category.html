@@ -289,7 +289,7 @@
                                   <th:block th:each="th : ${thuonghieu}">
         
                                   <li class="filter-item filter-item--check-box filter-item--green ">
-                                    <a th:href="@{'/trademake/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
+                                    <a th:href="@{'?trademake=' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
                                   </li> 
                                   </th:block>
                                                           
@@ -450,6 +450,11 @@
         </div>
     </section>
 
+
+    <section id="trademake">
+
+    </section>
+
     
 
 
@@ -545,7 +550,7 @@
     <script src="/asset/js/owl.carousel.min.js"></script>
     <script src="/asset/js/main.js"></script>
     <script src="/asset/js/slideshow.js"></script>
-    <script src="/asset/js/product.js"></script>
+    <script src="/asset/js/category_filter.js"></script>
     <script src="/asset/js/api/product.js"></script>
 
 

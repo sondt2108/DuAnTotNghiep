@@ -7,16 +7,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "khachhang")
 public class Customer {
     @Id
 	@GeneratedValue
 	private int id;
 	
-	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-	private User user ;
+	private User user;
 	
     @NotBlank
 	@Size(max = 35)

@@ -1,7 +1,11 @@
 package com.example.datn.controller;
 
+import java.util.List;
+
+import com.example.datn.models.MessageNotifications;
 import com.example.datn.models.Role;
 import com.example.datn.payload.response.JwtResponse;
+import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.security.services.UserDetailsImpl;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
@@ -45,5 +49,42 @@ public class AdminController {
         //     return "dashboard/products";
         //  }
          return "dashboard/categories"; 
+    }
+
+
+    @GetMapping("admin/customer")
+    public String listCustomer(){
+      
+        //  if (userService.isRole()) {
+        //     return "dashboard/products";
+        //  }
+         return "dashboard/khachhang"; 
+    }
+
+
+    @GetMapping("admin/user")
+    public String listUser(){
+      
+        //  if (userService.isRole()) {
+        //     return "dashboard/products";
+        //  }
+         return "dashboard/user"; 
+    }
+
+
+    @Autowired
+    MessageNotificationsRepository messageNotificationsRepository;
+
+    @GetMapping("admin/order")
+    public String listOrder(Model model){
+      
+        //  if (userService.isRole()) {
+        //     return "dashboard/products";
+        //  }
+
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll();
+
+        model.addAttribute("noti", ntn);
+         return "dashboard/order"; 
     }
 }

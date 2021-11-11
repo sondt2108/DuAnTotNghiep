@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Simple responsive owl carousel</title>
+	<title>Đức Phát | Thiết bị điện</title>
 	<link
       rel="stylesheet"
       href="/asset/css/bootstrap.min.css"
@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="/asset/css/chitietsp.css" />
     <link rel="stylesheet" href="/asset/css/slideshow.css" />
     <link rel="stylesheet" href="/asset/css/modalhide.css" />
+    <link rel="stylesheet" href="/asset/css/index.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.8/popper.min.js"></script>
 
@@ -308,7 +309,7 @@
         </div>
         <div class="product__details__text">
          <ul>
-              <button class="mo-gio-hang primary-btn" onclick="addSP()">Mua ngay</button>
+              <button class="primary-btn" onclick="addSP()">Mua ngay</button>
               <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
          </ul>
       </div>
@@ -368,21 +369,44 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="section-title related__product__title">
-            <h2>Related Product</h2>
+            <h2>Sản phẩm cùng loại</h2>
           </div>
         </div>
         <div class="categories__slider owl-carousel">
-          <div class="col-lg-3">
-            <div class="card" style="width: 18rem">
-              <img class="card-img-top" src="..." alt="Card image cap" />
-              <div class="card-body">
-                <p class="card-text">
-                  Some quick example text to build on the card title and make
-                  up the bulk of the card's content.
-                </p>
-              </div>
+          <div class="col-lg-3" th:each="products : ${products}">
+            <div class="thumb-wrapper">
+              <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
+                  
+                    <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                      
+                      </span>
+                    <img th:src="${products.hinhanh}" alt="" />
+                      <p class="product-item-name">[[${products.tensanpham}]]</p>
+                  
+                  <div class="item-price">
+                    <div class="price-box price-final_price">                                             
+                      <span class="special-price">
+                        <span class="price-container">
+                          <span class="price-wrapper">
+                            <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                          </span>
+                        </span>
+                      </span>
+                      
+                      <span class="old-price">
+                        <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                          <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                            <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                          </span>
+                        </span>
+                      </span>                                          
+                    </div>								
+                  </div>
+                
+              </a>
             </div>
-          </div>
+            
+          </div> 
         </div>
       </div>
     </div>

@@ -12,6 +12,8 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity(name="orderDetail")
 public class OrderDetail {
@@ -32,7 +34,7 @@ public class OrderDetail {
     @NotNull
     private int quantity;
 
-
+    @JsonIgnore
     @ManyToOne
 	@JoinColumn(name = "orderId", nullable = false, foreignKey = @ForeignKey(name = "order_orderitems"))
 	Order order;

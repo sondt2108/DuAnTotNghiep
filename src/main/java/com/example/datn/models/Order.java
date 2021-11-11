@@ -19,6 +19,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity(name="orders")
 public class Order {
@@ -64,7 +66,7 @@ public class Order {
 	@JoinColumn(name = "customer_Id", nullable = false, foreignKey = @ForeignKey(name = "customer_order"))
 	Customer customer;
 
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderDetail> order_items;
 

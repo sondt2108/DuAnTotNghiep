@@ -1,7 +1,10 @@
 package com.example.datn.controller;
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 
 import com.example.datn.payload.request.ForgotPasswordRequest;
 import com.example.datn.payload.request.ResetPassword;
@@ -10,13 +13,14 @@ import com.example.datn.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import com.example.datn.payload.response.MessageResponse;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -65,5 +69,7 @@ public class UserRescontroller {
                 return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
       }
 
+
+      
     
 }

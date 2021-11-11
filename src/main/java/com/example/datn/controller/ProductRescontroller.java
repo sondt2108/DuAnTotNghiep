@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +28,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -41,10 +45,15 @@ public class ProductRescontroller {
    
 
   @GetMapping("api/productdetails/{id}")
-  public ResponseEntity<Product> getTutorialById(@PathVariable("id") int id) {
+  public ResponseEntity<Product> getTutorialById(@PathVariable("id") int id, HttpServletRequest request) {
 		Optional<Product> tutorialData = productRepository.findById(id);
 
+
+    HttpSession session = request.getSession();
 		if (tutorialData.isPresent()) {
+      session.setAttribute("idth", tutorialData.get().getThuonghieu().getIdTH());
+      session.setAttribute("idCate", tutorialData.get().getCategory().getCategoryId());
+      
 			return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -61,7 +70,7 @@ public class ProductRescontroller {
   }
   
 
-
+  @PreAuthorize("hasRole('ADMIN')")
   @PostMapping(value = "/api/products")
     public HashMap<String, Object> insert(@RequestBody @Validated Product product, BindingResult result) {
 

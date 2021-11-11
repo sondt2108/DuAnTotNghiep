@@ -5,11 +5,13 @@ import java.util.Random;
 
 import javax.validation.Valid;
 
+import com.example.datn.models.MessageNotifications;
 import com.example.datn.models.Order;
 import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
 import com.example.datn.payload.request.OrderRequest;
 import com.example.datn.payload.response.MessageResponse;
+import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.repository.OrderDetailRepository;
 import com.example.datn.repository.OrderRepository;
 import com.example.datn.service.CartService;
@@ -42,6 +44,9 @@ public class OderRescontroller {
 
     @Autowired
     MailService mailService;
+
+   @Autowired
+   MessageNotificationsRepository messageNotificationsRepository;
     
 
     @PostMapping("/checkout")
@@ -86,7 +91,20 @@ public class OderRescontroller {
 			
 		}
 
-        mailService.sendMailWithOrderId(order.getOrderId());
+
+        MessageNotifications ntn = new MessageNotifications();
+        ntn.setOrderId(id);
+
+        messageNotificationsRepository.save(ntn);
+
+
+
+       
+
+
+
+
+        //mailService.sendMailWithOrderId(order.getOrderId());
 
         cartService.getGioHang().getChiTietGioHang().clear();
 

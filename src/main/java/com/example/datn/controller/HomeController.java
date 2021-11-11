@@ -1,13 +1,9 @@
 package com.example.datn.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.management.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import java.util.ArrayList;
 
 import com.example.datn.models.Category;
 import com.example.datn.models.Product;
@@ -21,9 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.datn.repository.CategoryRepository;
@@ -31,11 +25,8 @@ import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.TrademakeRepository;
 import com.example.datn.service.CartService;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 
 @Controller
 public class HomeController {
@@ -45,8 +36,25 @@ public class HomeController {
 	CartService cartService;
 
     @GetMapping("/detail/{productname}")
-    public String demo(@PathVariable String productname, Model model){
-        model.addAttribute("cart", cartService.getGioHang());
+    public String demo(@PathVariable String productname, Model model, HttpServletRequest request){
+        
+		HttpSession session = request.getSession();
+
+
+		 int idth = ((Integer) (session.getAttribute("idth")) ).intValue();
+		 int idcate = ((Integer) (session.getAttribute("idCate")) ).intValue();
+
+		
+
+	
+
+
+		 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
+		
+		model.addAttribute("cart", cartService.getGioHang());
+		model.addAttribute("products", products);
+
+		
 
 
 
@@ -149,6 +157,7 @@ public class HomeController {
 	@GetMapping("/category/{catename}")
     public String listcate(@PathVariable String catename, @RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
+			@RequestParam(name = "trademake", defaultValue = "") String th,
 			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
 
 		Sort sortable = null;
@@ -163,19 +172,10 @@ public class HomeController {
 
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
-		
+		if (th.equals("")) {
+			Page<Product> productPage = productRepository.findCategory(catename, pager);
 
-		Page<Product> productPage = productRepository.findCategory(catename, pager);
-		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
-		//category
-		List<Category> categories = categoryRepository.findAll();
-
-
-		model.addAttribute("cate", categories);
-
-		model.addAttribute("thuonghieu", thuonghieu);
-
-		model.addAttribute("countProduct", productPage.getTotalElements());
+			model.addAttribute("countProduct", productPage.getTotalElements());
 
 		model.addAttribute("products", productPage.getContent());
 		// truyền vào số lượng page tối đa
@@ -185,13 +185,45 @@ public class HomeController {
 		// truyền vào page hiện tại
 		model.addAttribute("currentPage", productPage.getNumber());
 
+		
+		}else{
+			Page<Product> productPage = productRepository.findCategoryAndTrademake(catename,th, pager);
+
+			model.addAttribute("countProduct", productPage.getTotalElements());
+
+		model.addAttribute("products", productPage.getContent());
+		// truyền vào số lượng page tối đa
+		model.addAttribute("maxPage", productPage.getTotalPages());
+		model.addAttribute("demo", productPage.getTotalElements());
+
+		// truyền vào page hiện tại
+		model.addAttribute("currentPage", productPage.getNumber());
+
+		
+		}
+
+		
+		
+		
+		
+		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		//category
+		List<Category> categories = categoryRepository.findAll();
+
+
+		model.addAttribute("cate", categories);
+
+		model.addAttribute("thuonghieu", thuonghieu);
+
+		
+
 		// truyền vào sắp xếp theo id, name, price
 		model.addAttribute("sortName", sortFeild);
 
 		// truyền vào kiểu sắp xếp 
 		model.addAttribute("sortDesc", sortBy);
 
-        return "product";
+        return "category";
     }
 
 
