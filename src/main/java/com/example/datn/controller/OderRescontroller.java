@@ -51,7 +51,7 @@ public class OderRescontroller {
 
     @PostMapping("/checkout")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> checkout(@Valid @RequestBody OrderRequest orderRequest){
+    public ResponseEntity<?> checkoutByUser(@Valid @RequestBody OrderRequest orderRequest){
 
         long leftLimit = 1L;
         long rightLimit = 100000L;
@@ -97,17 +97,67 @@ public class OderRescontroller {
 
         messageNotificationsRepository.save(ntn);
 
+        //mailService.sendMailWithOrderId(order.getOrderId());
+
+        cartService.getGioHang().getChiTietGioHang().clear();
+
+        return ResponseEntity.ok(new MessageResponse("check out success!"));
+    }
 
 
-       
+    @PostMapping("/checkoutByUser")
+    public ResponseEntity<?> checkOut(@Valid @RequestBody OrderRequest orderRequest){
+
+        long leftLimit = 1L;
+        long rightLimit = 100000L;
+        long id = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+        //order
+        Order order = new Order();
+        order.setOrderId(id);
+        order.setProvince(orderRequest.getProvince());
+        order.setDistrict(orderRequest.getDistrict());
+        order.setWard(orderRequest.getWard()); 
+        order.setAddress(orderRequest.getAddress());
+        order.setNote(orderRequest.getNote());
+        order.setPhoneNumber(orderRequest.getPhoneNumber());
+        order.setEmail(orderRequest.getEmail());
+        order.setFullName(orderRequest.getName());
+        order.setTotal(cartService.getTotal());
+        
+        orderRepository.save(order);
+        //oder detail
+
+        // luu orderItems
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+		for (Product product : listItems.keySet()) {
+
+            
+
+			OrderDetail orderItem = new OrderDetail();
+			int quantity = listItems.get(product);
+            
+			orderItem.setProduct(product);
+			orderItem.setOrder(order);
+			orderItem.setQuantity(quantity);
+			orderItem.setProductName(product.getTensanpham());
+			orderItem.setPrice(product.getGia());
+			//orderItem.setTotal((product.getGia()) * quantity);
+
+            orderDetailRepository.save(orderItem);
+			
+		}
 
 
+        MessageNotifications ntn = new MessageNotifications();
+        ntn.setOrderId(id);
 
+        messageNotificationsRepository.save(ntn);
 
         //mailService.sendMailWithOrderId(order.getOrderId());
 
         cartService.getGioHang().getChiTietGioHang().clear();
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("check out success!"));
     }
 }

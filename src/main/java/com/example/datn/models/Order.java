@@ -59,11 +59,17 @@ public class Order {
     private BigDecimal total;
 
 
+	private String email;
+
+
+	private String fullName;
+
+
 	private String note;
     
 
     @ManyToOne
-	@JoinColumn(name = "customer_Id", nullable = false, foreignKey = @ForeignKey(name = "customer_order"))
+	@JoinColumn(name = "customer_Id", nullable = true, foreignKey = @ForeignKey(name = "customer_order"))
 	Customer customer;
 
 	
@@ -75,11 +81,14 @@ public class Order {
 	}
 
 
+	
+
+
 	public Order(Long orderId, @NotNull Date createdDate, @NotBlank @Size(max = 50) String province,
 			@NotBlank @Size(max = 50) String district, @NotBlank @Size(max = 50) String ward,
 			@NotBlank @Size(max = 150) String address, @NotBlank @Size(max = 10) String phoneNumber,
-			@DecimalMin(value = "0.00", message = "*Price has to be non negative number") BigDecimal total, String note,
-			Customer customer, List<OrderDetail> order_items) {
+			@DecimalMin(value = "0.00", message = "*Price has to be non negative number") BigDecimal total,
+			String email, String fullName, String note, Customer customer, List<OrderDetail> order_items) {
 		this.orderId = orderId;
 		this.createdDate = createdDate;
 		this.province = province;
@@ -88,10 +97,15 @@ public class Order {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.total = total;
+		this.email = email;
+		this.fullName = fullName;
 		this.note = note;
 		this.customer = customer;
 		this.order_items = order_items;
 	}
+
+
+
 
 
 	public Long getOrderId() {
@@ -189,6 +203,26 @@ public class Order {
 	}
 
 
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getFullName() {
+		return fullName;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
@@ -203,7 +237,4 @@ public class Order {
 		this.order_items = order_items;
 	}
 
-
-	
-    
 }

@@ -32,13 +32,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "Select * from products where gia between :giamin and :giamax", nativeQuery = true)
     Page<Product> findProductAll(@Param(value = "giamin") Long giamin, @Param(value = "giamax") Long giamax, Pageable pager );
 
-    @Query(value = "select *  from products p inner join categories c on p.category_id = c.category_id where c.seourl iLIKE %:seourl%", nativeQuery = true)
-    Page<Product> findCategory(@Param(value = "seourl") String seourl, Pageable pager );
+    @Query(value = "select *  from products p inner join categories c on p.category_id = c.category_id where c.seourl iLIKE %:seourl% and p.gia between :giamin and :giamax", nativeQuery = true)
+    Page<Product> findCategory(@Param(value = "seourl") String seourl, @Param(value = "giamin") Long giamin, @Param(value = "giamax") Long giamax, Pageable pager );
 
     @Query(value = "select *  from products p inner join categories c on p.category_id = c.category_id" +
     " inner join thuonghieu th on p.thuonghieu_id = th.idth"+
-    " where c.seourl iLIKE  %:seourl% and th.tenth iLike %:tenth%", nativeQuery = true)
-    Page<Product> findCategoryAndTrademake(@Param(value = "seourl") String seourl, @Param(value = "tenth") String tenth, Pageable pager );
+    " where c.seourl iLIKE  %:seourl% and th.tenth iLike %:tenth% and p.gia between :giamin and :giamax", nativeQuery = true)
+    Page<Product> findCategoryAndTrademake(@Param(value = "seourl") String seourl, @Param(value = "tenth") String tenth, @Param(value = "giamin") Long giamin, @Param(value = "giamax") Long giamax, Pageable pager );
 
 
     @Query(value = "Select * from products where category_id = :idcate and thuonghieu_id = :idth Limit 6", nativeQuery = true)

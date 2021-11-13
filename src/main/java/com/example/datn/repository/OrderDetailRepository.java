@@ -10,8 +10,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
-    @Query(value = "SELECT * FROM order_detail where order_id = :order_id", nativeQuery = true)
+    @Query(value = "SELECT * FROM order_detail od inner join orders ors on od.order_id = ors.order_id  where od.order_id = :order_id", nativeQuery = true)
 	List<OrderDetail> findOrderItems(@Param(value = "order_id") Long orderID);
+
 
 
     

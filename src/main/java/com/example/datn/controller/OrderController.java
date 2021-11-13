@@ -48,13 +48,30 @@ public class OrderController {
 			model.addAttribute("cart", cartService.getGioHang());
 			model.addAttribute("total", cartService.getTotal().toString());
 			model.addAttribute("name", customerService.getCustomer().getHoten());
-			model.addAttribute("email",customerService.getCustomer().getUser().getEmail() );
+			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
 			model.addAttribute("phoneNumber",customerService.getCustomer().getSdt());
 			model.addAttribute("address",customerService.getCustomer().getDiachi());
+			model.addAttribute("isLogin", 1);
 			return "thanhtoan";
 		} else {
-			//model.addAttribute("cartStatus", 1);
-			return "redirect:/login?cartStatus=0";
+
+			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+		for (Product product : listItems.keySet()) {
+
+            
+
+			
+			int quantity = listItems.get(product);
+            
+			model.addAttribute("quantity", quantity);
+			
+		}
+			model.addAttribute("cart", cartService.getGioHang());
+			model.addAttribute("total", cartService.getTotal().toString());
+			
+			model.addAttribute("isLogin", 2);
+			return "thanhtoan";
 		}
 	}
 }

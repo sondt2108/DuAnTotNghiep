@@ -44,20 +44,21 @@ public class HomeController {
 		 int idth = ((Integer) (session.getAttribute("idth")) ).intValue();
 		 int idcate = ((Integer) (session.getAttribute("idCate")) ).intValue();
 
+
+		 if (idth == 0 || idcate == 0) {
+			 idth = 1;
+			 idcate = 1;
+			 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
 		
+			System.out.println("sonnnnne");
+			 model.addAttribute("products", products);
+		 }
 
-	
-
-
+		 
 		 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
 		
 		model.addAttribute("cart", cartService.getGioHang());
 		model.addAttribute("products", products);
-
-		
-
-
-
         return "demo";
     }
 
@@ -103,7 +104,7 @@ public class HomeController {
         return "ordersuccess";
     }
 
-    private static final int TOI_DA_SAN_PHAM = 6;
+    private static final int TOI_DA_SAN_PHAM = 1;
 
     @GetMapping("/product")
     public String listproduct(@RequestParam(name = "sort", defaultValue = "productId") String sortFeild,
@@ -158,7 +159,9 @@ public class HomeController {
     public String listcate(@PathVariable String catename, @RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
 			@RequestParam(name = "trademake", defaultValue = "") String th,
-			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+			@RequestParam(name = "price_min", defaultValue = "0") Long giamin,
+			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model, HttpServletRequest request) {
 
 		Sort sortable = null;
 
@@ -173,7 +176,7 @@ public class HomeController {
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
 		if (th.equals("")) {
-			Page<Product> productPage = productRepository.findCategory(catename, pager);
+			Page<Product> productPage = productRepository.findCategory(catename,giamin, giamax, pager);
 
 			model.addAttribute("countProduct", productPage.getTotalElements());
 
@@ -187,7 +190,7 @@ public class HomeController {
 
 		
 		}else{
-			Page<Product> productPage = productRepository.findCategoryAndTrademake(catename,th, pager);
+			Page<Product> productPage = productRepository.findCategoryAndTrademake(catename,th,giamin, giamax, pager);
 
 			model.addAttribute("countProduct", productPage.getTotalElements());
 
@@ -222,6 +225,11 @@ public class HomeController {
 
 		// truyền vào kiểu sắp xếp 
 		model.addAttribute("sortDesc", sortBy);
+
+		String test = request.getRequestURL().toString() + "?" + request.getQueryString();
+
+		System.out.println("sss" + test);
+		model.addAttribute("requestUrl", test);
 
         return "category";
     }
