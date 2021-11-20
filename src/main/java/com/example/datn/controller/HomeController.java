@@ -24,7 +24,7 @@ import com.example.datn.repository.CategoryRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.TrademakeRepository;
 import com.example.datn.service.CartService;
-
+import com.example.datn.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -50,7 +50,6 @@ public class HomeController {
 			 idcate = 1;
 			 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
 		
-			System.out.println("sonnnnne");
 			 model.addAttribute("products", products);
 		 }
 
@@ -107,9 +106,11 @@ public class HomeController {
     private static final int TOI_DA_SAN_PHAM = 1;
 
     @GetMapping("/product")
-    public String listproduct(@RequestParam(name = "sort", defaultValue = "productId") String sortFeild,
+    public String listproduct(@RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
-			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+			@RequestParam(name = "price_min", defaultValue = "0") Long giamin,
+			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model, HttpServletRequest request) {
 
 		Sort sortable = null;
 
@@ -125,10 +126,15 @@ public class HomeController {
 
 		
 		// lấy sản phẩm
-		Page<Product> productPage = productRepository.findAll(pager);
+		Page<Product> productPage = productRepository.findProductAll(giamin, giamax, pager);
 		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
 		//category
 		List<Category> categories = categoryRepository.findAll();
+
+		String test = request.getRequestURL().toString() + "?" + request.getQueryString();
+
+		System.out.println("sss" + test);
+		model.addAttribute("requestUrl", test);
 
 
 		model.addAttribute("cate", categories);
@@ -330,6 +336,27 @@ public class HomeController {
 		return "search";
 	}
 
+@Autowired
+CustomerService customerService;
+
+	@GetMapping("/myOrder")
+    public String OrderCustomer(Model model) {
+
+		if (customerService.isCustomerLogin()) {
+			//model.addAttribute("cartStatus", 0);
+			
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("address",customerService.getCustomer().getDiachi());
+			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
+			model.addAttribute("customer_id",customerService.getCustomer().getId());
+			
+			
+			return "OrderCustomer";
+	}
+
+
+        return "404Page";
+    }
 
 
 

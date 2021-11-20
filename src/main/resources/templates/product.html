@@ -235,6 +235,20 @@
             </div>
          </div>
 
+         <div class="filter_sort_mobile" id="filter_price">
+            <div class="box">
+                <label>Lọc theo giá sản phẩm:</label>
+                <select id="filter_price_mobile" onchange="priceChanged(this)">
+                  <option value="">Mặc định</option>
+                  <option value="1">Giá dưới 100.000đ</option>
+                  <option value="2">100.000đ - 300.000đ</option>
+                  <option value="3">300.000đ - 500.000đ</option>
+                  <option value="4">500.000đ - 700.000đ</option>
+                  <option value="5">Giá trên 700.000đ</option>
+                </select>
+              </div>
+           </div>
+
 
 
     </div>
@@ -331,6 +345,17 @@
                         <label class="form-check-label" for="flexRadioDefault2">
                           Giá cao đến thấp
                         </label>
+                      </div>
+
+                      <div class="form-check">
+                        <select class="wide" id="filter_price_desktop" onchange="priceChanged(this)">
+                            <option value="">Mặc định</option>
+                            <option value="1">Giá dưới 100.000đ</option>
+                            <option value="2">Giá từ: 100.000đ - 300.000đ</option>
+                            <option value="3">Giá từ: 300.000đ - 500.000đ</option>
+                            <option value="4">Giá từ: 500.000đ - 700.000đ</option>
+                            <option value="5">Giá trên 700.000đ</option>
+                          </select>
                       </div>
                       
 
@@ -433,9 +458,9 @@
                       </li>
                       <li th:each="i : ${#numbers.sequence(1, maxPage)}"
 						th:class="${i == currentPage +1 ? 'page-item active' :'page-item' }">
-						<a class="page-link" th:if="${currentPage != i}" th:href="@{'?sort=' +${sortName} +'&sortBy='+${sortDesc} + '&pageIndex=' + ${i -1}}">[[${i}]]</a>
-						<a class="page-link" th:unless="${currentPage != i}" th:href="@{'?sort=' +${sortName} +'&sortBy='+${sortDesc} + '&pageIndex=' + ${i -1}}">[[${i}]]
-            </a> 
+                        <a class="page-link" th:if="${currentPage != i}" th:with="page=${'&pageIndex='+currentPage},url=${#strings.replace(requestUrl,page,'')}" th:href="@{${url} + '&pageIndex=' + ${i -1}}">[[${i}]]</a>
+						<a class="page-link" th:unless="${currentPage != i}" th:with="page=${'&pageIndex='+currentPage},url=${#strings.replace(requestUrl,page,'')}" th:href="@{${url} + '&pageIndex=' + ${i -1}}">[[${i}]]
+            </a>
 					
 					</li>
                       <li class="page-item">

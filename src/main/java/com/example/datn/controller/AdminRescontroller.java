@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.example.datn.models.Customer;
 import com.example.datn.models.NhaCungCap;
 import com.example.datn.models.Order;
@@ -11,10 +13,13 @@ import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
 import com.example.datn.models.SearchForm;
 import com.example.datn.models.ThuongHieu;
+import com.example.datn.models.TinhTrangDonHang;
 import com.example.datn.models.User;
+import com.example.datn.payload.request.OrderCustomerRequest;
 import com.example.datn.repository.CustomerRepository;
 import com.example.datn.repository.OrderDetailRepository;
 import com.example.datn.repository.OrderRepository;
+import com.example.datn.repository.OrderStatusRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.SupplierRepository;
 import com.example.datn.repository.TrademarkRepository;
@@ -248,6 +253,11 @@ public class AdminRescontroller {
       @Autowired
       OrderRepository orderRepository;
 
+      @GetMapping("/api/order/{id}")
+	public Order getById(@PathVariable("id") Long id) {
+		return orderRepository.findById(id).orElse(null);
+	}
+
       @PostMapping("api/order/search")
       public Page<Order> searchOrder(
               // thông tin form tìm kiếm
@@ -265,6 +275,54 @@ public class AdminRescontroller {
           return orderPage;
       }
 
+
+      @PostMapping("api/orderCustomer/search")
+      public Page<Order> OrderCustomer(
+              // thông tin form tìm kiếm
+              @RequestBody OrderCustomerRequest orderCustomerRequest) {
+
+          Pageable phanTrang = PageRequest.of(orderCustomerRequest.getTrang(), TOI_DA_SAN_PHAM
+                  // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
+                  
+                  // xếp theo trường nào ví dụ id, name, price
+                 );
+
+            String email = orderCustomerRequest.getEmail();
+            int customer_id = orderCustomerRequest.getCustomer_id();
+
+          // lấy sản phẩm
+          Page<Order> orderPage = orderRepository.findOrderCustomer(email, customer_id, phanTrang);
+
+          return orderPage;
+      }
+
+
+
+      @PutMapping("/api/order/{id}")
+	public Order update(@PathVariable("id") Long id, @Valid @RequestBody Order order) {
+
+        Optional<Order> orderOptional = Optional
+					.ofNullable(orderRepository.findByOrderId(id));
+        Order or = orderOptional.get();
+        or.setTinhtrang(order.getTinhtrang());
+		return orderRepository.save(or);
+	}
+
+    public final static TinhTrangDonHang DEFAULT_TTDH = new TinhTrangDonHang();
+    static {
+		DEFAULT_TTDH.setIdTT(6);
+      
+    }
+
+    @PutMapping("/api/cencelOrder/{id}")
+	public Order cencelOrder(@PathVariable("id") Long id, @Valid @RequestBody Order order) {
+
+        Optional<Order> orderOptional = Optional
+					.ofNullable(orderRepository.findByOrderId(id));
+        Order or = orderOptional.get();
+        or.setTinhtrang(DEFAULT_TTDH);
+		return orderRepository.save(or);
+	}
 
 
 
@@ -285,7 +343,18 @@ public class AdminRescontroller {
 
 
 
+// tình trạng đơn hàng
 
+@Autowired
+OrderStatusRepository orderStatusRepository;
+
+
+
+@GetMapping("api/tinhtrang")
+public List<TinhTrangDonHang> listOrderStatus(){
+
+    return orderStatusRepository.findAll();
+}
 
     
 }

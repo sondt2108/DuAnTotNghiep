@@ -1,10 +1,5 @@
 
-
 const url = window.location.pathname;
-console.log('name' + url);
-
-
-
 
 const urlParams = new URLSearchParams(window.location.search);
 const param = urlParams.get('sort');
@@ -79,7 +74,7 @@ if(param == 'tensanpham' && sortBy == 'DESC'){
 
 var x = location.search;
 
- console.log(x);
+
 
 
 
@@ -123,7 +118,6 @@ document.body.addEventListener('change', function (e) {
                 break;
         }
     }else if( price_min !=null || price_max != null) {
-        console.log("trademake != '' && price_min !='' && price_max != ''");
 
         if (trademake === null) {
             if (price_max == 100000) {
@@ -456,24 +450,46 @@ function priceChanged(obj)
         }
     }else if (trademake !='') {
         if (param == 'tensanpham' || param == 'gia') {
-            if (value === ''){
-                window.location.assign(url+`?trademake=${trademake}&sort=${param}`)
+            if (sortBy == 'DESC') {
+                if (value === ''){
+                    window.location.assign(url+`?trademake=${trademake}&sort=${param}&sortBy=${sortBy}`)
+                }
+                else if (value === '1'){
+                window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}`)  
+                }
+                else if (value === '2'){
+                    window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`) 
+                }
+                else if (value === '3'){
+                    window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`) 
+                }
+                else if (value === '4'){
+                    window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`) 
+                }
+                else if (value === '5'){
+                    window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}`) 
+                }
+            } else if(param != '') {
+                if (value === ''){
+                    window.location.assign(url+`?trademake=${trademake}&sort=${param}`)
+                }
+                else if (value === '1'){
+                window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}`)  
+                }
+                else if (value === '2'){
+                    window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}`) 
+                }
+                else if (value === '3'){
+                    window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}`) 
+                }
+                else if (value === '4'){
+                    window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}`) 
+                }
+                else if (value === '5'){
+                    window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}`) 
+                }
             }
-            else if (value === '1'){
-            window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}`)  
-            }
-            else if (value === '2'){
-                window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}`) 
-            }
-            else if (value === '3'){
-                window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}`) 
-            }
-            else if (value === '4'){
-                window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}`) 
-            }
-            else if (value === '5'){
-                window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}`) 
-            }
+            
         
         } else if(param == 'tensanpham' && sortBy == 'DESC' || param == 'gia' && sortBy == 'DESC'){
             if (value === ''){
@@ -498,11 +514,9 @@ function priceChanged(obj)
            
         }
     }if(trademake != '' && price_max === null && price_min===null) {
-        if ((param != '' || sortBy != '') && trademake === null) {
-            console.log("sjdkfg")
-        }else if (trademake != ''  && price_min !='', price_max != '' && sortBy === null && param === null) {
+       if (trademake != ''  && price_min !='', price_max != '' && sortBy === null && param === null) {
             if (value === ''){
-                window.location.assign(url)
+                window.location.assign(`?trademake=${trademake}`)
             }
             else if (value === '1'){
             window.location.assign(`?trademake=${trademake}&price_max=100000`)  
@@ -526,7 +540,7 @@ function priceChanged(obj)
             if (param === null || sortBy === null) {
                 if (trademake != '' && price_min !='', price_max != '' && sortBy === null && param === null) {
                     if (value === ''){
-                        window.location.assign(url)
+                        window.location.assign(`?trademake=${trademake}`)
                     }
                     else if (value === '1'){
                     window.location.assign(`?trademake=${trademake}&price_max=100000`)  
@@ -543,20 +557,31 @@ function priceChanged(obj)
                     else if (value === '5'){
                         window.location.assign(url+`?trademake=${trademake}&price_min=700000`) 
                     } 
-                }else if(param !='' || sortBy != null){
-                    console.log("sdksfmvc")
                 }
                 
+            }
+        }else if(price_min === null || price_max === null ) {
+            if (value === ''){
+                window.location.assign(url)
+            }
+            else if (value === '1'){
+            window.location.assign(`?trademake=${trademake}&price_max=100000`)  
+            }
+            else if (value === '2'){
+                window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000`) 
+            }
+            else if (value === '3'){
+                window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000`) 
+            }
+            else if (value === '4'){
+                window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000`) 
+            }
+            else if (value === '5'){
+                window.location.assign(url+`?trademake=${trademake}&price_min=700000`) 
             }
         }
         
     }
-
-    
-    
-    
-
-    
 }
     
 }

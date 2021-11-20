@@ -572,6 +572,11 @@
                       </th>
                       <th class="font-weight-semi-bold border-top-0 py-2">
                         Tên khách hàng
+                        <p style="font-size: 10px;">(Đã đăng nhập)</p>
+                      </th>
+                      <th class="font-weight-semi-bold border-top-0 py-2">
+                        Tên khách hàng
+                        <p style="font-size: 10px;">(Không ĐKTK)</p>
                       </th>
                       <th class="font-weight-semi-bold border-top-0 py-2">
                         Số điện thoại
@@ -583,7 +588,10 @@
                         Tổng tiền
                       </th>
                       <th class="font-weight-semi-bold border-top-0 py-2">
-                        Action
+                        TT đơn hàng
+                      </th>
+                      <th class="font-weight-semi-bold border-top-0 py-2">
+                        CT đơn hàng
                       </th>
                     </tr>
                   </thead>
@@ -671,6 +679,35 @@
           </div>
         </div>
 
+
+        <div class="modal fade" id="ttorder" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<h5 class="modal-title" id="exampleModalLabel">
+								<b>Thêm sản phẩm</b>
+							</h5>
+
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="editorder"></form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary" action=""
+								id="edits">Sửa</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
         <!-- Footer -->
         <footer class="small p-3 px-md-4 mt-auto">
           <div class="row justify-content-between">
@@ -750,10 +787,16 @@
         "<tr>" +
         '<td class="py-3">{{orderId}}</td>' +
         '<td class="py-3">{{customer.hoten}}</td>' +
+        '<td class="py-3">{{fullName}}</td>' +
         '<td class="py-3">{{phoneNumber}}</td>' +
         '<td class="py-3">{{address}} <p style = "display:block;">({{ward}}-{{district}}-{{province}})</td></p>' +
         '<td class="py-3">{{total}}</td>' +
+        "{{#each order_items}}" +
+        '<td class="py-3" style = "display:block;">{{productName}}</td>' +
+        "{{/each}}"+
+        '<td class="py-3">{{tinhtrang.tinhTrang}}</td>' +
         '<td class="py-3"><button class="edit btn btn-outline" c-id="{{orderId}}"><i class="gd-list"></i></button>' +
+        '<td class="py-3"><button class="editOrderStatus btn btn-outline" c-id="{{orderId}}"><i class="gd-list"></i></button>' +
         "</tr>" +
         "{{/each}}";
       var rowHbs = Handlebars.compile(rowTemplate);
@@ -773,9 +816,9 @@
           .then((res) => res.json())
           .then((data) => {
             var rows = rowHbs({ order: data.content });
-            console.log(rows)
+           
             $("#myTable").html(rows);
-
+            bindEvent();
             bindClick();
             var pageHtml = "";
             for (var i = 0; i < data.totalPages; i++) {
@@ -873,6 +916,93 @@
             });
         });
       }
+
+
+      var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="idTT">{{#each tinhtrangs}}'
+			+ '<option value="{{idTT}}">'
+			+ "{{tinhTrang}}"
+			+ "</option>"
+			+ "{{/each}}</select>";
+		var tinhtrangSelectHbs = Handlebars.compile(tinhtrangSelect); 
+		
+		 var khachhangSelect = '<select id="khachhangSelect" class="form-control" name="id">{{#each khachhang}}'
+				+ '<option value="{{id}}">'
+				+ "{{hoten}}"
+				+ "</option>"
+				+ "{{/each}}</select>";
+			var khachhangSelectHbs = Handlebars.compile(khachhangSelect); 
+
+
+      var editTemplateStr = '<div class="mb-3">'+
+    		 '<input class="form-control" id="orderId"  name="orderId" idProduct="{{orderId}}"  value ="{{orderId}}"  type="hidden">'+
+    		'</div>';
+
+
+        var orderModal = new bootstrap.Modal(
+    	        document.getElementById("ttorder"),
+    	        {
+    	          keyboard: false,
+    	        }
+    	      );
+    				 
+    	    	var editHbs = Handlebars.compile(editTemplateStr);
+    	    	function bindEvent() {
+    	    	    $(".editOrderStatus").click(function() {
+    	    	    	
+    	    	    	orderModal.show();
+
+    	    	        var id = $(this).attr("c-id");
+    	    	        console.log(id);
+    	    	        fetch("/api/order/" + id)
+
+    	    	        .then((res) => res.json())
+    	    	            .then((order) => {
+    	    	                var editHTML = editHbs(order);
+    	    	                         fetch("/api/tinhtrang")
+    	        	                    .then((res) => res.json())
+    	        	                    .then((tinhtrangs) => {
+    	        	                        var tinhtrangSelectHtml = tinhtrangSelectHbs({
+    	        	                        	tinhtrangs: tinhtrangs,
+    	        	                        });
+    	        	                        editHTML += '<div class="mb-3">'
+    	        						           +	'<label for="tinhtrang" class="form-label"><b>Nhà cung cấp:</b> </label>'
+    	        						   		   + tinhtrangSelectHtml;
+
+    	        	                        $("#editorder").html(editHTML);
+    	        	                        $("#tinhtrangSelect").val(order.tinhtrang.idTT)
+    	        	                        
+    	        	                       
+    	        	                    }); 
+    	    	                    });
+    	    	            });
+    	        }
+    	    	 $("#edits").click(function () {
+    	  	        var id = document.getElementById("orderId").value;
+    	  	        var order = FormDataJson.toJson(
+    	  	          document.querySelector("#ttorder"));
+    	  	      order.tinhtrang = {
+      	  				idTT: order.idTT
+      	  			}
+                console.log("sone");
+                console.log(order);
+    	  	        var editOption = {
+    	  	          method: "PUT",
+    	  	          headers: {
+    	  	            "Content-Type": "application/json",
+    	  	          },
+    	  	          body: JSON.stringify(order),
+    	  	        };
+
+    	  	        if ($("#editorder").valid()) {
+    	  	        	order = fetch("/api/order/" + id, editOption)
+    	  	            .then((response) => response.json())
+    	  	            .then((data) => {
+    	  	              console.log(data);
+    	  	              loadList();
+    	  	            });
+                      orderModal.hide();
+    	  	        }
+    	  	      });
     </script>
   </body>
 </html>

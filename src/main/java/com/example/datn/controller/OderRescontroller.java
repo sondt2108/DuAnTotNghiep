@@ -1,6 +1,7 @@
 package com.example.datn.controller;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -9,11 +10,13 @@ import com.example.datn.models.MessageNotifications;
 import com.example.datn.models.Order;
 import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
+import com.example.datn.models.TinhTrangDonHang;
 import com.example.datn.payload.request.OrderRequest;
 import com.example.datn.payload.response.MessageResponse;
 import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.repository.OrderDetailRepository;
 import com.example.datn.repository.OrderRepository;
+import com.example.datn.repository.ProductRepository;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.MailService;
@@ -48,6 +51,16 @@ public class OderRescontroller {
    @Autowired
    MessageNotificationsRepository messageNotificationsRepository;
     
+   public final static TinhTrangDonHang DEFAULT_TTDH = new TinhTrangDonHang();
+    static {
+		DEFAULT_TTDH.setIdTT(1);
+      
+    }
+
+
+    @Autowired
+    ProductRepository productRepository;
+
 
     @PostMapping("/checkout")
     @PreAuthorize("hasRole('USER')")
@@ -67,6 +80,7 @@ public class OderRescontroller {
         order.setPhoneNumber(orderRequest.getPhoneNumber());
         order.setTotal(cartService.getTotal());
         order.setCustomer(customerService.getCustomer());
+        order.setTinhtrang(DEFAULT_TTDH);
         orderRepository.save(order);
         //oder detail
 
@@ -87,6 +101,20 @@ public class OderRescontroller {
 			orderItem.setPrice(product.getGia());
 			//orderItem.setTotal((product.getGia()) * quantity);
 
+            
+        Optional<Product> productOptional = Optional
+        .ofNullable(productRepository.findByProductId(product.getProductId()));
+Product pr = productOptional.get();
+double quantityOrder = listItems.get(product);
+ double sl = pr.getSoluong();
+
+ double slcl = sl - quantityOrder;
+
+ System.out.println("sonne" + slcl);
+
+ pr.setSoluong(slcl);
+ productRepository.save(pr);
+
             orderDetailRepository.save(orderItem);
 			
 		}
@@ -105,13 +133,18 @@ public class OderRescontroller {
     }
 
 
+    
+
     @PostMapping("/checkoutByUser")
     public ResponseEntity<?> checkOut(@Valid @RequestBody OrderRequest orderRequest){
 
         long leftLimit = 1L;
         long rightLimit = 100000L;
         long id = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+
+        
         //order
+        
         Order order = new Order();
         order.setOrderId(id);
         order.setProvince(orderRequest.getProvince());
@@ -123,6 +156,7 @@ public class OderRescontroller {
         order.setEmail(orderRequest.getEmail());
         order.setFullName(orderRequest.getName());
         order.setTotal(cartService.getTotal());
+        order.setTinhtrang(DEFAULT_TTDH);
         
         orderRepository.save(order);
         //oder detail
@@ -150,7 +184,7 @@ public class OderRescontroller {
 
 
         MessageNotifications ntn = new MessageNotifications();
-        ntn.setOrderId(id);
+        ntn.setOrderId(order.getOrderId());
 
         messageNotificationsRepository.save(ntn);
 

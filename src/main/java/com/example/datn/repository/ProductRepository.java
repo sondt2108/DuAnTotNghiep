@@ -15,6 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     
     Page<Product> findByTensanphamContainingIgnoreCase(String name, Pageable pager);
 
+    Product findByProductId(int id);
+
 
     @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)
     List<Product> findByTitleContaining();
