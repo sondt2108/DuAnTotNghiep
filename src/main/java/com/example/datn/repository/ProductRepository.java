@@ -17,6 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product findByProductId(int id);
 
+    Product findBySeourl(String name);
+
 
     @Query(value = "select * from products pr where thuonghieu_id = 1 and category_id = 1 Limit 6", nativeQuery = true)
     List<Product> findByTitleContaining();

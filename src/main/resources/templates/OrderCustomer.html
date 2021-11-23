@@ -155,7 +155,7 @@
         '<td class="py-3" style = "display:block;">{{productName}} <p>(Số lượng: {{quantity}})</p> <p>Đơn giá: {{price}}</p></td>' +
         "{{/each}}"+
         
-        '<td class="py-3">{{tinhtrang.tinhTrang}}</td>' +
+        '<td class="py-3" style="color:#85AAD7;">{{tinhtrang.tinhTrang}}</td>' +
         '<td class="py-3"><button style="color:red;" class="edit btn btn-outline" id="{{tinhtrang.idTT}}" c-id="{{orderId}}">Hủy đơn hàng</button></td>' +
         "</tr>" +
         "{{/each}}";
@@ -187,7 +187,7 @@
            
             $("#myTable").html(rows);
             orderStatus();
-            bindEvent();
+           
             bindClick();
             var pageHtml = "";
             for (var i = 0; i < data.totalPages; i++) {
@@ -218,7 +218,16 @@
 		$( "#3" ).remove();
 		$( "#4" ).remove();
 		$( "#5" ).remove();
-		$( "#6" ).remove();
+		
+		$('.edit').each(function(index, item) {
+    console.log(item.id);
+
+	if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id == 2) {
+		item.remove();
+	}
+	
+	
+});
 	  }
 
       var insertModal = new bootstrap.Modal(

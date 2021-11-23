@@ -17,6 +17,7 @@ import com.example.datn.models.TinhTrangDonHang;
 import com.example.datn.models.User;
 import com.example.datn.payload.request.OrderCustomerRequest;
 import com.example.datn.repository.CustomerRepository;
+import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.repository.OrderDetailRepository;
 import com.example.datn.repository.OrderRepository;
 import com.example.datn.repository.OrderStatusRepository;
@@ -270,7 +271,7 @@ public class AdminRescontroller {
                   sf.getXepTheo());
 
           // lấy sản phẩm
-          Page<Order> orderPage = orderRepository.findByPhoneNumberContaining(sf.getTen(), phanTrang);
+          Page<Order> orderPage = orderRepository.findByOrderId(sf.getTen(), phanTrang);
 
           return orderPage;
       }
@@ -324,6 +325,19 @@ public class AdminRescontroller {
 		return orderRepository.save(or);
 	}
 
+    
+    @Autowired
+    MessageNotificationsRepository messageNotificationsRepository;
+
+    @DeleteMapping("/api/notifi/{id}")
+  	public void deleteNotifi(@PathVariable("id") long id) {
+  		messageNotificationsRepository.deleteById(id);
+  	}
+
+      @DeleteMapping("/api/notifi")
+  	public void deleteAllNotifi() {
+  		messageNotificationsRepository.deleteAll();
+  	}
 
 
       @Autowired

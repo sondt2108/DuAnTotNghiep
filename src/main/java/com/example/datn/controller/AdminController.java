@@ -3,16 +3,12 @@ package com.example.datn.controller;
 import java.util.List;
 
 import com.example.datn.models.MessageNotifications;
-import com.example.datn.models.Role;
-import com.example.datn.payload.response.JwtResponse;
 import com.example.datn.repository.MessageNotificationsRepository;
-import com.example.datn.security.services.UserDetailsImpl;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
 
-import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,7 +78,7 @@ public class AdminController {
         //     return "dashboard/products";
         //  }
 
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll();
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
 
         model.addAttribute("noti", ntn);
          return "dashboard/order"; 

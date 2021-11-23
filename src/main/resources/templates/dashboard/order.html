@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Title -->
-    <title>Products | Graindashboard UI Kit</title>
+    <title>Order | Đức Phát</title>
 
     <meta charset="utf-8" />
     <meta
@@ -17,55 +17,7 @@
     <!-- Template -->
     <link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css" />
     <style type="text/css">
-      #timkiem-item {
-        background-color: #f5f5f5;
-        border: none;
-      }
-
-      #sort-item {
-        border: none;
-      }
-
-      #searchBt {
-        margin-left: 10px;
-        border: 1px solid #f0f0f0;
-        border-radius: 2px;
-        background-color: white;
-        color: black;
-      }
-
-      #searchBt:hover {
-        background-color: #f5f5f5;
-        color: black;
-      }
-
-      #them {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 5px;
-        border-radius: 3px;
-        font-size: 18px;
-        background-color: white;
-        color: black;
-        border: 2px solid #265df1;
-        margin-left: 5px;
-      }
-
-      #them:hover {
-        background-color: #265df1;
-        color: white;
-      }
-
-      #myInput {
-        background-image: url("/css/searchicon.png");
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        width: 100%;
-        font-size: 16px;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-      }
+      
 
       .error {
         color: red;
@@ -174,10 +126,10 @@
                     "
                   >
                     <h5 class="mb-0">Notifications</h5>
-                    <a class="link small ml-auto" href="#">Clear All</a>
+                    <button class="btn btn-outline link small ml-auto" onclick="clearAllNotifi()">Clear All</button>
                   </div>
 
-                  <div class="card-body p-0">
+                  <div id="notifi" class="card-body p-0">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item list-group-item-action" th:each="ntn : ${noti}">
                         <div class="d-flex align-items-center text-nowrap mb-2">
@@ -192,9 +144,8 @@
                         <p class="mb-0">
                           Đơn hàng <strong>#[[${ntn.orderId}]]</strong> vừa được đặt thành công.
                         </p>
-                        <a class="list-group-item-closer text-muted" href="#"
-                          ><i class="gd-close"></i
-                        ></a>
+                        <button class=" btn btn-outline list-group-item-closer text-muted" th:onclick="|deleteByNotifi(${ntn.notificationsId})|"><i class="gd-close"></i
+                        ></button>
                       </div>
                       
                     </div>
@@ -532,33 +483,49 @@
               <!-- Breadcrumb -->
               <nav class="d-none d-md-block" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Users</a></li>
+                  <li class="breadcrumb-item"><a href="#">Order</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    Users
+                    All order
                   </li>
                 </ol>
               </nav>
               <!-- End Breadcrumb -->
 
               <div class="mb-3 mb-md-4 d-flex justify-content-between">
-                <div class="h3 mb-0">User</div>
+                <div class="h3 mb-0">Order</div>
               </div>
               <div>
                 <form id="searchForm">
-                   <input name="ten" type="text" placeholder="Nhập SĐT đơn hàng cần tìm..." />
-                  <input type="hidden" name="trang" value="0" />
-                  <select id="sort-item" name="xepTheo">
-                    <option value="createdDate">Lọc theo ngày</option>
-                    <option value="orderId">Lọc theo Id</option>
-                  </select>
-                  <select id="sort-item" name="thuTu">
-                    <option value="false">Giảm dần</option>
-                    <option value="true">Tăng dần</option>
-                  </select>
+                  <div class="row">
+                    <div class="col-lg-3">
+                       <input name="ten" class="form-control" type="text" placeholder="Nhập mã đơn hàng cần tìm..." />
+                       <input type="hidden" name="trang" value="0" />
+                    </div>
+                    <div class="col-lg-3">
+                              <select id="sort-item" class="form-control" name="xepTheo">
+                                <option value="created_date">Lọc theo ngày</option>
+                                <option value="orderId">Lọc theo Id</option>
+                              </select>
+                    </div>
 
-                  <button class="button" type="button" id="searchBt">
-                    Tìm kiếm
-                  </button>
+                    <div class="col-lg-3">
+                       <select id="sort-item" class="form-control" name="thuTu">
+                          <option value="false">Giảm dần</option>
+                          <option value="true">Tăng dần</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3">
+                          
+                      <button class="btn btn-outline-primary" type="button" id="searchBt">
+                        Tìm kiếm
+                      </button>
+                    </div>
+                  </div>
+                  
+                  
+                 
+
                 </form>
               </div>
            
@@ -1003,6 +970,35 @@
                       orderModal.hide();
     	  	        }
     	  	      });
+
+                function deleteByNotifi(id) {
+                  var deleteOption = {
+	        method: 'delete',
+	        headers: {
+	            'Content-Type': 'application/json',
+				// 'Authorization': 'Bearer ' + x
+	        }
+	    };
+	    notification = fetch("/api/notifi/" + id, deleteOption)
+	        .then(response => {
+            $("#notifi").load(location.href + " #notifi");
+	        });
+                }
+
+
+                function clearAllNotifi() {
+                  var deleteOption = {
+	        method: 'delete',
+	        headers: {
+	            'Content-Type': 'application/json',
+				// 'Authorization': 'Bearer ' + x
+	        }
+	    };
+	    notification = fetch("/api/notifi", deleteOption)
+	        .then(response => {
+            $("#notifi").load(location.href + " #notifi");
+	        });
+                }
     </script>
   </body>
 </html>

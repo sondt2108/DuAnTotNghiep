@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    Page<Order>  findByPhoneNumberContaining(String phoneNumber, Pageable pager);
+
+    @Query(value = "Select * from orders where CAST(order_id AS varchar) iLike %:id%", nativeQuery = true)
+    Page<Order>  findByOrderId(String id, Pageable pager);
 
     Order findByOrderId(Long orderId);
 

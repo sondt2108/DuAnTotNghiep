@@ -1,6 +1,7 @@
 package com.example.datn.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,28 +37,30 @@ public class HomeController {
 	CartService cartService;
 
     @GetMapping("/detail/{productname}")
-    public String demo(@PathVariable String productname, Model model, HttpServletRequest request){
-        
-		HttpSession session = request.getSession();
+    public String demo(@PathVariable String productname, Model model, HttpServletRequest request, HttpSession session){
+         session = request.getSession();
 
+		 if (session.getAttribute("idth") == null || session.getAttribute("idCate") == null) {
+			int idth = 1;
+			int idcate = 1;
 
-		 int idth = ((Integer) (session.getAttribute("idth")) ).intValue();
+			List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
+
+	   model.addAttribute("products", products);
+		}else {
+			int idth = ((Integer) (session.getAttribute("idth")) ).intValue();
 		 int idcate = ((Integer) (session.getAttribute("idCate")) ).intValue();
-
-
-		 if (idth == 0 || idcate == 0) {
-			 idth = 1;
-			 idcate = 1;
-			 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
-		
-			 model.addAttribute("products", products);
-		 }
-
 		 
 		 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
 		
-		model.addAttribute("cart", cartService.getGioHang());
+		
 		model.addAttribute("products", products);
+		}
+
+		 
+		
+		model.addAttribute("cart", cartService.getGioHang());
+	
         return "demo";
     }
 
