@@ -2,7 +2,6 @@ package com.example.datn.controller;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -81,6 +80,7 @@ public class OderRescontroller {
         order.setTotal(cartService.getTotal());
         order.setCustomer(customerService.getCustomer());
         order.setTinhtrang(DEFAULT_TTDH);
+        order.setFullName(customerService.getCustomer().getHoten());
         orderRepository.save(order);
         //oder detail
 
