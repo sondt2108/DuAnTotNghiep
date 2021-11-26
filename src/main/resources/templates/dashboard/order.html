@@ -578,6 +578,9 @@
                         Số điện thoại
                       </th>
                       <th class="font-weight-semi-bold border-top-0 py-2">
+                        Ngày đặt 
+                      </th>
+                      <th class="font-weight-semi-bold border-top-0 py-2">
                         Địa chỉ GH
                       </th>
                       <th class="font-weight-semi-bold border-top-0 py-2">
@@ -816,6 +819,7 @@
         '<td class="py-3"><button class="btn btn-outline" onClick="orderDetail({{orderId}});">{{orderId}}</button></td>' +      
         '<td class="py-3">{{fullName}}</td>' +
         '<td class="py-3">{{phoneNumber}}</td>' +
+        '<td class="py-3" id="createdDate">{{createdDate}}</td>' +
         '<td class="py-3">{{address}} <p style = "display:block;">({{ward}}-{{district}}-{{province}})</td></p>' +
         "{{#each order_items}}" +
         '<td class="py-3" style = "display:block;">{{productName}}<p style = "display:block; font-weight: bold;font-style: oblique;">Số lượng: {{quantity}}</p></td>' +
@@ -872,8 +876,15 @@
     var price = $(this).find("#total").html();
     var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     var pr = $(this).find("#total").text(priceFormat +'đ');
-    $("#total").val();
+    
+    //date
+    var date = $(this).find("#createdDate").html();
+    console.log(date);
+    var dateFormat = new Date(date);
+    var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
  });
+
+ 
       }
       
       

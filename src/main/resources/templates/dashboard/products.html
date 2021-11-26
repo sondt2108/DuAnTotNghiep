@@ -74,7 +74,7 @@
 				<!-- Logo For Desktop View -->
 				<a class="navbar-brand navbar-brand-desktop" href="/"> <img
 					class="side-nav-show-on-closed" src="/asset/img/lg.png"
-					 style="width: auto; height: 33px;"> <img
+					 style="width: 70px; height: 33px;"> <img
 					class="side-nav-hide-on-closed" src="/asset/img/lg.png"
 					alt="Graindashboard" style="width: auto; height: 33px;">
 				</a>
@@ -486,7 +486,7 @@
 	<script src="/asset/dashboard/js/graindashboard.js"></script>
 	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script> 
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/handlebars-dateformat@1.1.1/index.min.js"></script>
+	
     
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
@@ -498,11 +498,7 @@
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js" integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    
-
-		<script
-		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
 
 
 	<script type="text/javascript">
@@ -510,8 +506,8 @@
 		var rowTemplate = "{{#each products}}"
 			+"<tr>"
 			+       '<td class="py-3 text_over">{{tensanpham}}</td>'
-			+       '<td class="py-3">{{gia}}</td>'
-			+       '<td class="py-3 text_over">{{dateFormat createdDate format="MMMM"}} </td>'
+			+       '<td class="py-3" id="price">{{gia}}</td>'
+			+       '<td class="py-3 text_over" id="createdDate">{{createdDate}}</td>'
 			+'<td class="py-3"><img src="{{hinhanh}}" style="width: 50px; height: 50px" /></td>' 
 			+       '<td class="py-3">{{category.name}}</td>'
 			+       '<td class="py-3">{{thuonghieu.tenTH}}</td>'
@@ -573,6 +569,7 @@
 					console.log(data);
 					bindEvent();
 					bindClick();
+					formatNumber();
 					var pageHtml = "";
 					for (var i = 0; i < data.totalPages; i++) {
 						pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="datatablePagination0" class='${i == searchForm.trang ? "page-link active pageIndex" : "page-link pageIndex"}'>${i+1}</button>`;
@@ -591,6 +588,27 @@
 			$('#searchForm input[name="trang"]').val(0);
 			loadList();
 		});
+
+
+
+
+		
+		function formatNumber() {
+        $('#myTable tr').each(function() {
+    var price = $(this).find("#price").html();
+    var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    var pr = $(this).find("#price").text(priceFormat +'đ');
+    
+    //date
+    var createdDate = $(this).find("#createdDate").html();
+    console.log(createdDate);
+    var dateFormat = new Date(createdDate);
+	console.log(dateFormat);
+    var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
+ });
+
+ 
+      }
 
 
      
@@ -682,10 +700,6 @@
 			  });
 		
 		});
-
-
-
-	
 
 	uploadFile = async (fileInput) => {
 	    let formData = new FormData()
