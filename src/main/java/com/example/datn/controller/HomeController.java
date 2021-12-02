@@ -106,7 +106,7 @@ public class HomeController {
         return "ordersuccess";
     }
 
-    private static final int TOI_DA_SAN_PHAM = 1;
+    private static final int TOI_DA_SAN_PHAM = 3;
 
     @GetMapping("/product")
     public String listproduct(@RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,

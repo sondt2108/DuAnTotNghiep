@@ -10,6 +10,7 @@ import com.example.datn.payload.request.ForgotPasswordRequest;
 import com.example.datn.payload.request.ResetPassword;
 import com.example.datn.service.MailService;
 import com.example.datn.service.UserService;
+import com.sendgrid.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,8 +46,14 @@ public class UserRescontroller {
             String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
               response = url + "/account/reset-password?token=" + response; 
 
-              mailService.sendMailWithResetPassword(email, response);
-              
+              //mailService.sendMailWithResetPassword(email, response);
+
+              ForgotPasswordRequest fPasswordRequest = new ForgotPasswordRequest();
+              fPasswordRequest.setEmail(forgotPasswordRequest.getEmail());
+              fPasswordRequest.setReponse(response);
+              fPasswordRequest.setSubject("Đặt lại mật khẩu trên Đức Phát");
+
+              Response res =mailService.sendMailResetPassword(fPasswordRequest);
           }else {
             return ResponseEntity.ok(new MessageResponse("fail!"));
           }     

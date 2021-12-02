@@ -85,3 +85,17 @@
     font-size: 13px;
 }
 
+figure.zoom {
+    background-position: 70% 70%;
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+figure.zoom img:hover {
+    opacity: 0;
+}
+figure.zoom img {
+    transition: opacity 0.5s;
+    display: block;
+    width: 100%;
+}

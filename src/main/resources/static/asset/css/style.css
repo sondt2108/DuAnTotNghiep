@@ -828,7 +828,28 @@ ol {
     background: #ffffff;
 }
 
+.store__slider.owl-carousel .owl-nav button {
+	font-size: 20px;
+    color: #878fa0;
+    height: 50px;
+    width: 30px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #f1f5f6;
+    border-radius: 5px;
+    box-shadow: 0 7px 10px 0 rgb(72 139 216 / 20%);
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-35px);
+    background: #ffffff;
+}
+
 .categories__slider.owl-carousel .owl-nav button.owl-next {
+	left: auto;
+	right: 0px;
+}
+
+.store__slider.owl-carousel .owl-nav button.owl-next {
 	left: auto;
 	right: 0px;
 }
@@ -3685,7 +3706,7 @@ ol {
   }
   
   .section-head {
-	border-top: 3px solid #057C40;
+	border-top: 4px solid #057C40;
 	position: relative;
 	margin-bottom: 20px;
   }

@@ -19,15 +19,12 @@
     <link rel="stylesheet" href="/asset/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/style.css" type="text/css">
     <link rel="stylesheet" href="/asset/css/slideshow.css">
     <link rel="stylesheet" href="/asset/css/index.css">
-    <link rel="stylesheet" href="/asset/css/chitietsp.css">
-    <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     
   </head>
@@ -427,155 +424,113 @@
       </div>
     </section>
 
-    
 
-    <!-- Modal -->
-    <div
-      class="modal fade bd-example-modal-lg"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myExtraLargeModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <p class="modal-title" id="exampleModalLabel">
-              Bạn đã thêm
-              <a href="" class="text-thanhtoan"
-                >Đèn LED âm trần điều chỉnh góc chiếu Panasonic 7W NNNC7629188 </a
-              >vào giỏ hàng
-            </p>
-          </div>
-          <div class="modal-header">
-            <p class="text-tengh modal-title" id="exampleModalLabel">
-              Giỏ hàng của bán có 1 sản phẩm
-            </p>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="row">
-                <div class="card border-white">
-                  <div class="table-responsive">
-                    <table class="table table-borderless table-shopping-cart">
-                      <thead class="text-muted">
-                        <tr class="small text-uppercase">
-                          <th scope="col" width="350">Sản Phẩm</th>
-                          <th
-                            scope="col"
-                            width="200"
-                            style="text-align: center"
-                          >
-                            Số Lượng
-                          </th>
-                          <th
-                            scope="col"
-                            class="text-center"
-                            width="150"
-                            style="text-align: center"
-                          >
-                            Đơn Giá
-                          </th>
-                          <th
-                            scope="col"
-                            class="text-center"
-                            width="150"
-                            style="text-align: center"
-                          >
-                            Thành Tiền
-                          </th>
-                          <th
-                            scope="col"
-                            class="text-center d-none d-md-block"
-                            width="50"
-                          ></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <figure class="itemside align-items-center">
-                              <div class="aside">
-                                <img
-                                  src="https://minio.thecoffeehouse.com/image/admin/caphe-suada--bacsiu_063797_400x400.jpg"
-                                  class="img-sm"
-                                />
-                              </div>
-                              <figcaption class="info">
-                                <p href="#" class="title-ten" data-abc="true">
-                                  Hồng Trà Sữa Trân Châu
-                                </p>
-                                <button
-                                  class="btn quantity-left-minus1"
-                                  data-abc="true"
-                                >
-                                  Xoá
-                                </button>
-                              </figcaption>
-                            </figure>
-                          </td>
-                          <td class="quantity-sl input-group">
-                            <button
-                              type="button"
-                              class="quantity-left-minus btn"
-                              data-type="minus"
-                              data-field=""
-                            >
-                              <i class="fa-gh fa fa-minus"></i>
-                            </button>
-                            <input
-                              type="text"
-                              name="quant[1]"
-                              class="form-control"
-                              value="1"
-                              min="1"
-                              max="10"
-                              style="text-align: center"
-                            />
-                            <button
-                              type="button"
-                              class="quantity-right-plus btn"
-                              data-type="plus"
-                              data-field=""
-                            >
-                              <i class="fa-gh fa fa-plus"></i>
-                            </button>
-                          </td>
-                          <td>
-                            <div class="price-wrap">
-                              <var class="price">32.000đ</var>
-                            </div>
-                          </td>
-                          <td>
-                            <div class="price-wrap">
-                              <var class="price">32.000đ</var>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+    <section style="margin-top: 50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-head">
+              <a href="https://thuanphong.vn/den-led-nanoco"
+                ><h2 data-metatip="true">Đèn Led Philips</h2></a
+              >
+            </div>
+            <div class="categories__slider owl-carousel">
+              <div class="col-lg-3" th:each="products : ${productByNano}">
+                <div class="thumb-wrapper">
+                  <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
+                      
+                        <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                          
+                          </span>
+                        <img th:src="${products.hinhanh}" alt="" />
+                          <p class="product-item-name">[[${products.tensanpham}]]</p>
+                      
+                      <div class="item-price">
+                        <div class="price-box price-final_price">                                             
+                          <span class="special-price">
+                            <span class="price-container">
+                              <span class="price-wrapper">
+                                <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>
+                          
+                          <span class="old-price">
+                            <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                              <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                                <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>                                          
+                        </div>								
+                      </div>
+                    
+                  </a>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="col md-3">
-              <i class="icon-price fa fa-angle-left"></i
-              ><a href="#" class="text-thanhtoan" data-dismiss="modal">Tiếp tục mua hàng</a>
-            </div>
-            <p>Thành Tiền: <span class="text-gia">32.000đ</span></p>
-          </div>
-          <div class="modal-footer">
-            <div class="col text-center">
-              <button type="button" class="btn btn-tt">
-                THANH TOÁN ĐƠN HÀNG
-              </button>
+                
+              </div> 
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section style="margin-top: 50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="section-head">
+              <h2 data-metatip="true">Ý kiến khách hàng</h2>
+              
+            </div>
+            
+            <body>
+              <div class="carousel">
+                  <div class="carousel__img-container">
+                      <img src="" alt="" class="carousel__image" id="img">
+                  </div>
+                  <blockquote class="testimonial">
+                      <p class="testimonial__text" id="testimonial"></p>
+                      <p class="testimonial__name" id="name"></p>
+                      <p class="testimonial__job" id="job"></p>
+                  </blockquote>
+                  <button class="carousel__btn carousel__btn--left">
+                      <ion-icon name="chevron-back-outline"><i class="fa fa-chevron-left comment"></i></ion-icon>
+                  </button>
+                  <button class="carousel__btn carousel__btn--right">
+                      <ion-icon name="chevron-forward-outline"><i class="fa fa-chevron-right comment"></i></ion-icon>
+                  </button>
+              </div>
+          </body>
+            
+          </div>
+          <div class="col-md-6">
+            <div class="section-head">
+             
+                <h2 data-metatip="true">Hình ảnh tại cửa hàng</h2>
+            </div>
+            <div class="store__slider owl-carousel col-lg-12">
+              <div class="col-lg-12">
+                <img src="/asset/img/ducphat.jpg" alt="" srcset="">
+              </div>
+              <div class="col-lg-12">
+                <img src="/asset/img/ducphat1.jpg" alt="" srcset="">
+              </div>
+              <div class="col-lg-12">
+                <img src="/asset/img/ducphat2.jpg" alt="" srcset="">
+              </div>
+              <div class="col-lg-12">
+                <img src="/asset/img/ducphat4.jpg" alt="" srcset="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    
 
     <div id="back-top">
       <a title="Go to Top" href="#"> <i class="fa fa-angle-double-up"></i></a>
@@ -679,5 +634,82 @@
     <script src="/asset/js/owl.carousel.min.js"></script>
     <script src="/asset/js/main.js"></script>
     <script src="/asset/js/slideshow.js"></script>
+
+    <script>
+      // TBC
+const reviews = [
+    {
+        id: 1,
+        name: "@darryncodes",
+        job: "Front-end developer",
+        img: "/asset/img/comment1.png",
+        text:
+            '"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint iste, voluptate quam ipsum aliquam, corporis dicta distinctio, ea omnis quo quae non nulla facere rerum aperiam."'
+    },
+    {
+        id: 2,
+        name: "@annajohnson",
+        job: "UI Designer",
+        img: "/asset/img/comment2.jpg",
+        text:
+            '"Morbi a facilisis quam. In nec lorem sollicitudin, volutpat ex sit amet, sodales augue. Duis pretium sagittis odio, nec porttitor purus vulputate id. Proin urna metus, luctus sit amet."'
+    },
+    {
+        id: 3,
+        name: "@peterjones",
+        job: "Intern",
+        img: "/asset/img/comment3.jpg",
+        text:
+            '"Donec hendrerit semper eros sed pellentesque. Nunc varius condimentum odio vitae posuere. Nulla sollicitudin sem mauris, eget porttitor justo pulvinar et. Maecenas maximus."'
+    },
+    {
+        id: 4,
+        name: "@billanderson",
+        job: "UX Designer",
+        img: "/asset/img/comment4.jpg",
+        text:
+            '"Curabitur turpis felis, pellentesque feugiat tristique sit amet, vestibulum eu turpis. Sed commodo nulla quis metus consequat imperdiet. Aenean at elit dui. Donec sagittis ultricies."'
+    }
+];
+
+const img = document.getElementById("img");
+const testimonial = document.getElementById("testimonial");
+const name = document.getElementById("name");
+const job = document.getElementById("job");
+
+const leftBtn = document.querySelector(".carousel__btn--left");
+const rightBtn = document.querySelector(".carousel__btn--right");
+
+let currentItem = 0;
+
+window.addEventListener("DOMContentLoaded", function () {
+    showPerson();
+});
+
+function showPerson() {
+    const item = reviews[currentItem];
+    img.src = item.img;
+    testimonial.textContent = item.text;
+    name.textContent = item.name;
+    job.textContent = item.job;
+}
+
+rightBtn.addEventListener("click", function () {
+    currentItem++;
+    if (currentItem > reviews.length - 1) {
+        currentItem = 0;
+    }
+    showPerson();
+});
+
+leftBtn.addEventListener("click", function () {
+    currentItem--;
+    if (currentItem < 0) {
+        currentItem = reviews.length - 1;
+    }
+    showPerson();
+});
+
+    </script>
   </body>
 </html>

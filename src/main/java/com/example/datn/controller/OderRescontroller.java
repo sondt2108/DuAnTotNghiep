@@ -11,6 +11,7 @@ import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
 import com.example.datn.models.TinhTrangDonHang;
 import com.example.datn.payload.request.OrderRequest;
+import com.example.datn.payload.request.SendMailRequest;
 import com.example.datn.payload.response.MessageResponse;
 import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.repository.OrderDetailRepository;
@@ -19,6 +20,7 @@ import com.example.datn.repository.ProductRepository;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.MailService;
+import com.sendgrid.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -115,6 +117,15 @@ double quantityOrder = listItems.get(product);
  pr.setSoluong(slcl);
  productRepository.save(pr);
 
+ SendMailRequest emailrequest = new SendMailRequest();
+        
+        emailrequest.setOrderId(id);
+        emailrequest.setToEmail(orderRequest.getEmail());
+        emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
+        
+        
+        Response response =mailService.sendemail(emailrequest);
+
             orderDetailRepository.save(orderItem);
 			
 		}
@@ -189,6 +200,15 @@ double quantityOrder = listItems.get(product);
         messageNotificationsRepository.save(ntn);
 
         //mailService.sendMailWithOrderId(order.getOrderId());
+
+        SendMailRequest emailrequest = new SendMailRequest();
+        
+        emailrequest.setOrderId(id);
+        emailrequest.setToEmail(orderRequest.getEmail());
+        emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
+        
+        
+        Response response =mailService.sendemail(emailrequest);
 
         cartService.getGioHang().getChiTietGioHang().clear();
 
