@@ -34,36 +34,49 @@ public class AdminController {
         //  }
 
         // model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
          return "dashboard/products"; 
     }
     
 
     @GetMapping("admin/category")
-    public String listCategory(){
+    public String listCategory(Model model){
       
         //  if (userService.isRole()) {
         //     return "dashboard/products";
         //  }
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
          return "dashboard/categories"; 
     }
 
 
     @GetMapping("admin/customer")
-    public String listCustomer(){
+    public String listCustomer(Model model){
       
         //  if (userService.isRole()) {
         //     return "dashboard/products";
         //  }
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
          return "dashboard/khachhang"; 
     }
 
 
     @GetMapping("admin/user")
-    public String listUser(){
+    public String listUser(Model model){
       
         //  if (userService.isRole()) {
         //     return "dashboard/products";
         //  }
+
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
          return "dashboard/user"; 
     }
 

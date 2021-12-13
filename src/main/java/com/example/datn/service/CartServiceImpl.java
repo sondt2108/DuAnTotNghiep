@@ -34,6 +34,17 @@ public class CartServiceImpl implements CartService {
 			gioHang.getChiTietGioHang().put(product, 1);
 		}
 	}
+
+	@Override
+	public void onchangeInput(int productId, int quantity) {
+		Product product = productRepository.findById(productId).get();
+		if (gioHang.getChiTietGioHang().containsKey(product)) {
+			int count = gioHang.getChiTietGioHang().get(product);
+			gioHang.getChiTietGioHang().replace(product, quantity);
+		} else {
+			gioHang.getChiTietGioHang().put(product, 1);
+		}
+	}
 	
 	
 	@Override

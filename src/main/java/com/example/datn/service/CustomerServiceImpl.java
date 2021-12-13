@@ -29,6 +29,12 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerSession.getCustomer() != null;
 	}
 
+	@Override
+	public boolean logout(Long userId) {
+		customerSession.setCustomer(null);
+		return true;
+	}
+
 
 	
 

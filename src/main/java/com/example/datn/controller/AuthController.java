@@ -105,16 +105,11 @@ public class AuthController {
         
         session.setAttribute("username", customerService.getCustomer().getHoten());
         session.setAttribute("currentUser", customerService.getCustomer());
-        //session.setAttribute("cartStatus", 0);
+        
        
     }
 
     userService.getUser(userDetails.getId());
-
-    
-        //cartStatus = 1;
-        //session.setAttribute("cartStatus", 1);
-    
 
     return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
         userDetails.getUsername(), userDetails.getEmail(), roles, cartStatus));
@@ -194,7 +189,13 @@ public class AuthController {
 
   @PostMapping("/logout")
   public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
-    refreshTokenService.deleteByUserId(logOutRequest.getUserId());
+
+    Long id = logOutRequest.getUserId();
+    System.out.println(logOutRequest.getUserId());
+    refreshTokenService.deleteByUserId(id);
+		customerService.logout(logOutRequest.getUserId());
+			
+		
     return ResponseEntity.ok(new MessageResponse("Log out successful!"));
   }
 

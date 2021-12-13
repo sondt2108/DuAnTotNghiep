@@ -72,14 +72,15 @@
                 <i class="fa-gh fa fa-minus"></i>
                 </button>
                 <input
-                type="text"
-                name="quant[1]"
-                class="form-control"
-                th:value="${cart.value}"
-                min="1"
-                max="10"
-                style="text-align: center"
-                />
+                            id="onchangeQuantityCart"
+                              type="number"
+                              th:name="${cart.key.productId}"
+                              class="form-control"
+                              th:value="${cart.value}"
+                              min="1"
+                              max="10"
+                              style="text-align: center"
+                            />  
                 <button
                 type="button"
                 class="quantity-right-plus btn"
@@ -131,7 +132,27 @@
         </div>
         </div>
         
+      <script>
+        var qtt = document.querySelectorAll('#onchangeQuantityCart');
 
+        qtt.forEach(function(inp) {
+  inp.addEventListener("change", updateValue)});
+
+function updateValue(e) {
+
+  var quantity = e.target.value;
+  var productId = e.target.name;
+console.log(quantity);
+if (quantity == "" || quantity <= 0) {
+  quantity = 1;
+}
+console.log(productId);
+  fetch("/cart/addCartByInputOnchange/" + productId+"/" + quantity)
+    .then((response) => response.text())
+    .then((data) => {
+    });
+}
+      </script>
 
 
         

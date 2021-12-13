@@ -14,13 +14,24 @@
 
 <!-- Template -->
 <link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css">
+<link rel="stylesheet" href="/asset/css/style.css" type="text/css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
 	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
 	crossorigin="anonymous">
 </head>
-
+<style>
+	header{
+		background-color: white;
+	}
+</style>
 <body>
+	<!-- header -->
+	<th:block th:replace="fragments :: header">
+
+	</th:block>
+	<!-- end header -->
+	<th:block th:if="${isLogin == 1}">
 	<div class="container">
 		<div class="row">
 			<div class=" col-6 f-col f-col3 col-md-3 col-sm-6 col-xs-6">
@@ -142,146 +153,437 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
-	<script type="text/javascript">
-      var url = "/api/order";
-      var rowTemplate =
-        "{{#each order}}" +
-        "<tr>" +
-        '<td class="py-3">{{orderId}}</td>' +
-        '<td class="py-3">{{phoneNumber}}</td>' +
-        '<td class="py-3">{{address}} <p style = "display:block;">({{ward}}-{{district}}-{{province}})</td></p>' +
-        '<td class="py-3">{{total}}</td>' +
-        "{{#each order_items}}" +
-        '<td class="py-3" style = "display:block;">{{productName}} <p>(Số lượng: {{quantity}})</p> <p>Đơn giá: {{price}}</p></td>' +
-        "{{/each}}"+
-        
-        '<td class="py-3" style="color:#85AAD7;">{{tinhtrang.tinhTrang}}</td>' +
-        '<td class="py-3"><button style="color:red;" class="edit btn btn-outline" id="{{tinhtrang.idTT}}" c-id="{{orderId}}">Hủy đơn hàng</button></td>' +
-        "</tr>" +
-        "{{/each}}";
-      var rowHbs = Handlebars.compile(rowTemplate);
-      
-    var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="idTT">{{#each tinhtrangs}}'
-			+ '<option value="{{idTT}}">'
-			+ "{{tinhTrang}}"
-			+ "</option>"
-			+ "{{/each}}</select>";
-		var tinhtrangSelectHbs = Handlebars.compile(tinhtrangSelect); 
-		
+		<script src="/asset/js/api/orderCustomer.js"></script>
+		<script>
+			loadList();
+		</script>
+</th:block>
+<th:block th:if="${isLogin == 2}">
+	<div class="container">
+	<div class="modal fade" id="editModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog"
+					style="width: 700px; border: 1px dashed #ebebeb;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">
+								<b>Hủy đơn hàng</b>
+							</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<h3>Bạn chắc chắn muốn hủy đơn hàng này?</h3>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" action=""
+						id="cancelOrder">Đồng ý</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      function loadList() {
-        var searchForm = FormDataJson.toJson(document.querySelector("form"));
-        console.log(searchForm);
-        var searchOption = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(searchForm),
-        };
-
-        fetch("/api/orderCustomer/search", searchOption)
-          .then((res) => res.json())
-          .then((data) => {
-            var rows = rowHbs({ order: data.content });
-           
-            $("#myTable").html(rows);
-            orderStatus();
-           
-            bindClick();
-            var pageHtml = "";
-            for (var i = 0; i < data.totalPages; i++) {
-              pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="datatablePagination0" class='${i == searchForm.trang ? "page-link active pageIndex" : "page-link pageIndex"}'>${i+1}</button>`;
-            }
-            $("#phanTrang").html(pageHtml);
-
-            $(".pageIndex").click(function () {
-              $('#searchForm input[name="trang"]').val($(this).val());
-              loadList();
-            });
-
-            
-          });
-
-
-          
-      }
-      loadList();
-
-      $("#searchBt").click(function () {
-        loadList();
-      });
-
-
-	  function orderStatus() {
-		$( "#2" ).remove();
-		$( "#3" ).remove();
-		$( "#4" ).remove();
-		$( "#5" ).remove();
-		
-		$('.edit').each(function(index, item) {
-    console.log(item.id);
-
-	if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id == 2) {
-		item.remove();
-	}
+			<!-- check order isLogin == false -->
+			<main class="main">
+				<div class="content">
+					  <div class="container-fluid pb-5">
+						  <div class="row justify-content-md-center">
+							  <div class="card-wrapper col-12 col-md-4 mt-5">
+								  <div class="card">
+									  <div class="card-body">
+										  <h4 class="card-title">Kiểm tra đơn hàng</h4>
+										  <form id="checkOrder">
+											  <div class="form-group">
+												  <label for="email">Email</label>
+												  <input id="email"  class="form-control" name="email" placeholder="Vui lòng nhập email">
+											  </div>									  
+		  
+											  <div class="form-group no-margin">
+												  <button type="submit" class="btn btn-primary btn-block">
+													  Xem đơn hàng
+												  </button>
+											  </div>
+										  </form>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </div>
+				</div>
+			  </main>
 	
-	
-});
-	  }
+			<div style="display: none;">
+		<form id="searchForm">
+			<input name="ten" type="text"
+				placeholder="Nhập SĐT đơn hàng cần tìm..." /> <input type="hidden"
+				name="trang" value="0" />
+                <select id="sort-item" name="xepTheo">
+				<option value="createdDate">Lọc theo ngày</option>
+				<option value="orderId">Lọc theo Id</option>
+			</select> <select id="sort-item" name="thuTu">
+				<option value="false">Giảm dần</option>
+				<option value="true">Tăng dần</option>
+			</select>
 
-      var insertModal = new bootstrap.Modal(
-        document.getElementById("editModal"),
-        {
-          keyboard: false,
-        }
+			<button class="button" type="button" id="searchBt">Tìm kiếm</button>
+		</form>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div id="dataOrder">
+
+			</div>
+			
+			<div style="float: right;"
+								class="page-item card-footer d-block d-md-flex align-items-center d-print-none"
+								id="phanTrang">
+							</div>
+		</div>
+	</div>
+	<script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+		integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+		crossorigin="anonymous"></script>
+    
+
+	<!-- Validation -->
+	<script
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+		integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+		integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
+		<script src="/asset/js/api/orderCustomer.js"></script>
+		<script>
+
+  var rowTemplate =`<div class="col-12 table-responsive-xl">
+				<table class="table table-striped table-sm" id="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Số điện thoại</th>
+							<th scope="col">Ngày đặt</th>
+							<th scope="col">Địa chỉ</th>
+							<th scope="col">Tổng tiền</th>
+                            <th scope="col">Sản phẩm</th>
+							<th scope="col">Tình trạng đơn hàng</th>
+							
+						</tr>
+					</thead>
+					<tbody id="myTable">
+						{{#each order}}
+							<tr> 
+							<td class="py-3">{{orderId}}</td> 
+							<td class="py-3" id="createdDate">{{createdDate}}</td>
+							<td class="py-3">{{phoneNumber}}</td> 
+							<td class="py-3">{{address}} <p style = "display:block;">({{ward}}-{{district}}-{{province}})</td></p> 
+							<td class="py-3" id="total">{{total}}</td>
+							{{#each order_items}} 
+							<td class="py-3" style = "display:block;">{{productName}} <p>(Số lượng: {{quantity}})</p> <p>Đơn giá: {{price}}</p></td> 
+							{{/each}}
+							
+							<td class="py-3" style="color:#85AAD7;">{{tinhtrang.tinhTrang}}</td> 
+							<td class="py-3"><button style="color:red;" class="edit btn btn-outline" id="{{tinhtrang.idTT}}" c-id="{{orderId}}">Hủy đơn hàng</button></td> 
+							</tr> 
+						{{/each}}
+					</tbody>
+				</table>
+			</div>`;
+  var rowHbs = Handlebars.compile(rowTemplate);
+  
+var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="idTT">{{#each tinhtrangs}}'
+        + '<option value="{{idTT}}">'
+        + "{{tinhTrang}}"
+        + "</option>"
+        + "{{/each}}</select>";
+    var tinhtrangSelectHbs = Handlebars.compile(tinhtrangSelect); 
+    
+
+  function loadList() {
+	$.validator.addMethod(
+    "checkEmail",
+    function (value, element) {
+      return (
+        this.optional(element) ||
+        /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i.test(value)
       );
-      
-   
-      
+    },
+    "Sai định dạng email, vui lòng nhập lại!"
+  );
+  $("#checkOrder").validate({
+    rules: {
+      email: "required checkEmail",
+    },
+    messages: {
+      email: {
+        required: "Email không được để trống",
+      },
+    },
+    submitHandler: function () {
+      var $form = $("#checkOrder");
+      var loginData = {
+        email: $form.find('input[name="email"]').val(),
+		xepTheo: "created_date",
+		thuTu : true,
+      };
+	  console.log(loginData);
+    //   document.getElementById("forgotpasswordbtn").disabled = true;
 
-      function bindClick() {
-        $(".edit").click(function () {
-          insertModal.show();
-          var id = $(this).attr("c-id");
-          console.log(id);
+      $.ajax({
+        url: "/api/orderCustomer/search",
+        type: "POST",
+        data: JSON.stringify(loginData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+			console.log(data);
+			if (data.content.length != 0) {
+				var rows = rowHbs({ order: data.content });
+			console.log(data);
+	   $("#dataOrder").html(rows);
+	   orderStatus();
+	   formatNumber();
+	   bindClick();
+	   var pageHtml = "";
+	   for (var i = 0; i < data.totalPages; i++) {
+		 pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="page" class='${i == data.pageable.pageNumber ? "page-link active pageIndex" : "page-link pageIndex"}' onclick="test(${i})">${i+1}</button>`;
+	   }
+	   $("#phanTrang").html(pageHtml);
+			}else {
 
-		  idTT = 6;
+				$("#dataOrder").append(`
+					<div>Bạn chưa đặt đơn hàng nào tại Đức Phát.</div>
+				`);
 
-		  var order = {
-          id,
-		  idTT,
-		  tinhtrang: {idTT: '6'}
+			}
+			
 
-        };
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+        },
+      });
+    },
+  });
+    //var searchForm = FormDataJson.toJson(document.querySelector("form"));
+  }
 
 
-		console.log(order);
+  function formatNumber() {
+        $('#myTable tr').each(function() {
+    var price = $(this).find("#total").html();
+    var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    var pr = $(this).find("#total").text(priceFormat +'đ');
+    
+    //date
+    var date = $(this).find("#createdDate").html();
+    console.log(date);
+    var dateFormat = new Date(date);
+    var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
+ });
 
-          var editOption = {
-    	  	          method: "PUT",
-    	  	          headers: {
-    	  	            "Content-Type": "application/json",
-    	  	          },
-    	  	          body: JSON.stringify(order),
-    	  	        };
-
-    	  	        
-					  $("#cancelOrder").button().click(function(){
-						
-    	  	        	order = fetch("/api/cencelOrder/" + id, editOption)
-    	  	            .then((response) => response.json())
-    	  	            .then((data) => {
-    	  	              console.log(data);
-    	  	              loadList();
-    	  	            });
-    	  	          insertModal.hide();
-    	  	        
-    });   
-        });
+ 
       }
-      
-      
-    </script>
+
+
+  loadList();
+  $("#searchBt").click(function () {
+    loadList();
+  });
+
+  function test(pageNumber) {
+	var $form = $("#checkOrder");
+	var loginData = {
+        email: $form.find('input[name="email"]').val(),
+		trang : pageNumber,
+		xepTheo: "created_date",
+		thuTu : true,
+      };
+
+	  console.log(loginData);
+	  $.ajax({
+        url: "/api/orderCustomer/search",
+        type: "POST",
+        data: JSON.stringify(loginData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+			console.log(data);
+			if (data.content == []) {
+				alert("lỗi")
+			}
+			var rows = rowHbs({ order: data.content });
+			console.log(data);
+	   $("#dataOrder").html(rows);
+	   orderStatus();
+	   formatNumber();
+	   bindClick();
+	   var pageHtml = "";
+	   for (var i = 0; i < data.totalPages; i++) {
+		pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="page" class='${i == data.pageable.pageNumber ? "page-link active pageIndex" : "page-link pageIndex"}' onclick="test(${i})">${i+1}</button>`;
+	   }
+	   $("#phanTrang").html(pageHtml);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+        },
+      });
+  }
+
+  $("#page").on('click', function() {
+		 
+		
+	   });
+
+  function orderStatus() {
+    $( "#2" ).remove();
+    $( "#3" ).remove();
+    $( "#4" ).remove();
+    $( "#5" ).remove();
+    
+    $('.edit').each(function(index, item) {
+console.log(item.id);
+
+if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id == 2) {
+    item.remove();
+}
+
+
+});
+  }
+
+  
+
+  
+
+  function bindClick() {
+    $(".edit").click(function () {
+      insertModal.show();
+      var id = $(this).attr("c-id");
+      console.log(id);
+
+      idTT = 6;
+
+      var order = {
+      id,
+      idTT,
+      tinhtrang: {idTT: '6'}
+
+    };
+
+
+    console.log(order);
+
+      var editOption = {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(order),
+                  };
+
+                  
+                  $("#cancelOrder").button().click(function(){
+                    
+                      order = fetch("/api/cencelOrder/" + id, editOption)
+                      .then((response) => response.json())
+                      .then((data) => {
+                        console.log(data);
+                        loadList();
+                      });
+                    insertModal.hide();
+                  
+});   
+    });
+  }
+  
+
+		</script>
+</th:block>
+
+<!-- Footer Section Begin -->
+<footer class="footer spad" style="margin-top: 100px;">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="footer__about">
+					<div class="footer__about__logo">
+						<a href="./index.html"><img src="img/lg.png" alt=""></a>
+					</div>
+					<ul>
+						<li>Address: 60-49 Road 11378 New York</li>
+						<li>Phone: +65 11.188.888</li>
+						<li>Email: sondtpk01429@fpt.edu.vn</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+				<div class="footer__widget">
+					<h6>Useful Links</h6>
+					<ul>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">About Our Shop</a></li>
+						<li><a href="#">Secure Shopping</a></li>
+						<li><a href="#">Delivery infomation</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+						<li><a href="#">Our Sitemap</a></li>
+					</ul>
+					<ul>
+						<li><a href="#">Who We Are</a></li>
+						<li><a href="#">Our Services</a></li>
+						<li><a href="#">Projects</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Innovation</a></li>
+						<li><a href="#">Testimonials</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-12">
+				<div class="footer__widget">
+					<h6>Join Our Newsletter Now</h6>
+					<p>Get E-mail updates about our latest shop and special offers.</p>
+					<form action="#">
+						<input type="text" placeholder="Enter your mail">
+						<button type="submit" class="site-btn">Subscribe</button>
+					</form>
+					<div class="footer__widget__social">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-instagram"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-pinterest"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="footer__copyright">
+					<div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script></script> All rights reserved | This template design by <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Team No Crack</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+					<div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
 </body>
 </html>

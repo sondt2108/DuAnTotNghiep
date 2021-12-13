@@ -11,10 +11,10 @@ import org.springframework.data.repository.query.Param;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = "Select * from orders where CAST(order_id AS varchar) iLike %:id%", nativeQuery = true)
-    Page<Order>  findByOrderId(String id, Pageable pager);
+    Page<Order> findByOrderId(String id, Pageable pager);
 
     Order findByOrderId(Long orderId);
 
     @Query(value = "Select * from orders where email iLike %:email% or customer_id = :customer_id", nativeQuery = true)
-    Page<Order> findOrderCustomer(@Param(value = "email") String email, @Param(value = "customer_id") int customer_id, Pageable pager );
+    Page<Order> findOrderCustomer(@Param(value = "email") String email, @Param(value = "customer_id") Long customer_id, Pageable pager );
 }

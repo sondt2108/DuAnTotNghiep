@@ -90,3 +90,23 @@ function removeCart(ev) {
       });
   }
 }
+
+//
+
+var input = document.querySelectorAll('#onchangeQuantity');
+
+input.forEach(function(inp) {
+  inp.addEventListener("change", updateValue)});
+
+function updateValue(e) {
+
+  var quantity = e.target.value;
+  var productId = e.target.name;
+  if (quantity == "" || quantity <= 0) {
+    quantity = 1;
+  }
+  fetch("/cart/addCartByInputOnchange/" + productId+"/" + quantity)
+    .then((response) => response.text())
+    .then((data) => {
+    });
+}

@@ -13,7 +13,7 @@ public class OrderCustomerRequest {
     public OrderCustomerRequest() {
         this.ten = "";
 		this.trang = 0;
-		this.xepTheo = "productId";
+		this.xepTheo = "created_date";
 		this.thuTu = true;
     }
 
@@ -67,15 +67,12 @@ public class OrderCustomerRequest {
 
 
 
-    public boolean isThuTu() {
-        return thuTu;
-    }
-
-
-
-    public void setThuTu(boolean thuTu) {
-        this.thuTu = thuTu;
-    }
+    public boolean getThuTu() {
+		return thuTu;
+	}
+	public void setThuTu(boolean thuTu) {
+		this.thuTu = thuTu;
+	}
 
 
 

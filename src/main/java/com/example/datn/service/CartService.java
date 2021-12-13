@@ -13,7 +13,7 @@ public interface CartService {
 	public void themSanPham(int productId);
 	public void truSanPham(int productId);
 	public void xoaSanPham(int productId);
-
+	public void onchangeInput(int productId, int quantity);
 	
 
 	BigDecimal getTotal();

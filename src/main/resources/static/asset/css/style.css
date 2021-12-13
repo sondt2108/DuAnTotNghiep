@@ -191,7 +191,7 @@ ol {
 	top: 0;
 	left: 0;
 	z-index: 999999;
-	background: #000;
+	background: rgb(58, 56, 56);
 }
 
 .loader {
@@ -334,6 +334,7 @@ ol {
 	top: 23px;
 	opacity: 1;
 	visibility: visible;
+	width: 150px;
 }
 
 .header__top__right__language:after {
@@ -367,7 +368,7 @@ ol {
 
 .header__top__right__language ul {
 	background: #222222;
-	width: 100px;
+	/* width: 100px; */
 	text-align: left;
 	padding: 5px 0;
 	position: absolute;

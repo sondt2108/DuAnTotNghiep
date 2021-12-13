@@ -38,6 +38,10 @@ console.log(cartStatus);
 
 //validate form login
 
+// get url current
+
+var currentUrl = localStorage.getItem("urlReturn");
+
 $(function () {
   $("#loginForm").validate({
     rules: {
@@ -59,6 +63,8 @@ $(function () {
         password: $form.find('input[name="password"]').val(),
       };
 
+      console.log(loginData);
+
       $.ajax({
         url: "/api/auth/signin",
         type: "POST",
@@ -72,7 +78,7 @@ $(function () {
           if (cartStatus == 0) {
             location.assign("/checkout")
           }else{
-            location.assign("/")
+            location.assign(currentUrl);
           }
           
         },

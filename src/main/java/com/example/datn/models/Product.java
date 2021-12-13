@@ -11,8 +11,6 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity(name="products")
@@ -79,6 +77,9 @@ public class Product {
 
 	private String seourl;
 
+	@Size(min = 0, max = 1000)
+	private String thongtinsp;
+
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY
@@ -89,6 +90,10 @@ public class Product {
 	@OneToMany(fetch = FetchType.LAZY
 			, mappedBy = "product")
 	private List<OrderDetail> orderDetail;
+
+	@OneToMany(fetch = FetchType.LAZY
+			, mappedBy = "product")
+	private List<Review> review;
 
 	public Product() {
 		super();
@@ -205,6 +210,14 @@ public class Product {
 
 	public String getHinhanh() {
 		return hinhanh;
+	}
+
+	public String getThongtinsp() {
+		return thongtinsp;
+	}
+
+	public void setThongtinsp(String thongtinsp) {
+		this.thongtinsp = thongtinsp;
 	}
 
 	public void setHinhanh(String hinhanh) {

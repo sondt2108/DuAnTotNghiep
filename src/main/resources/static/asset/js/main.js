@@ -268,3 +268,27 @@ $(window).on('scroll',function(){
     $('#back-top a').on("click",function(){$('body,html').animate({scrollTop:0},800);return false;});
     var menu=$('ul#navigation');
     if(menu.length){menu.slicknav({prependTo:".mobile_menu",closedSymbol:'+',openedSymbol:'-'});};
+
+
+
+    // logout 
+    function logout(userId) {
+        console.log(userId);
+        var data = {userId};
+        $.ajax({
+            url: "/api/auth/logout",
+            type: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+              location.assign("/")
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("error")
+            },
+          });
+    }
+
+    var returnUrl = window.location.href;
+    localStorage.setItem("urlReturn", returnUrl);

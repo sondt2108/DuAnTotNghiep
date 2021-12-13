@@ -25,6 +25,7 @@ import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.SupplierRepository;
 import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.repository.UserRepository;
+import com.example.datn.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -276,24 +277,37 @@ public class AdminRescontroller {
           return orderPage;
       }
 
+    @Autowired
+    CustomerService customerService;
+
 
       @PostMapping("api/orderCustomer/search")
       public Page<Order> OrderCustomer(
               // thông tin form tìm kiếm
               @RequestBody OrderCustomerRequest orderCustomerRequest) {
 
-          Pageable phanTrang = PageRequest.of(orderCustomerRequest.getTrang(), TOI_DA_SAN_PHAM
+          Pageable phanTrang = PageRequest.of(orderCustomerRequest.getTrang(), TOI_DA_SAN_PHAM,
                   // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                  
+                  orderCustomerRequest.getThuTu() ? Direction.ASC : Direction.DESC,
                   // xếp theo trường nào ví dụ id, name, price
+                  orderCustomerRequest.getXepTheo()
                  );
 
             String email = orderCustomerRequest.getEmail();
-            int customer_id = orderCustomerRequest.getCustomer_id();
+            long customer_id = orderCustomerRequest.getCustomer_id();
 
           // lấy sản phẩm
-          Page<Order> orderPage = orderRepository.findOrderCustomer(email, customer_id, phanTrang);
+          if (customerService.isCustomerLogin()) {
+            String emailUser = customerService.getCustomer().getUser().getEmail();
+            long customerIdUser = customerService.getCustomer().getUser().getId();
+            System.out.println(emailUser);
+            System.out.println(customerIdUser);
+          Page<Order> orderPage = orderRepository.findOrderCustomer(emailUser, customerIdUser, phanTrang);
+            
+          return orderPage;
+          }
 
+          Page<Order> orderPage = orderRepository.findOrderCustomer(email, customer_id, phanTrang);
           return orderPage;
       }
 

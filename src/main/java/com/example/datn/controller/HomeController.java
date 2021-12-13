@@ -81,20 +81,20 @@ public class HomeController {
 	List<Category> categories = categoryRepository.findAll();
 
 
+	model.addAttribute("productByPana", productByPanasonic);
+	model.addAttribute("productByNano", productByNanoco);
+	model.addAttribute("cate", categories);
 
-	
+	if (customerService.isCustomerLogin()) {
+		model.addAttribute("name",customerService.getCustomer().getHoten());
+		model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+		model.addAttribute("isLogin", 1);
 
-        model.addAttribute("productByPana", productByPanasonic);
-		model.addAttribute("productByNano", productByNanoco);
-		model.addAttribute("cate", categories);
+		return "index";
+	}
 
-
-		
-		long leftLimit = 1L;
-    long rightLimit = 100000L;
-    long generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
-
-	System.out.println("testRandom: " +generatedLong );
+		model.addAttribute("isLogin", 2);
+       
 
         return "index";
     }
@@ -125,6 +125,8 @@ public class HomeController {
 			sortable = Sort.by(Sort.Direction.ASC, sortFeild);
 		}
 
+		
+
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
 		
@@ -134,10 +136,9 @@ public class HomeController {
 		//category
 		List<Category> categories = categoryRepository.findAll();
 
-		String test = request.getRequestURL().toString() + "?" + request.getQueryString();
+		String requestUrl = request.getRequestURL().toString() + "?" + request.getQueryString();
 
-		System.out.println("sss" + test);
-		model.addAttribute("requestUrl", test);
+		model.addAttribute("requestUrl", requestUrl);
 
 
 		model.addAttribute("cate", categories);
@@ -159,6 +160,16 @@ public class HomeController {
 
 		// truyền vào kiểu sắp xếp 
 		model.addAttribute("sortDesc", sortBy);
+
+		if (customerService.isCustomerLogin()) {
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+	
+			return "product";
+		}
+	
+			model.addAttribute("isLogin", 2);
 
         return "product";
     }
@@ -214,10 +225,17 @@ public class HomeController {
 		
 		}
 
+		if (customerService.isCustomerLogin()) {
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+	
+			return "category";
+		}
+	
+			model.addAttribute("isLogin", 2);
 		
-		
-		
-		
+
 		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
 		//category
 		List<Category> categories = categoryRepository.findAll();
@@ -288,6 +306,16 @@ public class HomeController {
 		// truyền vào kiểu sắp xếp 
 		model.addAttribute("sortDesc", sortBy);
 
+		if (customerService.isCustomerLogin()) {
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+	
+			return "filter_product";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
         return "filter_product";
     }
 
@@ -298,7 +326,7 @@ public class HomeController {
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
 			// thêm từ khóa tìm kiếm
 			@RequestParam(name = "query", defaultValue = "") String productname, 
-			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model, HttpServletRequest request
 			) {
 
 		Sort sortable = null;
@@ -324,6 +352,12 @@ public class HomeController {
 		}else {
 			model.addAttribute("demo", productPage.getTotalElements());
 		}
+
+		//category
+		List<Category> categories = categoryRepository.findAll();
+
+
+		model.addAttribute("cate", categories);
 		model.addAttribute("searchName", productname);
 		model.addAttribute("products", productPage.getContent());
 		model.addAttribute("maxPage", productPage.getTotalPages());
@@ -335,6 +369,11 @@ public class HomeController {
 
 		// truyền vào kiểu sắp xếp desc
 		model.addAttribute("sortDesc", sortBy);
+
+		String test = request.getRequestURL().toString() + "?" + request.getQueryString();
+
+		System.out.println("sss" + test);
+		model.addAttribute("requestUrl", test);
 
 		return "search";
 	}
@@ -352,15 +391,24 @@ CustomerService customerService;
 			model.addAttribute("address",customerService.getCustomer().getDiachi());
 			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
 			model.addAttribute("customer_id",customerService.getCustomer().getId());
-			
+			model.addAttribute("isLogin", 1);
 			
 			return "OrderCustomer";
 	}
 
+	model.addAttribute("isLogin", 2);
 
-        return "404Page";
+        return "OrderCustomer";
     }
 
+
+
+	@GetMapping("/contact")
+	public String contact() {
+		
+		
+		return "contact";
+	}
 
 
 
