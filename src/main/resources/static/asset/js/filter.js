@@ -27,19 +27,19 @@ if (price_max == 100000) {
 }
 
 if (price_min === null) {
-    if (subst == '/trademake/') {
+    if (subst == '/trademark/') {
         $("#sort_product").css("display", 'none');
        
-        $("#page_trademake").css("display", 'block');
+        $("#page_trademark").css("display", 'block');
         //document.getElementById('default').style.display='none';
         //document.getElementById('default_active').style.display='none';
-        $("#page_trademake_filter").css("display", 'none');
+        $("#page_trademark_filter").css("display", 'none');
         //$("#default_page").remove();
         $("#page").css("display", 'none');
         
     } 
 } else {
-    if(subst == '/trademake/' && price_min >= 0){
+    if(subst == '/trademark/' && price_min >= 0){
 
         
 
@@ -49,9 +49,9 @@ if (price_min === null) {
        
         //document.getElementById('default').style.display='none';
         //document.getElementById('default_active').style.display='none';
-        $("#page_trademake").hide();
+        $("#page_trademark").hide();
     
-        $("#page_trademake_filter").show();
+        $("#page_trademark_filter").show();
     
     } 
 }

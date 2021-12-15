@@ -24,7 +24,7 @@ public class NhaCungCap {
 	
 	private String diaChi;
 	
-	private double sdt;
+	private String sdt;
 	
 	private String gmail;
 	
@@ -35,11 +35,17 @@ public class NhaCungCap {
 			, mappedBy = "nhacungcap")
 	private List<Product> product;
 
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY
+			, mappedBy = "nhacungcap")
+	private List<PhieuNhap> phieunhap;
+
 	public NhaCungCap() {
 		super();
 	}
 
-	public NhaCungCap(int idNCC, @NotNull @Size(min = 3, max = 50) String tenNCC, String diaChi, double sdt,
+	public NhaCungCap(int idNCC, @NotNull @Size(min = 3, max = 50) String tenNCC, String diaChi, String sdt,
 			String gmail, String mtk, List<Product> product) {
 		super();
 		this.idNCC = idNCC;
@@ -75,11 +81,11 @@ public class NhaCungCap {
 		this.diaChi = diaChi;
 	}
 
-	public double getSdt() {
+	public String getSdt() {
 		return sdt;
 	}
 
-	public void setSdt(double sdt) {
+	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
 

@@ -105,9 +105,51 @@ public class AdminRescontroller {
 	}
 
 
+    @GetMapping("/api/thuonghieu/{id}")
+	public ThuongHieu getTrademakeById(@PathVariable("id") int id) {
+		return trademarkRepository.findById(id).orElse(null);
+	}
+	
+	@PostMapping("/api/thuonghieu")
+	public ThuongHieu insertTrademake(@RequestBody @Valid ThuongHieu thuonghieu) {
+		return trademarkRepository.save(thuonghieu);
+	}
+	
+	@PutMapping("/api/thuonghieu/{id}")
+	public ThuongHieu updateTradamake(@Valid @RequestBody ThuongHieu thuonghieu) {
+		return trademarkRepository.save(thuonghieu);
+	}
+	
+	@DeleteMapping("/api/thuonghieu/{id}")
+	public void deleteTrademake(@PathVariable("id") int id) {
+		trademarkRepository.deleteById(id);
+	}
+
+//supplier
+
     @GetMapping("/api/nhacungcap")
 	public List<NhaCungCap> list() {
 		return supplierRepository.findAll();
+	}
+
+    @GetMapping("/api/nhacungcap/{id}")
+	public NhaCungCap getSupplierById(@PathVariable("id") int id) {
+		return supplierRepository.findById(id).orElse(null);
+	}
+	
+	@PostMapping("/api/nhacungcap")
+	public NhaCungCap insertSupplier(@RequestBody @Valid NhaCungCap nhacungcap) {
+		return supplierRepository.save(nhacungcap);
+	}
+	
+	@PutMapping("/api/nhacungcap/{id}")
+	public NhaCungCap updateSupplier(@Valid @RequestBody NhaCungCap nhacungcap) {
+		return supplierRepository.save(nhacungcap);
+	}
+	
+	@DeleteMapping("/api/nhacungcaps/{id}")
+	public void deleteSupplier(@PathVariable("id") int id) {
+		supplierRepository.deleteById(id);
 	}
 
 
@@ -386,6 +428,11 @@ public List<TinhTrangDonHang> listOrderStatus(){
 
     
 }
+
+
+//trademake
+
+
 
 
 

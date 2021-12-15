@@ -282,7 +282,7 @@ $(window).on('scroll',function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-              location.assign("/")
+              location.reload();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("error")

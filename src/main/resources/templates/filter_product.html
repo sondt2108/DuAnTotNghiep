@@ -112,7 +112,7 @@
                                   <th:block th:each="th : ${thuonghieu}">
         
                                   <li class="filter-item filter-item--check-box filter-item--green ">
-                                    <a th:href="@{'/trademake/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
+                                    <a th:href="@{'/trademark/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
                                   </li> 
                                   </th:block>
                                                           
@@ -204,14 +204,14 @@
     <!-- Hero Section End -->
     
 
-    <section id="page_trademake">
+    <section id="page_trademark">
       <div class="container">
           <div class="row justify-content-center">
               <nav aria-label="Page navigation example">
                   <ul class="pagination">
                     <li class="page-item">
                       
-                      <a class="page-link" href="#" aria-label="Previous">
+                      <a th:class="${currentPage == 0 ? 'disable page-link' :'page-link' }" th:href="@{'/trademark/'+ ${trademaxName}+'?pageIndex=' + ${currentPage - 1}}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
@@ -219,8 +219,8 @@
                     <li th:each="i : ${#numbers.sequence(1, maxPage)}"
           th:class="${i == currentPage +1 ? 'page-item active' :'page-item' }">
           <div id="filtel_price">
-            <a id="filtel_price_active" class="page-link" th:if="${currentPage != i}" th:href="@{'/trademake/'+ ${trademaxName}+'?pageIndex='+${i-1}}">[[${i}]]</a>
-          <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/trademake/'+ ${trademaxName}+'?pageIndex='+${i-1}}">[[${i}]]
+            <a id="filtel_price_active" class="page-link" th:if="${currentPage != i}" th:href="@{'/trademark/'+ ${trademaxName}+'?pageIndex='+${i-1}}">[[${i}]]</a>
+          <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/trademark/'+ ${trademaxName}+'?pageIndex='+${i-1}}">[[${i}]]
           </a>
           </div>
           
@@ -229,7 +229,7 @@
         
         </li>
                     <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
+                      <a th:class="${currentPage == maxPage - 1 ? 'disable page-link' :'page-link' }" th:href="@{'/trademark/'+ ${trademaxName}+'?pageIndex=' + ${currentPage + 1}}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
@@ -241,7 +241,7 @@
   </section>
 
 
-  <section id="page_trademake_filter">
+  <section id="page_trademark_filter">
     <div class="container">
         <div class="row justify-content-center">
             <nav aria-label="Page navigation example">
@@ -258,8 +258,8 @@
         
         
         
-          <a  class="page-link" th:if="${currentPage != i}" th:href="@{'/trademake/'+ ${trademaxName}+ '?price_min=' + ${price_min} +'&price_max=' + ${price_max}+'&pageIndex='+${i-1}}">[[${i}]]</a>
-        <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/trademake/'+ ${trademaxName}+ '?price_min=' + ${price_min} +'&price_max=' + ${price_max}+'&pageIndex='+${i-1}}">[[${i}]]
+          <a  class="page-link" th:if="${currentPage != i}" th:href="@{'/trademark/'+ ${trademaxName}+ '?price_min=' + ${price_min} +'&price_max=' + ${price_max}+'&pageIndex='+${i-1}}">[[${i}]]</a>
+        <a class="page-link" th:unless="${currentPage != i}" th:href="@{'/trademark/'+ ${trademaxName}+ '?price_min=' + ${price_min} +'&price_max=' + ${price_max}+'&pageIndex='+${i-1}}">[[${i}]]
         </a>
         
         

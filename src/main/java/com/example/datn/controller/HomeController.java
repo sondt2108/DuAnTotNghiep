@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.datn.repository.CategoryRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.TrademakeRepository;
+import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
 
@@ -35,6 +36,10 @@ public class HomeController {
 
     @Autowired
 	CartService cartService;
+
+	@Autowired
+	TrademarkRepository trademarkRepository;
+
 
     @GetMapping("/detail/{productname}")
     public String demo(@PathVariable String productname, Model model, HttpServletRequest request, HttpSession session){
@@ -132,7 +137,7 @@ public class HomeController {
 		
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findProductAll(giamin, giamax, pager);
-		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
 		//category
 		List<Category> categories = categoryRepository.findAll();
 
@@ -178,7 +183,7 @@ public class HomeController {
 	@GetMapping("/category/{catename}")
     public String listcate(@PathVariable String catename, @RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
-			@RequestParam(name = "trademake", defaultValue = "") String th,
+			@RequestParam(name = "trademark", defaultValue = "") String th,
 			@RequestParam(name = "price_min", defaultValue = "0") Long giamin,
 			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
 			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model, HttpServletRequest request) {
@@ -236,7 +241,7 @@ public class HomeController {
 			model.addAttribute("isLogin", 2);
 		
 
-		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
 		//category
 		List<Category> categories = categoryRepository.findAll();
 
@@ -262,10 +267,8 @@ public class HomeController {
     }
 
 
-	@Autowired
-	TrademakeRepository trademakeRepository;
-
-	@GetMapping("/trademake/{name}")
+	
+	@GetMapping("/trademark/{name}")
     public String filterByTremak(@PathVariable String name, @RequestParam(name = "price_min", defaultValue = "0") Long giamin,
 			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
@@ -277,7 +280,7 @@ public class HomeController {
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findByTradeMake(name, giamin, giamax, pager);
 
-		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
 
 		List<Category> categories = categoryRepository.findAll();
 
@@ -343,7 +346,7 @@ public class HomeController {
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(productname, pager);
 
-		List<ThuongHieu> thuonghieu = trademakeRepository.findAll();
+		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
 
 		model.addAttribute("thuonghieu", thuonghieu);
 
@@ -360,6 +363,7 @@ public class HomeController {
 		model.addAttribute("cate", categories);
 		model.addAttribute("searchName", productname);
 		model.addAttribute("products", productPage.getContent());
+
 		model.addAttribute("maxPage", productPage.getTotalPages());
 		// truyền vào page hiện tại
 		model.addAttribute("currentPage", productPage.getNumber());

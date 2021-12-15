@@ -78,7 +78,7 @@ $(function () {
           if (cartStatus == 0) {
             location.assign("/checkout")
           }else{
-            location.assign(currentUrl);
+            history.back();
           }
           
         },

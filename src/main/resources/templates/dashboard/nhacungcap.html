@@ -9,29 +9,14 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
 
-<!-- Template -->
 <link rel="stylesheet"
-	href="dashboard/graindashboard/css/graindashboard.css">
+	href="/asset/dashboard/css/graindashboard.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-#them {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 5px;
-	border-radius: 3px;
-	font-size: 18px;
-	background-color: white;
-	color: black;
-	border: 2px solid #265df1;
-	margin-left: 5px;
-}
 
-#them:hover {
-	background-color: #265df1;
-	color: white;
-}
 </style>
 </head>
 
@@ -336,7 +321,7 @@
 							<div class="h3 mb-0">Nhà cung cấp</div>
 						</div>
 
-						<button id="them">
+						<button id="them" class="btn btn-outline-primary">
 							<b>+ Thêm</b>
 						</button>
 						<!-- Users -->
@@ -426,29 +411,35 @@
 			<!-- End Footer -->
 		</div>
 	</main>
-	<script
-		src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.js"></script>
+	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+	
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+      integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+      crossorigin="anonymous"
+    ></script>
+    
+    <!-- Validation -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js" integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
 
 
 	<script type="text/javascript">
-	var url = "/api/nhacungcaps";
+	var url = "/api/nhacungcap";
 		var rowTemplate = "{{#each nhacungcaps}}"
 			+"<tr>"
-			+       '<td>{{idNCC}}</td>'
 			+       '<td>{{tenNCC}}</td>'
 			+       '<td>{{diaChi}}</td>'
 			+       '<td>{{sdt}}</td>'
 			+       '<td>{{gmail}}</td>'
 			+       '<td>{{mtk}}</td>'
-			+       '<td class="py-3"><button class="edit" c-id="{{idNCC}}"> <img class="icon-item" src="dashboard/img/iconfix.png" alt=""></button>'
-			+ 		'<button class="delete" c-id="{{idNCC}}"><img class="icon-item"  src="dashboard/img/iconremove.png" alt=""></button></td>'
+			+       '<td class="py-3"><button class="edit btn btn-outline" c-id="{{idNCC}}"><i class="gd-pencil-alt"></i></button>'
+			+ 		'<button class="delete btn btn-outline" c-id="{{idNCC}}"><i class="gd-trash"></i></button></td>'
 			
 			+"</tr>"
 		+"{{/each}}";
@@ -484,7 +475,7 @@
 	  			   +	'<input name="diaChi" value="" class="form-control" id="diaChi" placeholder="Địa chỉ">'
 	  			   
 	  			  +	'<label for="sdt" class="form-label"><b>Số điện thoại:</b></label>'
-	  			   +	'<input name="sdt" value="" class="form-control" id="sdt" placeholder="Số điện thoại">'
+	  			   +	'<input type="text" name="sdt" value="" class="form-control" id="sdt" placeholder="Số điện thoại">'
 	  			   
 	  			  +	'<label for="gmail" class="form-label"><b>Gmail:</b></label>'
 	  			   +	'<input name="gmail" value="" class="form-control" id="gmail" placeholder="Gmail">'
@@ -562,8 +553,6 @@
     	
 	</script>
 
-	<script src="dashboard/graindashboard/js/graindashboard.js"></script>
-	<script src="dashboard/graindashboard/js/graindashboard.vendor.js"></script>
 
 
 </body>

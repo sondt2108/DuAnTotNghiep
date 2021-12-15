@@ -3,8 +3,8 @@ const url = window.location.pathname;
 const urlParams = new URLSearchParams(window.location.search);
 const param = urlParams.get("sort");
 const sortBy = urlParams.get("sortBy");
-const trademake = urlParams.get("trademake");
-console.log(trademake);
+const trademark = urlParams.get("trademark");
+console.log(trademark);
 
 const urlPrice = new URLSearchParams(window.location.search);
 const price_min = urlPrice.get("price_min");
@@ -39,10 +39,10 @@ if (param == "tensanpham") {
   document.getElementById("filter_products").selectedIndex = "3";
   $("#page_default").css("display", "none");
   $("#page_sort").css("display", "block");
-} else if (trademake === null && param === null && sortBy === null) {
+} else if (trademark === null && param === null && sortBy === null) {
   console.log("4");
   $("#page_sort").css("display", "none");
-} else if (trademake != "") {
+} else if (trademark != "") {
   console.log("3");
   $("#page_default").css("display", "none");
 
@@ -94,7 +94,7 @@ document.body.addEventListener("change", function (e) {
   const urlParams = new URLSearchParams(window.location.search);
   const param = urlParams.get("sort");
   const sortBy = urlParams.get("sortBy");
-  const trademake = urlParams.get("trademake");
+  const trademark = urlParams.get("trademark");
 
   const urlPrice = new URLSearchParams(window.location.search);
   const price_min = urlPrice.get("price_min");
@@ -102,7 +102,7 @@ document.body.addEventListener("change", function (e) {
 
   if (
     x === "" ||
-    (trademake === null && price_min === null && price_max === null)
+    (trademark === null && price_min === null && price_max === null)
   ) {
     console.log("11");
 
@@ -418,17 +418,17 @@ document.body.addEventListener("change", function (e) {
     //             refreshPage();
     //         break;
     // }
-  } else if (trademake != "" && price_min === null && price_max === null) {
+  } else if (trademark != "" && price_min === null && price_max === null) {
     switch (target.id) {
       case "nameASC":
-        //window.location.assign(`?trademake=${trademake}&sort=tensanpham`)
+        //window.location.assign(`?trademark=${trademark}&sort=tensanpham`)
         $("#page_products").load(
-          `?trademake=${trademake}&sort=tensanpham` + " #page_products"
+          `?trademark=${trademark}&sort=tensanpham` + " #page_products"
         );
         window.history.pushState(
           "",
           "New Page Title",
-          `?trademake=${trademake}&sort=tensanpham`
+          `?trademark=${trademark}&sort=tensanpham`
         );
         $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
         $("#page_sort").attr("style", "display: block !important");
@@ -437,15 +437,15 @@ document.body.addEventListener("change", function (e) {
 
         break;
       case "nameDESC":
-        // window.location.assign(`?trademake=${trademake}&sort=tensanpham&sortBy=DESC`)
+        // window.location.assign(`?trademark=${trademark}&sort=tensanpham&sortBy=DESC`)
         $("#page_products").load(
-          `?trademake=${trademake}&sort=tensanpham&sortBy=DESC` +
+          `?trademark=${trademark}&sort=tensanpham&sortBy=DESC` +
             " #page_products"
         );
         window.history.pushState(
           "",
           "New Page Title",
-          `?trademake=${trademake}&sort=tensanpham&sortBy=DESC`
+          `?trademark=${trademark}&sort=tensanpham&sortBy=DESC`
         );
         $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
         $("#page_sort").attr("style", "display: block !important");
@@ -453,14 +453,14 @@ document.body.addEventListener("change", function (e) {
         refreshPage();
         break;
       case "priceASC":
-        //window.location.assign(`?trademake=${trademake}&sort=gia`)
+        //window.location.assign(`?trademark=${trademark}&sort=gia`)
         $("#page_products").load(
-          `?trademake=${trademake}&sort=gia` + " #page_products"
+          `?trademark=${trademark}&sort=gia` + " #page_products"
         );
         window.history.pushState(
           "",
           "New Page Title",
-          `?trademake=${trademake}&sort=gia`
+          `?trademark=${trademark}&sort=gia`
         );
         $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
         $("#page_sort").attr("style", "display: block !important");
@@ -468,14 +468,14 @@ document.body.addEventListener("change", function (e) {
         refreshPage();
         break;
       case "priceDESC":
-        //window.location.assign(`?trademake=${trademake}&sort=gia&sortBy=DESC`)
+        //window.location.assign(`?trademark=${trademark}&sort=gia&sortBy=DESC`)
         $("#page_products").load(
-          `?trademake=${trademake}&sort=gia&sortBy=DESC` + " #page_products"
+          `?trademark=${trademark}&sort=gia&sortBy=DESC` + " #page_products"
         );
         window.history.pushState(
           "",
           "New Page Title",
-          `?trademake=${trademake}&sort=gia&sortBy=DESC`
+          `?trademark=${trademark}&sort=gia&sortBy=DESC`
         );
         $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
         $("#page_sort").attr("style", "display: block !important");
@@ -484,7 +484,7 @@ document.body.addEventListener("change", function (e) {
         break;
     }
   } else if (price_min != null || price_max != null) {
-    if (trademake === null) {
+    if (trademark === null) {
       if (price_max == 100000) {
         switch (target.id) {
           case "nameASC":
@@ -709,19 +709,19 @@ document.body.addEventListener("change", function (e) {
             break;
         }
       }
-    } else if (trademake != "") {
+    } else if (trademark != "") {
       if (price_max == 100000) {
         switch (target.id) {
           case "nameASC":
-            //window.location.assign(`?trademake=${trademake}&price_max=${price_max}&sort=tensanpham`)
+            //window.location.assign(`?trademark=${trademark}&price_max=${price_max}&sort=tensanpham`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=${price_max}&sort=tensanpham` +
+              `?trademark=${trademark}&price_max=${price_max}&sort=tensanpham` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=${price_max}&sort=tensanpham`
+              `?trademark=${trademark}&price_max=${price_max}&sort=tensanpham`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -731,15 +731,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "nameDESC":
-            //window.location.assign(`?trademake=${trademake}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=${price_max}&sort=tensanpham&sortBy=DESC` +
+              `?trademark=${trademark}&price_max=${price_max}&sort=tensanpham&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`
+              `?trademark=${trademark}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -749,15 +749,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceASC":
-            //window.location.assign(`?trademake=${trademake}&price_max=${price_max}&sort=gia`)
+            //window.location.assign(`?trademark=${trademark}&price_max=${price_max}&sort=gia`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=${price_max}&sort=gia` +
+              `?trademark=${trademark}&price_max=${price_max}&sort=gia` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=${price_max}&sort=gia`
+              `?trademark=${trademark}&price_max=${price_max}&sort=gia`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -767,15 +767,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceDESC":
-            //window.location.assign(`?trademake=${trademake}&price_max=${price_max}&sort=gia&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_max=${price_max}&sort=gia&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=${price_max}&sort=gia&sortBy=DESC` +
+              `?trademark=${trademark}&price_max=${price_max}&sort=gia&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=${price_max}&sort=gia&sortBy=DESC`
+              `?trademark=${trademark}&price_max=${price_max}&sort=gia&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -792,15 +792,15 @@ document.body.addEventListener("change", function (e) {
       ) {
         switch (target.id) {
           case "nameASC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham` +
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham`
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -810,15 +810,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "nameDESC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC` +
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=tensanpham&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -828,15 +828,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceASC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia` +
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia`
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -846,15 +846,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceDESC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC` +
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC`
+              `?trademark=${trademark}&price_min=${price_min}&price_max=${price_max}&sort=gia&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -867,15 +867,15 @@ document.body.addEventListener("change", function (e) {
       } else if (price_min == 700000) {
         switch (target.id) {
           case "nameASC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&sort=tensanpham`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&sort=tensanpham`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&sort=tensanpham` +
+              `?trademark=${trademark}&price_min=${price_min}&sort=tensanpham` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&sort=tensanpham`
+              `?trademark=${trademark}&price_min=${price_min}&sort=tensanpham`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -885,15 +885,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "nameDESC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&sort=tensanpham&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&sort=tensanpham&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&sort=tensanpham&sortBy=DESC` +
+              `?trademark=${trademark}&price_min=${price_min}&sort=tensanpham&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&sort=tensanpham&sortBy=DESC`
+              `?trademark=${trademark}&price_min=${price_min}&sort=tensanpham&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -903,15 +903,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceASC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&sort=gia`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&sort=gia`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&sort=gia` +
+              `?trademark=${trademark}&price_min=${price_min}&sort=gia` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&sort=gia`
+              `?trademark=${trademark}&price_min=${price_min}&sort=gia`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -921,15 +921,15 @@ document.body.addEventListener("change", function (e) {
             refreshPage();
             break;
           case "priceDESC":
-            //window.location.assign(`?trademake=${trademake}&price_min=${price_min}&sort=gia&sortBy=DESC`)
+            //window.location.assign(`?trademark=${trademark}&price_min=${price_min}&sort=gia&sortBy=DESC`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=${price_min}&sort=gia&sortBy=DESC` +
+              `?trademark=${trademark}&price_min=${price_min}&sort=gia&sortBy=DESC` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=${price_min}&sort=gia&sortBy=DESC`
+              `?trademark=${trademark}&price_min=${price_min}&sort=gia&sortBy=DESC`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -1402,14 +1402,14 @@ function sortChanged(obj) {
   const urlParams = new URLSearchParams(window.location.search);
   const param = urlParams.get("sort");
   const sortBy = urlParams.get("sortBy");
-  const trademake = urlParams.get("trademake");
+  const trademark = urlParams.get("trademark");
 
   const urlPrice = new URLSearchParams(window.location.search);
   const price_min = urlPrice.get("price_min");
   const price_max = urlPrice.get("price_max");
 
   var value = obj.value;
-  if (x === "" || trademake === null) {
+  if (x === "" || trademark === null) {
     if (value === "") {
       //window.location.assign(url)
       $("#page_products").load(url + " #page_products");
@@ -1457,73 +1457,73 @@ function sortChanged(obj) {
 
       refreshPage();
     }
-  } else if (trademake != "") {
+  } else if (trademark != "") {
     if (value === "") {
-      //window.location.assign(url + `?trademake=${trademake}`)
+      //window.location.assign(url + `?trademark=${trademark}`)
       $("#page_products").load(
-        url + `?trademake=${trademake}` + " #page_products"
+        url + `?trademark=${trademark}` + " #page_products"
       );
       window.history.pushState(
         "",
         "New Page Title",
-        url + `?trademake=${trademake}`
+        url + `?trademark=${trademark}`
       );
       $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
       $("#page_sort").attr("style", "display: block !important");
 
       refreshPage();
     } else if (value === "1") {
-      //window.location.assign(`?trademake=${trademake}&sort=tensanpham`)
+      //window.location.assign(`?trademark=${trademark}&sort=tensanpham`)
       $("#page_products").load(
-        `?trademake=${trademake}&sort=tensanpham` + " #page_products"
+        `?trademark=${trademark}&sort=tensanpham` + " #page_products"
       );
       window.history.pushState(
         "",
         "New Page Title",
-        `?trademake=${trademake}&sort=tensanpham`
+        `?trademark=${trademark}&sort=tensanpham`
       );
       $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
       $("#page_sort").attr("style", "display: block !important");
 
       refreshPage();
     } else if (value === "2") {
-      //window.location.assign(`?trademake=${trademake}&sort=tensanpham&sortBy=DESC`)
+      //window.location.assign(`?trademark=${trademark}&sort=tensanpham&sortBy=DESC`)
       $("#page_products").load(
-        `?trademake=${trademake}&sort=tensanpham&sortBy=DESC` +
+        `?trademark=${trademark}&sort=tensanpham&sortBy=DESC` +
           " #page_products"
       );
       window.history.pushState(
         "",
         "New Page Title",
-        `?trademake=${trademake}&sort=tensanpham&sortBy=DESC`
+        `?trademark=${trademark}&sort=tensanpham&sortBy=DESC`
       );
       $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
       $("#page_sort").attr("style", "display: block !important");
 
       refreshPage();
     } else if (value === "3") {
-      //window.location.assign(`?trademake=${trademake}&sort=gia`)
+      //window.location.assign(`?trademark=${trademark}&sort=gia`)
       $("#page_products").load(
-        `?trademake=${trademake}&sort=gia` + " #page_products"
+        `?trademark=${trademark}&sort=gia` + " #page_products"
       );
       window.history.pushState(
         "",
         "New Page Title",
-        `?trademake=${trademake}&sort=gia`
+        `?trademark=${trademark}&sort=gia`
       );
       $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
       $("#page_sort").attr("style", "display: block !important");
 
       refreshPage();
     } else if (value === "4") {
-      //window.location.assign(`?trademake=${trademake}&sort=gia&sortBy=DESC`)
+      //window.location.assign(`?trademark=${trademark}&sort=gia&sortBy=DESC`)
       $("#page_products").load(
-        `?trademake=${trademake}&sort=gia&sortBy=DESC` + " #page_products"
+        `?trademark=${trademark}&sort=gia&sortBy=DESC` + " #page_products"
       );
       window.history.pushState(
         "",
         "New Page Title",
-        `?trademake=${trademake}&sort=gia&sortBy=DESC`
+        `?trademark=${trademark}&sort=gia&sortBy=DESC`
       );
       $("#pageSortRefresh").load(window.location.href + " #pageSortRefresh");
       $("#page_sort").attr("style", "display: block !important");
@@ -1539,7 +1539,7 @@ function priceChanged(obj) {
   const urlParams = new URLSearchParams(window.location.search);
   const param = urlParams.get("sort");
   const sortBy = urlParams.get("sortBy");
-  const trademake = urlParams.get("trademake");
+  const trademark = urlParams.get("trademark");
 
   const urlPrice = new URLSearchParams(window.location.search);
   const price_min = urlPrice.get("price_min");
@@ -1547,7 +1547,7 @@ function priceChanged(obj) {
 
   var value = obj.value;
 
-  if (x === "" || (trademake === null && param === null && sortBy === null)) {
+  if (x === "" || (trademark === null && param === null && sortBy === null)) {
     console.log("111");
     if(param === null && sortBy === null ) {
         if (value === ''){
@@ -1727,11 +1727,11 @@ function priceChanged(obj) {
             
             }
     }
-  } else if (param != "" || sortBy != "" && trademake != "") {
+  } else if (param != "" || sortBy != "" && trademark != "") {
     console.log("112");
     console.log(sortBy);
     console.log(param);
-    if (trademake === null) {
+    if (trademark === null) {
       if (param == "tensanpham" || param == "gia") {
         if (value === "") {
           console.log(url);
@@ -1941,22 +1941,22 @@ function priceChanged(obj) {
         }
       }
     }
-    //end  trademake === null
-    else if (trademake != "") {
+    //end  trademark === null
+    else if (trademark != "") {
       console.log("12345");
       if (param == "tensanpham" || param == "gia") {
         if (sortBy == "DESC") {
           if (value === "") {
-            //window.location.assign(url+`?trademake=${trademake}&sort=${param}&sortBy=${sortBy}`)
+            //window.location.assign(url+`?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
               url +
-                `?trademake=${trademake}&sort=${param}&sortBy=${sortBy}` +
+                `?trademark=${trademark}&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              url + `?trademake=${trademake}&sort=${param}&sortBy=${sortBy}`
+              url + `?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -1965,15 +1965,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "1") {
-            //window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}`)
+            //window.location.assign(`?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}`
+              `?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -1982,15 +1982,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "2") {
-            //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`)
+            //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`
+              `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -1999,15 +1999,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "3") {
-            //window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`)
+            //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`
+              `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2016,15 +2016,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "4") {
-            // window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`)
+            // window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`
+              `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2033,17 +2033,17 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "5") {
-            // window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}`)
+            // window.location.assign(url+`?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}`)
             $("#page_products").load(
               url +
-                `?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}` +
+                `?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
               url +
-                `?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}`
+                `?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2054,14 +2054,14 @@ function priceChanged(obj) {
           }
         } else if (param != "") {
           if (value === "") {
-            //window.location.assign(url+`?trademake=${trademake}&sort=${param}`)
+            //window.location.assign(url+`?trademark=${trademark}&sort=${param}`)
             $("#page_products").load(
-              url + `?trademake=${trademake}&sort=${param}` + " #page_products"
+              url + `?trademark=${trademark}&sort=${param}` + " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              url + `?trademake=${trademake}&sort=${param}`
+              url + `?trademark=${trademark}&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2070,15 +2070,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "1") {
-            //window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}`)
+            //window.location.assign(`?trademark=${trademark}&price_max=100000&sort=${param}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_max=100000&sort=${param}` +
+              `?trademark=${trademark}&price_max=100000&sort=${param}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_max=100000&sort=${param}`
+              `?trademark=${trademark}&price_max=100000&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2087,15 +2087,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "2") {
-            //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}`)
+            //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}` +
+              `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}`
+              `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2104,15 +2104,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "3") {
-            // window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}`)
+            // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}` +
+              `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}`
+              `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2121,15 +2121,15 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "4") {
-            // window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}`)
+            // window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}`)
             $("#page_products").load(
-              `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}` +
+              `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}`
+              `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2138,16 +2138,16 @@ function priceChanged(obj) {
 
             refreshPage();
           } else if (value === "5") {
-            //window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}`)
+            //window.location.assign(url+`?trademark=${trademark}&price_min=700000&sort=${param}`)
             $("#page_products").load(
               url +
-                `?trademake=${trademake}&price_min=700000&sort=${param}` +
+                `?trademark=${trademark}&price_min=700000&sort=${param}` +
                 " #page_products"
             );
             window.history.pushState(
               "",
               "New Page Title",
-              url + `?trademake=${trademake}&price_min=700000&sort=${param}`
+              url + `?trademark=${trademark}&price_min=700000&sort=${param}`
             );
             $("#pageSortRefresh").load(
               window.location.href + " #pageSortRefresh"
@@ -2164,16 +2164,16 @@ function priceChanged(obj) {
         (param == "gia" && sortBy == "DESC")
       ) {
         if (value === "") {
-          //window.location.assign(url+`?trademake=${trademake}&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(url+`?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
             url +
-              `?trademake=${trademake}&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            url + `?trademake=${trademake}&sort=${param}&sortBy=${sortBy}`
+            url + `?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2182,15 +2182,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "1") {
-          //window.location.assign(`?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(`?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}` +
+            `?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_max=100000&sort=${param}&sortBy=${sortBy}`
+            `?trademark=${trademark}&price_max=100000&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2199,15 +2199,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "2") {
-          //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}` +
+            `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`
+            `?trademark=${trademark}&price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2216,15 +2216,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "3") {
-          //window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}` +
+            `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`
+            `?trademark=${trademark}&price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2233,15 +2233,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "4") {
-          //window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}` +
+            `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`
+            `?trademark=${trademark}&price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2250,17 +2250,17 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "5") {
-          //window.location.assign(url+`?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}`)
+          //window.location.assign(url+`?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
             url +
-              `?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}` +
+              `?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
             url +
-              `?trademake=${trademake}&price_min=700000&sort=${param}&sortBy=${sortBy}`
+              `?trademark=${trademark}&price_min=700000&sort=${param}&sortBy=${sortBy}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2269,16 +2269,16 @@ function priceChanged(obj) {
 
           refreshPage();
         }
-      }else if (trademake != "" && price_max === null && price_min === null) {
+      }else if (trademark != "" && price_max === null && price_min === null) {
         if (value === "") {
-          //window.location.assign(`?trademake=${trademake}`)
+          //window.location.assign(`?trademark=${trademark}`)
           $("#page_products").load(
-            `?trademake=${trademake}` + " #page_products"
+            `?trademark=${trademark}` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}`
+            `?trademark=${trademark}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2287,14 +2287,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "1") {
-          //window.location.assign(`?trademake=${trademake}&price_max=100000`)
+          //window.location.assign(`?trademark=${trademark}&price_max=100000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_max=100000` + " #page_products"
+            `?trademark=${trademark}&price_max=100000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_max=100000`
+            `?trademark=${trademark}&price_max=100000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2303,15 +2303,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "2") {
-          //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=100000&price_max=300000` +
+            `?trademark=${trademark}&price_min=100000&price_max=300000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=100000&price_max=300000`
+            `?trademark=${trademark}&price_min=100000&price_max=300000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2321,15 +2321,15 @@ function priceChanged(obj) {
           refreshPage();
         } else if (value === "3") {
             console.log("1999988888");
-          // window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000`)
+          // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=300000&price_max=500000` +
+            `?trademark=${trademark}&price_min=300000&price_max=500000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=300000&price_max=500000`
+            `?trademark=${trademark}&price_min=300000&price_max=500000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2338,15 +2338,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "4") {
-          //window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=500000&price_max=700000` +
+            `?trademark=${trademark}&price_min=500000&price_max=700000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=500000&price_max=700000`
+            `?trademark=${trademark}&price_min=500000&price_max=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2355,14 +2355,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "5") {
-          //window.location.assign(url+`?trademake=${trademake}&price_min=700000`)
+          //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
           $("#page_products").load(
-            url + `?trademake=${trademake}&price_min=700000` + " #page_products"
+            url + `?trademark=${trademark}&price_min=700000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            url + `?trademake=${trademake}&price_min=700000`
+            url + `?trademark=${trademark}&price_min=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2373,24 +2373,24 @@ function priceChanged(obj) {
         }
       }
     }
-    //end trademake != ""
-    else if (trademake != "" && price_max === null && price_min === null) {
+    //end trademark != ""
+    else if (trademark != "" && price_max === null && price_min === null) {
       console.log("123");
       if (
-        (trademake != "" && price_min != "",
+        (trademark != "" && price_min != "",
         price_max != "" && sortBy === null && param === null)
       ) {
 
         console.log("147852");
         if (value === "") {
-          //window.location.assign(`?trademake=${trademake}`)
+          //window.location.assign(`?trademark=${trademark}`)
           $("#page_products").load(
-            `?trademake=${trademake}` + " #page_products"
+            `?trademark=${trademark}` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}`
+            `?trademark=${trademark}`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2399,14 +2399,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "1") {
-          //window.location.assign(`?trademake=${trademake}&price_max=100000`)
+          //window.location.assign(`?trademark=${trademark}&price_max=100000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_max=100000` + " #page_products"
+            `?trademark=${trademark}&price_max=100000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_max=100000`
+            `?trademark=${trademark}&price_max=100000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2415,15 +2415,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "2") {
-          //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=100000&price_max=300000` +
+            `?trademark=${trademark}&price_min=100000&price_max=300000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=100000&price_max=300000`
+            `?trademark=${trademark}&price_min=100000&price_max=300000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2433,15 +2433,15 @@ function priceChanged(obj) {
           refreshPage();
         } else if (value === "3") {
             console.log("1999988888");
-          // window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000`)
+          // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=300000&price_max=500000` +
+            `?trademark=${trademark}&price_min=300000&price_max=500000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=300000&price_max=500000`
+            `?trademark=${trademark}&price_min=300000&price_max=500000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2450,15 +2450,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "4") {
-          //window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=500000&price_max=700000` +
+            `?trademark=${trademark}&price_min=500000&price_max=700000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=500000&price_max=700000`
+            `?trademark=${trademark}&price_min=500000&price_max=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2467,14 +2467,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "5") {
-          //window.location.assign(url+`?trademake=${trademake}&price_min=700000`)
+          //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
           $("#page_products").load(
-            url + `?trademake=${trademake}&price_min=700000` + " #page_products"
+            url + `?trademark=${trademark}&price_min=700000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            url + `?trademake=${trademake}&price_min=700000`
+            url + `?trademark=${trademark}&price_min=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2485,24 +2485,24 @@ function priceChanged(obj) {
         }
       }
     } else {
-      if (trademake != null && price_max != null && price_min != null) {
+      if (trademark != null && price_max != null && price_min != null) {
         if (param === null || sortBy === null) {
           console.log("11222");
           if (
-            (trademake != "" && price_min != "",
+            (trademark != "" && price_min != "",
             price_max != "" && sortBy === null && param === null)
           ) {
 
             console.log("999999999");
             if (value === "") {
-              //window.location.assign(`?trademake=${trademake}`)
+              //window.location.assign(`?trademark=${trademark}`)
               $("#page_products").load(
-                `?trademake=${trademake}` + " #page_products"
+                `?trademark=${trademark}` + " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                `?trademake=${trademake}`
+                `?trademark=${trademark}`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2512,14 +2512,14 @@ function priceChanged(obj) {
               refreshPage();
             } else if (value === "1") {
                 console.log("999999999");
-              //window.location.assign(`?trademake=${trademake}&price_max=100000`)
+              //window.location.assign(`?trademark=${trademark}&price_max=100000`)
               $("#page_products").load(
-                `?trademake=${trademake}&price_max=100000` + " #page_products"
+                `?trademark=${trademark}&price_max=100000` + " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                `?trademake=${trademake}&price_max=100000`
+                `?trademark=${trademark}&price_max=100000`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2529,15 +2529,15 @@ function priceChanged(obj) {
               refreshPage();
             } else if (value === "2") {
                 console.log("999999999");
-              //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000`)
+              //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
               $("#page_products").load(
-                `?trademake=${trademake}&price_min=100000&price_max=300000` +
+                `?trademark=${trademark}&price_min=100000&price_max=300000` +
                   " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                `?trademake=${trademake}&price_min=100000&price_max=300000`
+                `?trademark=${trademark}&price_min=100000&price_max=300000`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2548,15 +2548,15 @@ function priceChanged(obj) {
             } else if (value === "3") {
 
                 console.log('199999');
-              //window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000`)
+              //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
               $("#page_products").load(
-                `?trademake=${trademake}&price_min=300000&price_max=500000` +
+                `?trademark=${trademark}&price_min=300000&price_max=500000` +
                   " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                `?trademake=${trademake}&price_min=300000&price_max=500000`
+                `?trademark=${trademark}&price_min=300000&price_max=500000`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2566,15 +2566,15 @@ function priceChanged(obj) {
               refreshPage();
             } else if (value === "4") {
                 console.log("999999999");
-              //window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000`)
+              //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
               $("#page_products").load(
-                `?trademake=${trademake}&price_min=500000&price_max=700000` +
+                `?trademark=${trademark}&price_min=500000&price_max=700000` +
                   " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                `?trademake=${trademake}&price_min=500000&price_max=700000`
+                `?trademark=${trademark}&price_min=500000&price_max=700000`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2584,16 +2584,16 @@ function priceChanged(obj) {
               refreshPage();
             } else if (value === "5") {
                 console.log("999999999");
-              //window.location.assign(url+`?trademake=${trademake}&price_min=700000`)
+              //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
               $("#page_products").load(
                 url +
-                  `?trademake=${trademake}&price_min=700000` +
+                  `?trademark=${trademark}&price_min=700000` +
                   " #page_products"
               );
               window.history.pushState(
                 "",
                 "New Page Title",
-                url + `?trademake=${trademake}&price_min=700000`
+                url + `?trademark=${trademark}&price_min=700000`
               );
               $("#pageSortRefresh").load(
                 window.location.href + " #pageSortRefresh"
@@ -2603,7 +2603,7 @@ function priceChanged(obj) {
               refreshPage();
             }
           }
-          //end trademake != "" && price_min != "", price_max != "" && sortBy === null && param === null
+          //end trademark != "" && price_min != "", price_max != "" && sortBy === null && param === null
         }
 
         //end param === null || sortBy === null
@@ -2619,14 +2619,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "1") {
-          //window.location.assign(`?trademake=${trademake}&price_max=100000`)
+          //window.location.assign(`?trademark=${trademark}&price_max=100000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_max=100000` + " #page_products"
+            `?trademark=${trademark}&price_max=100000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_max=100000`
+            `?trademark=${trademark}&price_max=100000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2635,15 +2635,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "2") {
-          //window.location.assign(`?trademake=${trademake}&price_min=100000&price_max=300000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=100000&price_max=300000` +
+            `?trademark=${trademark}&price_min=100000&price_max=300000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=100000&price_max=300000`
+            `?trademark=${trademark}&price_min=100000&price_max=300000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2653,15 +2653,15 @@ function priceChanged(obj) {
           refreshPage();
         } else if (value === "3") {
             console.log("1477777")
-          //window.location.assign(`?trademake=${trademake}&price_min=300000&price_max=500000`)
+          //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=300000&price_max=500000` +
+            `?trademark=${trademark}&price_min=300000&price_max=500000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=300000&price_max=500000`
+            `?trademark=${trademark}&price_min=300000&price_max=500000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2670,15 +2670,15 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "4") {
-          // window.location.assign(`?trademake=${trademake}&price_min=500000&price_max=700000`)
+          // window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
           $("#page_products").load(
-            `?trademake=${trademake}&price_min=500000&price_max=700000` +
+            `?trademark=${trademark}&price_min=500000&price_max=700000` +
               " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            `?trademake=${trademake}&price_min=500000&price_max=700000`
+            `?trademark=${trademark}&price_min=500000&price_max=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"
@@ -2687,14 +2687,14 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "5") {
-          //window.location.assign(url+`?trademake=${trademake}&price_min=700000`)
+          //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
           $("#page_products").load(
-            url + `?trademake=${trademake}&price_min=700000` + " #page_products"
+            url + `?trademark=${trademark}&price_min=700000` + " #page_products"
           );
           window.history.pushState(
             "",
             "New Page Title",
-            url + `?trademake=${trademake}&price_min=700000`
+            url + `?trademark=${trademark}&price_min=700000`
           );
           $("#pageSortRefresh").load(
             window.location.href + " #pageSortRefresh"

@@ -48,7 +48,14 @@ public class UserController {
 	@GetMapping("/register")
 	public String Register() {
 
-		return "dangky";
+		if (customerService.isCustomerLogin()) {
+			
+			return "redirect:/";
+		} else {
+			
+			
+			return "dangky";
+		}
 	}
 
 	@GetMapping("/account/forgot-password")

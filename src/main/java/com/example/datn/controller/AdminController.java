@@ -96,4 +96,31 @@ public class AdminController {
         model.addAttribute("noti", ntn);
          return "dashboard/order"; 
     }
+
+
+    @GetMapping("admin/trademark")
+    public String listTrademark(Model model){
+      
+        //  if (userService.isRole()) {
+        //     return "dashboard/products";
+        //  }
+
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
+         return "dashboard/thuonghieu"; 
+    }
+
+    @GetMapping("admin/supplier")
+    public String listSupplier(Model model){
+      
+        //  if (userService.isRole()) {
+        //     return "dashboard/products";
+        //  }
+
+        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+
+        model.addAttribute("noti", ntn);
+         return "dashboard/nhacungcap"; 
+    }
 }

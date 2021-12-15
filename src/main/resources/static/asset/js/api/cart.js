@@ -108,5 +108,6 @@ function updateValue(e) {
   fetch("/cart/addCartByInputOnchange/" + productId+"/" + quantity)
     .then((response) => response.text())
     .then((data) => {
+      $("#cart-data").html(data);
     });
 }
