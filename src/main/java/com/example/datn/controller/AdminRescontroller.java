@@ -7,9 +7,11 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.example.datn.models.Customer;
+import com.example.datn.models.MessageNotifications;
 import com.example.datn.models.NhaCungCap;
 import com.example.datn.models.Order;
 import com.example.datn.models.OrderDetail;
+import com.example.datn.models.PhieuNhap;
 import com.example.datn.models.Product;
 import com.example.datn.models.SearchForm;
 import com.example.datn.models.ThuongHieu;
@@ -25,6 +27,7 @@ import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.SupplierRepository;
 import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.repository.UserRepository;
+import com.example.datn.repository.WarehouseReceiptRepository;
 import com.example.datn.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +47,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 public class AdminRescontroller {
@@ -60,6 +65,7 @@ public class AdminRescontroller {
     
 
     private static final int TOI_DA_SAN_PHAM = 6;
+    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("api/product/search")
     public Page<Product> search(
             // thông tin form tìm kiếm
@@ -98,7 +104,7 @@ public class AdminRescontroller {
 		productRepository.deleteById(id);
 	}
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/thuonghieu")
 	public List<ThuongHieu> thuongHieu() {
 		return trademarkRepository.findAll();
@@ -110,23 +116,26 @@ public class AdminRescontroller {
 		return trademarkRepository.findById(id).orElse(null);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/api/thuonghieu")
 	public ThuongHieu insertTrademake(@RequestBody @Valid ThuongHieu thuonghieu) {
 		return trademarkRepository.save(thuonghieu);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/thuonghieu/{id}")
 	public ThuongHieu updateTradamake(@Valid @RequestBody ThuongHieu thuonghieu) {
 		return trademarkRepository.save(thuonghieu);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/api/thuonghieu/{id}")
 	public void deleteTrademake(@PathVariable("id") int id) {
 		trademarkRepository.deleteById(id);
 	}
 
 //supplier
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/nhacungcap")
 	public List<NhaCungCap> list() {
 		return supplierRepository.findAll();
@@ -137,17 +146,20 @@ public class AdminRescontroller {
 		return supplierRepository.findById(id).orElse(null);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/api/nhacungcap")
 	public NhaCungCap insertSupplier(@RequestBody @Valid NhaCungCap nhacungcap) {
 		return supplierRepository.save(nhacungcap);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/nhacungcap/{id}")
 	public NhaCungCap updateSupplier(@Valid @RequestBody NhaCungCap nhacungcap) {
 		return supplierRepository.save(nhacungcap);
 	}
 	
-	@DeleteMapping("/api/nhacungcaps/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/api/nhacungcap/{id}")
 	public void deleteSupplier(@PathVariable("id") int id) {
 		supplierRepository.deleteById(id);
 	}
@@ -160,16 +172,19 @@ public class AdminRescontroller {
     @Autowired
 	CustomerRepository customerRepository;
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/api/khachhang")
 	public List<Customer> listcus() {
 		return customerRepository.findAll();
 	}
 	
+
 	@GetMapping("/api/khachhang/{id}")
 	public Customer getByCustomerId(@PathVariable("id") int id) {
 		return customerRepository.findById(id).orElse(null);
 	}
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/api/khachhang")
     public HashMap<String, Object> insert(@RequestBody @Validated Customer customer, BindingResult result) {
 
@@ -196,11 +211,13 @@ public class AdminRescontroller {
         return ResponseData;
     }
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/khachhang/{id}")
     public Customer update(@PathVariable("id") int id, @RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
 	
+    @PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/api/khachhang/{id}")
 	public void deleteCustomer(@PathVariable("id") int id) {
 		customerRepository.deleteById(id);
@@ -229,6 +246,7 @@ public class AdminRescontroller {
     @Autowired
   	UserRepository userRepository;
   	
+    @PreAuthorize("hasRole('ADMIN')")
   	@GetMapping("/api/users")
   	public List<User> listUser() {
   		return userRepository.findAll();
@@ -239,6 +257,7 @@ public class AdminRescontroller {
   		return userRepository.findById(id).orElse(null);
   	}
   	
+    @PreAuthorize("hasRole('ADMIN')")
   	@PostMapping(value = "/api/users")
       public HashMap<String, Object> insert(@RequestBody @Validated User user, BindingResult result) {
 
@@ -265,16 +284,19 @@ public class AdminRescontroller {
           return ResponseData;
       }
   	
+      @PreAuthorize("hasRole('ADMIN')")
   	@PutMapping("/api/users/{id}")
       public User update(@PathVariable("id") int id, @RequestBody User user) {
           return userRepository.save(user);
       }
-  	
+
+  	@PreAuthorize("hasRole('ADMIN')")
   	@DeleteMapping("/api/users/{id}")
   	public void delete(@PathVariable("id") long id) {
   		userRepository.deleteById(id);
   	}
   	
+    @PreAuthorize("hasRole('ADMIN')")
   	@PostMapping("api/users/search")
       public Page<User> searchUser(
               // thông tin form tìm kiếm
@@ -302,6 +324,7 @@ public class AdminRescontroller {
 		return orderRepository.findById(id).orElse(null);
 	}
 
+    @PreAuthorize("hasRole('ADMIN')")
       @PostMapping("api/order/search")
       public Page<Order> searchOrder(
               // thông tin form tìm kiếm
@@ -354,7 +377,7 @@ public class AdminRescontroller {
       }
 
 
-
+      @PreAuthorize("hasRole('ADMIN')")
       @PutMapping("/api/order/{id}")
 	public Order update(@PathVariable("id") Long id, @Valid @RequestBody Order order) {
 
@@ -378,6 +401,12 @@ public class AdminRescontroller {
 					.ofNullable(orderRepository.findByOrderId(id));
         Order or = orderOptional.get();
         or.setTinhtrang(DEFAULT_TTDH);
+
+
+        MessageNotifications ntn = new MessageNotifications();
+        ntn.setOrderId(id);
+        ntn.setDescription("vừa được hủy");
+        messageNotificationsRepository.save(ntn);
 		return orderRepository.save(or);
 	}
 
@@ -426,11 +455,82 @@ public List<TinhTrangDonHang> listOrderStatus(){
     return orderStatusRepository.findAll();
 }
 
+//PN
+@Autowired
+WarehouseReceiptRepository warehouseReceiptRepository;
     
+@PreAuthorize("hasRole('ADMIN')")
+@GetMapping("/api/phieunhap")
+	public List<PhieuNhap> listPN() {
+		return warehouseReceiptRepository.findAll();
+	}
+	
+	@GetMapping("/api/phieunhap/{id}")
+	public PhieuNhap getByIdPN(@PathVariable("id") int id) {
+		return warehouseReceiptRepository.findById(id).orElse(null);
+	}
+	
+    @PreAuthorize("hasRole('ADMIN')")
+	@PostMapping(value = "/api/phieunhap")
+    public HashMap<String, Object> insert(@RequestBody @Validated PhieuNhap phieuNhap, BindingResult result) {
+
+        HashMap<String, Object> ResponseData = new HashMap<>();
+        ResponseData.put("status", true);
+
+        if (result.hasErrors()) {
+            List<FieldError> fieldErrors = result.getFieldErrors();
+
+            HashMap<String, String> ListValid = new HashMap<>();
+
+            for (FieldError error : fieldErrors) {
+                ListValid.put(error.getField(), error.getDefaultMessage());
+            }
+
+            ResponseData.put("status", false);
+            ResponseData.put("data", ListValid);
+
+            return ResponseData;
+
+        }
+        ResponseData.put("data", warehouseReceiptRepository.save(phieuNhap));
+
+        return ResponseData;
+    }
+	
+    @PreAuthorize("hasRole('ADMIN')")
+	@PutMapping("/api/phieunhap/{id}")
+    public PhieuNhap update(@PathVariable("id") int id, @RequestBody PhieuNhap phieuNhap) {
+        return warehouseReceiptRepository.save(phieuNhap);
+    }
+	
+    @PreAuthorize("hasRole('ADMIN')")
+	@DeleteMapping("/api/phieunhap/{id}")
+	public void deletePN(@PathVariable("id") int id) {
+		warehouseReceiptRepository.deleteById(id);
+	}
+
+    @PreAuthorize("hasRole('ADMIN')")
+	@PostMapping("api/phieunhap/search")
+    public Page<PhieuNhap> searchPN(
+            // thông tin form tìm kiếm
+            @RequestBody SearchForm sf) {
+
+        Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
+                // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
+                sf.getThuTu() ? Direction.ASC : Direction.DESC,
+                // xếp theo trường nào ví dụ id, name, price
+                sf.getXepTheo());
+
+        // lấy sản phẩm
+        Page<PhieuNhap> khachHangPage = warehouseReceiptRepository.findByIdPN(sf.getTen(), phanTrang);
+
+        return khachHangPage;
+    }
 }
 
 
-//trademake
+
+
 
 
 

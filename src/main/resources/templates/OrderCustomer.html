@@ -10,7 +10,7 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/img/favicon.png">
 
 <!-- Template -->
  <link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css">
@@ -25,201 +25,11 @@
 		background-color: white;
 	}
 </style>
-<body style="background-color: white !important;">
+<body>
 	<!-- header -->
-	<div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
-        <div class="humberger__menu__logo">
-            <a href="/"><img src="/asset/img/lg.png" alt=""></a>
-        </div>
-        <div class="humberger__menu__cart">
-            <ul>
+  <th:block th:replace="fragments :: header">
 
-                <li><a href="/cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-
-        </div>
-        <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
-              <img src="/asset/img/vietnam.png" alt="">
-                <div>Việt Nam</div>
-                <!-- <span class="arrow_carrot-down"></span>
-                <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
-                </ul> -->
-            </div>
-            <div class="header__top__right__language">
-                <th:block th:if="${isLogin == 1}">
-                        <div>Xin chào: [[${name}]] </div>
-                    <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li><a href="/myOrder">Thông tin đơn hàng</a></li>
-                        <li><button class="btn btn-outline" th:onclick="'logout('+ *{customer_id} +')'">Đăng xuất</button></li>
-                    </ul>
-                    </th:block>
-                <th:block th:if="${isLogin == 2}">
-                    <div> <i class="fa fa-user"></i> Tài khoản</div>
-                    <span class="arrow_carrot-down"></span>
-                    <ul>
-                        <li><a href="/login">Đăng nhập</a></li>
-                        <li><a href="/register">Đăng ký</a></li>
-                        <li><a href="/myOrder">Thông tin đơn hàng</a></li>
-                    </ul>
-                    </th:block>
-            </div>
-        </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li class="active"><a href="/">Trang chủ</a></li>
-                <li><a href="/product">Sản phẩm</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Đèn chiếu sáng</a></li>
-                        <li><a href="./shoping-cart.html">Công tắc ổ cắm</a></li>
-                        <li><a href="./checkout.html">CB-Thiết bị đóng cắt</a></li>
-                        <li><a href="./blog-details.html">Đèn trang trí</a></li>
-                        <li><a href="./blog-details.html">Ống luồn dây điện</a></li>
-                        <li><a href="./blog-details.html">Dây cáp điện</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Khuyến mãi</a></li>
-                <li><a href="./tintuc.html">Tin tức</a></li>
-                <li><a href="./contact.html">Liên hệ</a></li>
-                <li><a href="./blog-details.html">Lắp đặt</a></li>
-                <li><a href="./blog-details.html">Giới thiệu</a></li>
-            </ul>
-        </nav>
-        <div id="mobile-menu-wrap"></div>
-        <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-        </div>
-        <div class="humberger__menu__contact">
-            <ul>
-                <li><i class="fa fa-envelope"></i>Ducphatelectric113@gmail.com</li>
-                <li>Thắp sáng ước mơ</li>
-            </ul>
-        </div>
-    </div>
-    <!-- Humberger End -->
-
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> Ducphatelectric113@gmail.com</li>
-                                <li>Thắp sáng ước mơ</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="/asset/img/vietnam.png" alt="">
-                                <div>Việt Nam</div>
-                                
-                            </div>
-                            <div class="header__top__right__language">
-                                <th:block th:if="${isLogin == 2}">
-                                    <div> <i class="fa fa-user"></i> Tài khoản</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="/login">Đăng nhập</a></li>
-                                    <li><a href="/register">Đăng ký</a></li>
-                                    <li><a href="/myOrder">Thông tin đơn hàng</a></li>
-                                </ul>
-                                </th:block>
-                                <th:block th:if="${isLogin == 1}">
-                                    <div>Xin chào: [[${name}]] </div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="/myOrder">Thông tin đơn hàng</a></li>
-                                    <li><button style="color: white;" class="btn btn-outline" th:onclick="'logout('+ *{customer_id} +')'">Đăng xuất</button></li>
-                                </ul>
-                                </th:block>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3" style="text-align: center;">
-                    <div class="header__logo">
-                        <a href="/"><img class="imglogo" src="/asset/img/lg.png" alt="" width=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search" style="padding-top: 20px">
-                        <div class="hero__search__form">
-                          <form th:action="@{/search}" method="GET">
-
-
-                            <input type="text" name="query" th:value="${searchName}" placeholder="Tìm kiếm sản phẩm...">
-                            <button type="submit" class="site-btn">Tìm kiếm</button>
-                        </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>0987.654.321</h5>
-                                <span>Hỗ trợ 24/7 </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
-    <header class="header-bottom sticky-top">
-        <div class="container">
-
-            <nav class="header__menu">
-                <ul>
-                    <li class="active"><a href="/">Trang chủ</a></li>
-                    <li><a href="/product">Sản phẩm</a>
-                        <ul class="header__menu__dropdown">
-                            <li th:each="cate : ${cate}"><a th:href="@{'/category/' + ${cate.seourl}}">[[${cate.name}]]</a></li>
-                            
-                        </ul>
-                    </li>
-                    <li><a href="./blog.html">Khuyến mãi</a></li>
-                    <li><a href="./tintuc.html">Tin tức</a></li>
-                    <li><a href="./contact.html">Liên hệ</a></li>
-                    <li><a href="./blog-details.html">Lắp đặt</a></li>
-                    <li><a href="./blog-details.html">Giới thiệu</a></li>
-                    <li style="float: right;">
-
-                        <a href="/cart" class="header__cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
-                    </li>
-
-                </ul>
-
-            </nav>
-
-        </div>
-    </header>
+  </th:block>
    <!-- end header -->
 	<th:block th:if="${isLogin == 1}">
 	<div class="container">
@@ -396,7 +206,6 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
       xepTheo: "created_date",
       thuTu : true,
         };
-        console.log(customerData);
     var searchOption = {
       method: "POST",
       headers: {
@@ -410,7 +219,6 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
       .then((data) => {
         var rows = rowHbs({ order: data.content });
         $("#dataOrder").html(rows);
-        console.log(rows);
         orderStatus();
         formatNumber();
         bindClick();
@@ -466,12 +274,10 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function (data, textStatus, jqXHR) {
-        console.log(data);
         if (data.content == []) {
           alert("lỗi")
         }
         var rows = rowHbs({ order: data.content });
-        console.log(rows);
        $("#dataOrder").html(rows);
        orderStatus();
        formatNumber();
@@ -506,7 +312,6 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
     };
 
 
-    console.log(order);
 
       var editOption = {
                     method: "PUT",
@@ -522,7 +327,6 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
                       order = fetch("/api/cencelOrder/" + id, editOption)
                       .then((response) => response.json())
                       .then((data) => {
-                        console.log(data);
                         loadList();
                       });
                     insertModal.hide();
@@ -567,6 +371,7 @@ var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
 						</div>
 						<div class="modal-body">
 							<h3>Bạn chắc chắn muốn hủy đơn hàng này?</h3>
+              <i>(Lưu ý : Cửa hàng sẽ liện lạc lại với bạn để xác nhận hủy đơn hàng.)</i>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary" action=""
@@ -584,7 +389,7 @@ var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
 					  <div class="container-fluid pb-5">
 						  <div class="row justify-content-md-center">
 							  <div class="card-wrapper col-12 col-md-4 mt-5">
-								  <div class="card">
+								  <div class="card border border-primary">
 									  <div class="card-body">
 										  <h4 class="card-title">Kiểm tra đơn hàng</h4>
 										  <form id="checkOrder">
@@ -663,6 +468,13 @@ var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
 		<script src="/asset/js/api/orderCustomer.js"></script>
 		<script>
 
+var insertModal = new bootstrap.Modal(
+    document.getElementById("editModal"),
+    {
+      keyboard: false,
+    }
+  );
+
   var rowTemplate =`<div class="col-12 table-responsive-xl">
 				<table class="table table-striped table-sm" id="table">
 					<thead>
@@ -733,8 +545,7 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
 		xepTheo: "created_date",
 		thuTu : true,
       };
-	  console.log(loginData);
-    //   document.getElementById("forgotpasswordbtn").disabled = true;
+
 
       $.ajax({
         url: "/api/orderCustomer/search",
@@ -743,10 +554,8 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-			console.log(data);
 			if (data.content.length != 0) {
 				var rows = rowHbs({ order: data.content });
-			console.log(data);
 	   $("#dataOrder").html(rows);
 	   orderStatus();
 	   formatNumber();
@@ -775,6 +584,47 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
     //var searchForm = FormDataJson.toJson(document.querySelector("form"));
   }
 
+  function refreshData() {
+    var $form = $("#checkOrder");
+      var loginData = {
+        email: $form.find('input[name="email"]').val(),
+		xepTheo: "created_date",
+		thuTu : true,
+      };
+    $.ajax({
+        url: "/api/orderCustomer/search",
+        type: "POST",
+        data: JSON.stringify(loginData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+			if (data.content.length != 0) {
+				var rows = rowHbs({ order: data.content });
+	   $("#dataOrder").html(rows);
+	   orderStatus();
+	   formatNumber();
+	   bindClick();
+	   var pageHtml = "";
+	   for (var i = 0; i < data.totalPages; i++) {
+		 pageHtml += `<button style="display: inline-block; margin-left:5px;" value="${i}" id="page" class='${i == data.pageable.pageNumber ? "page-link active pageIndex" : "page-link pageIndex"}' onclick="test(${i})">${i+1}</button>`;
+	   }
+	   $("#phanTrang").html(pageHtml);
+			}else {
+
+				$("#dataOrder").append(`
+					<div>Bạn chưa đặt đơn hàng nào tại Đức Phát.</div>
+				`);
+
+			}
+			
+
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+        },
+      });
+  }
+
 
   function formatNumber() {
         $('#myTable tr').each(function() {
@@ -784,7 +634,6 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
     
     //date
     var date = $(this).find("#createdDate").html();
-    console.log(date);
     var dateFormat = new Date(date);
     var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
  });
@@ -807,7 +656,6 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
 		thuTu : true,
       };
 
-	  console.log(loginData);
 	  $.ajax({
         url: "/api/orderCustomer/search",
         type: "POST",
@@ -815,12 +663,10 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-			console.log(data);
 			if (data.content == []) {
 				alert("lỗi")
 			}
 			var rows = rowHbs({ order: data.content });
-			console.log(data);
 	   $("#dataOrder").html(rows);
 	   orderStatus();
 	   formatNumber();
@@ -847,7 +693,6 @@ var tinhtrangSelect = '<select id="tinhtrangSelect" class="form-control" name="i
     $( "#5" ).remove();
     
     $('.edit').each(function(index, item) {
-console.log(item.id);
 
 if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id == 2) {
     item.remove();
@@ -858,14 +703,11 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
   }
 
   
-
-  
-
   function bindClick() {
     $(".edit").click(function () {
       insertModal.show();
       var id = $(this).attr("c-id");
-      console.log(id);
+     
 
       idTT = 6;
 
@@ -892,8 +734,7 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
                       order = fetch("/api/cencelOrder/" + id, editOption)
                       .then((response) => response.json())
                       .then((data) => {
-                        console.log(data);
-                        loadList();
+                        refreshData();
                       });
                     insertModal.hide();
                   
@@ -905,10 +746,16 @@ if (item.id == 6 || item.id == 5 || item.id == 4  || item.id == 3  || item.id ==
 		</script>
 </th:block>
 
-<!-- Footer Section Begin -->
-<th:block th:replace="fragments :: footer">
+<script>
+  var quantityProduct = $("#quantityCart").text();
 
-</th:block>
-<!-- Footer Section End -->
+if (quantityProduct === '') {
+    $("#quantityCart").hide();
+}else{
+    $("#quantityCart").show();
+}
+</script>
+
+
 </body>
 </html>

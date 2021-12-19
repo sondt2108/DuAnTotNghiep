@@ -55,9 +55,9 @@ public class UserRescontroller {
 
               Response res =mailService.sendMailResetPassword(fPasswordRequest);
           }else {
-            return ResponseEntity.ok(new MessageResponse("fail!"));
+            return ResponseEntity.ok(new MessageResponse("Email chưa đăng ký, vui lòng điền email khác!"));
           }     
-          return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+          return ResponseEntity.ok(new MessageResponse("Chúng tôi đã gửi yêu cầu đặt lại mật khẩu tới email của bạn, vui lòng kiểm tra email!"));
       }
 
 
@@ -73,7 +73,7 @@ public class UserRescontroller {
 
                 userService.resetPassword(token, password);
   
-                return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+                return ResponseEntity.ok(new MessageResponse("Thay đổi mật khẩu thành công!"));
       }
 
 

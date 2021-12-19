@@ -3,33 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đức Phát | Thiết bị điện</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
-   
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="/asset/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/elegant-icons.css" type="text/css">
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
+     <!-- Google Font -->
+     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
     
-    <link rel="stylesheet" href="/asset/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/style.css" type="text/css">
-    <link rel="stylesheet" href="/asset/css/product.css">
-    <link rel="stylesheet" href="/asset/css/slideshow.css">
-    <link rel="stylesheet" href="/asset/css/modalhide.css">
-    <link rel="stylesheet" href="/asset/css/index.css">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.8/popper.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
-   
+     <!-- Css Styles -->
+     <link rel="stylesheet" href="/asset/css/bootstrap.min.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/font-awesome.min.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/elegant-icons.css" type="text/css">
+     
+     <link rel="stylesheet" href="/asset/css/jquery-ui.min.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/owl.carousel.min.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/slicknav.min.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/style.css" type="text/css">
+     <link rel="stylesheet" href="/asset/css/product.css">
+     <link rel="stylesheet" href="/asset/css/slideshow.css">
+     <link rel="stylesheet" href="/asset/css/modalhide.css">
+     <link rel="stylesheet" href="/asset/css/index.css">
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.8/popper.min.js'></script>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
 
 </head>
 
@@ -41,46 +38,48 @@
     <!-- end header -->
 
     <section>
-        <!-- Humberger Begin -->
-        <div class="filter__open">
-            <i class="fa fa-filter"></i>
-        </div>
-    <div class="filter__menu__wrapper">
-        <h2>Lọc</h2>
-        <div class="filter_sort_mobile">
+      <!-- Humberger Begin -->
+      <div class="filter__open">
+          <i class="fa fa-filter"></i>
+      </div>
+  <div class="filter__menu__overlay"></div>
+  <div class="filter__menu__wrapper">
+      <h2>Lọc</h2>
+      <div class="filter_sort_mobile">
+        <div class="box">
+            <label>Ưu tiên theo:</label>
+            <select class="form-control" id="filter_products" onchange="sortChanged(this)">
+              <option value="">Mặc định</option>
+              <option value="1">Tên A-Z</option>
+              <option value="2">Tên Z-A</option>
+              <option value="3">Giá thấp đến cao</option>
+              <option value="4">Giá cao đến thấp</option>
+            </select>
+          </div>
+       </div>
+
+       <div class="filter_sort_mobile" id="filter_price">
           <div class="box">
-              <label>Ưu tiên theo:</label>
-              <select class="wide" id="filter_products" onchange="sortChanged(this)">
+              <label>Lọc theo giá sản phẩm:</label>
+              <select class="form-control" id="filter_price_mobile" onchange="priceChanged(this)">
                 <option value="">Mặc định</option>
-                <option value="1">Tên A-Z</option>
-                <option value="2">Tên Z-A</option>
-                <option value="3">Giá thấp đến cao</option>
-                <option value="4">Giá cao đến thấp</option>
+                <option value="1">Giá dưới 100.000đ</option>
+                <option value="2">100.000đ - 300.000đ</option>
+                <option value="3">300.000đ - 500.000đ</option>
+                <option value="4">500.000đ - 700.000đ</option>
+                <option value="5">Giá trên 700.000đ</option>
               </select>
             </div>
          </div>
 
-         <div class="filter_sort_mobile" id="filter_price">
-            <div class="box">
-                <label>Lọc theo giá sản phẩm:</label>
-                <select id="filter_price_mobile" onchange="priceChanged(this)">
-                  <option value="">Mặc định</option>
-                  <option value="1">Giá dưới 100.000đ</option>
-                  <option value="2">100.000đ - 300.000đ</option>
-                  <option value="3">300.000đ - 500.000đ</option>
-                  <option value="4">500.000đ - 700.000đ</option>
-                  <option value="5">Giá trên 700.000đ</option>
-                </select>
-              </div>
-           </div>
 
 
-
-    </div>
+  </div>
 </div>
-    </div>
-    <!-- Humberger End -->
-    </section>
+  </div>
+  </div>
+  <!-- Humberger End -->
+  </section>
 
 
     <section>
@@ -119,7 +118,7 @@
 
                     <aside class="aside-item filter-vendor" style="margin-top: 30px;">
                       <div class="aside-title">
-                        <h2 class="title-head margin-top-0"><span>Thương hiệu</span></h2>
+                        <h2 class="title-head margin-top-0"><span class="edit-span">Thương hiệu</span></h2>
                       </div>
                       <div class="scrollbar" id="style-7">
                         <div class="force-overflow">                      
@@ -172,7 +171,7 @@
                       </div>
                    </div>
                    <!-- sort price -->
-                    <select class="form-control" id="filter_price_desktop" onchange="priceChanged(this)">
+                    <select style="margin-top: 15px;" class="form-control" id="filter_price_desktop" onchange="priceChanged(this)">
                         <option value="">Lọc theo giá (Mặc định)</option>
                         <option value="1">Giá dưới 100.000đ</option>
                         <option value="2">Giá từ: 100.000đ - 300.000đ</option>
@@ -180,12 +179,14 @@
                         <option value="4">Giá từ: 500.000đ - 700.000đ</option>
                         <option value="5">Giá trên 700.000đ</option>
                       </select>
-                 
 
-                   <div class="row" id="page_products">
+                      
+                 
+                <th:block th:if="${demo >= 1}">
+                  <div class="row" id="page_products">
                     <!-- card -->
                     <div class="col-lg-4 mobile" th:each="products : ${products}">
-                      <div class="thumb-wrapper">
+                      <div class="thumb-wrapper baseBlock">
                         <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                             
                               <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
@@ -222,6 +223,8 @@
                     
                     <!-- end card -->
                 </div>
+                </th:block>
+                
                    
 
                 </div>
@@ -229,7 +232,11 @@
             </div>
         </div>
     </section>
+
+
+
     <!-- Hero Section End -->
+    <th:block th:if="${demo >= 1}">
     <section id="page_default">
         <div class="container">
             <div class="row justify-content-center">
@@ -291,7 +298,7 @@
         </div>
     </section>
 
-    
+    </th:block>
 
 
   
@@ -321,7 +328,6 @@
     <script src="/asset/js/slideshow.js"></script>
     <script src="/asset/js/product.js"></script>
     <script src="/asset/js/api/product.js"></script>
-
 
 
 </body>

@@ -12,7 +12,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico" />
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
 
     <!-- Template -->
     <link rel="stylesheet" href="/asset/dashboard/css/graindashboard.css" />
@@ -78,7 +78,7 @@
 
           <!-- Dashboard -->
           <li class="side-nav-menu-item">
-            <a class="side-nav-menu-link media align-items-center" href="/">
+            <a class="side-nav-menu-link media align-items-center" href="/admin/dashboard">
               <span class="side-nav-menu-icon d-flex mr-3">
                 <i class="gd-dashboard"></i>
               </span>
@@ -128,8 +128,6 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
 							href="/admin/customer">Khách hàng</a></li>
-						<!-- <li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhanvien.html">Nhân Viên</a></li> -->
 						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
 							href="/admin/user">Người dùng</a></li>
 					</ul> <!-- End Users: subUsers --></li>
@@ -137,29 +135,28 @@
 
 				<!-- Products -->
 
-				<li class="side-nav-menu-item side-nav-has-menu"><a
-          class="side-nav-menu-link media align-items-center" href="#"
-          data-target="#subProducts"> <span
-              class="side-nav-menu-icon d-flex mr-3"> <i
-                  class="gd-package"></i>
-          </span> <span class="side-nav-fadeout-on-closed media-body">Sản
-                  phẩm</span> <span class="side-nav-control-icon d-flex"> <i
-                  class="gd-angle-right side-nav-fadeout-on-closed"></i>
-          </span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-      </a> <!-- Products: subProducts -->
-          <ul id="subProducts"
-              class="side-nav-menu side-nav-menu-second-level mb-0">
-              <li class="side-nav-menu-item active"><a
-                  class="side-nav-menu-link" href="/admin/product">Sản Phẩm</a></li>
-              <li class="side-nav-menu-item"><a class="side-nav-menu-link"
-                  href="/admin/category">Loại sản phẩm</a></li>
-              <li class="side-nav-menu-item"><a class="side-nav-menu-link"
-                  href="/admin/hoadon">Hóa đơn</a></li>
-          </ul> <!-- End Products: subProducts --></li>
+				<li class="side-nav-menu-item side-nav-has-menu "><a
+					class="side-nav-menu-link media align-items-center" href="#"
+					data-target="#subProducts"> <span
+						class="side-nav-menu-icon d-flex mr-3"> <i
+							class="gd-package"></i>
+					</span> <span class="side-nav-fadeout-on-closed media-body">Sản
+							phẩm</span> <span class="side-nav-control-icon d-flex"> <i
+							class="gd-angle-right side-nav-fadeout-on-closed"></i>
+					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
+				</a> <!-- Products: subProducts -->
+					<ul id="subProducts"
+						class="side-nav-menu side-nav-menu-second-level mb-0">
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="/admin/product">Sản Phẩm</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="/admin/category">Loại sản phẩm</a></li>
+						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="/admin/warehouse-receipt">Hóa đơn</a></li>
+					</ul> <!-- End Products: subProducts --></li>
 
 				<!-- End Products -->
-				<!-- category -->
-				<li class="side-nav-menu-item side-nav-has-menu "><a
+				<li class="side-nav-menu-item side-nav-has-menu"><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subCategory"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-list"></i>
@@ -172,97 +169,11 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhacungcap.html">Nhà cung cấp</a></li>
+							href="/admin/supplier">Nhà cung cấp</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhasanxuat.html">Nhà sản xuất</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="thuonghieu.html">Thương hiệu</a></li>
+							href="/admin/trademark">Thương hiệu</a></li>
 					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
 				</li>
-				<!-- End category -->
-
-          <!-- Authentication -->
-          <li class="side-nav-menu-item side-nav-has-menu">
-            <a
-              class="side-nav-menu-link media align-items-center"
-              href="#"
-              data-target="#subPages"
-            >
-              <span class="side-nav-menu-icon d-flex mr-3">
-                <i class="gd-lock"></i>
-              </span>
-              <span class="side-nav-fadeout-on-closed media-body"
-                >Authentication</span
-              >
-              <span class="side-nav-control-icon d-flex">
-                <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
-              </span>
-              <span
-                class="side-nav__indicator side-nav-fadeout-on-closed"
-              ></span>
-            </a>
-            <!-- Pages: subPages -->
-            <ul
-              id="subPages"
-              class="side-nav-menu side-nav-menu-second-level mb-0"
-            >
-              <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link" href="login.html">Login</a>
-              </li>
-              <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link" href="register.html">Register</a>
-              </li>
-              <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link" href="password-reset.html"
-                  >Forgot Password</a
-                >
-              </li>
-              <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link" href="password-reset-2.html"
-                  >Forgot Password 2</a
-                >
-              </li>
-              <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link" href="email-verification.html"
-                  >Email Verification</a
-                >
-              </li>
-            </ul>
-            <!-- End Pages: subPages -->
-          </li>
-          <!-- End Authentication -->
-
-          <!-- Settings -->
-          <li class="side-nav-menu-item">
-            <a
-              class="side-nav-menu-link media align-items-center"
-              href="settings.html"
-            >
-              <span class="side-nav-menu-icon d-flex mr-3">
-                <i class="gd-settings"></i>
-              </span>
-              <span class="side-nav-fadeout-on-closed media-body"
-                >Settings</span
-              >
-            </a>
-          </li>
-          <!-- End Settings -->
-
-          <!-- Static -->
-          <li class="side-nav-menu-item">
-            <a
-              class="side-nav-menu-link media align-items-center"
-              href="static-non-auth.html"
-            >
-              <span class="side-nav-menu-icon d-flex mr-3">
-                <i class="gd-file"></i>
-              </span>
-              <span class="side-nav-fadeout-on-closed media-body"
-                >Static page</span
-              >
-            </a>
-          </li>
-          <!-- End Static -->
         </ul>
       </aside>
       <!-- End Sidebar Nav -->
@@ -274,16 +185,16 @@
               <!-- Breadcrumb -->
               <nav class="d-none d-md-block" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Order</a></li>
+                  <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
                   <li class="breadcrumb-item active" aria-current="page">
-                    All order
+                    Danh sách đơn hàng
                   </li>
                 </ol>
               </nav>
               <!-- End Breadcrumb -->
 
               <div class="mb-3 mb-md-4 d-flex justify-content-between">
-                <div class="h3 mb-0">Order</div>
+                <div class="h3 mb-0">Đơn hàng</div>
               </div>
               <div>
                 <form id="searchForm">
@@ -496,53 +407,16 @@
 				</div>
 			</div>
         <!-- Footer -->
-        <footer class="small p-3 px-md-4 mt-auto">
-          <div class="row justify-content-between">
-            <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
-              <ul class="list-dot list-inline mb-0">
-                <li
-                  class="
-                    list-dot-item list-dot-item-not list-inline-item
-                    mr-lg-2
-                  "
-                >
-                  <a class="link-dark" href="#">FAQ</a>
-                </li>
-                <li class="list-dot-item list-inline-item mr-lg-2">
-                  <a class="link-dark" href="#">Support</a>
-                </li>
-                <li class="list-dot-item list-inline-item mr-lg-2">
-                  <a class="link-dark" href="#">Contact us</a>
-                </li>
-              </ul>
-            </div>
+        <th:block th:replace="/dashboard/fragments :: footer">
 
-            <div class="col-lg text-center mb-3 mb-lg-0">
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item mx-2">
-                  <a class="link-muted" href="#"
-                    ><i class="gd-twitter-alt"></i
-                  ></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a class="link-muted" href="#"><i class="gd-facebook"></i></a>
-                </li>
-                <li class="list-inline-item mx-2">
-                  <a class="link-muted" href="#"><i class="gd-github"></i></a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg text-center text-lg-right">
-              &copy; 2019 Graindashboard. All Rights Reserved.
-            </div>
-          </div>
-        </footer>
+    		</th:block>
         <!-- End Footer -->
       </div>
     </main>
     <script src="/asset/dashboard/js/graindashboard.js"></script>
     <script src="/asset/dashboard/js/graindashboard.vendor.js"></script>
+    <script src="/asset/dashboard/js/notification.js"></script>
+    <script src="/asset/dashboard/js/logout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
     <script
@@ -569,6 +443,8 @@
     <script src="https://cdn.jsdelivr.net/npm/form-data-json-convert/dist/form-data-json.min.js"></script>
     <script type="text/javascript">
       var url = "/api/khachhang";
+
+      var token = sessionStorage.getItem("jwtToken");
       
       var rowTemplate =
         "{{#each order}}" +
@@ -596,6 +472,7 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + token
           },
           body: JSON.stringify(searchForm),
         };
@@ -604,9 +481,6 @@
           .then((res) => res.json())
           .then((data) => {
             var rows = rowHbs({ order: data.content });
-
- 
-           
             $("#myTable").html(rows);
             bindEvent();
             clickPrint();
@@ -628,21 +502,19 @@
       
   
 
-      function formatNumber() {
-        $('#myTable tr').each(function() {
-    var price = $(this).find("#total").html();
-    var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-    var pr = $(this).find("#total").text(priceFormat +'đ');
-    
-    //date
-    var date = $(this).find("#createdDate").html();
-    console.log(date);
-    var dateFormat = new Date(date);
-    var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
- });
+function formatNumber() {
+    $('#myTable tr').each(function() {
+        var price = $(this).find("#total").html();
+        var priceFormat = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        var pr = $(this).find("#total").text(priceFormat + 'đ');
 
- 
-      }
+        //date
+        var date = $(this).find("#createdDate").html();
+        console.log(date);
+        var dateFormat = new Date(date);
+        var dt = $(this).find("#createdDate").text(dateFormat.toLocaleString());
+    });
+}
       
       
 
@@ -758,6 +630,7 @@
     	  	          method: "PUT",
     	  	          headers: {
     	  	            "Content-Type": "application/json",
+                      'Authorization': 'Bearer ' + token
     	  	          },
     	  	          body: JSON.stringify(order),
     	  	        };
@@ -773,44 +646,19 @@
     	  	        
     	  	      });
 
-                function deleteByNotifi(id) {
-                  var deleteOption = {
-	        method: 'delete',
-	        headers: {
-	            'Content-Type': 'application/json',
-				// 'Authorization': 'Bearer ' + x
-	        }
-	    };
-	    notification = fetch("/api/notifi/" + id, deleteOption)
-	        .then(response => {
-            $("#notifi").load(location.href + " #notifi");
-	        });
-                }
-
-
-                function clearAllNotifi() {
-                  var deleteOption = {
-	        method: 'delete',
-	        headers: {
-	            'Content-Type': 'application/json',
-				// 'Authorization': 'Bearer ' + x
-	        }
-	    };
-	    notification = fetch("/api/notifi", deleteOption)
-	        .then(response => {
-            $("#notifi").load(location.href + " #notifi");
-	        });
-                }
                 
-                 var printModal = new bootstrap.Modal(
-            	        document.getElementById("print-order"),
-            	        {
-            	          keyboard: false,
-            	        }
-            	      ); 
                
-                 
+var printModal = new bootstrap.Modal(
+    document.getElementById("print-order"), {
+        keyboard: false,
+    }
+);
                  // print
+
+                 var date = new Date();
+
+                 var dateFormat = date.toLocaleString();
+                 console.log(dateFormat);
                  
                  var rowTemplateOrderPrint =
                 	 
@@ -821,13 +669,13 @@
                          '<div class="col-6 "><img class="img" style="with:50%; height:50%; margin-top: 20px;" src="/asset/img/lg.png"></div>'+
                          '<div class="col-6  text-center "> '+
                          '<h2>Phiếu giao hàng</h3>'+
-                         '<p>Ngày tạo:</p>'+
+                         '<p id="date">Ngày tạo:</p>'+
                          '</div>'+
                      '</div>'+
                      '<div class="row border">'+
                         ' <div class="col-6 border-right">'+
                          '<h2>Cửa hàng Đức Phát</h2>'+
-                             '<p>Địa chỉ: </p>'+
+                             '<p>Địa chỉ:29 Quang Trung. TT Chư Ty. Đức Cơ. Gia Lai </p>'+
                          '</div>'+               
                          '<div class="col-6 ">'+
                          '<h2>Người Nhận</h2>'+
@@ -884,10 +732,12 @@
                               
                             $("#printOrder").html(orderPrint);
                             var pricePrint =$("#total_print").html();
+
                       console.log($("#total_print").html());
                       var priceFormat = pricePrint.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
                             
                       var pr = $("#total_print").text('Tổng tiền: '+priceFormat +'đ');
+                      var currentDate = $("#date").text(dateFormat);
 
                           });
                           

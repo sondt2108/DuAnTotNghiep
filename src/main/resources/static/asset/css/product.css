@@ -18,6 +18,10 @@
     .filter_sort {
     display: none;
 }
+#filter_price_desktop{
+    display: none;
+}
+
 }
 
 
@@ -41,7 +45,6 @@
 .scrollbar
 {
 	max-height: 140px;
-    max-width: 260px;
     overflow-y: auto;
     overflow-x: hidden;
 	margin-bottom: 25px;
@@ -75,6 +78,14 @@
 }
 
 
+@media only screen and (max-width: 767px){
+    .filter_sort {
+    display: none;
+}
+#filter_price_desktop{
+    display: none;
+}
+}
 
 
 
@@ -200,9 +211,8 @@
     text-transform: uppercase;
     color: #000;
     font-size: 15px;
-    font-weight: 600;
     margin-bottom: 10px;
-    font-family: SFUFuturaBold;
+    font-family: "Cairo", sans-serif;
 }
 
 .filter-group {

@@ -68,6 +68,7 @@
                 data-type="minus"
                 data-field=""
                 th:onclick="'truSP('+ *{cart.key.productId} +')'"
+                th:disabled="${cart.value <= 1}"
                 >
                 <i class="fa-gh fa fa-minus"></i>
                 </button>
@@ -151,6 +152,7 @@ console.log(productId);
     .then((response) => response.text())
     .then((data) => {
       $("#table-content").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
     });
 }
       </script>

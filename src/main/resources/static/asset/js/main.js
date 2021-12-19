@@ -11,6 +11,14 @@
 
 (function ($) {
 
+    var quantityProduct = $("#quantityCart").text();
+
+    if (quantityProduct === '') {
+        $("#quantityCart").hide();
+    }else{
+        $("#quantityCart").show();
+    }
+
     /*------------------
         Preloader
     --------------------*/

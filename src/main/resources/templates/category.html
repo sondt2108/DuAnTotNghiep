@@ -3,12 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đức Phát | Thiết bị điện</title>
 
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
@@ -50,7 +48,7 @@
         <div class="filter_sort_mobile">
           <div class="box">
               <label>Ưu tiên theo:</label>
-              <select class="wide" id="filter_products" onchange="sortChanged(this)">
+              <select class="form-control" id="filter_products" onchange="sortChanged(this)">
                 <option value="">Mặc định</option>
                 <option value="1">Tên A-Z</option>
                 <option value="2">Tên Z-A</option>
@@ -63,7 +61,7 @@
          <div class="filter_sort_mobile" id="filter_price">
             <div class="box">
                 <label>Lọc theo giá sản phẩm:</label>
-                <select id="filter_price_mobile" onchange="priceChanged(this)">
+                <select class="form-control" id="filter_price_mobile" onchange="priceChanged(this)">
                   <option value="">Mặc định</option>
                   <option value="1">Giá dưới 100.000đ</option>
                   <option value="2">100.000đ - 300.000đ</option>
@@ -90,7 +88,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li>Trang chủ > Tất cả sản phẩm</li>
+                        <li>Trang chủ > Danh mục sản phẩm</li>
                     </ul>
                 </div>
             </div>
@@ -173,7 +171,7 @@
                    </div>
 
                   <!-- sort price -->
-                  <select class="form-control" id="filter_price_desktop" onchange="priceChanged(this)">
+                  <select class="form-control" id="filter_price_desktop" style="margin-top: 15px;" onchange="priceChanged(this)">
                     <option value="">Lọc theo giá (Mặc định)</option>
                     <option value="1">Giá dưới 100.000đ</option>
                     <option value="2">Giá từ: 100.000đ - 300.000đ</option>
@@ -186,11 +184,10 @@
                   
 
                    
-
                    <div class="row" id="page_products">
                     <!-- card -->
                     <div class="col-lg-4 mobile" th:each="products : ${products}">
-                      <div class="thumb-wrapper">
+                      <div class="thumb-wrapper baseBlock">
                         <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                             
                               <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
@@ -227,7 +224,6 @@
                     
                     <!-- end card -->
                 </div>
-                   
 
                 </div>
                 </div>
@@ -235,6 +231,7 @@
         </div>
     </section>
     <!-- Hero Section End -->
+    <th:block th:if="${demo >= 1}">
     <section id="page_default">
         <div class="container">
             <div class="row justify-content-center">
@@ -296,7 +293,7 @@
             </div>
         </div>
     </section>
-
+  </th:block>
 
     <section id="trademark">
 

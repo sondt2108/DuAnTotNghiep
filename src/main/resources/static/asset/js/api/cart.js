@@ -1,3 +1,5 @@
+
+
 $("button.close").click(function () {
   $(this).parent().css("display", "none");
 });
@@ -7,6 +9,8 @@ $("button.mo-gio-hang").click(function () {
     .then((response) => response.text())
     .then((data) => {
       $("#table-content").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
 });
 
@@ -16,6 +20,8 @@ function truSP(ev) {
     .then((response) => response.text())
     .then((data) => {
       $("#table-content").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
 }
 function congSP(ev) {
@@ -25,6 +31,8 @@ function congSP(ev) {
     .then((response) => response.text())
     .then((data) => {
       $("#table-content").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
 }
 
@@ -37,6 +45,8 @@ function xoaSP(ev) {
       .then((response) => response.text())
       .then((data) => {
         $("#table-content").html(data);
+        $("#quantityPr").load(location.href + " #quantityPr");
+        loadQuantityCart();
       });
   }
 }
@@ -66,6 +76,8 @@ function minusCart(ev) {
     .then((response) => response.text())
     .then((data) => {
       $("#cart-data").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
 }
 function addCart(ev) {
@@ -75,18 +87,22 @@ function addCart(ev) {
     .then((response) => response.text())
     .then((data) => {
       $("#cart-data").html(data);
+      $("#quantityPr").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
 }
 
 function removeCart(ev) {
   console.log(ev);
-  var r = confirm("Do you really want to delete this row?");
+  var r = confirm("Bạn có chắc chắn xóa sản phẩm này khỏi giỏ hàng?");
   if (r == true) {
     let id = $(ev.target).attr("id");
     fetch("/cart/remove/" + ev)
       .then((response) => response.text())
       .then((data) => {
         $("#cart-data").html(data);
+        $("#quantityPr").load(location.href + " #quantityPr");
+        loadQuantityCart();
       });
   }
 }
@@ -109,5 +125,20 @@ function updateValue(e) {
     .then((response) => response.text())
     .then((data) => {
       $("#cart-data").html(data);
+      $("#quantityCart").load(location.href + " #quantityPr");
+      loadQuantityCart();
     });
+}
+
+function loadQuantityCart() {
+  var quantityProduct = $("#quantityCart").text();
+  console.log(quantityProduct);
+    if (quantityProduct == '') {
+        console.log("hide");
+        $("#quantityCart").hide();
+    }else{
+      console.log("jejej");
+      $("#quantityCart").show();
+    }
+
 }

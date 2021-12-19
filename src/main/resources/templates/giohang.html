@@ -2,12 +2,10 @@
 <html lang="zxx">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Ogani Template" />
-    <meta name="keywords" content="Ogani, unica, creative, html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Đức Phát | Thiết bị điện</title>
 
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
     <link
       rel="stylesheet"
       href="/asset/css/bootstrap.min.css"
@@ -112,6 +110,7 @@
                               data-type="minus"
                               data-field=""
                               th:onclick="'minusCart('+ *{cart.key.productId} +')'"
+                              th:disabled="${cart.value <= 1}"
                             >
                               <i class="fa-gh fa fa-minus"></i>
                             </button>

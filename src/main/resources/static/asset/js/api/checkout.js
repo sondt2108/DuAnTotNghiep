@@ -1,5 +1,5 @@
 
-const tk = localStorage.getItem("jwtToken");
+const tk = sessionStorage.getItem("jwtToken");
 
 console.log(tk);
 
@@ -150,7 +150,7 @@ $(function () {
   
         },
         messages: {
-         
+         email : "Vui lòng nhập đúng email",
           name: "Tên đăng nhập không được để trống",
           phoneNumber: {
             required: "Số điện thoại không được để trống",
@@ -206,9 +206,8 @@ $(function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-              //location.assign("/checkout/success")
-              console.log(data);
               
+              location.assign("/checkout/success")
             },
             error: function (jqXHR, textStatus, errorThrown) {
               $('#loginErrorModal')

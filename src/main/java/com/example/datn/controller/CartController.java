@@ -1,6 +1,12 @@
 package com.example.datn.controller;
 
 
+import java.util.List;
+import java.util.Map;
+
+import com.example.datn.models.Category;
+import com.example.datn.models.Product;
+import com.example.datn.repository.CategoryRepository;
 import com.example.datn.service.CartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +29,23 @@ public class CartController {
 	public String gioHang(Model model) {
 		model.addAttribute("cart", cartService.getGioHang());
 		model.addAttribute("total", cartService.getTotal().toString());
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
 		
 		return "cart";
 		
@@ -53,12 +76,35 @@ public class CartController {
 		return "redirect:/cart/gio-hang";
 	}
 
+	@Autowired
+	CategoryRepository categoryRepository;
+
 
 
 	@GetMapping("cart")
 	public String  cart(Model model) {
 		model.addAttribute("cart", cartService.getGioHang());
 		model.addAttribute("total", cartService.getTotal().toString());
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
+
+	List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("cate", categories);
 
 		return "giohang";
 		

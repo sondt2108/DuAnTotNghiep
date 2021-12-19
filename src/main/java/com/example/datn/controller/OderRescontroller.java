@@ -117,7 +117,12 @@ double quantityOrder = listItems.get(product);
  pr.setSoluong(slcl);
  productRepository.save(pr);
 
- SendMailRequest emailrequest = new SendMailRequest();
+ 
+            orderDetailRepository.save(orderItem);
+			
+		}
+
+        SendMailRequest emailrequest = new SendMailRequest();
         
         emailrequest.setOrderId(id);
         emailrequest.setToEmail(orderRequest.getEmail());
@@ -125,15 +130,11 @@ double quantityOrder = listItems.get(product);
         
         
         Response response =mailService.sendemail(emailrequest);
-
-            orderDetailRepository.save(orderItem);
-			
-		}
-
+        Response rp = mailService.sendMailOrderWithAdmin(id);
 
         MessageNotifications ntn = new MessageNotifications();
         ntn.setOrderId(id);
-
+        ntn.setDescription("vừa đặt hàng thành công");
         messageNotificationsRepository.save(ntn);
 
         //mailService.sendMailWithOrderId(order.getOrderId());
@@ -196,7 +197,7 @@ double quantityOrder = listItems.get(product);
 
         MessageNotifications ntn = new MessageNotifications();
         ntn.setOrderId(order.getOrderId());
-
+        ntn.setDescription("vừa đặt hàng thành công");
         messageNotificationsRepository.save(ntn);
 
         //mailService.sendMailWithOrderId(order.getOrderId());
@@ -209,6 +210,8 @@ double quantityOrder = listItems.get(product);
         
         
         Response response =mailService.sendemail(emailrequest);
+        
+        Response rp = mailService.sendMailOrderWithAdmin(id);
 
         cartService.getGioHang().getChiTietGioHang().clear();
 

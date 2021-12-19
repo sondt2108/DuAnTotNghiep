@@ -35,7 +35,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(gioHangIterceptor)
-			.addPathPatterns("/check-out");
+			.addPathPatterns("/checkout", "/checkout");
 		//registry.addInterceptor(userInterceptor).addPathPatterns("/admin/*");
 		// set da ngon ngu
 				LocaleChangeInterceptor lci = new LocaleChangeInterceptor();

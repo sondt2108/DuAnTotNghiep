@@ -1838,9 +1838,6 @@ ol {
 	display: inline-block;
 }
 
-.product__details__tab {
-	padding-top: 85px;
-}
 
 .product__details__tab .nav-tabs {
 	border-bottom: none;
@@ -3590,6 +3587,7 @@ ol {
 		display: none;
 		}
 
+
 	.humberger__menu__wrapper {
 		width: 200px;
 		background: #ffffff;
@@ -3811,3 +3809,21 @@ ol {
       pointer-events: none;
       cursor: default;
     }
+
+.baseBlock {
+	border-radius: 5px;
+	overflow: hidden;
+	background: #fff;
+	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.baseBlock:hover {
+	-webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}

@@ -1,9 +1,14 @@
 package com.example.datn.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import com.example.datn.models.Category;
+import com.example.datn.models.Product;
 import com.example.datn.models.User;
+import com.example.datn.repository.CategoryRepository;
 import com.example.datn.repository.UserRepository;
+import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
 
@@ -19,15 +24,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
 public class UserController {
-    @GetMapping("/all")
-	public String allAccess() {
-		return "Public Content.";
-	}
+    
 
 	@Autowired
     CustomerService customerService;
 
+	@Autowired
+	CategoryRepository categoryRepository;
 
+	@Autowired
+	CartService cartService;
 
 	@GetMapping("/login")
 	public String Login(Model model) {
@@ -36,6 +42,25 @@ public class UserController {
 			
 			return "redirect:/";
 		} else {
+
+
+			List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("cate", categories);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 			
 			
 			return "dangnhap";
@@ -46,22 +71,61 @@ public class UserController {
 
 
 	@GetMapping("/register")
-	public String Register() {
+	public String Register(Model model) {
 
 		if (customerService.isCustomerLogin()) {
 			
 			return "redirect:/";
 		} else {
 			
+			List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("cate", categories);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
 			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 			return "dangky";
 		}
 	}
 
 	@GetMapping("/account/forgot-password")
-	public String Forgotpassword() {
+	public String Forgotpassword(Model model) {
 
-		return "forgotpassword";
+		if (customerService.isCustomerLogin()) {
+			
+			return "redirect:/";
+		} else {
+			
+			List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("cate", categories);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
+	return "forgotpassword";
+		}
 	}
 
 	
@@ -70,11 +134,29 @@ public class UserController {
 	
 
 	@GetMapping("/account/reset-password")
-	public String resetPassword(@RequestParam String token) {
+	public String resetPassword(@RequestParam String token, Model model) {
 
 		String response = userService.checkToken(token);
 
 		if (!response.startsWith("Invalid")) {
+
+			List<Category> categories = categoryRepository.findAll();
+		model.addAttribute("cate", categories);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 
 			return "resetpassword";
 
@@ -89,24 +171,24 @@ public class UserController {
 	@Autowired
 	UserRepository pr;
 
-	@GetMapping("/user")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-	public List<User> list(){
+	// @GetMapping("/user")
+	// @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	// public List<User> list(){
 		
 		
 		
-		return pr.findAll();
-	}
+	// 	return pr.findAll();
+	// }
 
-	@GetMapping("/mod")
-	@PreAuthorize("hasRole('MODERATOR')")
-	public String moderatorAccess() {
-		return "Moderator Board.";
-	}
+	// @GetMapping("/mod")
+	// @PreAuthorize("hasRole('MODERATOR')")
+	// public String moderatorAccess() {
+	// 	return "Moderator Board.";
+	// }
 
-	@GetMapping("/admin")
-	@PreAuthorize("hasRole('ADMIN')")
-	public String adminAccess() {
-		return "Admin Board.";
-	}
+	// @GetMapping("/admin")
+	// @PreAuthorize("hasRole('ADMIN')")
+	// public String adminAccess() {
+	// 	return "Admin Board.";
+	// }
 }

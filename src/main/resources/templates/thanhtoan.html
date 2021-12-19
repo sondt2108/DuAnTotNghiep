@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
@@ -37,47 +38,13 @@
     </th:block>
     <!-- end header -->
 
-    <!-- Hero Section Begin -->
-    <header class="header-bottom sticky-top">
-        <div class="container">
-
-            <nav class="header__menu">
-                <ul>
-                    <li class="active"><a href="./index.html">Trang chủ</a></li>
-                    <li><a href="./product.html">Sản phẩm</a>
-                        <ul class="header__menu__dropdown">
-                            <li><a href="./shop-details.html">Đèn chiếu sáng</a></li>
-                            <li><a href="./shoping-cart.html">Công tắc ổ cắm</a></li>
-                            <li><a href="./checkout.html">CB-Thiết bị đóng cắt</a></li>
-                            <li><a href="./blog-details.html">Đèn trang trí</a></li>
-                            <li><a href="./blog-details.html">Ống luồn dây điện</a></li>
-                            <li><a href="./blog-details.html">Dây cáp điện</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./blog.html">Khuyến mãi</a></li>
-                    <li><a href="./tintuc.html">Tin tức</a></li>
-                    <li><a href="./contact.html">Liên hệ</a></li>
-                    <li><a href="./blog-details.html">Lắp đặt</a></li>
-                    <li><a href="./blog-details.html">Giới thiệu</a></li>
-                    <li style="float: right;">
-
-                        <a href="./giohang.html" class="header__cart"><i class="fa fa-shopping-bag"></i> <span>[[${quantity}]]</span></a>
-                    </li>
-
-                </ul>
-
-            </nav>
-
-        </div>
-    </header>
-    <!-- end header -->
     <th:block th:if="${isLogin == 1}">
 <section>
     <div class="container-xl ">
         <form class="needs-validation" id="checkoutForm">
             <div class="row">           
                 <div class="col-md-7 order-md-1">
-                    <a href="./index.html" class="ducphat">Đức Phát</a>
+                    <a href="/" class="ducphat">Đức Phát</a>
                     <div class="mb-3">
                         <label class="thongtin">Thông tin nhận hàng</label>
                         
@@ -226,7 +193,7 @@
             <form class="needs-validation" id="checkoutByUserForm">
                 <div class="row">           
                     <div class="col-md-7 order-md-1">
-                        <a href="./index.html" class="ducphat">Đức Phát</a>
+                        <a href="/" class="ducphat">Đức Phát</a>
                         <div class="mb-3">
                             <label class="thongtin">Thông tin nhận hàng</label>
                             <a href="/login?cartStatus=0" class="dangnhap"><i class="fas fa-user-circle"></i>Đăng nhập</a>
@@ -234,7 +201,7 @@
                             <div class="mb-3">
                                 <label for="email"><i class="fas fa-envelope"></i>Email</label>
                                 
-                                    <input type="text" class="form-control" id="email" name="email"  />
+                                    <input type="email" class="form-control" id="email" name="email" required />
                                 
                             </div>
                             <div class="mb-3">

@@ -76,6 +76,11 @@ public class UserService {
 			
 			return "ok";
 		}
+
+		public boolean logoutAdmin(Long userId) {
+			userSession.setUser(null);
+			return true;
+		}
 		
 		
 		

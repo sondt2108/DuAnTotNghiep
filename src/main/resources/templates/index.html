@@ -2,8 +2,6 @@
 <html lang="zxx" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Ogani Template" />
-    <meta name="keywords" content="Ogani, unica, creative, html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Đức Phát | Thiết bị điện</title>
@@ -12,7 +10,7 @@
     </style>
 
     <!-- Google Font -->
-   
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 
@@ -56,8 +54,8 @@
               </a>
             </div>
             <div class="categories__slider owl-carousel owl-theme" id="product">
-              <div class="col-lg-3" th:each="products : ${productByPana}">
-                <div class="thumb-wrapper">
+              <div class="col-lg-3 " th:each="products : ${productByPana}">
+                <div class="thumb-wrapper baseBlock">
                   <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                       
                         <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
@@ -107,8 +105,8 @@
               >
             </div>
             <div class="categories__slider owl-carousel">
-              <div class="col-lg-3" th:each="products : ${productByNano}">
-                <div class="thumb-wrapper">
+              <div class="col-lg-3 " th:each="products : ${productByNano}">
+                <div class="thumb-wrapper baseBlock">
                   <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                       
                         <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
@@ -153,13 +151,114 @@
         <div class="row">
           <div class="col-md-12">
             <div class="section-head">
-              <a href="https://thuanphong.vn/den-led-nanoco"
-                ><h2 data-metatip="true">Đèn Led Philips</h2></a
+              <a href="#"
+                ><h2 data-metatip="true">Dây cáp điện</h2></a
               >
             </div>
             <div class="categories__slider owl-carousel">
-              <div class="col-lg-3" th:each="products : ${productByNano}">
-                <div class="thumb-wrapper">
+              <div class="col-lg-3 " th:each="products : ${productByWire}">
+                <div class="thumb-wrapper baseBlock">
+                  <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
+                      
+                        <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                          
+                          </span>
+                        <img th:src="${products.hinhanh}" alt="" />
+                          <p class="product-item-name">[[${products.tensanpham}]]</p>
+                      
+                      <div class="item-price">
+                        <div class="price-box price-final_price">                                             
+                          <span class="special-price">
+                            <span class="price-container">
+                              <span class="price-wrapper">
+                                <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>
+                          
+                          <span class="old-price">
+                            <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                              <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                                <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>                                          
+                        </div>								
+                      </div>
+                    
+                  </a>
+                </div>
+                
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section style="margin-top: 50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-head">
+              <a href="#"
+                ><h2 data-metatip="true">Công tắc-Ổ cắm</h2></a
+              >
+            </div>
+            <div class="categories__slider owl-carousel">
+              <div class="col-lg-3 " th:each="products : ${productBySockets}">
+                <div class="thumb-wrapper baseBlock">
+                  <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
+                      
+                        <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
+                          
+                          </span>
+                        <img th:src="${products.hinhanh}" alt="" />
+                          <p class="product-item-name">[[${products.tensanpham}]]</p>
+                      
+                      <div class="item-price">
+                        <div class="price-box price-final_price">                                             
+                          <span class="special-price">
+                            <span class="price-container">
+                              <span class="price-wrapper">
+                                <span class="price" th:text="${#numbers.formatDecimal(products.gia, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>
+                          
+                          <span class="old-price">
+                            <span class="price-container" th:with="discount=${(100 - products.khuyenmai)/100}">
+                              <span class="price-wrapper" th:with="specialprice=${products.gia / discount}">
+                                <span class="price" th:text="${#numbers.formatDecimal(specialprice, 0, 'COMMA', 0, 'POINT') +'₫'}"></span>
+                              </span>
+                            </span>
+                          </span>                                          
+                        </div>								
+                      </div>
+                    
+                  </a>
+                </div>
+                
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top: 50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-head">
+              <a href="#"
+                ><h2 data-metatip="true">Điện gia dụng</h2></a
+              >
+            </div>
+            <div class="categories__slider owl-carousel">
+              <div class="col-lg-3 " th:each="products : ${productByElectricHouseware}">
+                <div class="thumb-wrapper baseBlock">
                   <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                       
                         <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
@@ -287,27 +386,27 @@
 const reviews = [
     {
         id: 1,
-        name: "@darryncodes",
-        job: "Front-end developer",
+        name: "Chị Nguyễn Thị Khánh Vy",
+        job: "",
         img: "/asset/img/comment1.png",
         text:
-            '"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint iste, voluptate quam ipsum aliquam, corporis dicta distinctio, ea omnis quo quae non nulla facere rerum aperiam."'
+            '"Cửa hàng tư vấn sản phẩm nhiệt tình. Giá cả phải chăng, chất lượng sản phẩm sau khi sử dụng rất tốt."'
     },
     {
         id: 2,
-        name: "@annajohnson",
-        job: "UI Designer",
+        name: "Anh Khánh",
+        job: "",
         img: "/asset/img/comment2.jpg",
         text:
-            '"Morbi a facilisis quam. In nec lorem sollicitudin, volutpat ex sit amet, sodales augue. Duis pretium sagittis odio, nec porttitor purus vulputate id. Proin urna metus, luctus sit amet."'
+            '"Đã mua hàng và được cửa hàng hỗ trợ lắp đặt rất tận tình."'
     },
     {
         id: 3,
-        name: "@peterjones",
-        job: "Intern",
+        name: "Anh Tài",
+        job: "",
         img: "/asset/img/comment3.jpg",
         text:
-            '"Donec hendrerit semper eros sed pellentesque. Nunc varius condimentum odio vitae posuere. Nulla sollicitudin sem mauris, eget porttitor justo pulvinar et. Maecenas maximus."'
+            '"Sản phẩm tốt, giá cả phải chăng."'
     },
     {
         id: 4,
@@ -315,7 +414,7 @@ const reviews = [
         job: "UX Designer",
         img: "/asset/img/comment4.jpg",
         text:
-            '"Curabitur turpis felis, pellentesque feugiat tristique sit amet, vestibulum eu turpis. Sed commodo nulla quis metus consequat imperdiet. Aenean at elit dui. Donec sagittis ultricies."'
+            '"Được cửa hàng tư vấn nhiệt tình, hỗ trợ lắp đặt sản phẩm."'
     }
 ];
 

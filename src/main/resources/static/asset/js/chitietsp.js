@@ -58,15 +58,19 @@ function renderProduct(prs) {
     var priceFormat = price
       .toString()
       .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+      var discount = prs.khuyenmai;
+    var priceDiscount = price/(100 - discount)*100;
+    var priceDiscountFormat = priceDiscount.toFixed(0).toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    console.log(priceDiscount);
     return `
        
-        <h3>${prs.tensanpham}</h3>
+        <h1 class="title-head">${prs.tensanpham}</h1>
                         
-        <div class="product__details__price" >${priceFormat}₫</div>
+        <div class="product__details__price" >${priceFormat}₫ <span style="text-decoration:line-through; color: #a4a4a4;">${priceDiscountFormat}₫</span></div>
         <ul>
             <li><b>Thương hiệu</b> <span>${prs.thuonghieu.tenTH}</span></li>
             <li><b>Tình trạng</b> <span>${prs.tinhtranghang}</span></li>
-            <li><b>Weight</b> <span>0.5 kg</span></li>
         </ul>
         
         `;
@@ -93,6 +97,8 @@ function addSP() {
     .then((response) => response.text())
     .then((data) => {
       $("#table-content").html(data);
+      $("#quantityCart").show();
+      $("#quantityPr").load(location.href + " #quantityPr");
       $("div.gio-hang").css("display", "block");
     });
 }

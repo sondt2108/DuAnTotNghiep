@@ -61,10 +61,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests().antMatchers(HttpMethod.POST,"/api/auth/**", "/signup").permitAll()
 			.antMatchers("/asset/**","/asset/img/**", "/asset/img/categories/**","/upload/**","/category/**","/myOrder").permitAll()
 			.antMatchers("/admin/**").permitAll()
-			.antMatchers("/login", "/contact", "/register","/logout","/","/demo","/detail/**", "/product/**","/search/**","/trademark/**").permitAll()
+			.antMatchers("/login", "/contact","/introduce", "/installation", "/register","/logout","/","/demo","/detail/**", "/product/**","/search/**","/trademark/**").permitAll()
 			.antMatchers("/account/**").permitAll()
 			.antMatchers("/api/**","api/productdetails/**", "/cart/**", "/checkout","/checkoutByUser","/checkout/success").permitAll()
-			.anyRequest().authenticated();
+			.anyRequest().authenticated()
+			.and().formLogin()
+			.and().exceptionHandling().accessDeniedPage("/404page");;
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}

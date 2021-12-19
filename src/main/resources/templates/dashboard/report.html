@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/img/favicon.png">
 
 <link rel="stylesheet"
 	href="/asset/dashboard/css/graindashboard.css">
@@ -60,12 +60,46 @@
 				<li class="sidebar-heading h6">Examples</li>
 				<!-- End Title -->
 
+				<li
+				class="side-nav-menu-item side-nav-has-menu"
+			  >
+				<a
+				  class="side-nav-menu-link media align-items-center"
+				  href="#"
+				  data-target="#subOrder"
+				>
+				  <span class="side-nav-menu-icon d-flex mr-3">
+					<i class="gd-shopping-cart"></i>
+				  </span>
+				  <span class="side-nav-fadeout-on-closed media-body">Đặt hàng</span>
+				  <span class="side-nav-control-icon d-flex">
+					<i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+				  </span>
+				  <span
+					class="side-nav__indicator side-nav-fadeout-on-closed"
+				  ></span>
+				</a>
+	  
+				<!-- order: subOrder -->
+				<ul
+				  id="subOrder"
+				  class="side-nav-menu side-nav-menu-second-level mb-0"
+				>
+				  <li class="side-nav-menu-item">
+					<a class="side-nav-menu-link" href="/admin/order"
+					  >Danh sách đặt hàng</a
+					>
+				  </li>
+				</ul>
+				<!-- End order: subORDER -->
+			  </li>
+
 				<!-- Users -->
 				<li class="side-nav-menu-item side-nav-has-menu"><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subUsers"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-user"></i>
-					</span> <span class="side-nav-fadeout-on-closed media-body">Sản phẩm</span> <span
+					</span> <span class="side-nav-fadeout-on-closed media-body">Người dùng</span> <span
 						class="side-nav-control-icon d-flex"> <i
 							class="gd-angle-right side-nav-fadeout-on-closed"></i>
 					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
@@ -73,19 +107,17 @@
 					<ul id="subUsers"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
-							href="khachhang.html">Khách hàng</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhanvien.html">Nhân Viên</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="chucvu.html">Chức vụ</a></li>
+							href="/admin/customer">Khách hàng</a></li>
+						<!-- <li class="side-nav-menu-item"><a class="side-nav-menu-link"
+							href="nhanvien.html">Nhân Viên</a></li> -->
 						<li class="side-nav-menu-item "><a class="side-nav-menu-link"
-							href="user.html">User</a></li>
+							href="/admin/user">Người dùng</a></li>
 					</ul> <!-- End Users: subUsers --></li>
 				<!-- End Users -->
 
 				<!-- Products -->
 
-				<li class="side-nav-menu-item side-nav-has-menu"><a
+				<li class="side-nav-menu-item side-nav-has-menu "><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subProducts"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i
@@ -97,21 +129,16 @@
 				</a> <!-- Products: subProducts -->
 					<ul id="subProducts"
 						class="side-nav-menu side-nav-menu-second-level mb-0">
-						<li class="side-nav-menu-item active"><a
-							class="side-nav-menu-link" href="products.html">Sản Phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="categories.html">Loại sản phẩm</a></li>
+							href="/admin/product">Sản Phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="mausac.html">Màu sắc</a></li>
+							href="/admin/category">Loại sản phẩm</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="hoadon.html">Hóa đơn</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="cthoadon.html">Chi tiết hóa đơn</a></li>
+							href="/admin/warehouse-receipt">Hóa đơn</a></li>
 					</ul> <!-- End Products: subProducts --></li>
 
 				<!-- End Products -->
-				<!-- category -->
-				<li class="side-nav-menu-item side-nav-has-menu "><a
+				<li class="side-nav-menu-item side-nav-has-menu"><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subCategory"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-list"></i>
@@ -124,49 +151,11 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhacungcap.html">Nhà cung cấp</a></li>
+							href="/admin/supplier">Nhà cung cấp</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhasanxuat.html">Nhà sản xuất</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="thuonghieu.html">Thương hiệu</a></li>
+							href="/admin/trademark">Thương hiệu</a></li>
 					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
 				</li>
-				<!-- End category -->
-
-				<!-- Authentication -->
-				<li class="side-nav-menu-item side-nav-has-menu"><a
-					class="side-nav-menu-link media align-items-center" href="#"
-					data-target="#subPages"> <span
-						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-lock"></i>
-					</span> <span class="side-nav-fadeout-on-closed media-body">Authentication</span>
-						<span class="side-nav-control-icon d-flex"> <i
-							class="gd-angle-right side-nav-fadeout-on-closed"></i>
-					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-				</a> <!-- Pages: subPages -->
-					<ul id="subPages"
-						class="side-nav-menu side-nav-menu-second-level mb-0">
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="login.html">Login</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="register.html">Register</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="password-reset.html">Forgot Password</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="password-reset-2.html">Forgot Password 2</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="email-verification.html">Email Verification</a></li>
-					</ul> <!-- End Pages: subPages --></li>
-				<!-- End Authentication -->
-
-				<!-- Settings -->
-				<li class="side-nav-menu-item"><a
-					class="side-nav-menu-link media align-items-center"
-					href="settings.html"> <span
-						class="side-nav-menu-icon d-flex mr-3"> <i
-							class="gd-settings"></i>
-					</span> <span class="side-nav-fadeout-on-closed media-body">Settings</span>
-				</a></li>
-				<!-- End Settings -->
 
 			</ul>
 		</aside>
@@ -226,6 +215,8 @@
 	
 	<script src="/asset/dashboard/js/graindashboard.js"></script>
 	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script> 
+	<script src="/asset/dashboard/js/notification.js"></script>
+    <script src="/asset/dashboard/js/logout.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     
     <script

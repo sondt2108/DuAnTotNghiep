@@ -4,32 +4,30 @@ var REFRESF_TOKEN_KEY = "refreshToken";
 
 // FUNCTIONS =============================================================
 function getJwtToken() {
-  return localStorage.getItem(TOKEN_KEY);
+  return sessionStorage.getItem(TOKEN_KEY);
 }
 
 function getRefreshToken() {
-  return localStorage.getItem(REFRESF_TOKEN_KEY);
+  return sessionStorage.getItem(REFRESF_TOKEN_KEY);
 }
 
 function setJwtToken(token) {
-  localStorage.setItem(TOKEN_KEY, token);
+  sessionStorage.setItem(TOKEN_KEY, token);
 }
 
 function setRefreshToken(refreshToken) {
-  localStorage.setItem(REFRESF_TOKEN_KEY, refreshToken);
+  sessionStorage.setItem(REFRESF_TOKEN_KEY, refreshToken);
 }
 
 function removeJwtToken() {
-  localStorage.removeItem(TOKEN_KEY);
+  sessionStorage.removeItem(TOKEN_KEY);
 }
 
 function removeRefreshToken() {
-  localStorage.removeItem(REFRESF_TOKEN_KEY);
+  sessionStorage.removeItem(REFRESF_TOKEN_KEY);
 }
 
-function errorLogin() {
-  $("#showerror").append("sai kiaf cmm ");
-}
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const cartStatus = urlParams.get('cartStatus');
@@ -40,7 +38,7 @@ console.log(cartStatus);
 
 // get url current
 
-var currentUrl = localStorage.getItem("urlReturn");
+var currentUrl = sessionStorage.getItem("urlReturn");
 
 $(function () {
   $("#loginForm").validate({
@@ -74,16 +72,22 @@ $(function () {
         success: function (data, textStatus, jqXHR) {
           setJwtToken(data.accessToken);
           setRefreshToken(data.refreshToken);
-          console.log(data);
-          if (cartStatus == 0) {
-            location.assign("/checkout")
+
+          if (data.roles.includes('ROLE_ADMIN')) {
+            location.assign("/admin/dashboard");
           }else{
-            history.back();
+            if (cartStatus == 0) {
+              location.assign("/checkout")
+            }else{
+              history.back();
+            }
           }
+          
           
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (jqXHR.status === 401) {
+            console.clear();
             $("#loginErrorModal")
               .modal("show")
               .find(".modal-body")
@@ -100,6 +104,14 @@ $(function () {
 });
 
 //register
+
+function checkPass() {
+  var password = $("#password-input").val();
+  var confirmPassword = $("#password-confirm").val();
+  if (password === confirmPassword) {
+    $("#CheckPasswordMatch").html("");
+  }
+}
 
 $(function () {
   $.validator.addMethod(
@@ -181,12 +193,13 @@ $(function () {
             location.assign("/login");
           },
           error: function (jqXHR, textStatus, errorThrown) {
+            console.clear();
             if (jqXHR.status === 400) {
               $('#loginErrorModal')
               .modal("show")
               .find(".modal-body")
               .empty()
-              .html("<p>" + jqXHR.responseJSON.message + "</p>");
+              .html("<p class='error'>" + jqXHR.responseJSON.message + "</p>");
             } 
           },
         });
@@ -232,19 +245,18 @@ $(function () {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-          alert(jqXHR.responseJSON.message);
-          if(jqXHR.responseJSON.message.startsWith("fail!")){
+          if(jqXHR.responseJSON.message.startsWith("Email chưa đăng ký")){
             document.getElementById("forgotpasswordbtn").disabled = false;
           }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          if (jqXHR.status === 401) {
-            $("#loginErrorModal")
+          $("#loginErrorModal")
               .modal("show")
               .find(".modal-body")
               .empty()
-              .html("<p>" + jqXHR.responseJSON.message + "</p>");
-            location.replace("/login");
+              .html("<p class='error'>" + jqXHR.responseJSON.message + "</p>");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (jqXHR.status === 401) {
+            
           }
         },
       });
@@ -303,7 +315,11 @@ $(function () {
           dataType: "json",
           success: function (data, textStatus, jqXHR) {
 
-            alert("thay doi mat khau thanh cong")
+            $("#loginErrorModal")
+              .modal("show")
+              .find(".modal-body")
+              .empty()
+              .html("<p class='error'>" + jqXHR.responseJSON.message + "</p>");
             location.assign("/login")
 
           },

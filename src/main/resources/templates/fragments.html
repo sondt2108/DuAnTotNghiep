@@ -56,34 +56,28 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="/">Trang chủ</a></li>
-                <li><a href="/product">Sản phẩm</a>
+                <li id="pageHome"><a href="/">Trang chủ</a></li>
+                <li id="pageProduct"><a href="/product">Sản phẩm</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Đèn chiếu sáng</a></li>
-                        <li><a href="./shoping-cart.html">Công tắc ổ cắm</a></li>
-                        <li><a href="./checkout.html">CB-Thiết bị đóng cắt</a></li>
-                        <li><a href="./blog-details.html">Đèn trang trí</a></li>
-                        <li><a href="./blog-details.html">Ống luồn dây điện</a></li>
-                        <li><a href="./blog-details.html">Dây cáp điện</a></li>
+                        <li th:each="cate : ${cate}"><a th:href="@{'/category/' + ${cate.seourl}}">[[${cate.name}]]</a></li>
                     </ul>
                 </li>
                 <li><a href="./blog.html">Khuyến mãi</a></li>
                 <li><a href="./tintuc.html">Tin tức</a></li>
-                <li><a href="./contact.html">Liên hệ</a></li>
-                <li><a href="./blog-details.html">Lắp đặt</a></li>
-                <li><a href="./blog-details.html">Giới thiệu</a></li>
+                <li id="pageContact"><a href="/contact">Liên hệ</a></li>
+                <li><a href="/introduce">Giới thiệu</a></li>
+                <th:block th:if="${isAdmin == 1}">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                </th:block>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i>Ducphatelectric113@gmail.com</li>
+                <li><i class="fa fa-envelope"></i>Ducphat29qt@gmail.com</li>
                 <li>Thắp sáng ước mơ</li>
             </ul>
         </div>
@@ -98,7 +92,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> Ducphatelectric113@gmail.com</li>
+                                <li><i class="fa fa-envelope"></i> Ducphat29qt@gmail.com</li>
                                 <li>Thắp sáng ước mơ</li>
                             </ul>
                         </div>
@@ -107,9 +101,6 @@
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="/asset/img/vietnam.png" alt="">
@@ -162,7 +153,7 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>0987.654.321</h5>
+                                <h5>0968.544.270</h5>
                                 <span>Hỗ trợ 24/7 </span>
                             </div>
                         </div>
@@ -179,10 +170,9 @@
     <!-- Hero Section Begin -->
     <header class="header-bottom sticky-top">
         <div class="container">
-
             <nav class="header__menu">
                 <ul>
-                    <li class="active"><a href="/">Trang chủ</a></li>
+                    <li><a href="/">Trang chủ</a></li>
                     <li><a href="/product">Sản phẩm</a>
                         <ul class="header__menu__dropdown">
                             <li th:each="cate : ${cate}"><a th:href="@{'/category/' + ${cate.seourl}}">[[${cate.name}]]</a></li>
@@ -191,14 +181,16 @@
                     </li>
                     <li><a href="./blog.html">Khuyến mãi</a></li>
                     <li><a href="./tintuc.html">Tin tức</a></li>
-                    <li><a href="./contact.html">Liên hệ</a></li>
-                    <li><a href="./blog-details.html">Lắp đặt</a></li>
-                    <li><a href="./blog-details.html">Giới thiệu</a></li>
-                    <li style="float: right;">
+                    <li><a href="/contact">Liên hệ</a></li>
+                    <li><a href="/installation">Lắp đặt</a></li>
+                    <li><a href="/introduce">Giới thiệu</a></li>
+                    <th:block th:if="${isAdmin == 1}">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                </th:block>
+                    <li id="quantityPr" style="float: right;">
 
-                        <a href="/cart" class="header__cart"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
+                        <a href="/cart" class="header__cart"><i class="fa fa-shopping-bag"></i> <span id="quantityCart" th:text="${quantity}"></span></a>
                     </li>
-
                 </ul>
 
             </nav>

@@ -10,53 +10,19 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 
-<link rel="shortcut icon" href="/asset/dashboard/img/favicon.ico">
+<link rel="shortcut icon" href="/asset/img/favicon.png">
 
 <link rel="stylesheet"
 	href="/asset/dashboard/css/graindashboard.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-#timkiem-item {
-	background-color: #F5F5F5;
-	border: none;
-}
 
 .error{
     	color: red;
     	font-size: 16px;
     	
     }
-
-#them {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	margin-left: 5px;
-	border-radius: 3px;
-	font-size: 18px;
-	background-color: white;
-	color: black;
-	border: 2px solid #265df1;
-	margin-left: 5px;
-}
-
-#them:hover {
-	background-color: #265df1;
-	color: white;
-}
-
-#myInput {
-	background-image: url('/css/searchicon.png');
-	background-position: 10px 10px;
-	background-repeat: no-repeat;
-	width: 100%;
-	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
-	margin-bottom: 12px;
-}
-
-
 
 
 
@@ -204,7 +170,7 @@
 				<a
 				  class="side-nav-menu-link media align-items-center"
 				  href="#"
-				  data-target="#subUsers"
+				  data-target="#subOrder"
 				>
 				  <span class="side-nav-menu-icon d-flex mr-3">
 					<i class="gd-shopping-cart"></i>
@@ -220,7 +186,7 @@
 	  
 				<!-- order: subOrder -->
 				<ul
-				  id="subUsers"
+				  id="subOrder"
 				  class="side-nav-menu side-nav-menu-second-level mb-0"
 				>
 				  <li class="side-nav-menu-item">
@@ -260,8 +226,8 @@
 				</th:block>
 
 				<!-- End Products -->
-				<!-- category -->
-				<li class="side-nav-menu-item side-nav-has-menu "><a
+				<!-- End Products -->
+				<li class="side-nav-menu-item side-nav-has-menu"><a
 					class="side-nav-menu-link media align-items-center" href="#"
 					data-target="#subCategory"> <span
 						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-list"></i>
@@ -274,49 +240,11 @@
 						class="side-nav-menu side-nav-menu-second-level mb-0">
 
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhacungcap.html">Nhà cung cấp</a></li>
+							href="/admin/supplier">Nhà cung cấp</a></li>
 						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="nhasanxuat.html">Nhà sản xuất</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="thuonghieu.html">Thương hiệu</a></li>
+							href="/admin/trademark">Thương hiệu</a></li>
 					</ul> <!-- End category: subCategory --> <!-- End category: subCategory -->
 				</li>
-				<!-- End category -->
-
-				<!-- Authentication -->
-				<li class="side-nav-menu-item side-nav-has-menu"><a
-					class="side-nav-menu-link media align-items-center" href="#"
-					data-target="#subPages"> <span
-						class="side-nav-menu-icon d-flex mr-3"> <i class="gd-lock"></i>
-					</span> <span class="side-nav-fadeout-on-closed media-body">Authentication</span>
-						<span class="side-nav-control-icon d-flex"> <i
-							class="gd-angle-right side-nav-fadeout-on-closed"></i>
-					</span> <span class="side-nav__indicator side-nav-fadeout-on-closed"></span>
-				</a> <!-- Pages: subPages -->
-					<ul id="subPages"
-						class="side-nav-menu side-nav-menu-second-level mb-0">
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="login.html">Login</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="register.html">Register</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="password-reset.html">Forgot Password</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="password-reset-2.html">Forgot Password 2</a></li>
-						<li class="side-nav-menu-item"><a class="side-nav-menu-link"
-							href="email-verification.html">Email Verification</a></li>
-					</ul> <!-- End Pages: subPages --></li>
-				<!-- End Authentication -->
-
-				<!-- Settings -->
-				<li class="side-nav-menu-item"><a
-					class="side-nav-menu-link media align-items-center"
-					href="settings.html"> <span
-						class="side-nav-menu-icon d-flex mr-3"> <i
-							class="gd-settings"></i>
-					</span> <span class="side-nav-fadeout-on-closed media-body">Settings</span>
-				</a></li>
-				<!-- End Settings -->
 
 			</ul>
 		</aside>
@@ -370,7 +298,7 @@
 							</form>
 						</div>
 
-						<button id="them">
+						<button class="btn btn-outline-primary" id="them" style="margin-top: 15px;">
 							<b>+ Thêm</b>
 						</button>
 
@@ -439,41 +367,17 @@
 
 			
 			<!-- Footer -->
-			<footer class="small p-3 px-md-4 mt-auto">
-				<div class="row justify-content-between">
-					<div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
-						<ul class="list-dot list-inline mb-0">
-							<li
-								class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a
-								class="link-dark" href="#">FAQ</a></li>
-							<li class="list-dot-item list-inline-item mr-lg-2"><a
-								class="link-dark" href="#">Support</a></li>
-							<li class="list-dot-item list-inline-item mr-lg-2"><a
-								class="link-dark" href="#">Contact us</a></li>
-						</ul>
-					</div>
+			<th:block th:replace="/dashboard/fragments :: footer">
 
-					<div class="col-lg text-center mb-3 mb-lg-0">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item mx-2"><a class="link-muted"
-								href="#"><i class="gd-twitter-alt"></i></a></li>
-							<li class="list-inline-item mx-2"><a class="link-muted"
-								href="#"><i class="gd-facebook"></i></a></li>
-							<li class="list-inline-item mx-2"><a class="link-muted"
-								href="#"><i class="gd-github"></i></a></li>
-						</ul>
-					</div>
-
-					<div class="col-lg text-center text-lg-right">&copy; 2019
-						Graindashboard. All Rights Reserved.</div>
-				</div>
-			</footer>
+    		</th:block>
 			<!-- End Footer -->
 		</div>
 	</main>
 
 	<script src="/asset/dashboard/js/graindashboard.js"></script>
 	<script src="/asset/dashboard/js/graindashboard.vendor.js"></script> 
+	<script src="/asset/dashboard/js/notification.js"></script>
+    <script src="/asset/dashboard/js/logout.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 	
     
@@ -492,6 +396,8 @@
 
 	<script type="text/javascript">
 	var url = "/api/products";
+
+	var token = sessionStorage.getItem("jwtToken");
 		var rowTemplate = "{{#each products}}"
 			+"<tr>"
 			+       '<td class="py-3 text_over">{{tensanpham}}</td>'
@@ -545,7 +451,8 @@
 			var searchOption = {
 		        method: 'POST',
 		        headers: {
-		            'Content-Type': 'application/json'
+		            'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
 	          	},
 		        body: JSON.stringify(searchForm)
 			};
@@ -598,11 +505,7 @@
 
  
       }
-
-
-     
-		
-		
+	
 //thêm sản phẩm
 		var insertModal = new bootstrap.Modal(document.getElementById('editModal'), {
 			  keyboard: false
@@ -612,18 +515,36 @@
 			document.getElementById("save").style.display = "block";
 			insertModal.show();
 			// nhà cung cấp
-			fetch("/api/nhacungcap")
+			fetch("/api/nhacungcap", {
+				method: 'GET',
+				headers: {
+		            'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
+	          	}
+			})
 			  .then(response => response.json())
 			  .then(data => {
 				  var nhacungcapSelectHtml = nhacungcapSelectHbs({ nhacungcaps: data });
 				  
 				  //category
-			fetch("/api/categories")
+			fetch("/api/categories", {
+				method: 'GET',
+				headers: {
+		            'Content-Type': 'application/json',
+					'Authorization': 'Bearer ' + token
+	          	}
+			})
 			  .then(response => response.json())
 			  .then(data => {
 				  var categorySelectHtml = categorySelectHbs({ categories: data });								  
 					  //thương hiệu
-					  fetch("/api/thuonghieu")
+					  fetch("/api/thuonghieu", {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': 'Bearer ' + token
+						}
+					  })
 					  .then(response => response.json())
 					  .then(data => {
 						  var thuonghieuSelectHtml = thuonghieuSelectHbs({ thuonghieus: data });
@@ -677,7 +598,7 @@
 							   +   '</div>';
 							   insertForm += '<div class="mb-3">'
 					           +	'<label for="tT" class="form-label"><b>Thông tin sản phẩm:</b></label>'
-					  		   +	'<textarea name="thongtinsp" class="form-control mb-3" rows="3" placeholder="Default textarea"></textarea>'
+					  		   +	'<textarea name="thongtinsp" class="form-control mb-3" rows="3"></textarea>'
 							   +   '</div>';
 					$("#editForm").html(insertForm);
 					
@@ -742,6 +663,7 @@
 
 				str = str.replace(/\s+/g, '-');
 				str = str.toLowerCase();
+				str = str.replace('/', '-');
 				str.replace(/\s/g,'-');
 				console.log(str);
 
@@ -838,7 +760,7 @@ function myFunction() {
 		        method: 'POST',
 		        headers: {
 		            'Content-Type': 'application/json',
-					'Authorization': 'Bearer ' + x
+					'Authorization': 'Bearer ' + token
 	          	},
 		        body: JSON.stringify(products, seourl)
 			};
@@ -887,7 +809,7 @@ function myFunction() {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + x
+				'Authorization': 'Bearer ' + token
 			  },
 			body: JSON.stringify(products, seourl)
 		};
@@ -907,7 +829,7 @@ function myFunction() {
 // thực hiện delete
 		function bindEvent() {
 			$(".delete").click(function() {
-	            var result = confirm("Want to delete?");
+	            var result = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
 	            if (result == true) {
 	            	deleteProducts($(this));
 	            } else {
@@ -917,11 +839,13 @@ function myFunction() {
 		}
 		function deleteProducts($button) {
 	    var id = $button.attr("c-id");
-	    var deleteOption = {
+		
+		
+			var deleteOption = {
 	        method: 'delete',
 	        headers: {
 	            'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + x
+				'Authorization': 'Bearer ' + token
 	        }
 	    };
 	    products = fetch(url + "/" + id, deleteOption)
@@ -929,6 +853,7 @@ function myFunction() {
 	            loadList();
 	        });
 
+	    
 	}
 		
 // Sửa sản phẩm 
@@ -982,7 +907,13 @@ var editTemplateStr = '<div class="mb-3">'
     	                var editHTML = editHbs(products);
     	                
    //fetch nhà cùng cấp
-    	                         fetch("/api/nhacungcap")
+    	                         fetch("/api/nhacungcap", {
+									method: 'GET',
+									headers: {
+										'Content-Type': 'application/json',
+										'Authorization': 'Bearer ' + token
+									}
+								 })
         	                    .then((res) => res.json())
         	                    .then((nhacungcaps) => {
         	                        var nhacungcapSelectHtml = nhacungcapSelectHbs({
@@ -996,7 +927,13 @@ var editTemplateStr = '<div class="mb-3">'
         	                        $("#nhacungcapSelect").val(products.nhacungcap.idNCC)
         	                        
    //fetch categories
-        	             fetch("/api/categories")
+        	             fetch("/api/categories", {
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': 'Bearer ' + token
+							}
+						 })
     	                    .then((res) => res.json())
     	                    .then((categories) => {
     	                        var categorySelectHtml = categorySelectHbs({
@@ -1011,7 +948,13 @@ var editTemplateStr = '<div class="mb-3">'
     	                        
    
  //fetch thường hiệu                     
-        	               fetch("/api/thuonghieu")
+        	               fetch("/api/thuonghieu", {
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': 'Bearer ' + token
+								}
+						   })
         	                    .then((res) => res.json())
         	                    .then((thuonghieus) => {
         	                        var thuonghieuSelectHtml = thuonghieuSelectHbs({
@@ -1039,6 +982,8 @@ var editTemplateStr = '<div class="mb-3">'
     	    
     	
         }
+
+		
 
         </script>
 	

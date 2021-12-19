@@ -16,8 +16,8 @@
             <a class="navbar-brand navbar-brand-mobile" href="/">
               <img
                 class="img-fluid w-100"
-                src="/asset/dashboard/img/logo-mini.png"
-                alt="Graindashboard"
+                src="/asset/img/lg.png"
+                alt=""
               />
             </a>
             <!-- End Logo For Mobile View -->
@@ -26,14 +26,14 @@
             <a class="navbar-brand navbar-brand-desktop" href="/">
               <img
                 class="side-nav-show-on-closed"
-                src="/asset/dashboard/img/logo-mini.png"
-                alt="Graindashboard"
-                style="width: auto; height: 33px"
+                src="/asset/img/lg.png"
+                alt=""
+                style="width: 70px; height: 33px"
               />
               <img
                 class="side-nav-hide-on-closed"
-                src="/asset/dashboard/img/logo.png"
-                alt="Graindashboard"
+                src="/asset/img/lg.png"
+                alt=""
                 style="width: auto; height: 33px"
               />
             </a>
@@ -105,7 +105,7 @@
                         py-3
                       "
                     >
-                      <h5 class="mb-0">Notifications</h5>
+                      <h5 class="mb-0">Thông báo</h5>
                       <button class="btn btn-outline link small ml-auto" onclick="clearAllNotifi()">Clear All</button>
                     </div>
   
@@ -122,7 +122,7 @@
                             >
                           </div>
                           <p class="mb-0">
-                            Đơn hàng <strong>#[[${ntn.orderId}]]</strong> vừa được đặt thành công.
+                            Đơn hàng <strong>#[[${ntn.orderId}]]</strong> [[${ntn.description}]].
                           </p>
                           <button class=" btn btn-outline list-group-item-closer text-muted" th:onclick="|deleteByNotifi(${ntn.notificationsId})|"><i class="gd-close"></i
                           ></button>
@@ -151,8 +151,8 @@
                   data-unfold-animation-out="fadeOut"
                 >
                   <!--img class="avatar rounded-circle mr-md-2" src="#" alt="John Doe"-->
-                  <span class="mr-md-2 avatar-placeholder">J</span>
-                  <span class="d-none d-md-block">John Doe</span>
+                  <span class="mr-md-2 avatar-placeholder">AD</span>
+                  <span class="d-none d-md-block">[[${username}]]</span>
                   <i class="gd-angle-down d-none d-md-block ml-2"></i>
                 </a>
   
@@ -170,27 +170,16 @@
                   aria-labelledby="profileMenuInvoker"
                   style="animation-duration: 300ms"
                 >
-                  <li class="unfold-item">
-                    <a
-                      class="unfold-link d-flex align-items-center text-nowrap"
-                      href="#"
-                    >
-                      <span class="unfold-item-icon mr-3">
-                        <i class="gd-user"></i>
-                      </span>
-                      My Profile
-                    </a>
-                  </li>
                   <li class="unfold-item unfold-item-has-divider">
-                    <a
-                      class="unfold-link d-flex align-items-center text-nowrap"
-                      href="#"
+                    <button
+                      class="btn btn-outline unfold-link d-flex align-items-center text-nowrap"
+                      th:onclick="'logout('+ *{customer_id} +')'"
                     >
                       <span class="unfold-item-icon mr-3">
                         <i class="gd-power-off"></i>
                       </span>
-                      Sign Out
-                    </a>
+                      Đăng xuất
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -265,7 +254,7 @@
                     <li class="side-nav-menu-item"><a class="side-nav-menu-link"
                         href="/admin/category">Loại sản phẩm</a></li>
                     <li class="side-nav-menu-item"><a class="side-nav-menu-link"
-                        href="/admin/hoadon">Hóa đơn</a></li>
+                        href="/admin/warehouse-receipt">Hóa đơn</a></li>
                 </ul> <!-- End Products: subProducts --></li>
         </th:block>
     <!-- end product -->
@@ -289,9 +278,51 @@
                 <li class="side-nav-menu-item active"><a class="side-nav-menu-link"
                     href="/admin/category">Loại sản phẩm</a></li>
                 <li class="side-nav-menu-item"><a class="side-nav-menu-link"
-                    href="/admin/hoadon">Hóa đơn</a></li>
+                    href="/admin/warehouse-receipt">Hóa đơn</a></li>
             </ul> <!-- End category: subCategory --></li>
     </th:block>
 <!-- end category -->
+
+<!-- footer -->
+    <th:block th:fragment="footer">
+      <footer class="small p-3 px-md-4 mt-auto">
+        <div class="row justify-content-between">
+          <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
+            <ul class="list-dot list-inline mb-0">
+              <li
+                class="
+                  list-dot-item list-dot-item-not list-inline-item
+                  mr-lg-2
+                "
+              >
+                <a class="link-dark" href="#">FAQ</a>
+              </li>
+              <li class="list-dot-item list-inline-item mr-lg-2">
+                <a class="link-dark" href="#">Support</a>
+              </li>
+              <li class="list-dot-item list-inline-item mr-lg-2">
+                <a class="link-dark" href="#">Contact us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg text-center mb-3 mb-lg-0">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item mx-2">
+                <a class="link-muted" href="https://www.facebook.com/thanhson2112hc"><i class="gd-facebook"></i></a>
+              </li>
+              <li class="list-inline-item mx-2">
+                <a class="link-muted" href="https://github.com/sondt2108"><i class="gd-github"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg text-center text-lg-right">
+            &copy; @2021 Team Nocrack
+          </div>
+        </div>
+      </footer>
+    </th:block>
+<!-- end footer -->
 </body>
 </html>

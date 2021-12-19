@@ -29,55 +29,91 @@ public class AdminController {
     @GetMapping("admin/product")
     public String listProduct(Model model){
       
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
+     if (customerService.isCustomerLogin()) {
 
-        // model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+               
+              return "dashboard/products";
+           }   
+           
+           return "404page";
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/products"; 
+          }
+
+        
+     
+         return "404page"; 
     }
     
 
     @GetMapping("admin/category")
     public String listCategory(Model model){
       
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+     if (customerService.isCustomerLogin()) {
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/categories"; 
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/categories";
+           }   
+           
+           return "404page";
+
+          }
+        
+        
+         return "404page"; 
     }
 
 
     @GetMapping("admin/customer")
     public String listCustomer(Model model){
-      
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+     if (customerService.isCustomerLogin()) {
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/khachhang"; 
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/khachhang";
+           }   
+           
+           return "404page";
+
+          }
+        
+        
+         return "404page"; 
     }
 
 
     @GetMapping("admin/user")
     public String listUser(Model model){
       
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
+     if (customerService.isCustomerLogin()) {
 
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+                System.out.println("sonneeeeee");
+              return "dashboard/user";
+           }   
+           System.out.println("sonneeeeee12333");
+           return "404page";
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/user"; 
+          }
+
+        
+        
+         return "404page"; 
     }
 
 
@@ -86,41 +122,88 @@ public class AdminController {
 
     @GetMapping("admin/order")
     public String listOrder(Model model){
-      
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
+     if (customerService.isCustomerLogin()) {
+          if (userService.isRole()) {
+               System.out.println("sonne");
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/order";
+           }   
+           
+           return "404page";
 
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+          }
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/order"; 
+        
+        
+         return "404page"; 
     }
 
 
     @GetMapping("admin/trademark")
     public String listTrademark(Model model){
       
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
+     if (customerService.isCustomerLogin()) {
 
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/thuonghieu";
+           }   
+           
+           return "404page";
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/thuonghieu"; 
+          }
+
+        
+        
+         return "404page"; 
     }
 
     @GetMapping("admin/supplier")
     public String listSupplier(Model model){
       
-        //  if (userService.isRole()) {
-        //     return "dashboard/products";
-        //  }
+     if (customerService.isCustomerLogin()) {
 
-        List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/nhacungcap";
+           }   
+           
+           return "404page";
 
-        model.addAttribute("noti", ntn);
-         return "dashboard/nhacungcap"; 
+          }
+        
+        
+         return "404page"; 
+    }
+
+    @GetMapping("admin/warehouse-receipt")
+    public String listWAREHOUSEEXPORT(Model model){
+      
+     if (customerService.isCustomerLogin()) {
+
+          if (userService.isRole()) {
+               model.addAttribute("username",customerService.getCustomer().getUser().getUsername());
+               model.addAttribute("customer_id", customerService.getCustomer().getUser().getId());
+               List<MessageNotifications> ntn = messageNotificationsRepository.findAll(Sort.by("createdDate").descending());
+                model.addAttribute("noti", ntn);
+              return "dashboard/warehousereceipt";
+           }   
+           
+           return "404page";
+
+          }
+
+        
+        
+         return "404page"; 
     }
 }

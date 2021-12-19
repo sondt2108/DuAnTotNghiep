@@ -22,6 +22,9 @@ public class MessageNotifications {
     @NotNull
     private Long orderId;
 
+
+    private String description;
+
     public MessageNotifications() {
     }
 
@@ -53,6 +56,14 @@ public class MessageNotifications {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

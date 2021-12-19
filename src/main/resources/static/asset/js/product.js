@@ -282,7 +282,7 @@ function sortChanged(obj)
     
     var value = obj.value;
     if (value === ''){
-        window.location.assign(url)
+        window.location.assign(location)
     }
     else if (value === '1'){
       window.location.assign('?sort=tensanpham')  
@@ -325,8 +325,8 @@ const price_max = urlPrice.get('price_max');
         $("#page_products").load(url + " #page_products");
         window.history.pushState('', 'New Page Title', url);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
-        $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $("#page_sort").hide();
+        $('#page_default').attr('style', 'display: block !important');
         refreshPage();
     }
     else if (value === '1'){
@@ -336,7 +336,7 @@ const price_max = urlPrice.get('price_max');
         window.history.pushState('', 'New Page Title', `?price_max=100000`);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
         $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $('#page_default').hide();
         refreshPage(); 
     }
     else if (value === '2'){
@@ -346,7 +346,7 @@ const price_max = urlPrice.get('price_max');
         window.history.pushState('', 'New Page Title', `?price_min=100000&price_max=300000`);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
         $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $('#page_default').hide();
         refreshPage();
          
     }
@@ -356,7 +356,7 @@ const price_max = urlPrice.get('price_max');
         window.history.pushState('', 'New Page Title', `?price_min=300000&price_max=500000`);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
         $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $('#page_default').hide();
         refreshPage();
     }
     else if (value === '4'){
@@ -365,7 +365,7 @@ const price_max = urlPrice.get('price_max');
         window.history.pushState('', 'New Page Title', `?price_min=500000&price_max=700000`);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
         $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $('#page_default').hide();
         refreshPage();
     }
     else if (value === '5'){
@@ -374,7 +374,7 @@ const price_max = urlPrice.get('price_max');
         window.history.pushState('', 'New Page Title', url+`?price_min=700000`);
         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
         $("#page_sort").attr('style', 'display: block !important');
-        document.getElementById('page_default').remove();
+        $('#page_default').hide();
         refreshPage();
     }
 

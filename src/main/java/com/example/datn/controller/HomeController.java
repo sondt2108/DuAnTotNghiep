@@ -1,7 +1,7 @@
 package com.example.datn.controller;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.datn.repository.CategoryRepository;
 import com.example.datn.repository.ProductRepository;
-import com.example.datn.repository.TrademakeRepository;
 import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
+import com.example.datn.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,12 +40,20 @@ public class HomeController {
 	@Autowired
 	TrademarkRepository trademarkRepository;
 
+	@Autowired
+	UserService userService;
 
     @GetMapping("/detail/{productname}")
     public String demo(@PathVariable String productname, Model model, HttpServletRequest request, HttpSession session){
          session = request.getSession();
 
-		 if (session.getAttribute("idth") == null || session.getAttribute("idCate") == null) {
+		 List<Category> categories = categoryRepository.findAll();
+
+
+	model.addAttribute("cate", categories);
+
+		 if (session.getAttribute("idth") == null && session.getAttribute("idCate") == null) {
+
 			int idth = 1;
 			int idcate = 1;
 
@@ -55,6 +63,7 @@ public class HomeController {
 		}else {
 			int idth = ((Integer) (session.getAttribute("idth")) ).intValue();
 		 int idcate = ((Integer) (session.getAttribute("idCate")) ).intValue();
+
 		 
 		 List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
 		
@@ -62,7 +71,39 @@ public class HomeController {
 		model.addAttribute("products", products);
 		}
 
-		 
+		if (customerService.isCustomerLogin()) {
+
+			if (userService.isRole()) {
+				System.out.println("síisisisisis");
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+			
+	
+	
+			return "demo";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+	}
+
 		
 		model.addAttribute("cart", cartService.getGioHang());
 	
@@ -83,25 +124,153 @@ public class HomeController {
 
 	List<Product> productByNanoco = productRepository.findByTrade();
 
+	List<Product> productByWire = productRepository.findByWire();
+
+	List<Product> productBySockets = productRepository.findBySockets();
+
+	List<Product> productByElectricHouseware = productRepository.findByElectricHouseware();
+
 	List<Category> categories = categoryRepository.findAll();
 
 
 	model.addAttribute("productByPana", productByPanasonic);
 	model.addAttribute("productByNano", productByNanoco);
+	model.addAttribute("productByWire", productByWire);
+	model.addAttribute("productBySockets", productBySockets);
+	model.addAttribute("productByElectricHouseware", productByElectricHouseware);
 	model.addAttribute("cate", categories);
 
 	if (customerService.isCustomerLogin()) {
+
+		if (userService.isRole()) {
+			model.addAttribute("isAdmin", 1);
+		}
 		model.addAttribute("name",customerService.getCustomer().getHoten());
 		model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 		model.addAttribute("isLogin", 1);
+		
+
 
 		return "index";
 	}
 
 		model.addAttribute("isLogin", 2);
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
        
 
         return "index";
+    }
+
+
+
+	@GetMapping("/introduce")
+    public String introduce(Model model) {
+
+
+	List<Category> categories = categoryRepository.findAll();
+
+
+	
+	model.addAttribute("cate", categories);
+
+	if (customerService.isCustomerLogin()) {
+
+		if (userService.isRole()) {
+			model.addAttribute("isAdmin", 1);
+		}
+		model.addAttribute("name",customerService.getCustomer().getHoten());
+		model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+		model.addAttribute("isLogin", 1);
+		
+
+
+		return "introduce";
+	}
+
+		model.addAttribute("isLogin", 2);
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
+       
+
+        return "introduce";
+    }
+
+	@GetMapping("/installation")
+    public String ld(Model model) {
+
+
+	List<Category> categories = categoryRepository.findAll();
+
+
+	
+	model.addAttribute("cate", categories);
+
+	if (customerService.isCustomerLogin()) {
+
+		if (userService.isRole()) {
+			model.addAttribute("isAdmin", 1);
+		}
+		model.addAttribute("name",customerService.getCustomer().getHoten());
+		model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+		model.addAttribute("isLogin", 1);
+		
+
+
+		return "ld";
+	}
+
+		model.addAttribute("isLogin", 2);
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
+       
+
+        return "ld";
     }
 
 
@@ -151,7 +320,8 @@ public class HomeController {
 		model.addAttribute("thuonghieu", thuonghieu);
 
 		model.addAttribute("countProduct", productPage.getTotalElements());
-
+		System.out.println("dddd");
+		System.out.println(productPage.getTotalElements());
 		model.addAttribute("products", productPage.getContent());
 		// truyền vào số lượng page tối đa
 		model.addAttribute("maxPage", productPage.getTotalPages());
@@ -167,14 +337,34 @@ public class HomeController {
 		model.addAttribute("sortDesc", sortBy);
 
 		if (customerService.isCustomerLogin()) {
+			if (userService.isRole()) {
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
 			model.addAttribute("name",customerService.getCustomer().getHoten());
 			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
+			
 	
 			return "product";
 		}
 	
 			model.addAttribute("isLogin", 2);
+
+			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 
         return "product";
     }
@@ -197,6 +387,15 @@ public class HomeController {
 		if (sortBy.equals("ASC")) {
 			sortable = Sort.by(Sort.Direction.ASC, sortFeild);
 		}
+
+		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
+			//category
+			List<Category> categories = categoryRepository.findAll();
+	
+	
+			model.addAttribute("cate", categories);
+	
+			model.addAttribute("thuonghieu", thuonghieu);
 
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
@@ -231,24 +430,22 @@ public class HomeController {
 		}
 
 		if (customerService.isCustomerLogin()) {
+
+			if (userService.isRole()) {
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
 			model.addAttribute("name",customerService.getCustomer().getHoten());
 			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
-	
+			
 			return "category";
 		}
 	
 			model.addAttribute("isLogin", 2);
 		
 
-		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
-		//category
-		List<Category> categories = categoryRepository.findAll();
-
-
-		model.addAttribute("cate", categories);
-
-		model.addAttribute("thuonghieu", thuonghieu);
 
 		
 
@@ -263,6 +460,20 @@ public class HomeController {
 		System.out.println("sss" + test);
 		model.addAttribute("requestUrl", test);
 
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
+
         return "category";
     }
 
@@ -272,7 +483,7 @@ public class HomeController {
     public String filterByTremak(@PathVariable String name, @RequestParam(name = "price_min", defaultValue = "0") Long giamin,
 			@RequestParam(name = "price_max", defaultValue = "10000000") Long giamax,
 			@RequestParam(name = "pageIndex", defaultValue = "0") int pageIndex,
-			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model) {
+			@RequestParam(name = "sortBy", defaultValue = "ASC") String sortBy, Model model, HttpServletRequest request) {
 
 		
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM);
@@ -310,14 +521,39 @@ public class HomeController {
 		model.addAttribute("sortDesc", sortBy);
 
 		if (customerService.isCustomerLogin()) {
+
+			if (userService.isRole()) {
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
 			model.addAttribute("name",customerService.getCustomer().getHoten());
 			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
+			
 	
 			return "filter_product";
 		}
 	
 			model.addAttribute("isLogin", 2);
+
+			String requestUrl = request.getRequestURL().toString() + "?" + request.getQueryString();
+
+		model.addAttribute("requestUrl", requestUrl);
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 
         return "filter_product";
     }
@@ -379,6 +615,38 @@ public class HomeController {
 		System.out.println("sss" + test);
 		model.addAttribute("requestUrl", test);
 
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+		if (customerService.isCustomerLogin()) {
+
+			if (userService.isRole()) {
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+			
+	
+	
+			return "search";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
+
 		return "search";
 	}
 
@@ -388,19 +656,45 @@ CustomerService customerService;
 	@GetMapping("/myOrder")
     public String OrderCustomer(Model model) {
 
+		List<Category> categories = categoryRepository.findAll();
+
+
+	model.addAttribute("cate", categories);
+
 		if (customerService.isCustomerLogin()) {
-			//model.addAttribute("cartStatus", 0);
-			
+
+			if (userService.isRole()) {
+				model.addAttribute("isAdmin", 1);
+			}else{
+				model.addAttribute("isAdmin", 2);
+			}
 			model.addAttribute("name",customerService.getCustomer().getHoten());
-			model.addAttribute("address",customerService.getCustomer().getDiachi());
-			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
-			model.addAttribute("customer_id",customerService.getCustomer().getId());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
 			
+	
+	
 			return "OrderCustomer";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
 	}
 
-	model.addAttribute("isLogin", 2);
+		
+		model.addAttribute("cart", cartService.getGioHang());
 
         return "OrderCustomer";
     }
@@ -408,8 +702,40 @@ CustomerService customerService;
 
 
 	@GetMapping("/contact")
-	public String contact() {
+	public String contact(Model model) {
+
+		if (customerService.isCustomerLogin()) {
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+			
+	
+	
+			return "demo";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
 		
+		model.addAttribute("quantity", quantity);
+	}
+
+	List<Category> categories = categoryRepository.findAll();
+
+
+	model.addAttribute("cate", categories);
+		
+		model.addAttribute("cart", cartService.getGioHang());
 		
 		return "contact";
 	}

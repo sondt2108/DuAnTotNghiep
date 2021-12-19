@@ -4,7 +4,6 @@ const urlParams = new URLSearchParams(window.location.search);
 const param = urlParams.get("sort");
 const sortBy = urlParams.get("sortBy");
 const trademark = urlParams.get("trademark");
-console.log(trademark);
 
 const urlPrice = new URLSearchParams(window.location.search);
 const price_min = urlPrice.get("price_min");
@@ -28,36 +27,35 @@ if (price_max == 100000) {
 }
 
 if (param == "tensanpham") {
-  console.log("1");
+
   document.getElementById("nameASC").checked = true;
   document.getElementById("filter_products").selectedIndex = "1";
   $("#page_default").css("display", "none");
   $("#page_sort").css("display", "block");
 } else if (param == "gia") {
-  console.log("2");
+
   document.getElementById("priceASC").checked = true;
   document.getElementById("filter_products").selectedIndex = "3";
   $("#page_default").css("display", "none");
   $("#page_sort").css("display", "block");
 } else if (trademark === null && param === null && sortBy === null) {
-  console.log("4");
+
   $("#page_sort").css("display", "none");
 } else if (trademark != "") {
-  console.log("3");
+
   $("#page_default").css("display", "none");
 
   $("#page_sort").css("display", "block");
 }
 
 if (param == "tensanpham" && sortBy == "DESC") {
-  console.log("5");
+
 
   document.getElementById("nameDESC").checked = true;
   document.getElementById("filter_products").selectedIndex = "2";
   $("#page_default").css("display", "none");
   $("#page_sort").css("display", "block");
 } else if (param == "gia" && sortBy == "DESC") {
-  console.log("6");
   document.getElementById("priceDESC").checked = true;
   document.getElementById("filter_products").selectedIndex = "4";
   $("#page_default").css("display", "none");
@@ -1548,7 +1546,7 @@ function priceChanged(obj) {
   var value = obj.value;
 
   if (x === "" || (trademark === null && param === null && sortBy === null)) {
-    console.log("111");
+   
     if(param === null && sortBy === null ) {
         if (value === ''){
             //window.location.assign(url)
@@ -1556,7 +1554,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', url);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
         }
         else if (value === '1'){
@@ -1566,7 +1564,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', `?price_max=100000`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage(); 
         }
         else if (value === '2'){
@@ -1576,7 +1574,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', `?price_min=100000&price_max=300000`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
              
         }
@@ -1586,7 +1584,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', `?price_min=300000&price_max=500000`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
         }
         else if (value === '4'){
@@ -1595,7 +1593,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', `?price_min=500000&price_max=700000`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
         }
         else if (value === '5'){
@@ -1604,11 +1602,10 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', url+`?price_min=700000`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
         }
     
-        console.log("sonne");
     }else if(param !='' || sortBy!='') {
        
             if (param != '') {
@@ -1619,7 +1616,7 @@ function priceChanged(obj) {
             window.history.pushState('', 'New Page Title', url+`?sort=${param}&sortBy=${sortBy}`);
             $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
             $("#page_sort").attr('style', 'display: block !important');
-            document.getElementById('page_default').remove();
+           $("#page_default").hide();
             refreshPage();
                     }
                     else if (value === '1'){
@@ -1628,7 +1625,7 @@ function priceChanged(obj) {
                     window.history.pushState('', 'New Page Title', `?price_max=100000&sort=${param}&sortBy=${sortBy}`);
                     $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                     $("#page_sort").attr('style', 'display: block !important');
-                    document.getElementById('page_default').remove();
+                   $("#page_default").hide();
                     refreshPage(); 
                     }
                     else if (value === '2'){
@@ -1637,7 +1634,7 @@ function priceChanged(obj) {
                     window.history.pushState('', 'New Page Title', `?price_min=100000&price_max=300000&sort=${param}&sortBy=${sortBy}`);
                     $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                     $("#page_sort").attr('style', 'display: block !important');
-                    document.getElementById('page_default').remove();
+                   $("#page_default").hide();
                     refreshPage();  
                     }
                     else if (value === '3'){
@@ -1646,7 +1643,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_min=300000&price_max=500000&sort=${param}&sortBy=${sortBy}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage(); 
                     }
                     else if (value === '4'){
@@ -1655,7 +1652,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_min=500000&price_max=700000&sort=${param}&sortBy=${sortBy}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();
                     }
                     else if (value === '5'){
@@ -1664,7 +1661,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', url+`?price_min=700000&sort=${param}&sortBy=${sortBy}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();
                     }
                 }else if(param != '' && price_min != '' && price_max != '') {
@@ -1674,7 +1671,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', url+`?sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();
                     }
                     else if (value === '1'){
@@ -1683,7 +1680,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_max=100000&sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage(); 
                     }
                     else if (value === '2'){
@@ -1692,7 +1689,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_min=100000&price_max=300000&sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();  
                     }
                     else if (value === '3'){
@@ -1701,7 +1698,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_min=300000&price_max=500000&sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();   
                     }
                     else if (value === '4'){
@@ -1710,7 +1707,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', `?price_min=500000&price_max=700000&sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage();   
                     }
                     else if (value === '5'){
@@ -1719,7 +1716,7 @@ function priceChanged(obj) {
                         window.history.pushState('', 'New Page Title', url+`?price_min=700000&sort=${param}`);
                         $( "#pageSortRefresh" ).load(window.location.href + " #pageSortRefresh" );
                         $("#page_sort").attr('style', 'display: block !important');
-                        document.getElementById('page_default').remove();
+                       $("#page_default").hide();
                         refreshPage(); 
                     }
                 }
@@ -1727,14 +1724,12 @@ function priceChanged(obj) {
             
             }
     }
-  } else if (param != "" || sortBy != "" && trademark != "") {
-    console.log("112");
-    console.log(sortBy);
-    console.log(param);
+  } else if (param != "" && sortBy != "" && trademark != "") {
+   
     if (trademark === null) {
       if (param == "tensanpham" || param == "gia") {
         if (value === "") {
-          console.log(url);
+         
           //window.location.assign(url+`?sort=${param}`)
           $("#page_products").load(url + `?sort=${param}` + " #page_products");
           window.history.pushState(
@@ -1943,8 +1938,9 @@ function priceChanged(obj) {
     }
     //end  trademark === null
     else if (trademark != "") {
-      console.log("12345");
+     
       if (param == "tensanpham" || param == "gia") {
+     
         if (sortBy == "DESC") {
           if (value === "") {
             //window.location.assign(url+`?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`)
@@ -2163,6 +2159,7 @@ function priceChanged(obj) {
         (param == "tensanpham" && sortBy == "DESC") ||
         (param == "gia" && sortBy == "DESC")
       ) {
+       
         if (value === "") {
           //window.location.assign(url+`?trademark=${trademark}&sort=${param}&sortBy=${sortBy}`)
           $("#page_products").load(
@@ -2270,6 +2267,7 @@ function priceChanged(obj) {
           refreshPage();
         }
       }else if (trademark != "" && price_max === null && price_min === null) {
+   
         if (value === "") {
           //window.location.assign(`?trademark=${trademark}`)
           $("#page_products").load(
@@ -2320,7 +2318,109 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "3") {
-            console.log("1999988888");
+          
+          // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
+          $("#page_products").load(
+            `?trademark=${trademark}&price_min=300000&price_max=500000` +
+              " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            `?trademark=${trademark}&price_min=300000&price_max=500000`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        } else if (value === "4") {
+          //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
+          $("#page_products").load(
+            `?trademark=${trademark}&price_min=500000&price_max=700000` +
+              " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            `?trademark=${trademark}&price_min=500000&price_max=700000`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        } else if (value === "5") {
+          //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
+          $("#page_products").load(
+            url + `?trademark=${trademark}&price_min=700000` + " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            url + `?trademark=${trademark}&price_min=700000`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        }
+      }else {
+        if (value === "") {
+          //window.location.assign(`?trademark=${trademark}`)
+          $("#page_products").load(
+            `?trademark=${trademark}` + " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            `?trademark=${trademark}`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        } else if (value === "1") {
+          //window.location.assign(`?trademark=${trademark}&price_max=100000`)
+          $("#page_products").load(
+            `?trademark=${trademark}&price_max=100000` + " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            `?trademark=${trademark}&price_max=100000`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        } else if (value === "2") {
+          //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
+          $("#page_products").load(
+            `?trademark=${trademark}&price_min=100000&price_max=300000` +
+              " #page_products"
+          );
+          window.history.pushState(
+            "",
+            "New Page Title",
+            `?trademark=${trademark}&price_min=100000&price_max=300000`
+          );
+          $("#pageSortRefresh").load(
+            window.location.href + " #pageSortRefresh"
+          );
+          $("#page_sort").attr("style", "display: block !important");
+
+          refreshPage();
+        } else if (value === "3") {
+            
           // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
             `?trademark=${trademark}&price_min=300000&price_max=500000` +
@@ -2375,13 +2475,12 @@ function priceChanged(obj) {
     }
     //end trademark != ""
     else if (trademark != "" && price_max === null && price_min === null) {
-      console.log("123");
+     
       if (
         (trademark != "" && price_min != "",
         price_max != "" && sortBy === null && param === null)
       ) {
 
-        console.log("147852");
         if (value === "") {
           //window.location.assign(`?trademark=${trademark}`)
           $("#page_products").load(
@@ -2432,7 +2531,7 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "3") {
-            console.log("1999988888");
+          
           // window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
             `?trademark=${trademark}&price_min=300000&price_max=500000` +
@@ -2487,13 +2586,12 @@ function priceChanged(obj) {
     } else {
       if (trademark != null && price_max != null && price_min != null) {
         if (param === null || sortBy === null) {
-          console.log("11222");
+        
           if (
             (trademark != "" && price_min != "",
             price_max != "" && sortBy === null && param === null)
           ) {
 
-            console.log("999999999");
             if (value === "") {
               //window.location.assign(`?trademark=${trademark}`)
               $("#page_products").load(
@@ -2511,7 +2609,6 @@ function priceChanged(obj) {
 
               refreshPage();
             } else if (value === "1") {
-                console.log("999999999");
               //window.location.assign(`?trademark=${trademark}&price_max=100000`)
               $("#page_products").load(
                 `?trademark=${trademark}&price_max=100000` + " #page_products"
@@ -2528,7 +2625,6 @@ function priceChanged(obj) {
 
               refreshPage();
             } else if (value === "2") {
-                console.log("999999999");
               //window.location.assign(`?trademark=${trademark}&price_min=100000&price_max=300000`)
               $("#page_products").load(
                 `?trademark=${trademark}&price_min=100000&price_max=300000` +
@@ -2546,8 +2642,6 @@ function priceChanged(obj) {
 
               refreshPage();
             } else if (value === "3") {
-
-                console.log('199999');
               //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
               $("#page_products").load(
                 `?trademark=${trademark}&price_min=300000&price_max=500000` +
@@ -2565,7 +2659,6 @@ function priceChanged(obj) {
 
               refreshPage();
             } else if (value === "4") {
-                console.log("999999999");
               //window.location.assign(`?trademark=${trademark}&price_min=500000&price_max=700000`)
               $("#page_products").load(
                 `?trademark=${trademark}&price_min=500000&price_max=700000` +
@@ -2583,7 +2676,6 @@ function priceChanged(obj) {
 
               refreshPage();
             } else if (value === "5") {
-                console.log("999999999");
               //window.location.assign(url+`?trademark=${trademark}&price_min=700000`)
               $("#page_products").load(
                 url +
@@ -2652,7 +2744,6 @@ function priceChanged(obj) {
 
           refreshPage();
         } else if (value === "3") {
-            console.log("1477777")
           //window.location.assign(`?trademark=${trademark}&price_min=300000&price_max=500000`)
           $("#page_products").load(
             `?trademark=${trademark}&price_min=300000&price_max=500000` +

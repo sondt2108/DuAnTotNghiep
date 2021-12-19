@@ -50,7 +50,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -103,9 +102,6 @@ public class AuthController {
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
     if (customerService.getUser(userDetails.getId())) {
         
-        session.setAttribute("username", customerService.getCustomer().getHoten());
-        session.setAttribute("currentUser", customerService.getCustomer());
-        
        
     }
 
@@ -120,11 +116,11 @@ public class AuthController {
   @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Tên tài khoản đã tồn tại!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email đã tồn tại, vui lòng chọn email khác"));
         }
 
         // Create new user's account
@@ -187,6 +183,8 @@ public class AuthController {
         .orElseThrow(() ->  new TokenRefreshException(requestRefreshToken, "Refresh token is not in database!"));
   }
 
+  
+
   @PostMapping("/logout")
   public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
 
@@ -194,7 +192,8 @@ public class AuthController {
     System.out.println(logOutRequest.getUserId());
     refreshTokenService.deleteByUserId(id);
 		customerService.logout(logOutRequest.getUserId());
-			
+		//remove sess
+    userService.logoutAdmin(logOutRequest.getUserId());
 		
     return ResponseEntity.ok(new MessageResponse("Log out successful!"));
   }

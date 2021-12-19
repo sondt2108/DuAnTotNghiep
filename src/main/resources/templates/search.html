@@ -3,12 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đức Phát | Thiết bị điện</title>
 
+    <link rel="shortcut icon" href="/asset/img/favicon.png">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
@@ -84,7 +82,7 @@
                                   <th:block th:each="th : ${thuonghieu}">
         
                                   <li class="filter-item filter-item--check-box filter-item--green ">
-                                    <a th:href="@{'/trademake/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
+                                    <a th:href="@{'/trademark/' + ${th.tenTH}}" style="padding-left: 10px; color: black;">[[${th.tenTH}]]</a>
                                   </li> 
                                   </th:block>
                                                           
@@ -114,8 +112,8 @@
                          <!-- card -->
                          
                          <div class="col-lg-4 mobile" th:each="products : ${products}">
-                           <div class="thumb-wrapper">
-                             <a  th:attr="onclick=|loaddetail('${products.productId}')|">
+                           <div class="thumb-wrapper baseBlock">
+                             <a th:href="@{'/detail/' + ${products.seourl}}" th:attr="onclick=|loaddetail('${products.productId}')|">
                                  
                                    <span class="sale" th:text="${#numbers.formatDecimal(products.khuyenmai, 0, 'COMMA', 0, 'POINT') +'%'}"> 
                                      
