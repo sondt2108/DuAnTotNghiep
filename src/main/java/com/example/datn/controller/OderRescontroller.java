@@ -129,8 +129,8 @@ double quantityOrder = listItems.get(product);
         emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
         
         
-        Response response =mailService.sendemail(emailrequest);
-        Response rp = mailService.sendMailOrderWithAdmin(id);
+        // Response response =mailService.sendemail(emailrequest);
+        // Response rp = mailService.sendMailOrderWithAdmin(id);
 
         MessageNotifications ntn = new MessageNotifications();
         ntn.setOrderId(id);
@@ -209,9 +209,9 @@ double quantityOrder = listItems.get(product);
         emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
         
         
-        Response response =mailService.sendemail(emailrequest);
+        // Response response =mailService.sendemail(emailrequest);
         
-        Response rp = mailService.sendMailOrderWithAdmin(id);
+        // Response rp = mailService.sendMailOrderWithAdmin(id);
 
         cartService.getGioHang().getChiTietGioHang().clear();
 

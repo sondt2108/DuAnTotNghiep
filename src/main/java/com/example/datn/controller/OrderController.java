@@ -51,6 +51,7 @@ public class OrderController {
 			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
 			model.addAttribute("phoneNumber",customerService.getCustomer().getSdt());
 			model.addAttribute("address",customerService.getCustomer().getDiachi());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
 			return "thanhtoan";
 		} else {

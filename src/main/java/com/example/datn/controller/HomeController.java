@@ -47,6 +47,20 @@ public class HomeController {
     public String demo(@PathVariable String productname, Model model, HttpServletRequest request, HttpSession session){
          session = request.getSession();
 
+		 Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+	}
+
+
 		 List<Category> categories = categoryRepository.findAll();
 
 
@@ -58,6 +72,8 @@ public class HomeController {
 			int idcate = 1;
 
 			List<Product> products = productRepository.findByRelatedProduct(idth, idcate);
+
+			model.addAttribute("cart", cartService.getGioHang());
 
 	   model.addAttribute("products", products);
 		}else {
@@ -89,23 +105,7 @@ public class HomeController {
 		}
 	
 			model.addAttribute("isLogin", 2);
-
-
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
 		
-		model.addAttribute("quantity", quantity);
-	}
-
-		
-		model.addAttribute("cart", cartService.getGioHang());
 	
         return "demo";
     }
@@ -132,6 +132,23 @@ public class HomeController {
 
 	List<Category> categories = categoryRepository.findAll();
 
+	Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+
+		System.out.println("sonne");
+		System.out.println(quantity);
+		
+	}
+
 
 	model.addAttribute("productByPana", productByPanasonic);
 	model.addAttribute("productByNano", productByNanoco);
@@ -154,25 +171,7 @@ public class HomeController {
 		return "index";
 	}
 
-		model.addAttribute("isLogin", 2);
-
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-
-		System.out.println("sonne");
-		System.out.println(quantity);
-		
-	}
-       
+		model.addAttribute("isLogin", 2);       
 
         return "index";
     }
@@ -184,6 +183,20 @@ public class HomeController {
 
 
 	List<Category> categories = categoryRepository.findAll();
+
+	Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 
 
 	
@@ -204,8 +217,17 @@ public class HomeController {
 	}
 
 		model.addAttribute("isLogin", 2);
+       
 
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+        return "introduce";
+    }
+
+	@GetMapping("/installation")
+    public String ld(Model model) {
+
+
+	List<Category> categories = categoryRepository.findAll();
+	Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
 
 
 	for (Product product : listItems.keySet()) {
@@ -221,17 +243,6 @@ public class HomeController {
 		System.out.println(quantity);
 		
 	}
-       
-
-        return "introduce";
-    }
-
-	@GetMapping("/installation")
-    public String ld(Model model) {
-
-
-	List<Category> categories = categoryRepository.findAll();
-
 
 	
 	model.addAttribute("cate", categories);
@@ -252,22 +263,6 @@ public class HomeController {
 
 		model.addAttribute("isLogin", 2);
 
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-
-		System.out.println("sonne");
-		System.out.println(quantity);
-		
-	}
        
 
         return "ld";
@@ -280,7 +275,7 @@ public class HomeController {
         return "ordersuccess";
     }
 
-    private static final int TOI_DA_SAN_PHAM = 3;
+    private static final int TOI_DA_SAN_PHAM = 6;
 
     @GetMapping("/product")
     public String listproduct(@RequestParam(name = "sort", defaultValue = "product_id") String sortFeild,
@@ -303,7 +298,19 @@ public class HomeController {
 
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM, sortable);
 
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
 		
+		model.addAttribute("quantity", quantity);
+		
+	}
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findProductAll(giamin, giamax, pager);
 		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
@@ -352,19 +359,6 @@ public class HomeController {
 	
 			model.addAttribute("isLogin", 2);
 
-			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-		
-	}
 
         return "product";
     }
@@ -391,6 +385,20 @@ public class HomeController {
 		List<ThuongHieu> thuonghieu = trademarkRepository.findAll();
 			//category
 			List<Category> categories = categoryRepository.findAll();
+			
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+		for (Product product : listItems.keySet()) {
+	
+				
+	
+				
+			int quantity = listItems.get(product);
+			
+			model.addAttribute("quantity", quantity);
+			
+		}
 	
 	
 			model.addAttribute("cate", categories);
@@ -460,20 +468,6 @@ public class HomeController {
 		System.out.println("sss" + test);
 		model.addAttribute("requestUrl", test);
 
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-		
-	}
-
         return "category";
     }
 
@@ -487,6 +481,20 @@ public class HomeController {
 
 		
 		Pageable pager = PageRequest.of(pageIndex, TOI_DA_SAN_PHAM);
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+
+            
+
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+		
+	}
 
 		// lấy sản phẩm
 		Page<Product> productPage = productRepository.findByTradeMake(name, giamin, giamax, pager);
@@ -541,19 +549,6 @@ public class HomeController {
 
 		model.addAttribute("requestUrl", requestUrl);
 
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-		
-	}
 
         return "filter_product";
     }
@@ -616,6 +611,13 @@ public class HomeController {
 		model.addAttribute("requestUrl", test);
 
 		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+		for (Product product : listItems.keySet()) {
+
+			int quantity = listItems.get(product);
+			
+			model.addAttribute("quantity", quantity);
+			
+		}
 
 		if (customerService.isCustomerLogin()) {
 
@@ -627,25 +629,11 @@ public class HomeController {
 			model.addAttribute("name",customerService.getCustomer().getHoten());
 			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
-			
-	
-	
+
 			return "search";
 		}
 	
 			model.addAttribute("isLogin", 2);
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-		
-	}
 
 		return "search";
 	}
@@ -657,6 +645,19 @@ CustomerService customerService;
     public String OrderCustomer(Model model) {
 
 		List<Category> categories = categoryRepository.findAll();
+
+		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+
+
+	for (Product product : listItems.keySet()) {
+			
+		int quantity = listItems.get(product);
+		
+		model.addAttribute("quantity", quantity);
+	}
+
+		
+		model.addAttribute("cart", cartService.getGioHang());
 
 
 	model.addAttribute("cate", categories);
@@ -680,22 +681,6 @@ CustomerService customerService;
 			model.addAttribute("isLogin", 2);
 
 
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
-
-
-	for (Product product : listItems.keySet()) {
-
-            
-
-			
-		int quantity = listItems.get(product);
-		
-		model.addAttribute("quantity", quantity);
-	}
-
-		
-		model.addAttribute("cart", cartService.getGioHang());
-
         return "OrderCustomer";
     }
 
@@ -703,19 +688,6 @@ CustomerService customerService;
 
 	@GetMapping("/contact")
 	public String contact(Model model) {
-
-		if (customerService.isCustomerLogin()) {
-			model.addAttribute("name",customerService.getCustomer().getHoten());
-			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
-			model.addAttribute("isLogin", 1);
-			
-	
-	
-			return "demo";
-		}
-	
-			model.addAttribute("isLogin", 2);
-
 
 		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
 
@@ -736,6 +708,19 @@ CustomerService customerService;
 	model.addAttribute("cate", categories);
 		
 		model.addAttribute("cart", cartService.getGioHang());
+
+		if (customerService.isCustomerLogin()) {
+			model.addAttribute("name",customerService.getCustomer().getHoten());
+			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
+			model.addAttribute("isLogin", 1);
+			
+	
+	
+			return "demo";
+		}
+	
+			model.addAttribute("isLogin", 2);
+
 		
 		return "contact";
 	}
