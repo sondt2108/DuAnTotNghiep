@@ -1,0 +1,11 @@
+
+
+spring.datasource.url=postgres://ec2-44-195-186-223.compute-1.amazonaws.com:5432/da4lm64f45li02
+
+spring.datasource.username=omvtxyfmycbgvo
+
+spring.datasource.password=6c5d61b65ad9396cc0f59892a1b9db9c0e2da0bbe039f9ec853f36ddc558c350
+
+spring.datasource.driverClassName=org.postgresql.Driver
+
+SPRING_JPA_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQL9Dialect
