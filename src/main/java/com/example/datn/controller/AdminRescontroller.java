@@ -25,6 +25,7 @@ import com.example.datn.repository.OrderRepository;
 import com.example.datn.repository.OrderStatusRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.SupplierRepository;
+import com.example.datn.repository.TinhTrangdhRepository;
 import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.repository.UserRepository;
 import com.example.datn.repository.WarehouseReceiptRepository;
@@ -510,7 +511,7 @@ WarehouseReceiptRepository warehouseReceiptRepository;
 	}
 
     @PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("api/phieunhap/search")
+	@PostMapping("/api/phieunhap/search")
     public Page<PhieuNhap> searchPN(
             // thông tin form tìm kiếm
             @RequestBody SearchForm sf) {
@@ -526,6 +527,14 @@ WarehouseReceiptRepository warehouseReceiptRepository;
 
         return khachHangPage;
     }
+
+    @Autowired
+    TinhTrangdhRepository tinhTrangdhRepository;
+
+    @PostMapping("/api/tinhtrang")
+	public TinhTrangDonHang insertTinhTrang(@RequestBody @Valid TinhTrangDonHang tinhTrangDonHang) {
+		return tinhTrangdhRepository.save(tinhTrangDonHang);
+	}
 }
 
 

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name = "tinhtrangdonhang")
 public class TinhTrangDonHang {
     @Id
-	@GeneratedValue
 	private int idTT;
 	
 	private String tinhTrang;
