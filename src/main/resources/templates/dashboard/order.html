@@ -63,9 +63,185 @@
 
   <body class="has-sidebar has-fixed-sidebar-and-header">
     <!-- Header -->
-    <th:block th:replace="/dashboard/fragments :: header"> 
+    <header class="header bg-body">
+      <nav class="navbar flex-nowrap p-0">
+        <div class="navbar-brand-wrapper d-flex align-items-center col-auto">
+          <!-- Logo For Mobile View -->
+          <a class="navbar-brand navbar-brand-mobile" href="/">
+            <img
+              class="img-fluid w-100"
+              src="/asset/img/lg.png"
+              alt=""
+            />
+          </a>
+          <!-- End Logo For Mobile View -->
 
-    </th:block>
+          <!-- Logo For Desktop View -->
+          <a class="navbar-brand navbar-brand-desktop" href="/">
+            <img
+              class="side-nav-show-on-closed"
+              src="/asset/img/lg.png"
+              alt=""
+              style="width: 70px; height: 33px"
+            />
+            <img
+              class="side-nav-hide-on-closed"
+              src="/asset/img/lg.png"
+              alt=""
+              style="width: auto; height: 33px"
+            />
+          </a>
+          <!-- End Logo For Desktop View -->
+        </div>
+
+        <div class="header-content col px-md-3">
+          <div class="d-flex align-items-center">
+            <!-- Side Nav Toggle -->
+            <a
+              class="js-side-nav header-invoker d-flex mr-md-2"
+              href="#"
+              data-close-invoker="#sidebarClose"
+              data-target="#sidebar"
+              data-target-wrapper="body"
+            >
+              <i class="gd-align-left"></i>
+            </a>
+            <!-- End Side Nav Toggle -->
+
+            <!-- User Notifications -->
+            <div class="dropdown ml-auto">
+              <a
+                id="notificationsInvoker"
+                class="header-invoker"
+                href="#"
+                aria-controls="notifications"
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-unfold-event="click"
+                data-unfold-target="#notifications"
+                data-unfold-type="css-animation"
+                data-unfold-duration="300"
+                data-unfold-animation-in="fadeIn"
+                data-unfold-animation-out="fadeOut"
+              >
+                <span
+                  class="
+                    indicator
+                    indicator-bordered
+                    indicator-top-right
+                    indicator-primary
+                    rounded-circle
+                  "
+                ></span>
+                <i class="gd-bell"></i>
+              </a>
+
+              <div
+                id="notifications"
+                class="
+                  dropdown-menu dropdown-menu-center
+                  py-0
+                  mt-4
+                  w-18_75rem
+                  w-md-22_5rem
+                  unfold-css-animation unfold-hidden
+                "
+                aria-labelledby="notificationsInvoker"
+                style="animation-duration: 300ms"
+              >
+                <div class="card">
+                  <div
+                    class="
+                      card-header
+                      d-flex
+                      align-items-center
+                      border-bottom
+                      py-3
+                    "
+                  >
+                    <h5 class="mb-0">Thông báo</h5>
+                    <button class="btn btn-outline link small ml-auto" onclick="clearAllNotifi()">Clear All</button>
+                  </div>
+
+                  <div id="notifi" class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                      <div class="list-group-item list-group-item-action" th:each="ntn : ${noti}">
+                        <div class="d-flex align-items-center text-nowrap mb-2">
+                          <i
+                            class="gd-info-alt icon-text text-primary mr-2"
+                          ></i>
+                          <h6 class="font-weight-semi-bold mb-0">Thông báo mới</h6>
+                          <span class="list-group-item-date text-muted ml-auto"
+                          th:text="${#dates.format(ntn.createdDate, 'dd-MM-yyyy HH:mm')}"></span
+                          >
+                        </div>
+                        <p class="mb-0">
+                          Đơn hàng <strong>#[[${ntn.orderId}]]</strong> [[${ntn.description}]].
+                        </p>
+                        <button class=" btn btn-outline list-group-item-closer text-muted" th:onclick="|deleteByNotifi(${ntn.notificationsId})|"><i class="gd-close"></i
+                        ></button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End User Notifications -->
+            <!-- User Avatar -->
+            <div class="dropdown mx-3 dropdown ml-2">
+              <a
+                id="profileMenuInvoker"
+                class="header-complex-invoker"
+                href="#"
+                aria-controls="profileMenu"
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-unfold-event="click"
+                data-unfold-target="#profileMenu"
+                data-unfold-type="css-animation"
+                data-unfold-duration="300"
+                data-unfold-animation-in="fadeIn"
+                data-unfold-animation-out="fadeOut"
+              >
+                <!--img class="avatar rounded-circle mr-md-2" src="#" alt="John Doe"-->
+                <span class="mr-md-2 avatar-placeholder">AD</span>
+                <span class="d-none d-md-block">[[${username}]]</span>
+                <i class="gd-angle-down d-none d-md-block ml-2"></i>
+              </a>
+
+              <ul
+                id="profileMenu"
+                class="
+                  unfold unfold-user unfold-light unfold-top unfold-centered
+                  position-absolute
+                  pt-2
+                  pb-1
+                  mt-4
+                  unfold-css-animation unfold-hidden
+                  fadeOut
+                "
+                aria-labelledby="profileMenuInvoker"
+                style="animation-duration: 300ms"
+              >
+                <li class="unfold-item unfold-item-has-divider">
+                  <button
+                    class="btn btn-outline unfold-link d-flex align-items-center text-nowrap"
+                    th:onclick="'logout('+ *{customer_id} +')'"
+                  >
+                    <span class="unfold-item-icon mr-3">
+                      <i class="gd-power-off"></i>
+                    </span>
+                    Đăng xuất
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <!-- End User Avatar -->
+          </div>
+        </div>
+      </nav>
+    </header>
     <!-- End Header -->
 
     <main class="main">
@@ -110,10 +286,41 @@
           <li class="sidebar-heading h6">Examples</li>
           <!-- End Title -->
 
-          <th:block th:replace="/dashboard/fragments :: subOrder">
+          <li
+          class="side-nav-menu-item side-nav-has-menu active side-nav-opened"
+        >
+          <a
+            class="side-nav-menu-link media align-items-center"
+            href="#"
+            data-target="#subOrder"
+          >
+            <span class="side-nav-menu-icon d-flex mr-3">
+              <i class="gd-shopping-cart"></i>
+            </span>
+            <span class="side-nav-fadeout-on-closed media-body">Đặt hàng</span>
+            <span class="side-nav-control-icon d-flex">
+              <i class="gd-angle-right side-nav-fadeout-on-closed"></i>
+            </span>
+            <span
+              class="side-nav__indicator side-nav-fadeout-on-closed"
+            ></span>
+          </a>
 
-          </th:block>
-
+          <!-- order: subOrder -->
+          <ul
+            id="subOrder"
+            class="side-nav-menu side-nav-menu-second-level mb-0"
+            style="display: block"
+          >
+            <li class="side-nav-menu-item active">
+              <a class="side-nav-menu-link" href="/admin/order"
+                >Danh sách đặt hàng</a
+              >
+            </li>
+          </ul>
+          <!-- End order: subORDER -->
+        </li>
+        <!-- End order -->
          <!-- Users -->
 				<li class="side-nav-menu-item side-nav-has-menu"><a
 					class="side-nav-menu-link media align-items-center" href="#"
@@ -407,9 +614,43 @@
 				</div>
 			</div>
         <!-- Footer -->
-        <th:block th:replace="/dashboard/fragments :: footer">
-
-    		</th:block>
+        <footer class="small p-3 px-md-4 mt-auto">
+          <div class="row justify-content-between">
+            <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">
+              <ul class="list-dot list-inline mb-0">
+                <li
+                  class="
+                    list-dot-item list-dot-item-not list-inline-item
+                    mr-lg-2
+                  "
+                >
+                  <a class="link-dark" href="#">FAQ</a>
+                </li>
+                <li class="list-dot-item list-inline-item mr-lg-2">
+                  <a class="link-dark" href="#">Support</a>
+                </li>
+                <li class="list-dot-item list-inline-item mr-lg-2">
+                  <a class="link-dark" href="#">Contact us</a>
+                </li>
+              </ul>
+            </div>
+  
+            <div class="col-lg text-center mb-3 mb-lg-0">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item mx-2">
+                  <a class="link-muted" href="https://www.facebook.com/thanhson2112hc"><i class="gd-facebook"></i></a>
+                </li>
+                <li class="list-inline-item mx-2">
+                  <a class="link-muted" href="https://github.com/sondt2108"><i class="gd-github"></i></a>
+                </li>
+              </ul>
+            </div>
+  
+            <div class="col-lg text-center text-lg-right">
+              &copy; @2021 Team Nocrack
+            </div>
+          </div>
+        </footer>
         <!-- End Footer -->
       </div>
     </main>
@@ -426,7 +667,7 @@
     ></script>
 
     <!-- Validation -->
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
       integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
