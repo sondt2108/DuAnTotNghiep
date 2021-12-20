@@ -65,7 +65,7 @@ public class AdminRescontroller {
     SupplierRepository supplierRepository;
     
 
-    private static final int TOI_DA_SAN_PHAM = 6;
+    private static final int TOI_DA_SAN_PHAM = 9;
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("api/product/search")
     public Page<Product> search(

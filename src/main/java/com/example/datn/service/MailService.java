@@ -1564,7 +1564,7 @@ public class MailService {
 		
 				
 		
-		Mail mail = new Mail(new Email("dinhthanhson21122000@gmail.com"), "Đơng hàng mới.", new Email("thanhtungcoder@gmail.com"),new Content("text/html", content));
+		Mail mail = new Mail(new Email("dinhthanhson21122000@gmail.com"), "Đơng hàng mới.", new Email("sondtpk01429@fpt.edu.vn"),new Content("text/html", content));
 		mail.setReplyTo(new Email("abc@gmail.com"));
 		Request request = new Request();
 
