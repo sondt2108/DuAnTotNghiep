@@ -54,7 +54,7 @@ public class OderRescontroller {
     
    public final static OrderStatus DEFAULT_TTDH = new OrderStatus();
     static {
-		DEFAULT_TTDH.setIdTT(1);
+		DEFAULT_TTDH.setOrderStatusId(1);
       
     }
 
@@ -81,13 +81,13 @@ public class OderRescontroller {
         order.setPhoneNumber(orderRequest.getPhoneNumber());
         order.setTotal(cartService.getTotal());
         order.setCustomer(customerService.getCustomer());
-        order.setTinhtrang(DEFAULT_TTDH);
-        order.setFullName(customerService.getCustomer().getHoten());
+        order.setOrderStatus(DEFAULT_TTDH);
+        order.setFullName(customerService.getCustomer().getFullName());
         orderRepository.save(order);
         //oder detail
 
         // luu orderItems
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+		Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
 
 		for (Product product : listItems.keySet()) {
 
@@ -99,8 +99,8 @@ public class OderRescontroller {
 			orderItem.setProduct(product);
 			orderItem.setOrder(order);
 			orderItem.setQuantity(quantity);
-			orderItem.setProductName(product.getTensanpham());
-			orderItem.setPrice(product.getGia());
+			orderItem.setProductName(product.getProductName());
+			orderItem.setPrice(product.getPrice());
 			//orderItem.setTotal((product.getGia()) * quantity);
 
             
@@ -108,13 +108,13 @@ public class OderRescontroller {
         .ofNullable(productRepository.findByProductId(product.getProductId()));
 Product pr = productOptional.get();
 double quantityOrder = listItems.get(product);
- double sl = pr.getSoluong();
+ double sl = pr.getQuantity();
 
  double slcl = sl - quantityOrder;
 
  System.out.println("sonne" + slcl);
 
- pr.setSoluong(slcl);
+ pr.setQuantity(slcl);
  productRepository.save(pr);
 
  
@@ -139,7 +139,7 @@ double quantityOrder = listItems.get(product);
 
         //mailService.sendMailWithOrderId(order.getOrderId());
 
-        cartService.getGioHang().getChiTietGioHang().clear();
+        cartService.getCart().getCartDetails().clear();
 
         return ResponseEntity.ok(new MessageResponse("check out success!"));
     }
@@ -168,13 +168,13 @@ double quantityOrder = listItems.get(product);
         order.setEmail(orderRequest.getEmail());
         order.setFullName(orderRequest.getName());
         order.setTotal(cartService.getTotal());
-        order.setTinhtrang(DEFAULT_TTDH);
+        order.setOrderStatus(DEFAULT_TTDH);
         
         orderRepository.save(order);
         //oder detail
 
         // luu orderItems
-		Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+		Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
 
 		for (Product product : listItems.keySet()) {
 
@@ -186,8 +186,8 @@ double quantityOrder = listItems.get(product);
 			orderItem.setProduct(product);
 			orderItem.setOrder(order);
 			orderItem.setQuantity(quantity);
-			orderItem.setProductName(product.getTensanpham());
-			orderItem.setPrice(product.getGia());
+			orderItem.setProductName(product.getProductName());
+			orderItem.setPrice(product.getPrice());
 			//orderItem.setTotal((product.getGia()) * quantity);
 
             orderDetailRepository.save(orderItem);
@@ -213,7 +213,7 @@ double quantityOrder = listItems.get(product);
         
         Response rp = mailService.sendMailOrderWithAdmin(id);
 
-        cartService.getGioHang().getChiTietGioHang().clear();
+        cartService.getCart().getCartDetails().clear();
 
         return ResponseEntity.ok(new MessageResponse("check out success!"));
     }

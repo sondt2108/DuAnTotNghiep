@@ -48,7 +48,7 @@ public class ProductRescontroller {
 
     HttpSession session = request.getSession();
 		if (tutorialData.isPresent()) {
-      session.setAttribute("idth", tutorialData.get().getThuonghieu().getIdTH());
+      session.setAttribute("idth", tutorialData.get().getTrademark().getTrademarkId());
       session.setAttribute("idCate", tutorialData.get().getCategory().getCategoryId());
       
 			return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);

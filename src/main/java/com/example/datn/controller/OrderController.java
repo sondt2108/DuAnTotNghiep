@@ -33,7 +33,7 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		if (customerService.isCustomerLogin()) {
 			//model.addAttribute("cartStatus", 0);
-			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+			Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
 
 		for (Product product : listItems.keySet()) {
 
@@ -45,18 +45,18 @@ public class OrderController {
 			model.addAttribute("quantity", quantity);
 			
 		}
-			model.addAttribute("cart", cartService.getGioHang());
+			model.addAttribute("cart", cartService.getCart());
 			model.addAttribute("total", cartService.getTotal().toString());
-			model.addAttribute("name", customerService.getCustomer().getHoten());
+			model.addAttribute("name", customerService.getCustomer().getFullName());
 			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
-			model.addAttribute("phoneNumber",customerService.getCustomer().getSdt());
-			model.addAttribute("address",customerService.getCustomer().getDiachi());
+			model.addAttribute("phoneNumber",customerService.getCustomer().getPhoneNumber());
+			model.addAttribute("address",customerService.getCustomer().getAddress());
 			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
 			model.addAttribute("isLogin", 1);
 			return "thanhtoan";
 		} else {
 
-			Map<Product, Integer> listItems = cartService.getGioHang().getChiTietGioHang();
+			Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
 
 		for (Product product : listItems.keySet()) {
 
@@ -68,7 +68,7 @@ public class OrderController {
 			model.addAttribute("quantity", quantity);
 			
 		}
-			model.addAttribute("cart", cartService.getGioHang());
+			model.addAttribute("cart", cartService.getCart());
 			model.addAttribute("total", cartService.getTotal().toString());
 			
 			model.addAttribute("isLogin", 2);
