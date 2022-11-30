@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "productimg")
+@Entity(name = "productImg")
 public class ImgProduct {
 
     @Id
@@ -21,7 +21,7 @@ public class ImgProduct {
 	@JoinColumn(
 			name = "productId",
 			nullable = true,
-			foreignKey = @ForeignKey(name = "productimg_products"))
+			foreignKey = @ForeignKey(name = "productImg_product"))
 	private Product product;
 
 

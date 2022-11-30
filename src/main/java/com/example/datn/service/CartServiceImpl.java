@@ -3,7 +3,7 @@ package com.example.datn.service;
 import java.math.BigDecimal;
 
 
-import com.example.datn.models.GioHang;
+import com.example.datn.models.Cart;
 import com.example.datn.models.Product;
 import com.example.datn.repository.ProductRepository;
 
@@ -15,52 +15,52 @@ public class CartServiceImpl implements CartService {
 	
 	
 	@Autowired
-	private GioHang gioHang;
+	private Cart cart;
 	
-	public GioHang getGioHang() {
-		return gioHang;
+	public Cart getCart() {
+		return cart;
 	}
 
 	@Autowired
 	ProductRepository productRepository;
 
 	@Override
-	public void themSanPham(int productId) {
+	public void addProduct(int productId) {
 		Product product = productRepository.findById(productId).get();
-		if (gioHang.getChiTietGioHang().containsKey(product)) {
-			int count = gioHang.getChiTietGioHang().get(product);
-			gioHang.getChiTietGioHang().replace(product, count + 1);
+		if (cart.getCartDetails().containsKey(product)) {
+			int count = cart.getCartDetails().get(product);
+			cart.getCartDetails().replace(product, count + 1);
 		} else {
-			gioHang.getChiTietGioHang().put(product, 1);
+			cart.getCartDetails().put(product, 1);
 		}
 	}
 
 	@Override
 	public void onchangeInput(int productId, int quantity) {
 		Product product = productRepository.findById(productId).get();
-		if (gioHang.getChiTietGioHang().containsKey(product)) {
-			int count = gioHang.getChiTietGioHang().get(product);
-			gioHang.getChiTietGioHang().replace(product, quantity);
+		if (cart.getCartDetails().containsKey(product)) {
+			//int count = cart.getCartDetails().get(product);
+			cart.getCartDetails().replace(product, quantity);
 		} else {
-			gioHang.getChiTietGioHang().put(product, 1);
+			cart.getCartDetails().put(product, 1);
 		}
 	}
 	
 	
 	@Override
-	public void truSanPham(int productId) {
+	public void minusProduct(int productId) {
 		Product product = productRepository.findById(productId).get();
-		if (gioHang.getChiTietGioHang().containsKey(product)) {
-			int count = gioHang.getChiTietGioHang().get(product);
-			gioHang.getChiTietGioHang().replace(product, count - 1);
+		if (cart.getCartDetails().containsKey(product)) {
+			int count = cart.getCartDetails().get(product);
+			cart.getCartDetails().replace(product, count - 1);
 		}
 	}
 	
 	@Override
-	public void xoaSanPham(int productId) {
+	public void removeProduct(int productId) {
 		Product product = productRepository.findById(productId).get();
-		if (gioHang.getChiTietGioHang().containsKey(product)) {
-			gioHang.getChiTietGioHang().remove(product);
+		if (cart.getCartDetails().containsKey(product)) {
+			cart.getCartDetails().remove(product);
 		}
 	}
 
@@ -68,7 +68,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
     public BigDecimal getTotal() {
-        return gioHang.getChiTietGioHang().entrySet().stream()
+        return cart.getCartDetails().entrySet().stream()
                 .map(entry -> entry.getKey().getGia().multiply(BigDecimal.valueOf(entry.getValue())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);

@@ -36,7 +36,7 @@ public class OrderDetail {
 
     @JsonIgnore
     @ManyToOne
-	@JoinColumn(name = "orderId", nullable = false, foreignKey = @ForeignKey(name = "order_orderitems"))
+	@JoinColumn(name = "orderId", nullable = false, foreignKey = @ForeignKey(name = "order_orderItems"))
 	Order order;
 	
 	@ManyToOne

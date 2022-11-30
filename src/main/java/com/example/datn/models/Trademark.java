@@ -14,45 +14,45 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity(name = "thuonghieu")
-public class ThuongHieu {
+public class Trademark {
 
     @Id
 	@GeneratedValue
-	private int idTH;
+	private int trademarkId;
 	@NotNull
 	@Size(min = 3, max = 50)
-	private String tenTH;
+	private String trademarkName;
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY
-			, mappedBy = "thuonghieu")
+			, mappedBy = "trademark")
 	private List<Product> products;
 
 	
 	
-	public ThuongHieu() {
+	public Trademark() {
 	}
 
-	public ThuongHieu(int idTH, @NotNull @Size(min = 3, max = 50) String tenTH, List<Product> products) {
-		this.idTH = idTH;
-		this.tenTH = tenTH;
+	public Trademark(int trademarkId, String trademarkName, List<Product> products) {
+		this.trademarkId = trademarkId;
+		this.trademarkName = trademarkName;
 		this.products = products;
 	}
 
-	public int getIdTH() {
-		return idTH;
+	public int getTrademarkId() {
+		return trademarkId;
 	}
 
-	public void setIdTH(int idTH) {
-		this.idTH = idTH;
+	public void setTrademarkId(int trademarkId) {
+		this.trademarkId = trademarkId;
 	}
 
-	public String getTenTH() {
-		return tenTH;
+	public String getTrademarkName() {
+		return trademarkName;
 	}
 
-	public void setTenTH(String tenTH) {
-		this.tenTH = tenTH;
+	public void setTrademarkName(String trademarkName) {
+		this.trademarkName = trademarkName;
 	}
 
 	public List<Product> getProducts() {

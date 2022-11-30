@@ -7,7 +7,7 @@ public class RatingRequest {
 	private String description;
 	
 	
-	private double score;
+	private int scores;
 	
 	
 	private int productId;
@@ -35,12 +35,12 @@ public class RatingRequest {
 		this.description = description;
 	}
 
-	public double getScore() {
-		return score;
+	public int getScores() {
+		return scores;
 	}
 
-	public void setScore(double score) {
-		this.score = score;
+	public void setScore(int scores) {
+		this.scores = scores;
 	}
 
 	public String getPhoneNumber() {

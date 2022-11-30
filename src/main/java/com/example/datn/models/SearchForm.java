@@ -1,48 +1,55 @@
 package com.example.datn.models;
 
 public class SearchForm {
-    private String ten;
-	private int trang;
-	private String xepTheo;
-	private boolean thuTu;
+    private String name;
+	private int page;
+	private String orderBy;
+	private boolean orderly;
 	
-	public SearchForm(String ten, int trang, String xepTheo, boolean thuTu) {
+	public SearchForm(String name, int page, String orderBy, boolean orderly) {
 		super();
-		this.ten = ten;
-		this.trang = trang;
-		this.xepTheo = xepTheo;
-		this.thuTu = thuTu;
+		this.name = name;
+		this.page = page;
+		this.orderBy = orderBy;
+		this.orderly = orderly;
 	}
 	
 	public SearchForm() {
-		this.ten = "";
-		this.trang = 0;
-		this.xepTheo = "productId";
-		this.thuTu = true;
+		this.name = "";
+		this.page = 0;
+		this.orderBy = "productId";
+		this.orderly = true;
 	}
-	
-	public String getTen() {
-		return ten;
+
+	public String getName() {
+		return name;
 	}
-	public void setTen(String ten) {
-		this.ten = ten;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public int getTrang() {
-		return trang;
+
+	public int getPage() {
+		return page;
 	}
-	public void setTrang(int trang) {
-		this.trang = trang;
+
+	public void setPage(int page) {
+		this.page = page;
 	}
-	public String getXepTheo() {
-		return xepTheo;
+
+	public String getOrderBy() {
+		return orderBy;
 	}
-	public void setXepTheo(String xepTheo) {
-		this.xepTheo = xepTheo;
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
 	}
-	public boolean getThuTu() {
-		return thuTu;
+
+	public boolean isOrderly() {
+		return orderly;
 	}
-	public void setThuTu(boolean thuTu) {
-		this.thuTu = thuTu;
+
+	public void setOrderly(boolean orderly) {
+		this.orderly = orderly;
 	}
 }

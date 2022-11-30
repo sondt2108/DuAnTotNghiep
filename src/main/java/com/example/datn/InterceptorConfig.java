@@ -2,7 +2,7 @@ package com.example.datn;
 
 import java.util.Locale;
 
-import com.example.datn.intenceptor.GioHangInterceptor;
+import com.example.datn.intenceptor.CartInterceptor;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
-	GioHangInterceptor gioHangIterceptor;
+    CartInterceptor gioHangIterceptor;
 	
 	
 	

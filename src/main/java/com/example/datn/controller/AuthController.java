@@ -100,10 +100,6 @@ public class AuthController {
         .collect(Collectors.toList());
 
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
-    if (customerService.getUser(userDetails.getId())) {
-        
-       
-    }
 
     userService.getUser(userDetails.getId());
 
@@ -134,8 +130,8 @@ public class AuthController {
 
         Customer customer = new Customer();
         customer.setUser(user);
-        customer.setHoten(signUpRequest.getName());
-        customer.setDiachi(signUpRequest.getAddress());
+        customer.setFullName(signUpRequest.getName());
+        customer.setAddress(signUpRequest.getAddress());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

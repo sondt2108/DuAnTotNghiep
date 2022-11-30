@@ -56,15 +56,13 @@ public class ReviewRestController {
 		if (!reviewOptional.isPresent()) {
 			Product pr = new Product();
 			pr.setProductId(ratingRequest.getProductId());
-			
-			System.out.println(ratingRequest.getProductId());
 			Review rw = new Review();
 			rw.setName(ratingRequest.getName());
 			rw.setProduct(pr);
 			rw.setDescription(ratingRequest.getDescription());
 			rw.setGmail(ratingRequest.getGmail());
 			rw.setPhoneNumber(ratingRequest.getPhoneNumber());
-			rw.setScore(ratingRequest.getScore());
+			rw.setScores(ratingRequest.getScores());
 			rw.setImage(ratingRequest.getImage());
 			reviewRepository.save(rw);
 			

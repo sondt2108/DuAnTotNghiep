@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity(name="thongbao")
+@Entity(name="notification")
 public class MessageNotifications {
     
     @Id
     @GeneratedValue
-    private Long NotificationsId;
+    private Long notificationId;
 
 
 
@@ -28,18 +28,18 @@ public class MessageNotifications {
     public MessageNotifications() {
     }
 
-    public MessageNotifications(Long notificationsId, @NotNull Date createdDate, @NotNull Long orderId) {
-        NotificationsId = notificationsId;
+    public MessageNotifications(Long notificationId, @NotNull Date createdDate, @NotNull Long orderId) {
+        this.notificationId = notificationId;
         this.createdDate = createdDate;
         this.orderId = orderId;
     }
 
     public Long getNotificationsId() {
-        return NotificationsId;
+        return notificationId;
     }
 
-    public void setNotificationsId(Long notificationsId) {
-        NotificationsId = notificationsId;
+    public void setNotificationsId(Long notificationId) {
+        this.notificationId = notificationId;
     }
 
     public Date getCreatedDate() {

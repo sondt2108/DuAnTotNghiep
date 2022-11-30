@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,11 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity(name="orders")
@@ -69,35 +64,30 @@ public class Order {
     
 
     @ManyToOne
-	@JoinColumn(name = "customer_Id", nullable = true, foreignKey = @ForeignKey(name = "customer_order"))
+	@JoinColumn(name = "customerId", nullable = true, foreignKey = @ForeignKey(name = "customer_order"))
 	Customer customer;
 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDetail> order_items;
+	private List<OrderDetail> orderItems;
 
-	public final static TinhTrangDonHang DEFAULT_TTDH = new TinhTrangDonHang();
+	public static final OrderStatus DEFAULT_ORDER_STATUS = new OrderStatus();
     static {
-		DEFAULT_TTDH.setIdTT(1);
+		DEFAULT_ORDER_STATUS.setOrderStatusId(1);
       
     }
 
 	@ManyToOne
 	@JoinColumn(
-			name = "tinhtrang_id",
+			name = "orderStatusId",
 			nullable = true,
-			foreignKey = @ForeignKey(name = "tinhtrang_order"))
-	private TinhTrangDonHang tinhtrang;
+			foreignKey = @ForeignKey(name = "orderStatus_order"))
+	private OrderStatus orderStatus;
 
 	public Order() {
 	}
 
-	public Order(Long orderId, @NotNull Date createdDate,  @Size(max = 50) String province,
-			 @Size(max = 50) String district,  @Size(max = 50) String ward,
-			 @Size(max = 150) String address,  @Size(max = 10) String phoneNumber,
-			@DecimalMin(value = "0.00", message = "*Price has to be non negative number") BigDecimal total,
-			String email, String fullName, String note, Customer customer, List<OrderDetail> order_items,
-			TinhTrangDonHang tinhtrang) {
+	public Order(Long orderId, Date createdDate, String province, String district, String ward, String address, String phoneNumber, BigDecimal total, String email, String fullName, String note, Customer customer, List<OrderDetail> order_items, OrderStatus orderStatus) {
 		this.orderId = orderId;
 		this.createdDate = createdDate;
 		this.province = province;
@@ -110,8 +100,8 @@ public class Order {
 		this.fullName = fullName;
 		this.note = note;
 		this.customer = customer;
-		this.order_items = order_items;
-		this.tinhtrang = tinhtrang;
+		this.orderItems = order_items;
+		this.orderStatus = orderStatus;
 	}
 
 	public Long getOrderId() {
@@ -210,22 +200,19 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<OrderDetail> getOrder_items() {
-		return order_items;
+	public List<OrderDetail> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setOrder_items(List<OrderDetail> order_items) {
-		this.order_items = order_items;
+	public void setOrderItems(List<OrderDetail> orderItems) {
+		this.orderItems = orderItems;
 	}
 
-	public TinhTrangDonHang getTinhtrang() {
-		return tinhtrang;
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setTinhtrang(TinhTrangDonHang tinhtrang) {
-		this.tinhtrang = tinhtrang;
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
-
-	
-
 }

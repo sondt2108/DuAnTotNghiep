@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "khachhang")
+@Entity(name = "customer")
 public class Customer {
     @Id
 	@GeneratedValue
@@ -17,34 +17,29 @@ public class Customer {
 	
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
 	private User user;
 	
     @NotBlank
 	@Size(max = 35)
-	private String hoten;
+	private String fullName;
 	
 	@NotBlank
 	@Size(max = 150)
-	private String diachi;
+	private String address;
 	
 	
-	private String sdt;
-
-	// @OneToMany(fetch = FetchType.LAZY
-	// 		, mappedBy = "custommer")
-	// private List<Order> order;
+	private String phoneNumber;
 
 	public Customer() {
 	}
 
-	public Customer(int id, User user, @NotBlank @Size(max = 35) String hoten, @NotBlank @Size(max = 150) String diachi,
-			@Size(max = 10) @Null String sdt) {
+	public Customer(int id, User user, String fullName, String address, String phoneNumber) {
 		this.id = id;
 		this.user = user;
-		this.hoten = hoten;
-		this.diachi = diachi;
-		this.sdt = sdt;
+		this.fullName = fullName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public int getId() {
@@ -63,32 +58,27 @@ public class Customer {
 		this.user = user;
 	}
 
-	public String getHoten() {
-		return hoten;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setHoten(String hoten) {
-		this.hoten = hoten;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getDiachi() {
-		return diachi;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setDiachi(String diachi) {
-		this.diachi = diachi;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getSdt() {
-		return sdt;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
-
-	
-
-
-	
 }

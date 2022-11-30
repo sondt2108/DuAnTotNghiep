@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity(name = "loaisanpham")
-public class Loaisp {
+public class ProductType {
 
     @Id
 	@GeneratedValue
@@ -28,10 +28,10 @@ public class Loaisp {
 			, mappedBy = "loaisanpham")
 	private List<Product> products;
 
-	public Loaisp() {
+	public ProductType() {
 	}
 
-	public Loaisp(int idlsp, @NotNull @Size(min = 3, max = 50) String tenlsp, List<Product> products) {
+	public ProductType(int idlsp, @NotNull @Size(min = 3, max = 50) String tenlsp, List<Product> products) {
 		this.idlsp = idlsp;
 		this.tenlsp = tenlsp;
 		this.products = products;

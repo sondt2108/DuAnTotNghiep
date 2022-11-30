@@ -18,7 +18,7 @@ public class Review {
 	int id;
 	String name;
 	String description;
-	double score;
+	int scores;
 	String image;
 	
 	String gmail;
@@ -29,7 +29,7 @@ public class Review {
 	private Date createdDate = new Date((new java.util.Date()).getTime());
 	
 	@ManyToOne
-	@JoinColumn(name = "product_Id", nullable = true, foreignKey = @ForeignKey(name = "review_product"))
+	@JoinColumn(name = "productId", nullable = true, foreignKey = @ForeignKey(name = "review_product"))
 	Product product;
 	
 	
@@ -39,18 +39,16 @@ public class Review {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Review(int id, String name, String description, double score, String image, String gmail,
-			@NotNull Date createdDate, Product product, Order order) {
-		super();
+	public Review(int id, String name, String description, int scores, String image, String gmail, String phoneNumber, Date createdDate, Product product) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.score = score;
+		this.scores = scores;
 		this.image = image;
 		this.gmail = gmail;
+		this.phoneNumber = phoneNumber;
 		this.createdDate = createdDate;
 		this.product = product;
-		
 	}
 
 	public int getId() {
@@ -77,12 +75,12 @@ public class Review {
 		this.description = description;
 	}
 
-	public double getScore() {
-		return score;
+	public double getScores() {
+		return scores;
 	}
 
-	public void setScore(double score) {
-		this.score = score;
+	public void setScores(int scores) {
+		this.scores = scores;
 	}
 
 	public String getImage() {

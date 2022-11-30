@@ -32,7 +32,7 @@ public class Category {
 
 	private String icon;
 
-	private String seourl;
+	private String seoUrl;
 
 	public Category() {
 		super();
@@ -78,11 +78,11 @@ public class Category {
 	}
 
 	public String getSeourl() {
-		return seourl;
+		return seoUrl;
 	}
 
 	public void setSeourl(String seourl) {
-		this.seourl = seourl;
+		this.seoUrl = seourl;
 	}
 
 	

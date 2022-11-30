@@ -8,14 +8,14 @@ import javax.validation.Valid;
 
 import com.example.datn.models.Customer;
 import com.example.datn.models.MessageNotifications;
-import com.example.datn.models.NhaCungCap;
+import com.example.datn.models.Supplier;
 import com.example.datn.models.Order;
 import com.example.datn.models.OrderDetail;
-import com.example.datn.models.PhieuNhap;
+import com.example.datn.models.ImportBill;
 import com.example.datn.models.Product;
 import com.example.datn.models.SearchForm;
-import com.example.datn.models.ThuongHieu;
-import com.example.datn.models.TinhTrangDonHang;
+import com.example.datn.models.Trademark;
+import com.example.datn.models.OrderStatus;
 import com.example.datn.models.User;
 import com.example.datn.payload.request.OrderCustomerRequest;
 import com.example.datn.repository.CustomerRepository;
@@ -40,7 +40,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,14 +71,14 @@ public class AdminRescontroller {
             // thông tin form tìm kiếm
             @RequestBody SearchForm sf) {
 
-        Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
+        Pageable pageable = PageRequest.of(sf.getPage(), TOI_DA_SAN_PHAM,
                 // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                sf.getThuTu() ? Direction.DESC : Direction.ASC,
+                sf.isOrderly() ? Direction.DESC : Direction.ASC,
                 // xếp theo trường nào ví dụ id, name, price
-                sf.getXepTheo());
+                sf.getOrderBy());
 
         // lấy sản phẩm
-        Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(sf.getTen(), phanTrang);
+        Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(sf.getName(), pageable);
 
         return productPage;
     }
@@ -107,25 +106,25 @@ public class AdminRescontroller {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/thuonghieu")
-	public List<ThuongHieu> thuongHieu() {
+	public List<Trademark> thuongHieu() {
 		return trademarkRepository.findAll();
 	}
 
 
     @GetMapping("/api/thuonghieu/{id}")
-	public ThuongHieu getTrademakeById(@PathVariable("id") int id) {
+	public Trademark getTrademakeById(@PathVariable("id") int id) {
 		return trademarkRepository.findById(id).orElse(null);
 	}
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/api/thuonghieu")
-	public ThuongHieu insertTrademake(@RequestBody @Valid ThuongHieu thuonghieu) {
+	public Trademark insertTrademake(@RequestBody @Valid Trademark thuonghieu) {
 		return trademarkRepository.save(thuonghieu);
 	}
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/thuonghieu/{id}")
-	public ThuongHieu updateTradamake(@Valid @RequestBody ThuongHieu thuonghieu) {
+	public Trademark updateTradamake(@Valid @RequestBody Trademark thuonghieu) {
 		return trademarkRepository.save(thuonghieu);
 	}
 	
@@ -138,24 +137,24 @@ public class AdminRescontroller {
 //supplier
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/api/nhacungcap")
-	public List<NhaCungCap> list() {
+	public List<Supplier> list() {
 		return supplierRepository.findAll();
 	}
 
     @GetMapping("/api/nhacungcap/{id}")
-	public NhaCungCap getSupplierById(@PathVariable("id") int id) {
+	public Supplier getSupplierById(@PathVariable("id") int id) {
 		return supplierRepository.findById(id).orElse(null);
 	}
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/api/nhacungcap")
-	public NhaCungCap insertSupplier(@RequestBody @Valid NhaCungCap nhacungcap) {
+	public Supplier insertSupplier(@RequestBody @Valid Supplier nhacungcap) {
 		return supplierRepository.save(nhacungcap);
 	}
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/nhacungcap/{id}")
-	public NhaCungCap updateSupplier(@Valid @RequestBody NhaCungCap nhacungcap) {
+	public Supplier updateSupplier(@Valid @RequestBody Supplier nhacungcap) {
 		return supplierRepository.save(nhacungcap);
 	}
 	
@@ -229,14 +228,14 @@ public class AdminRescontroller {
             // thông tin form tìm kiếm
             @RequestBody SearchForm sf) {
 
-        Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
+        Pageable pageable = PageRequest.of(sf.getPage(), TOI_DA_SAN_PHAM,
                 // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                sf.getThuTu() ? Direction.ASC : Direction.DESC,
+                sf.isOrderly() ? Direction.ASC : Direction.DESC,
                 // xếp theo trường nào ví dụ id, name, price
-                sf.getXepTheo());
+                sf.getOrderBy());
 
         // lấy sản phẩm
-        Page<Customer> customerPage = customerRepository.findByHotenContaining(sf.getTen(), phanTrang);
+        Page<Customer> customerPage = customerRepository.findByHotenContaining(sf.getName(), pageable);
 
         return customerPage;
     }
@@ -303,14 +302,14 @@ public class AdminRescontroller {
               // thông tin form tìm kiếm
               @RequestBody SearchForm sf) {
 
-          Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
-                  // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                  sf.getThuTu() ? Direction.ASC : Direction.DESC,
-                  // xếp theo trường nào ví dụ id, name, price
-                  sf.getXepTheo());
+        Pageable pageable = PageRequest.of(sf.getPage(), TOI_DA_SAN_PHAM,
+                // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
+                sf.isOrderly() ? Direction.ASC : Direction.DESC,
+                // xếp theo trường nào ví dụ id, name, price
+                sf.getOrderBy());
 
           // lấy sản phẩm
-          Page<User> userPage = userRepository.findByUsernameContaining(sf.getTen(), phanTrang);
+          Page<User> userPage = userRepository.findByUsernameContaining(sf.getName(), pageable);
 
           return userPage;
       }
@@ -331,14 +330,14 @@ public class AdminRescontroller {
               // thông tin form tìm kiếm
               @RequestBody SearchForm sf) {
 
-          Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
-                  // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                  sf.getThuTu() ? Direction.ASC : Direction.DESC,
-                  // xếp theo trường nào ví dụ id, name, price
-                  sf.getXepTheo());
+        Pageable pageable = PageRequest.of(sf.getPage(), TOI_DA_SAN_PHAM,
+                // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
+                sf.isOrderly() ? Direction.ASC : Direction.DESC,
+                // xếp theo trường nào ví dụ id, name, price
+                sf.getOrderBy());
 
           // lấy sản phẩm
-          Page<Order> orderPage = orderRepository.findByOrderId(sf.getTen(), phanTrang);
+          Page<Order> orderPage = orderRepository.findByOrderId(sf.getName(), pageable);
 
           return orderPage;
       }
@@ -385,13 +384,13 @@ public class AdminRescontroller {
         Optional<Order> orderOptional = Optional
 					.ofNullable(orderRepository.findByOrderId(id));
         Order or = orderOptional.get();
-        or.setTinhtrang(order.getTinhtrang());
+        or.setOrderStatus(order.getOrderStatus());
 		return orderRepository.save(or);
 	}
 
-    public final static TinhTrangDonHang DEFAULT_TTDH = new TinhTrangDonHang();
+    public final static OrderStatus DEFAULT_TTDH = new OrderStatus();
     static {
-		DEFAULT_TTDH.setIdTT(6);
+		DEFAULT_TTDH.setOrderStatusId(6);
       
     }
 
@@ -401,7 +400,7 @@ public class AdminRescontroller {
         Optional<Order> orderOptional = Optional
 					.ofNullable(orderRepository.findByOrderId(id));
         Order or = orderOptional.get();
-        or.setTinhtrang(DEFAULT_TTDH);
+        or.setOrderStatus(DEFAULT_TTDH);
 
 
         MessageNotifications ntn = new MessageNotifications();
@@ -451,7 +450,7 @@ OrderStatusRepository orderStatusRepository;
 
 
 @GetMapping("api/tinhtrang")
-public List<TinhTrangDonHang> listOrderStatus(){
+public List<OrderStatus> listOrderStatus(){
 
     return orderStatusRepository.findAll();
 }
@@ -462,18 +461,18 @@ WarehouseReceiptRepository warehouseReceiptRepository;
     
 @PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/api/phieunhap")
-	public List<PhieuNhap> listPN() {
+	public List<ImportBill> listPN() {
 		return warehouseReceiptRepository.findAll();
 	}
 	
 	@GetMapping("/api/phieunhap/{id}")
-	public PhieuNhap getByIdPN(@PathVariable("id") int id) {
+	public ImportBill getByIdPN(@PathVariable("id") int id) {
 		return warehouseReceiptRepository.findById(id).orElse(null);
 	}
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/api/phieunhap")
-    public HashMap<String, Object> insert(@RequestBody @Validated PhieuNhap phieuNhap, BindingResult result) {
+    public HashMap<String, Object> insert(@RequestBody @Validated ImportBill phieuNhap, BindingResult result) {
 
         HashMap<String, Object> ResponseData = new HashMap<>();
         ResponseData.put("status", true);
@@ -500,7 +499,7 @@ WarehouseReceiptRepository warehouseReceiptRepository;
 	
     @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/api/phieunhap/{id}")
-    public PhieuNhap update(@PathVariable("id") int id, @RequestBody PhieuNhap phieuNhap) {
+    public ImportBill update(@PathVariable("id") int id, @RequestBody ImportBill phieuNhap) {
         return warehouseReceiptRepository.save(phieuNhap);
     }
 	
@@ -512,18 +511,18 @@ WarehouseReceiptRepository warehouseReceiptRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/api/phieunhap/search")
-    public Page<PhieuNhap> searchPN(
+    public Page<ImportBill> searchPN(
             // thông tin form tìm kiếm
             @RequestBody SearchForm sf) {
 
-        Pageable phanTrang = PageRequest.of(sf.getTrang(), TOI_DA_SAN_PHAM,
+        Pageable pageable = PageRequest.of(sf.getPage(), TOI_DA_SAN_PHAM,
                 // nếu đúng thì thứ tự tăng đần ngược lại giảm dần
-                sf.getThuTu() ? Direction.ASC : Direction.DESC,
+                sf.isOrderly() ? Direction.ASC : Direction.DESC,
                 // xếp theo trường nào ví dụ id, name, price
-                sf.getXepTheo());
+                sf.getOrderBy());
 
         // lấy sản phẩm
-        Page<PhieuNhap> khachHangPage = warehouseReceiptRepository.findByIdPN(sf.getTen(), phanTrang);
+        Page<ImportBill> khachHangPage = warehouseReceiptRepository.findByIdPN(sf.getName(), pageable);
 
         return khachHangPage;
     }
@@ -532,8 +531,8 @@ WarehouseReceiptRepository warehouseReceiptRepository;
     TinhTrangdhRepository tinhTrangdhRepository;
 
     @PostMapping("/api/tinhtrang")
-	public TinhTrangDonHang insertTinhTrang(@RequestBody @Valid TinhTrangDonHang tinhTrangDonHang) {
-		return tinhTrangdhRepository.save(tinhTrangDonHang);
+	public OrderStatus insertTinhTrang(@RequestBody @Valid OrderStatus orderStatus) {
+		return tinhTrangdhRepository.save(orderStatus);
 	}
 }
 

@@ -9,7 +9,7 @@ import com.example.datn.models.MessageNotifications;
 import com.example.datn.models.Order;
 import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
-import com.example.datn.models.TinhTrangDonHang;
+import com.example.datn.models.OrderStatus;
 import com.example.datn.payload.request.OrderRequest;
 import com.example.datn.payload.request.SendMailRequest;
 import com.example.datn.payload.response.MessageResponse;
@@ -52,7 +52,7 @@ public class OderRescontroller {
    @Autowired
    MessageNotificationsRepository messageNotificationsRepository;
     
-   public final static TinhTrangDonHang DEFAULT_TTDH = new TinhTrangDonHang();
+   public final static OrderStatus DEFAULT_TTDH = new OrderStatus();
     static {
 		DEFAULT_TTDH.setIdTT(1);
       

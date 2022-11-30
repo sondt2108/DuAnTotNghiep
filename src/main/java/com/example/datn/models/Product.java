@@ -22,69 +22,69 @@ public class Product {
 	
 	@NotBlank
 	@Size(min = 3, max = 255)
-	private String tensanpham;
+	private String productName;
 	
 	
 	@ManyToOne
 	@JoinColumn(
-			name = "nhacungcap_id",
+			name = "supplierId",
 			nullable = true,
-			foreignKey = @ForeignKey(name = "nhacungcap_products"))
-	private NhaCungCap nhacungcap;
+			foreignKey = @ForeignKey(name = "supplier_product"))
+	private Supplier supplier;
 	
 	
 	
 	
 	@ManyToOne
 	@JoinColumn(
-			name = "Thuonghieu_id",
+			name = "trademarkId",
 			nullable = true,
-			foreignKey = @ForeignKey(name = "Thuonghieu_products"))
-	private ThuongHieu thuonghieu;
+			foreignKey = @ForeignKey(name = "trademark_product"))
+	private Trademark trademark;
 
 
 	@ManyToOne
 	@JoinColumn(
-			name = "Loaisanpham_id",
+			name = "productTypeId",
 			nullable = true,
-			foreignKey = @ForeignKey(name = "LoaiSanPham_products"))
-	private Loaisp loaisanpham;
+			foreignKey = @ForeignKey(name = "productType_product"))
+	private ProductType productType;
 
 
-	private double soluong;
+	private double quantity;
 	
-	private double khuyenmai;
+	private double promotion;
 	
-	private String tinhtranghang;
+	private String productStatus;
 
-	@Column(name = "gia", nullable = false)
+	@Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private BigDecimal gia;
-	
+    private BigDecimal price;
+
 	@NotNull
 	private Date createdDate = new Date((new java.util.Date()).getTime());
-	
+
 	@ManyToOne
 	@JoinColumn(
-			name = "category_id",
+			name = "categoryId",
 			nullable = true,
 			foreignKey = @ForeignKey(name = "category_products"))
 	private Category category;
-	
-	
-	private String hinhanh;
 
 
-	private String seourl;
+	private String productImg;
+
+
+	private String seoUrl;
 
 	@Size(min = 0, max = 1000)
-	private String thongtinsp;
+	private String productDetail;
 
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY
 			, mappedBy = "product")
-	private List<ImgProduct> imgProducts;
+	private List<ImgProduct> imgProduct;
 
 
 	@OneToMany(fetch = FetchType.LAZY
@@ -99,24 +99,24 @@ public class Product {
 		super();
 	}
 
-	public Product(int productId, @NotBlank @Size(min = 3, max = 255) String tensanpham, NhaCungCap nhacungcap,
-			ThuongHieu thuonghieu, Loaisp loaisanpham, double soluong, double khuyenmai, String tinhtranghang,
-			BigDecimal gia, @NotNull Date createdDate, Category category, String hinhanh,
-			String seourl, List<ImgProduct> imgProducts) {
+	public Product(int productId, String productName, Supplier supplier, Trademark trademark, ProductType productType, double quantity, double promotion, String productStatus, BigDecimal price, Date createdDate, Category category, String productImg, String seoUrl, String productDetail, List<ImgProduct> imgProduct, List<OrderDetail> orderDetail, List<Review> review) {
 		this.productId = productId;
-		this.tensanpham = tensanpham;
-		this.nhacungcap = nhacungcap;
-		this.thuonghieu = thuonghieu;
-		this.loaisanpham = loaisanpham;
-		this.soluong = soluong;
-		this.khuyenmai = khuyenmai;
-		this.tinhtranghang = tinhtranghang;
-		this.gia = gia;
+		this.productName = productName;
+		this.supplier = supplier;
+		this.trademark = trademark;
+		this.productType = productType;
+		this.quantity = quantity;
+		this.promotion = promotion;
+		this.productStatus = productStatus;
+		this.price = price;
 		this.createdDate = createdDate;
 		this.category = category;
-		this.hinhanh = hinhanh;
-		this.seourl = seourl;
-		this.imgProducts = imgProducts;
+		this.productImg = productImg;
+		this.seoUrl = seoUrl;
+		this.productDetail = productDetail;
+		this.imgProduct = imgProduct;
+		this.orderDetail = orderDetail;
+		this.review = review;
 	}
 
 	public int getProductId() {
@@ -127,69 +127,68 @@ public class Product {
 		this.productId = productId;
 	}
 
-	public String getTensanpham() {
-		return tensanpham;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setTensanpham(String tensanpham) {
-		this.tensanpham = tensanpham;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public NhaCungCap getNhacungcap() {
-		return nhacungcap;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setNhacungcap(NhaCungCap nhacungcap) {
-		this.nhacungcap = nhacungcap;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
-	public ThuongHieu getThuonghieu() {
-		return thuonghieu;
+	public Trademark getTrademark() {
+		return trademark;
 	}
 
-	public void setThuonghieu(ThuongHieu thuonghieu) {
-		this.thuonghieu = thuonghieu;
+	public void setTrademark(Trademark trademark) {
+		this.trademark = trademark;
 	}
 
-	public Loaisp getLoaisanpham() {
-		return loaisanpham;
+	public ProductType getProductType() {
+		return productType;
 	}
 
-	public void setLoaisanpham(Loaisp loaisanpham) {
-		this.loaisanpham = loaisanpham;
+	public void setProductType(ProductType productType) {
+		this.productType = productType;
 	}
 
-	public double getSoluong() {
-		return soluong;
+	public double getQuantity() {
+		return quantity;
 	}
 
-	public void setSoluong(double soluong) {
-		this.soluong = soluong;
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 
-	public double getKhuyenmai() {
-		return khuyenmai;
+	public double getPromotion() {
+		return promotion;
 	}
 
-	public void setKhuyenmai(double khuyenmai) {
-		this.khuyenmai = khuyenmai;
+	public void setPromotion(double promotion) {
+		this.promotion = promotion;
 	}
 
-	public String getTinhtranghang() {
-		return tinhtranghang;
+	public String getProductStatus() {
+		return productStatus;
 	}
 
-	public void setTinhtranghang(String tinhtranghang) {
-		this.tinhtranghang = tinhtranghang;
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
 	}
 
-	public BigDecimal getGia() {
-		return gia;
+	public BigDecimal getPrice() {
+		return price;
 	}
 
-
-	public void setGia(BigDecimal unitPrice) {
-        this.gia = unitPrice;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 
 	public Date getCreatedDate() {
@@ -208,38 +207,53 @@ public class Product {
 		this.category = category;
 	}
 
-	public String getHinhanh() {
-		return hinhanh;
+	public String getProductImg() {
+		return productImg;
 	}
 
-	public String getThongtinsp() {
-		return thongtinsp;
+	public void setProductImg(String productImg) {
+		this.productImg = productImg;
 	}
 
-	public void setThongtinsp(String thongtinsp) {
-		this.thongtinsp = thongtinsp;
+	public String getSeoUrl() {
+		return seoUrl;
 	}
 
-	public void setHinhanh(String hinhanh) {
-		this.hinhanh = hinhanh;
+	public void setSeoUrl(String seoUrl) {
+		this.seoUrl = seoUrl;
 	}
 
-	public String getSeourl() {
-		return seourl;
+	public String getProductDetail() {
+		return productDetail;
 	}
 
-	public void setSeourl(String seourl) {
-		this.seourl = seourl;
+	public void setProductDetail(String productDetail) {
+		this.productDetail = productDetail;
 	}
 
-	public List<ImgProduct> getImgProducts() {
-		return imgProducts;
+	public List<ImgProduct> getImgProduct() {
+		return imgProduct;
 	}
 
-	public void setImgProducts(List<ImgProduct> imgProducts) {
-		this.imgProducts = imgProducts;
+	public void setImgProduct(List<ImgProduct> imgProduct) {
+		this.imgProduct = imgProduct;
 	}
 
+	public List<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(List<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	public List<Review> getReview() {
+		return review;
+	}
+
+	public void setReview(List<Review> review) {
+		this.review = review;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

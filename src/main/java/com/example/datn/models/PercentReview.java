@@ -2,32 +2,32 @@ package com.example.datn.models;
 
 public class PercentReview {
     
-    private int score;
+    private int scores;
 
-    private double scorepercent;
+    private double scoresPercent;
 
-    public int getScore() {
-        return score;
+    public int getScores() {
+        return scores;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScore(int scores) {
+        this.scores = scores;
     }
 
     public double getScorePercent() {
-        return scorepercent;
+        return scoresPercent;
     }
 
-    public void setScorePercent(double scorepercent) {
-        this.scorepercent = scorepercent;
+    public void setScorePercent(double scoresPercent) {
+        this.scoresPercent = scoresPercent;
     }
 
     public PercentReview() {
     }
 
-    public PercentReview(int score, double scorepercent) {
-        this.score = score;
-        this.scorepercent = scorepercent;
+    public PercentReview(int scores, double scoresPercent) {
+        this.scores = scores;
+        this.scoresPercent = scoresPercent;
     }
 
 
