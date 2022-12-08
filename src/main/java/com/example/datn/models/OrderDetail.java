@@ -29,7 +29,7 @@ public class OrderDetail {
 
 
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private BigDecimal price;
+    private double price;
 
     @NotNull
     private int quantity;
@@ -49,7 +49,7 @@ public class OrderDetail {
     
 
     public OrderDetail(Long orderDetailId, @NotBlank String productName,
-            @DecimalMin(value = "0.00", message = "*Price has to be non negative number") BigDecimal price,
+            @DecimalMin(value = "0.00", message = "*Price has to be non negative number") double price,
             @NotBlank int quantity, Order order, Product product) {
         this.orderDetailId = orderDetailId;
         this.productName = productName;
@@ -77,11 +77,11 @@ public class OrderDetail {
         this.productName = productName;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

@@ -13,44 +13,44 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Entity(name = "loaisanpham")
+@Entity(name = "productType")
 public class ProductType {
 
     @Id
 	@GeneratedValue
-	private int idlsp;
+	private int productTypeId;
 	@NotNull
 	@Size(min = 3, max = 50)
-	private String tenlsp;
+	private String name;
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY
-			, mappedBy = "loaisanpham")
+			, mappedBy = "productType")
 	private List<Product> products;
 
 	public ProductType() {
 	}
 
-	public ProductType(int idlsp, @NotNull @Size(min = 3, max = 50) String tenlsp, List<Product> products) {
-		this.idlsp = idlsp;
-		this.tenlsp = tenlsp;
+	public ProductType(int productTypeId, String name, List<Product> products) {
+		this.productTypeId = productTypeId;
+		this.name = name;
 		this.products = products;
 	}
 
-	public int getIdlsp() {
-		return idlsp;
+	public int getProductTypeId() {
+		return productTypeId;
 	}
 
-	public void setIdlsp(int idlsp) {
-		this.idlsp = idlsp;
+	public void setProductTypeId(int productTypeId) {
+		this.productTypeId = productTypeId;
 	}
 
-	public String getTenlsp() {
-		return tenlsp;
+	public String getName() {
+		return name;
 	}
 
-	public void setTenlsp(String tenlsp) {
-		this.tenlsp = tenlsp;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<Product> getProducts() {

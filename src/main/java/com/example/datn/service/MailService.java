@@ -701,7 +701,7 @@ public class MailService {
 				for (int i = 0; i < orderItems.size(); i++) {
 					OrderDetail orderItem = orderItems.get(i);
 					
-					double price = (orderItem.getPrice()).doubleValue();
+					double price = (orderItem.getPrice());
 					double totalprice = orderItem.getQuantity() * price;
 					DecimalFormat formatter = new DecimalFormat("###,###");
 					String totalPriceFormat = String.format("%,.0f", totalprice);

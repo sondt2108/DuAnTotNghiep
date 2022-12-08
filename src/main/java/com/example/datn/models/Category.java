@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.example.datn.payload.request.CategoryRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -77,15 +78,21 @@ public class Category {
 		this.icon = icon;
 	}
 
-	public String getSeourl() {
+	public String getSeoUrl() {
 		return seoUrl;
 	}
 
-	public void setSeourl(String seourl) {
-		this.seoUrl = seourl;
+	public void setSeoUrl(String seoUrl) {
+		this.seoUrl = seoUrl;
 	}
 
-	
+	public static Category toCategory(CategoryRequest categoryRequest){
+		Category category = new Category();
+		category.setName(categoryRequest.getName());
+		category.setSeoUrl(categoryRequest.getSeoUrl());
+		category.setIcon(categoryRequest.getIcon());
+		return category;
+	}
 
 	
 

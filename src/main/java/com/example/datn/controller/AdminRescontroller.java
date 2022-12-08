@@ -78,7 +78,7 @@ public class AdminRescontroller {
                 sf.getOrderBy());
 
         // lấy sản phẩm
-        Page<Product> productPage = productRepository.findByTensanphamContainingIgnoreCase(sf.getName(), pageable);
+        Page<Product> productPage = productRepository.findByProductNameContainingIgnoreCase(sf.getName(), pageable);
 
         return productPage;
     }
@@ -235,7 +235,7 @@ public class AdminRescontroller {
                 sf.getOrderBy());
 
         // lấy sản phẩm
-        Page<Customer> customerPage = customerRepository.findByHotenContaining(sf.getName(), pageable);
+        Page<Customer> customerPage = customerRepository.findByFullNameContaining(sf.getName(), pageable);
 
         return customerPage;
     }
@@ -384,7 +384,7 @@ public class AdminRescontroller {
         Optional<Order> orderOptional = Optional
 					.ofNullable(orderRepository.findByOrderId(id));
         Order or = orderOptional.get();
-        or.setOrderStatus(order.getOrderStatus());
+        //or.setOrderStatus(order.getOrderStatus());
 		return orderRepository.save(or);
 	}
 
@@ -400,7 +400,7 @@ public class AdminRescontroller {
         Optional<Order> orderOptional = Optional
 					.ofNullable(orderRepository.findByOrderId(id));
         Order or = orderOptional.get();
-        or.setOrderStatus(DEFAULT_TTDH);
+        //or.setOrderStatus(DEFAULT_TTDH);
 
 
         MessageNotifications ntn = new MessageNotifications();

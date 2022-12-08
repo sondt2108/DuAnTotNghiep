@@ -14,9 +14,6 @@ public interface CartService {
 	public void onchangeInput(int productId, int quantity);
 	
 
-	BigDecimal getTotal();
-	
-
 
 	
 }

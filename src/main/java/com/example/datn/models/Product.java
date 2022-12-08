@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.example.datn.payload.request.ProductRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.DecimalMin;
@@ -51,15 +52,15 @@ public class Product {
 	private ProductType productType;
 
 
-	private double quantity;
+	private int quantity;
 	
-	private double promotion;
+	private int promotion;
 	
 	private String productStatus;
 
 	@Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
-    private BigDecimal price;
+    private double price;
 
 	@NotNull
 	private Date createdDate = new Date((new java.util.Date()).getTime());
@@ -96,10 +97,10 @@ public class Product {
 	private List<Review> review;
 
 	public Product() {
-		super();
+
 	}
 
-	public Product(int productId, String productName, Supplier supplier, Trademark trademark, ProductType productType, double quantity, double promotion, String productStatus, BigDecimal price, Date createdDate, Category category, String productImg, String seoUrl, String productDetail, List<ImgProduct> imgProduct, List<OrderDetail> orderDetail, List<Review> review) {
+	public Product(int productId, String productName, Supplier supplier, Trademark trademark, ProductType productType, int quantity, int promotion, String productStatus, double price, Date createdDate, Category category, String productImg, String seoUrl, String productDetail, List<ImgProduct> imgProduct, List<OrderDetail> orderDetail, List<Review> review) {
 		this.productId = productId;
 		this.productName = productName;
 		this.supplier = supplier;
@@ -159,19 +160,19 @@ public class Product {
 		this.productType = productType;
 	}
 
-	public double getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(double quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	public double getPromotion() {
+	public int getPromotion() {
 		return promotion;
 	}
 
-	public void setPromotion(double promotion) {
+	public void setPromotion(int promotion) {
 		this.promotion = promotion;
 	}
 
@@ -183,11 +184,11 @@ public class Product {
 		this.productStatus = productStatus;
 	}
 
-	public BigDecimal getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -269,7 +270,23 @@ public class Product {
 		return productId;
 	}
 
-	
+	public static Product toProduct(ProductRequest productRequest){
+		Product product = new Product();
+		product.setProductName(productRequest.getProductName());
+		product.setProductImg(productRequest.getProductImg());
+		product.setProductDetail(productRequest.getProductDetail());
+		product.setPrice(productRequest.getPrice());
+		product.setSeoUrl(productRequest.getSeoUrl());
+		product.setCategory(productRequest.getCategory());
+		product.setProductStatus(productRequest.getProductStatus());
+		product.setQuantity(productRequest.getQuantity());
+		product.setTrademark(productRequest.getTrademark());
+		product.setSupplier(productRequest.getSupplier());
+		product.setPromotion(productRequest.getPromotion());
+		product.setProductType(productRequest.getProductType());
+
+		return product;
+	}
 	
 
 	

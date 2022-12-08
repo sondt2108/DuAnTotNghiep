@@ -21,8 +21,8 @@ public class OrderStatus {
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY
-			, mappedBy = "OrderStatus")
-	private List<Order> orders;
+			, mappedBy = "orderStatus")
+	private List<Order> order;
 
     public OrderStatus() {
     }
@@ -43,12 +43,12 @@ public class OrderStatus {
         this.status = status;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<Order> getOrder() {
+        return order;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<Order> order) {
+        this.order = order;
     }
 
 	

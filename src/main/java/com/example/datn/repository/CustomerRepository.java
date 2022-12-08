@@ -12,11 +12,11 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-    Page<Customer> findByHotenContaining(String hoten, Pageable pager); 
+    Page<Customer> findByFullNameContaining(String fullName, Pageable pager);
 
 
 
-    @Query(value = "select * from khachhang  where user_id = ?1 ", nativeQuery = true)
+    @Query(value = "select * from customer  where user_id = ?1 ", nativeQuery = true)
     Customer findByUserId(@Param(value = "user_id") Long userId);
 
 

@@ -79,9 +79,9 @@ public class OderRescontroller {
         order.setAddress(orderRequest.getAddress());
         order.setNote(orderRequest.getNote());
         order.setPhoneNumber(orderRequest.getPhoneNumber());
-        order.setTotal(cartService.getTotal());
+        //order.setTotal(cartService.getTotal());
         order.setCustomer(customerService.getCustomer());
-        order.setOrderStatus(DEFAULT_TTDH);
+        //order.setOrderStatus(DEFAULT_TTDH);
         order.setFullName(customerService.getCustomer().getFullName());
         orderRepository.save(order);
         //oder detail
@@ -107,14 +107,8 @@ public class OderRescontroller {
         Optional<Product> productOptional = Optional
         .ofNullable(productRepository.findByProductId(product.getProductId()));
 Product pr = productOptional.get();
-double quantityOrder = listItems.get(product);
- double sl = pr.getQuantity();
 
- double slcl = sl - quantityOrder;
-
- System.out.println("sonne" + slcl);
-
- pr.setQuantity(slcl);
+ pr.setQuantity((int)(pr.getQuantity()) - listItems.get(product));
  productRepository.save(pr);
 
  
@@ -167,8 +161,8 @@ double quantityOrder = listItems.get(product);
         order.setPhoneNumber(orderRequest.getPhoneNumber());
         order.setEmail(orderRequest.getEmail());
         order.setFullName(orderRequest.getName());
-        order.setTotal(cartService.getTotal());
-        order.setOrderStatus(DEFAULT_TTDH);
+        //order.setTotal(cartService.getTotal());
+        //order.setOrderStatus(DEFAULT_TTDH);
         
         orderRepository.save(order);
         //oder detail

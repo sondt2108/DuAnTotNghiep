@@ -34,6 +34,7 @@ import com.example.datn.security.services.UserDetailsImpl;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,6 +52,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
+@SecurityRequirement(name = "datnapi")
 @RequestMapping("/api/auth")
 public class AuthController {
   @Autowired
@@ -81,7 +83,7 @@ public class AuthController {
   @Autowired
   UserService userService;
   
-  @PostMapping("/signin")
+  @PostMapping(value = "/signin", produces = "application/json")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
   @RequestParam(value = "cartStatus", defaultValue = "0") int cartStatus, HttpServletResponse response) {
     HttpSession session = request.getSession();

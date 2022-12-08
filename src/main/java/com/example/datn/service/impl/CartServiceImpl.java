@@ -1,4 +1,4 @@
-package com.example.datn.service;
+package com.example.datn.service.impl;
 
 import java.math.BigDecimal;
 
@@ -7,6 +7,7 @@ import com.example.datn.models.Cart;
 import com.example.datn.models.Product;
 import com.example.datn.repository.ProductRepository;
 
+import com.example.datn.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,20 +64,6 @@ public class CartServiceImpl implements CartService {
 			cart.getCartDetails().remove(product);
 		}
 	}
-
-
-
-	@Override
-    public BigDecimal getTotal() {
-        return cart.getCartDetails().entrySet().stream()
-                .map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
-                .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
-    }
-
-	
-
-	
 
 	
 }

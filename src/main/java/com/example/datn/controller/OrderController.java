@@ -46,7 +46,7 @@ public class OrderController {
 			
 		}
 			model.addAttribute("cart", cartService.getCart());
-			model.addAttribute("total", cartService.getTotal().toString());
+			//model.addAttribute("total", cartService.getTotal().toString());
 			model.addAttribute("name", customerService.getCustomer().getFullName());
 			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
 			model.addAttribute("phoneNumber",customerService.getCustomer().getPhoneNumber());
@@ -69,7 +69,7 @@ public class OrderController {
 			
 		}
 			model.addAttribute("cart", cartService.getCart());
-			model.addAttribute("total", cartService.getTotal().toString());
+			//model.addAttribute("total", cartService.getTotal().toString());
 			
 			model.addAttribute("isLogin", 2);
 			return "thanhtoan";
