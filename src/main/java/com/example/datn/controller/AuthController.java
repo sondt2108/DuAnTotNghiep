@@ -83,10 +83,10 @@ public class AuthController {
   @Autowired
   UserService userService;
   
-  @PostMapping(value = "/signin", produces = "application/json")
+  @PostMapping(value = "/signing", produces = "application/json")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
   @RequestParam(value = "cartStatus", defaultValue = "0") int cartStatus, HttpServletResponse response) {
-    HttpSession session = request.getSession();
+    //HttpSession session = request.getSession();
    
         Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

@@ -19,7 +19,7 @@ import com.example.datn.repository.OrderRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
-import com.example.datn.service.MailService;
+import com.example.datn.service.impl.MailServiceImpl;
 import com.sendgrid.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class OderRescontroller {
     OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    MailService mailService;
+    MailServiceImpl mailService;
 
    @Autowired
    MessageNotificationsRepository messageNotificationsRepository;
@@ -123,8 +123,8 @@ Product pr = productOptional.get();
         emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
         
         
-        Response response =mailService.sendemail(emailrequest);
-        Response rp = mailService.sendMailOrderWithAdmin(id);
+        mailService.sendEmail(emailrequest);
+        mailService.sendMailOrderWithAdmin(id);
 
         MessageNotifications ntn = new MessageNotifications();
         ntn.setOrderId(id);
@@ -203,9 +203,9 @@ Product pr = productOptional.get();
         emailrequest.setTieuDe("Cảm ơn bạn đã tin tưởng và đặt hàng tại Đức Phát");
         
         
-        Response response =mailService.sendemail(emailrequest);
+        mailService.sendEmail(emailrequest);
         
-        Response rp = mailService.sendMailOrderWithAdmin(id);
+        mailService.sendMailOrderWithAdmin(id);
 
         cartService.getCart().getCartDetails().clear();
 

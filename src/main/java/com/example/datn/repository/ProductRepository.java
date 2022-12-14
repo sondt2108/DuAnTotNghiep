@@ -23,7 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product findBySeoUrl(String seoUrl);
 
-    Product findProductByCategory(Category category);
+    List<Product> findProductByCategory(Category category);
 
     Product findProductByTrademark(Trademark trademark);
 

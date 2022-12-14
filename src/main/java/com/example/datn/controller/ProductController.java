@@ -9,21 +9,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/api/admin/product")
+@RequestMapping(value = "/api/admin")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
-    @PostMapping
+    @PostMapping(value = "/product")
     public ResponseEntity<Void> create(@RequestBody ProductRequest productRequest){
 
         productService.create(productRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping(value = "/product")
     public ResponseEntity<Void> update(@RequestBody ProductRequest productRequest){
         productService.update(productRequest);
 
@@ -33,20 +35,22 @@ public class ProductController {
     @GetMapping(value = "/{seoUrl}")
     public ResponseEntity<ProductRequest> getProductBySeoUrl(@PathVariable String seoUrl){
         Product product = productService.getProductBySeoUrl(seoUrl);
-        if(ObjectUtils.isEmpty(product)){
-            return ResponseEntity.notFound().build();
-        }
         ProductRequest productRequest = ProductRequest.toProductRequest(product);
         return new ResponseEntity<>(productRequest, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/product/{id}")
     public ResponseEntity<ProductRequest> getProductById(@PathVariable int id){
         Product product = productService.getProductById(id);
-        if(ObjectUtils.isEmpty(product)){
-            return ResponseEntity.notFound().build();
-        }
         ProductRequest productRequest = ProductRequest.toProductRequest(product);
         return new ResponseEntity<>(productRequest, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/categorySeoUrl/{seoUrl}")
+    public ResponseEntity<List<ProductRequest>> getProductBySeoUrlCategory(@PathVariable String seoUrl){
+        List<Product> products = productService.getProductByCategory(seoUrl);
+        List<ProductRequest> productRequestList = ProductRequest.toProductRequestList(products);
+
+        return new ResponseEntity<>(productRequestList, HttpStatus.OK);
     }
 }

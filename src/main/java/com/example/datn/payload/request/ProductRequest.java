@@ -2,6 +2,7 @@ package com.example.datn.payload.request;
 
 import com.example.datn.models.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRequest {
@@ -137,8 +138,21 @@ public class ProductRequest {
     }
 
     public static ProductRequest toProductRequest(Product product){
+
+        return productToProductRequest(product);
+    }
+
+    public static  List<ProductRequest> toProductRequestList(List<Product> products){
+        List<ProductRequest> productRequestList = new ArrayList<>();
+        for (Product product : products){
+            productRequestList.add(productToProductRequest(product));
+        }
+        return productRequestList;
+    }
+
+    public static ProductRequest productToProductRequest(Product product){
         ProductRequest productRequest = new ProductRequest();
-        productRequest.setProductName(productRequest.getProductName());
+        productRequest.setProductName(product.getProductName());
         productRequest.setProductImg(product.getProductImg());
         productRequest.setProductDetail(product.getProductDetail());
         productRequest.setPrice(product.getPrice());

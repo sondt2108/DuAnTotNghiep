@@ -1,11 +1,13 @@
 package com.example.datn.service.impl;
 
+import com.example.datn.exception.ResourceNotFoundException;
 import com.example.datn.models.Category;
 import com.example.datn.models.Product;
 import com.example.datn.models.SearchForm;
 import com.example.datn.models.Trademark;
 import com.example.datn.payload.request.ProductRequest;
 import com.example.datn.repository.ProductRepository;
+import com.example.datn.service.CategoryService;
 import com.example.datn.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -20,9 +23,13 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private static final int PAGE_SIZE = 25;
+    private static final String PRODUCT_NOT_FOUND = "Product not found";
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Override
     public void create(ProductRequest productRequest) {
@@ -59,25 +66,41 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(int id) {
-
-        return productRepository.findByProductId(id);
+        Product product = productRepository.findByProductId(id);
+        if (ObjectUtils.isEmpty(product)){
+            throw new ResourceNotFoundException(PRODUCT_NOT_FOUND);
+        }
+        return product;
     }
 
     @Override
-    public Product getProductByCategory(Category category) {
-
-        return productRepository.findProductByCategory(category);
+    public List<Product> getProductByCategory(String seoUrl) {
+        Category category = categoryService.getCategoryBySeoUrl(seoUrl);
+        if(ObjectUtils.isEmpty(category)){
+            throw new ResourceNotFoundException("Category not found");
+        }
+        List<Product> product = productRepository.findProductByCategory(category);
+        if (ObjectUtils.isEmpty(product)){
+            throw new ResourceNotFoundException(PRODUCT_NOT_FOUND);
+        }
+        return product;
     }
 
     @Override
     public Product getProductBySeoUrl(String seoUrl) {
-
-        return productRepository.findBySeoUrl(seoUrl);
+        Product product = productRepository.findBySeoUrl(seoUrl);
+        if (ObjectUtils.isEmpty(product)){
+            throw new ResourceNotFoundException(PRODUCT_NOT_FOUND);
+        }
+        return product;
     }
 
     @Override
     public Product getProductByTrademark(Trademark trademark) {
-
-        return productRepository.findProductByTrademark(trademark);
+        Product product = productRepository.findProductByTrademark(trademark);
+        if (ObjectUtils.isEmpty(product)){
+            throw new ResourceNotFoundException(PRODUCT_NOT_FOUND);
+        }
+        return product;
     }
 }

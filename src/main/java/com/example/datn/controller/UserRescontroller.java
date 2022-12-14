@@ -8,9 +8,8 @@ import javax.validation.Valid;
 
 import com.example.datn.payload.request.ForgotPasswordRequest;
 import com.example.datn.payload.request.ResetPassword;
-import com.example.datn.service.MailService;
+import com.example.datn.service.impl.MailServiceImpl;
 import com.example.datn.service.UserService;
-import com.sendgrid.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +30,7 @@ public class UserRescontroller {
     private UserService userService;
 
     @Autowired
-    private MailService mailService;
+    private MailServiceImpl mailService;
   
   
     @PostMapping("/account/forgot-password")
@@ -53,7 +52,7 @@ public class UserRescontroller {
               fPasswordRequest.setReponse(response);
               fPasswordRequest.setSubject("Đặt lại mật khẩu trên Đức Phát");
 
-              Response res =mailService.sendMailResetPassword(fPasswordRequest);
+              mailService.sendMailResetPassword(fPasswordRequest);
           }else {
             return ResponseEntity.ok(new MessageResponse("Email chưa đăng ký, vui lòng điền email khác!"));
           }     

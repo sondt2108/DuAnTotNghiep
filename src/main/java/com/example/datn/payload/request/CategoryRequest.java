@@ -1,5 +1,10 @@
 package com.example.datn.payload.request;
 
+import com.example.datn.models.Category;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryRequest {
     private int id;
     private String name;
@@ -36,5 +41,27 @@ public class CategoryRequest {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public static CategoryRequest toCategoryRequest(Category category){
+        CategoryRequest categoryRequest = new CategoryRequest();
+        categoryRequest.setName(category.getName());
+        categoryRequest.setSeoUrl(category.getSeoUrl());
+        categoryRequest.setIcon(category.getIcon());
+
+        return categoryRequest;
+    }
+
+    public static List<CategoryRequest> toCategoryRequestList(List<Category> categories){
+        List<CategoryRequest> categoryRequests = new ArrayList<>();
+        for (Category category : categories){
+            CategoryRequest categoryRequest = new CategoryRequest();
+            categoryRequest.setName(category.getName());
+            categoryRequest.setSeoUrl(category.getSeoUrl());
+            categoryRequest.setIcon(category.getIcon());
+
+            categoryRequests.add(categoryRequest);
+        }
+        return categoryRequests;
     }
 }

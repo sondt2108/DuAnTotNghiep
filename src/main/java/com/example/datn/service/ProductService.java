@@ -1,6 +1,5 @@
 package com.example.datn.service;
 
-import com.example.datn.models.Category;
 import com.example.datn.models.Product;
 import com.example.datn.models.SearchForm;
 import com.example.datn.models.Trademark;
@@ -28,7 +27,7 @@ public interface ProductService {
     @PreAuthorize("hasRole('ADMIN')")
     void delete(int id);
 
-    Product getProductByCategory(Category category);
+    List<Product> getProductByCategory(String seoUrl);
 
     Product getProductBySeoUrl(String seoUrl);
 
