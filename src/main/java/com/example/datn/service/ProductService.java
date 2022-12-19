@@ -32,4 +32,6 @@ public interface ProductService {
     Product getProductBySeoUrl(String seoUrl);
 
     Product getProductByTrademark(Trademark trademark);
+
+    void setProduct(Product product);
 }

@@ -43,6 +43,8 @@ public class OrderDetail {
 	@JoinColumn(name = "productId", nullable = false, foreignKey = @ForeignKey(name = "product_orderDetail"))
 	Product product;
 
+    private double total;
+
     public OrderDetail() {
     }
 
@@ -108,8 +110,12 @@ public class OrderDetail {
     public void setProduct(Product product) {
         this.product = product;
     }
-    
 
+    public double getTotal() {
+        return total;
+    }
 
-    
+    public void setTotal(double total) {
+        this.total = total;
+    }
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.example.datn.models.MessageNotifications;
 import com.example.datn.repository.MessageNotificationsRepository;
 import com.example.datn.service.CustomerService;
-import com.example.datn.service.UserService;
+import com.example.datn.service.impl.UserServiceImpl;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class ReportController {
 	CustomerService customerService;
 
 	@Autowired
-	UserService userService;
+	UserServiceImpl userService;
 
 	@Autowired
 	MessageNotificationsRepository messageNotificationsRepository;

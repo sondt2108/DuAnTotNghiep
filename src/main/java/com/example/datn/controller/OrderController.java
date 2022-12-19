@@ -1,23 +1,22 @@
 package com.example.datn.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import com.example.datn.models.OrderDetail;
 import com.example.datn.models.Product;
-import com.example.datn.payload.response.JwtResponse;
 import com.example.datn.service.CartService;
 import com.example.datn.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class OrderController {
 
     @Autowired
@@ -26,53 +25,24 @@ public class OrderController {
 	@Autowired
     CartService cartService;
 
-	
-    
     @GetMapping("checkout")
-    public String checkout(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+    public ResponseEntity<Map<String, Object>> checkout(Model model, HttpServletRequest request) {
+		Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
+		Map<String, Object> result = new HashMap<>();
+		//Get quantity product in cart
+		listItems.keySet().stream().mapToInt(listItems::get).forEachOrdered(quantity -> result.put("quantity", quantity));
 		if (customerService.isCustomerLogin()) {
-			//model.addAttribute("cartStatus", 0);
-			Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
-
-		for (Product product : listItems.keySet()) {
-
-            
-
-			
-			int quantity = listItems.get(product);
-            
-			model.addAttribute("quantity", quantity);
-			
-		}
-			model.addAttribute("cart", cartService.getCart());
-			//model.addAttribute("total", cartService.getTotal().toString());
-			model.addAttribute("name", customerService.getCustomer().getFullName());
-			model.addAttribute("email",customerService.getCustomer().getUser().getEmail());
-			model.addAttribute("phoneNumber",customerService.getCustomer().getPhoneNumber());
-			model.addAttribute("address",customerService.getCustomer().getAddress());
-			model.addAttribute("customer_id",customerService.getCustomer().getUser().getId());
-			model.addAttribute("isLogin", 1);
-			return "thanhtoan";
+			result.put("cart", cartService.getCart());
+			result.put("name", customerService.getCustomer().getFullName());
+			result.put("email",customerService.getCustomer().getUser().getEmail());
+			result.put("phoneNumber",customerService.getCustomer().getPhoneNumber());
+			result.put("address",customerService.getCustomer().getAddress());
+			result.put("customer_id",customerService.getCustomer().getUser().getId());
+			result.put("isLogin", true);
 		} else {
-
-			Map<Product, Integer> listItems = cartService.getCart().getCartDetails();
-
-		for (Product product : listItems.keySet()) {
-
-            
-
-			
-			int quantity = listItems.get(product);
-            
-			model.addAttribute("quantity", quantity);
-			
+			result.put("cart", cartService.getCart());
+			result.put("isLogin", false);
 		}
-			model.addAttribute("cart", cartService.getCart());
-			//model.addAttribute("total", cartService.getTotal().toString());
-			
-			model.addAttribute("isLogin", 2);
-			return "thanhtoan";
-		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 }

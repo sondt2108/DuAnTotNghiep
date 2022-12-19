@@ -7,13 +7,9 @@ import com.example.datn.models.Cart;
 
 
 public interface CartService {
-    public Cart getCart();
-	public void addProduct(int productId);
-	public void minusProduct(int productId);
-	public void removeProduct(int productId);
-	public void onchangeInput(int productId, int quantity);
-	
-
-
-	
+	Cart getCart();
+	void addProduct(int productId);
+	void minusProduct(int productId);
+	void removeProduct(int productId);
+	void onchangeInput(int productId, int quantity);
 }

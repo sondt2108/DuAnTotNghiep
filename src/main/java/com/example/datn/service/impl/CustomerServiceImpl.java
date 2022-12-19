@@ -1,13 +1,18 @@
 package com.example.datn.service.impl;
 
 import com.example.datn.models.Customer;
+import com.example.datn.models.User;
+import com.example.datn.payload.request.SignupRequest;
 import com.example.datn.repository.CustomerRepository;
 
 
+import com.example.datn.repository.UserRepository;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.CustomerSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -15,7 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
 	CustomerSession customerSession;
 
-	
+	@Autowired
+	UserRepository userRepository;
 
 
     @Autowired
@@ -38,11 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 
-	
-
     @Override
 	public boolean getUser(Long userId) {
-		Customer customer = customerRepository.findByUserId(userId);
+		Customer customer = customerRepository.findCustomerByUserId(userId);
 		if(customer != null) {
 			customerSession.setCustomer(customer);
 			return true;
@@ -50,6 +54,12 @@ public class CustomerServiceImpl implements CustomerService {
 		return false;
 	}
 
-
-	
+	@Override
+	public Customer createCustomer(User user, SignupRequest signupRequest) {
+		Customer customer = new Customer();
+		customer.setUser(user);
+		customer.setFullName(signupRequest.getName());
+		customer.setAddress(signupRequest.getAddress());
+		return customerRepository.save(customer);
+	}
 }

@@ -87,7 +87,7 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(Long orderId, Date createdDate, String province, String district, String ward, String address, String phoneNumber, BigDecimal total, String email, String fullName, String note, Customer customer, List<OrderDetail> order_items /*OrderStatus orderStatus*/) {
+	public Order(Long orderId, Date createdDate, String province, String district, String ward, String address, String phoneNumber, BigDecimal total, String email, String fullName, String note, Customer customer, List<OrderDetail> order_items, OrderStatus orderStatus) {
 		this.orderId = orderId;
 		this.createdDate = createdDate;
 		this.province = province;
@@ -101,7 +101,7 @@ public class Order {
 		this.note = note;
 		this.customer = customer;
 		this.orderItems = order_items;
-		//this.orderStatus = orderStatus;
+		this.orderStatus = orderStatus;
 	}
 
 	public Long getOrderId() {
@@ -208,11 +208,11 @@ public class Order {
 		this.orderItems = orderItems;
 	}
 
-//	public OrderStatus getOrderStatus() {
-//		return orderStatus;
-//	}
-//
-//	public void setOrderStatus(OrderStatus orderStatus) {
-//		this.orderStatus = orderStatus;
-//	}
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 }

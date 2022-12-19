@@ -103,4 +103,9 @@ public class ProductServiceImpl implements ProductService {
         }
         return product;
     }
+
+    @Override
+    public Product setProduct(Product product) {
+        return productRepository.save(product);
+    }
 }

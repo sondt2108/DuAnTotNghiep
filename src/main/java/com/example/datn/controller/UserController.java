@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import com.example.datn.payload.request.ForgotPasswordRequest;
 import com.example.datn.payload.request.ResetPassword;
 import com.example.datn.service.impl.MailServiceImpl;
-import com.example.datn.service.UserService;
+import com.example.datn.service.impl.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,10 +24,10 @@ import com.example.datn.payload.response.MessageResponse;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-public class UserRescontroller {
+public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private MailServiceImpl mailService;
@@ -50,13 +50,13 @@ public class UserRescontroller {
               ForgotPasswordRequest fPasswordRequest = new ForgotPasswordRequest();
               fPasswordRequest.setEmail(forgotPasswordRequest.getEmail());
               fPasswordRequest.setReponse(response);
-              fPasswordRequest.setSubject("Đặt lại mật khẩu trên Đức Phát");
+              fPasswordRequest.setSubject("Reset password on Duc Phat");
 
               mailService.sendMailResetPassword(fPasswordRequest);
           }else {
-            return ResponseEntity.ok(new MessageResponse("Email chưa đăng ký, vui lòng điền email khác!"));
+            return ResponseEntity.ok(new MessageResponse("Email is not registered, please enter another email!"));
           }     
-          return ResponseEntity.ok(new MessageResponse("Chúng tôi đã gửi yêu cầu đặt lại mật khẩu tới email của bạn, vui lòng kiểm tra email!"));
+          return ResponseEntity.ok(new MessageResponse("We have sent a password reset request to your email, please check your email!"));
       }
 
 
@@ -72,7 +72,7 @@ public class UserRescontroller {
 
                 userService.resetPassword(token, password);
   
-                return ResponseEntity.ok(new MessageResponse("Thay đổi mật khẩu thành công!"));
+                return ResponseEntity.ok(new MessageResponse("Change password successfully!"));
       }
 
 

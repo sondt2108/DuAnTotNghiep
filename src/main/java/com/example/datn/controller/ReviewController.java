@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
-import com.example.datn.models.PercentReview;
 import com.example.datn.models.Product;
 import com.example.datn.models.Review;
 import com.example.datn.payload.request.RatingRequest;
@@ -24,7 +23,7 @@ import com.example.datn.repository.ReviewRepository;
 
 @RestController
 @RequestMapping("api/review")
-public class ReviewRestController {
+public class ReviewController {
     @Autowired
 	ReviewRepository reviewRepository;
 
@@ -53,7 +52,7 @@ public class ReviewRestController {
 		Optional<Review> reviewOptional = Optional
 				.ofNullable(reviewRepository.findByReview(phoneNumber, productId));
 		
-		if (!reviewOptional.isPresent()) {
+		if (reviewOptional.isEmpty()) {
 			Product pr = new Product();
 			pr.setProductId(ratingRequest.getProductId());
 			Review rw = new Review();

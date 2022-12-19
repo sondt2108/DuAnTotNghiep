@@ -6,7 +6,6 @@ import com.example.datn.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +48,14 @@ public class ProductController {
     @GetMapping(value = "/categorySeoUrl/{seoUrl}")
     public ResponseEntity<List<ProductRequest>> getProductBySeoUrlCategory(@PathVariable String seoUrl){
         List<Product> products = productService.getProductByCategory(seoUrl);
+        List<ProductRequest> productRequestList = ProductRequest.toProductRequestList(products);
+
+        return new ResponseEntity<>(productRequestList, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductRequest>> getAllProduct(){
+        List<Product> products = productService.getAllProduct();
         List<ProductRequest> productRequestList = ProductRequest.toProductRequestList(products);
 
         return new ResponseEntity<>(productRequestList, HttpStatus.OK);

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.example.datn.exception.TokenRefreshException;
@@ -33,33 +32,27 @@ import com.example.datn.security.services.RefreshTokenService;
 import com.example.datn.security.services.UserDetailsImpl;
 import com.example.datn.service.CustomerService;
 import com.example.datn.service.UserService;
+import com.example.datn.service.impl.UserServiceImpl;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 
 @RestController
-@SecurityRequirement(name = "datnapi")
 @RequestMapping("/api/auth")
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
-
-  @Autowired
-  UserRepository userRepository;
 
   @Autowired
   RoleRepository roleRepository; 
@@ -82,11 +75,11 @@ public class AuthController {
 
   @Autowired
   UserService userService;
+
+  private static final String ROLE_NOT_FOUND = "Role Not found!";
   
-  @PostMapping(value = "/signing", produces = "application/json")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request,
-  @RequestParam(value = "cartStatus", defaultValue = "0") int cartStatus, HttpServletResponse response) {
-    //HttpSession session = request.getSession();
+  @PostMapping(value = "/login", produces = "application/json")
+  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
    
         Authentication authentication = authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -98,7 +91,7 @@ public class AuthController {
 
     String jwt = jwtUtils.generateJwtToken(userDetails);
 
-    List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+    List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());
 
     RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
@@ -106,68 +99,48 @@ public class AuthController {
     userService.getUser(userDetails.getId());
 
     return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-        userDetails.getUsername(), userDetails.getEmail(), roles, cartStatus));
+        userDetails.getUsername(), userDetails.getEmail(), roles));
 
   }
   
 
   @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Tên tài khoản đã tồn tại!"));
+        if (userService.isExistsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponse(String.format("Error: Username %s already exists!", signUpRequest.getUsername())));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email đã tồn tại, vui lòng chọn email khác"));
+        if (userService.isExistsEmail(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse(String.format("Error: Email %s already exists", signUpRequest.getEmail())));
         }
-
-        // Create new user's account
-        
-        User user = new User();
-
-        user.setUsername(signUpRequest.getUsername());
-        user.setEmail(signUpRequest.getEmail());
-        user.setPassword(encoder.encode(signUpRequest.getPassword()));
-
-
-        Customer customer = new Customer();
-        customer.setUser(user);
-        customer.setFullName(signUpRequest.getName());
-        customer.setAddress(signUpRequest.getAddress());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                    .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
-                switch (role) {
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
+                if ("mod".equals(role)) {
+                    Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                            .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND));
+                    roles.add(modRole);
+                } else {
+                    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND));
+                    roles.add(userRole);
                 }
             });
         }
-
-        user.setRoles(roles);
-        userRepository.save(user);
-        customerRepository.save(customer);
+        userService.create(signUpRequest, roles);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
   @PostMapping("/refreshtoken")
-  public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
+  public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequest request) {
     String requestRefreshToken = request.getRefreshToken();
 
     return refreshTokenService.findByToken(requestRefreshToken)
@@ -187,13 +160,12 @@ public class AuthController {
   public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
 
     Long id = logOutRequest.getUserId();
-    System.out.println(logOutRequest.getUserId());
     refreshTokenService.deleteByUserId(id);
 		customerService.logout(logOutRequest.getUserId());
 		//remove sess
     userService.logoutAdmin(logOutRequest.getUserId());
 		
-    return ResponseEntity.ok(new MessageResponse("Log out successful!"));
+    return ResponseEntity.ok(new MessageResponse("Log out successfully!"));
   }
 
 

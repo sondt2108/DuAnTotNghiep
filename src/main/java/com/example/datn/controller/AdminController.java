@@ -25,7 +25,6 @@ import com.example.datn.repository.OrderRepository;
 import com.example.datn.repository.OrderStatusRepository;
 import com.example.datn.repository.ProductRepository;
 import com.example.datn.repository.SupplierRepository;
-import com.example.datn.repository.TinhTrangdhRepository;
 import com.example.datn.repository.TrademarkRepository;
 import com.example.datn.repository.UserRepository;
 import com.example.datn.repository.WarehouseReceiptRepository;
@@ -50,7 +49,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class AdminRescontroller {
+public class AdminController {
 
 
     @Autowired
@@ -528,7 +527,7 @@ WarehouseReceiptRepository warehouseReceiptRepository;
     }
 
     @Autowired
-    TinhTrangdhRepository tinhTrangdhRepository;
+    OrderStatusRepository tinhTrangdhRepository;
 
     @PostMapping("/api/tinhtrang")
 	public OrderStatus insertTinhTrang(@RequestBody @Valid OrderStatus orderStatus) {

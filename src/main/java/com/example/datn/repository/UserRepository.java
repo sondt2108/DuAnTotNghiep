@@ -15,8 +15,7 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
 
-    Page<User> findByUsernameContaining(String user, Pageable pager); 
-
+    Page<User> findByUsernameContaining(String user, Pageable pager);
 
     User findByEmail(String email);
 
@@ -27,6 +26,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
 
-    @Query(value = "select * from users inner join user_roles on users.id = user_roles.user_id where user_id = :user_id and role_id = 3", nativeQuery = true)
+    @Query(value = "Select * from users inner join user_roles on users.id = user_roles.user_id where user_id = :user_id and role_id = 3", nativeQuery = true)
     User findByRole(@Param(value = "user_id") Long userId);
   }

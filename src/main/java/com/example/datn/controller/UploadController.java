@@ -27,19 +27,20 @@ public class UploadController {
 		Path uploadPath = Paths.get("upload");
          
         try (InputStream inputStream = file.getInputStream()) {
-        	//Kiem tra ton tai
+        	//check exist
         	if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
         	String fileName = file.getOriginalFilename();
-        	fileName = fileName.substring(fileName.lastIndexOf('.'));
+			assert fileName != null;
+			fileName = fileName.substring(fileName.lastIndexOf('.'));
         	fileName = new Date().getTime() + fileName;
             Path filePath = uploadPath.resolve(fileName);
             
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             return "{\"uploaded\": \"true\", \"url\" : \"/upload/" +fileName+ "\"}";
         } catch (Exception ioe) {
-        	return "{\"uploaded\": \"false\", \"error\" : \"Lỗi upload" + ioe.getMessage() + "\"}";
+        	return "{\"uploaded\": \"false\", \"error\" : \"upload error" + ioe.getMessage() + "\"}";
         }
 	}
 	
