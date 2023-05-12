@@ -5,24 +5,20 @@ import com.example.shop.models.Review;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RatingRequest {
+public class ReviewRequest {
     private String name;
-	
-	
+
 	private String description;
-	
 	
 	private int scores;
 	
-	
 	private int productId;
-	
 	
 	private String phoneNumber;
 	
 	private String image;
 	
-	private String gmail;
+	private String email;
 
 	public String getName() {
 		return name;
@@ -64,12 +60,12 @@ public class RatingRequest {
 		this.image = image;
 	}
 
-	public String getGmail() {
-		return gmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setGmail(String gmail) {
-		this.gmail = gmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getProductId() {
@@ -80,8 +76,8 @@ public class RatingRequest {
 		this.productId = productId;
 	}
 
-	public static List<RatingRequest> toRatingRequestList(List<Review> reviewList){
-		List<RatingRequest> ratingRequestList = new ArrayList<>();
+	public static List<ReviewRequest> toRatingRequestList(List<Review> reviewList){
+		List<ReviewRequest> ratingRequestList = new ArrayList<>();
 		for(Review review : reviewList){
 			ratingRequestList.add(toRatingRequest(review));
 		}
@@ -89,10 +85,10 @@ public class RatingRequest {
 		return ratingRequestList;
 	}
 
-	public static RatingRequest toRatingRequest(Review review){
-		RatingRequest ratingRequest = new RatingRequest();
+	public static ReviewRequest toRatingRequest(Review review){
+		ReviewRequest ratingRequest = new ReviewRequest();
 		ratingRequest.setName(review.getName());
-		ratingRequest.setGmail(review.getGmail());
+		ratingRequest.setEmail(review.getEmail());
 		ratingRequest.setPhoneNumber(ratingRequest.getPhoneNumber());
 		ratingRequest.setImage(ratingRequest.getImage());
 		ratingRequest.setDescription(ratingRequest.getDescription());

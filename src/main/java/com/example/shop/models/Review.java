@@ -21,7 +21,7 @@ public class Review {
 	int scores;
 	String image;
 	
-	String gmail;
+	String email;
 	
 	String phoneNumber;
 	
@@ -36,16 +36,15 @@ public class Review {
 	
 	public Review() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Review(int id, String name, String description, int scores, String image, String gmail, String phoneNumber, Date createdDate, Product product) {
+	public Review(int id, String name, String description, int scores, String image, String email, String phoneNumber, Date createdDate, Product product) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.scores = scores;
 		this.image = image;
-		this.gmail = gmail;
+		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.createdDate = createdDate;
 		this.product = product;
@@ -101,12 +100,12 @@ public class Review {
 
 	
 
-	public String getGmail() {
-		return gmail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setGmail(String gmail) {
-		this.gmail = gmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Date getCreatedDate() {

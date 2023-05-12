@@ -71,12 +71,6 @@ public class Order {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderDetail> orderItems;
 
-	public static final OrderStatus DEFAULT_ORDER_STATUS = new OrderStatus();
-    static {
-		DEFAULT_ORDER_STATUS.setOrderStatusId(1);
-      
-    }
-
 	@ManyToOne
 	@JoinColumn(
 			name = "orderStatusId",
@@ -87,7 +81,7 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(Long orderId, Date createdDate, String province, String district, String ward, String address, String phoneNumber, BigDecimal total, String email, String fullName, String note, Customer customer, List<OrderDetail> order_items, OrderStatus orderStatus) {
+	public Order(Long orderId, Date createdDate, String province, String district, String ward, String address, String phoneNumber, BigDecimal total, String email, String fullName, String note, Customer customer, List<OrderDetail> orderDetails, OrderStatus orderStatus) {
 		this.orderId = orderId;
 		this.createdDate = createdDate;
 		this.province = province;
@@ -100,7 +94,7 @@ public class Order {
 		this.fullName = fullName;
 		this.note = note;
 		this.customer = customer;
-		this.orderItems = order_items;
+		this.orderItems = orderDetails;
 		this.orderStatus = orderStatus;
 	}
 

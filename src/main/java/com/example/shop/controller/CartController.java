@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class CartController {
 
-
     @Autowired
     CartService cartService;
-
 
 
 	@GetMapping("/cart")
